@@ -1,0 +1,962 @@
+2026-05-06 16:29:10.836 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:29:10.836 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:29:10.837 | ERROR    | 2051884030163619840 | 处理失败 taskId=4, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:29:10.837 | ERROR    | 2051886031249281024 | 处理失败 taskId=5, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:29:10.840 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 16:29:10.839 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 16:29:30.770 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:29:30.771 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:29:30.772 | ERROR    | 2051884030163619840 | 处理失败 taskId=4, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:29:30.772 | ERROR    | 2051886031249281024 | 处理失败 taskId=5, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:29:30.774 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 16:29:30.776 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 16:29:50.823 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:29:50.825 | ERROR    | 2051886031249281024 | 处理失败 taskId=5, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:29:50.827 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 16:29:50.832 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:29:50.835 | ERROR    | 2051884030163619840 | 处理失败 taskId=4, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:29:50.837 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 16:30:10.819 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:30:10.819 | ERROR    | 2051886031249281024 | 处理失败 taskId=5, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:30:10.820 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 16:30:10.828 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:30:10.828 | ERROR    | 2051884030163619840 | 处理失败 taskId=4, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:30:10.830 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 16:30:50.738 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:30:50.739 | ERROR    | 2051884030163619840 | 处理失败 taskId=4, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:30:50.741 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:30:50.742 | ERROR    | 2051886031249281024 | 处理失败 taskId=5, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:30:50.740 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 16:30:50.743 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 16:32:10.662 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:32:10.664 | ERROR    | 2051884030163619840 | 处理失败 taskId=4, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:32:10.667 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 16:32:10.671 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:32:10.673 | ERROR    | 2051886031249281024 | 处理失败 taskId=5, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:32:10.675 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 16:34:30.449 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:34:30.449 | ERROR    | 2051886031249281024 | 处理失败 taskId=5, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:34:30.450 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 16:34:30.459 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:34:30.460 | ERROR    | 2051884030163619840 | 处理失败 taskId=4, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:34:30.461 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 16:46:34.473 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:46:34.473 | ERROR    | 2051886031249281024 | 处理失败 taskId=5, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:46:34.476 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:46:34.478 | ERROR    | 2051884030163619840 | 处理失败 taskId=4, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:46:34.474 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 16:46:34.481 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 16:51:52.616 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:51:52.616 | ERROR    | 2051886031249281024 | 处理失败 taskId=5, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:51:52.618 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 16:51:52.625 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:51:52.625 | ERROR    | 2051884030163619840 | 处理失败 taskId=4, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:51:52.626 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 16:58:11.959 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:58:11.959 | ERROR    | 2051884030163619840 | 处理失败 taskId=4, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:58:11.961 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 16:58:11.968 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:58:11.968 | ERROR    | 2051886031249281024 | 处理失败 taskId=5, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 16:58:11.970 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 17:05:31.216 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 17:05:31.217 | ERROR    | 2051884030163619840 | 处理失败 taskId=4, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 17:05:31.218 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 17:05:31.226 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 17:05:31.227 | ERROR    | 2051886031249281024 | 处理失败 taskId=5, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 17:05:31.228 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 17:13:50.431 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 17:13:50.431 | ERROR    | 2051884030163619840 | 处理失败 taskId=4, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 17:13:50.434 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 17:13:50.447 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 17:13:50.448 | ERROR    | 2051886031249281024 | 处理失败 taskId=5, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 17:13:50.449 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 17:16:59.326 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 17:16:59.327 | ERROR    | 2051954357266747392 | 处理失败 taskId=6, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-06 17:16:59.329 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 17:23:00.126 | ERROR    | N/A | AI模型调用失败: 400 Client Error: Bad Request for url: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+2026-05-06 17:23:00.127 | ERROR    | 2051884030163619840 | 处理失败 taskId=4, error=AI模型错误: 400 Client Error: Bad Request for url: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+2026-05-06 17:23:00.129 | ERROR    | N/A | AI模型调用失败: 400 Client Error: Bad Request for url: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+2026-05-06 17:23:00.129 | ERROR    | 2051886031249281024 | 处理失败 taskId=5, error=AI模型错误: 400 Client Error: Bad Request for url: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+2026-05-06 17:23:00.128 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 17:23:00.130 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 17:23:00.138 | ERROR    | N/A | AI模型调用失败: 400 Client Error: Bad Request for url: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+2026-05-06 17:23:00.139 | ERROR    | 2051954357266747392 | 处理失败 taskId=6, error=AI模型错误: 400 Client Error: Bad Request for url: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+2026-05-06 17:23:00.140 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 17:23:20.014 | ERROR    | N/A | AI模型调用失败: 400 Client Error: Bad Request for url: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+2026-05-06 17:23:20.014 | ERROR    | 2051954357266747392 | 处理失败 taskId=6, error=AI模型错误: 400 Client Error: Bad Request for url: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+2026-05-06 17:23:20.015 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 17:23:59.965 | ERROR    | N/A | AI模型调用失败: 400 Client Error: Bad Request for url: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+2026-05-06 17:23:59.965 | ERROR    | 2051954357266747392 | 处理失败 taskId=6, error=AI模型错误: 400 Client Error: Bad Request for url: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+2026-05-06 17:23:59.967 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 17:25:44.433 | ERROR    | N/A | AI模型调用失败: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-06 17:25:44.434 | ERROR    | 2051954357266747392 | 处理失败 taskId=6, error=AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-06 17:25:44.434 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 17:28:24.643 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 17:28:44.766 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 17:29:20.262 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 17:30:10.625 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given
+2026-05-06 17:31:16.627 | ERROR    | N/A | 消息处理异常，将稍后重试: Message.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 64, in send_result
+    msg = Message(settings.RESULT_TOPIC)
+
+TypeError: Message.__init__() takes 1 positional argument but 2 were given

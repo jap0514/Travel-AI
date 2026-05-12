@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travel.mapper.TravelPlanMapper">
+
+    <resultMap id="BaseResultMap" type="com.travel.entity.TravelPlan">
+            <id property="plan_id" column="plan_id" jdbcType="BIGINT"/>
+            <result property="task_id" column="task_id" jdbcType="BIGINT"/>
+            <result property="user_id" column="user_id" jdbcType="BIGINT"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="destination" column="destination" jdbcType="VARCHAR"/>
+            <result property="days" column="days" jdbcType="INTEGER"/>
+            <result property="content" column="content" jdbcType="OTHER"/>
+            <result property="weather" column="weather" jdbcType="VARCHAR"/>
+            <result property="create_time" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        plan_id,task_id,user_id,
+        title,destination,days,
+        content,weather,create_time
+    </sql>
+</mapper>

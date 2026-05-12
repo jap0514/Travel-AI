@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travel.mapper.TravelTaskMapper">
+
+    <resultMap id="BaseResultMap" type="com.travel.entity.TravelTask">
+            <id property="task_id" column="task_id" jdbcType="BIGINT"/>
+            <result property="user_id" column="user_id" jdbcType="BIGINT"/>
+            <result property="user_query" column="user_query" jdbcType="VARCHAR"/>
+            <result property="days" column="days" jdbcType="INTEGER"/>
+            <result property="budget" column="budget" jdbcType="VARCHAR"/>
+            <result property="pace" column="pace" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="OTHER"/>
+            <result property="plan_id" column="plan_id" jdbcType="BIGINT"/>
+            <result property="error_msg" column="error_msg" jdbcType="VARCHAR"/>
+            <result property="trace_id" column="trace_id" jdbcType="VARCHAR"/>
+            <result property="create_time" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="update_time" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        task_id,user_id,user_query,
+        days,budget,pace,
+        status,plan_id,error_msg,
+        trace_id,create_time,update_time
+    </sql>
+</mapper>

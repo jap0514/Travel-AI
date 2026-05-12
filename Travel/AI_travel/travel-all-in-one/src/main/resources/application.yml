@@ -1,0 +1,76 @@
+server:
+  port: 8080
+
+spring:
+  # 数据库
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.71.140:3306/travel_ai?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+  # Redis
+  data:
+    redis:
+      host: 192.168.71.140
+      port: 6379
+      timeout: 3000ms
+      lettuce:
+        pool:
+          max-active: 8    # 连接池最大连接数
+          max-idle: 8      # 连接池最大空闲连接
+          min-idle: 0      # 连接池最小空闲连接
+          max-wait: 3000ms # 连接池最大阻塞等待时间
+
+rocketmq:
+  name-server: 192.168.71.140:9876
+  producer:
+    group: travel-content-producer-group  # 内容生产者组
+    send-message-timeout: 3000
+    retry-times-when-send-failed: 2      # 失败自动重试
+    retry-times-when-send-async-failed: 2
+  consumer:
+    group: travel-task-consumer-group
+    message-model: CLUSTERING
+    ack-mode: MANUAL                     # 手动确认
+    consume-thread-min: 1
+    consume-thread-max: 5
+
+
+#  # RabbitMQ
+#  rabbitmq:
+#    host: 192.168.71.140
+#    port: 5672
+#    username: admin
+#    password: 123456
+#    virtual-host: /
+#    publisher-confirm-type: correlated   # 确认消息是否到达了交换器（Exchange）
+#    publisher-returns: true             # 确认消息从交换器路由到队列的过程是否成功。
+
+# MyBatis Plus
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: auto
+  mapper-locations: classpath:mapper/*.xml
+
+
+knife4j:
+  enable: true
+
+
+jwt:
+  # 密钥（至少32位，建议使用 base64 编码后的字符串）
+  secret: bXlTZWNyZXRLZXlGb3JKV1RIUzI1NklzU2FmZUFuZExvbmdFbm91Z2g=
+  expiration: 3600000  # 过期时间（毫秒）
+
+
+# 自定义配置
+travel:
+  mq:
+#    submit-topic: travel-task-submit  # 任务提交  Topic
+    submit-topic: travel-content-submit  # 对话内容提交  Topic
+    result-topic: travel-task-result  # 任务结果 Topic
+  security:
+    sign-secret: ${SIGN_SECRET:defaultSecret123456}  # 签名密钥

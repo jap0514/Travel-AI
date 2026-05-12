@@ -1,0 +1,100 @@
+version: '3.8'
+
+services:
+  # MySQL 8.0.30
+  mysql:
+    image: mysql:8.0.30
+    container_name: travel_mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: travel_ai
+    restart: always
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  # Redis 7.0.15
+  redis:
+    image: redis:7.0.15
+    container_name: travel_redis
+    ports:
+      - "6379:6379"
+    restart: always
+    volumes:
+      - redis_data:/data
+
+
+  # ========== RocketMQ 相关服务 ==========
+  # RocketMQ NameServer (路由中心/注册中心)
+  namesrv:
+    image: apache/rocketmq:5.3.2
+    container_name: travel_rocketmq_namesrv
+    ports:
+      - "9876:9876"
+    volumes:
+      - rocketmq_namesrv_logs:/home/rocketmq/logs
+    command: sh mqnamesrv
+    restart: always
+
+  # RocketMQ Broker (消息代理/存储节点)
+  broker:
+    image: apache/rocketmq:5.3.2
+    container_name: travel_rocketmq_broker
+    user: root
+    depends_on:
+      - namesrv
+    ports:
+      - "10909:10909"
+      - "10911:10911"
+      - "8081:8081"
+    volumes:
+      - ./conf/broker.conf:/home/rocketmq/rocketmq-5.3.2/conf/broker.conf
+#      - rocketmq_broker_logs:/home/rocketmq/logs
+#      - rocketmq_broker_store:/home/rocketmq/store
+      - ./data/rocketmq/logs:/home/rocketmq/logs
+      - ./data/rocketmq/store:/home/rocketmq/store
+    environment:
+      - JAVA_OPT=-Xms256m -Xmx512m -XX:MaxDirectMemorySize=256m
+      - NAMESRV_ADDR=namesrv:9876
+    command: sh mqbroker -n namesrv:9876 --enable-proxy
+    restart: always
+
+  # RocketMQ Dashboard (Web 控制台)
+  dashboard:
+    image: apacherocketmq/rocketmq-dashboard:latest
+    container_name: travel_rocketmq_dashboard
+    depends_on:
+      - namesrv
+    ports:
+      - "8088:8082"
+    environment:
+      - NAMESRV_ADDR=namesrv:9876
+    restart: always
+
+volumes:
+  mysql_data:
+  redis_data:
+  rocketmq_namesrv_logs:
+  rocketmq_broker_logs:
+  rocketmq_broker_store:
+
+#  # RabbitMQ 3.13（带管理面板）
+#  rabbitmq:
+#    image: rabbitmq:3.13-management
+#    container_name: travel_rabbitmq
+#    ports:
+#      - "5672:5672"
+#      - "15672:15672"
+#    environment:
+#      RABBITMQ_DEFAULT_USER: admin
+#      RABBITMQ_DEFAULT_PASS: 123456
+#    restart: always
+#    volumes:
+#      - rabbitmq_data:/var/lib/rabbitmq
+#
+#volumes:
+#  mysql_data:
+#  redis_data:
+#  rabbitmq_data:
+
