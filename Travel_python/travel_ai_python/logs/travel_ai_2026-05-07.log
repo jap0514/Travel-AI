@@ -1,0 +1,643 @@
+2026-05-07 12:40:30.308 | INFO     | N/A | ResultProducer 启动成功
+2026-05-07 12:40:30.426 | INFO     | N/A | TaskConsumer 启动成功，连接至 Proxy 地址: 192.168.71.140:8081
+2026-05-07 12:40:30.426 | INFO     | N/A | Python 消费者已启动，等待消息...
+2026-05-07 12:40:31.458 | INFO     | 2051954357266747392 | 收到任务，taskId=6, query=去北京旅游
+2026-05-07 12:40:31.459 | INFO     | 2051954357266747392 | 开始处理任务 taskId=6
+2026-05-07 12:40:31.459 | INFO     | 2051957059656814592 | 收到任务，taskId=7, query=去北京旅游
+2026-05-07 12:40:31.459 | INFO     | 2051957059656814592 | 开始处理任务 taskId=7
+2026-05-07 12:40:31.459 | INFO     | 2051884030163619840 | 收到任务，taskId=4, query=去北京旅游
+2026-05-07 12:40:31.460 | INFO     | 2051884030163619840 | 开始处理任务 taskId=4
+2026-05-07 12:40:31.460 | INFO     | 2051886031249281024 | 收到任务，taskId=5, query=去北京旅游
+2026-05-07 12:40:31.460 | INFO     | 2051886031249281024 | 开始处理任务 taskId=5
+2026-05-07 12:41:09.038 | INFO     | 2051957059656814592 | AI处理成功 taskId=7, planId=6706
+2026-05-07 12:41:09.039 | ERROR    | N/A | 消息处理异常，将稍后重试: 'Producer' object has no attribute 'send_sync'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 69, in send_result
+    ret = self.producer.send_sync(msg)
+
+AttributeError: 'Producer' object has no attribute 'send_sync'. Did you mean: 'send_async'?
+2026-05-07 12:41:15.958 | INFO     | 2051886031249281024 | AI处理成功 taskId=5, planId=7164
+2026-05-07 12:41:15.958 | ERROR    | N/A | 消息处理异常，将稍后重试: 'Producer' object has no attribute 'send_sync'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 69, in send_result
+    ret = self.producer.send_sync(msg)
+
+AttributeError: 'Producer' object has no attribute 'send_sync'. Did you mean: 'send_async'?
+2026-05-07 12:41:24.412 | INFO     | 2051954357266747392 | AI处理成功 taskId=6, planId=8509
+2026-05-07 12:41:24.412 | ERROR    | N/A | 消息处理异常，将稍后重试: 'Producer' object has no attribute 'send_sync'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 69, in send_result
+    ret = self.producer.send_sync(msg)
+
+AttributeError: 'Producer' object has no attribute 'send_sync'. Did you mean: 'send_async'?
+2026-05-07 12:41:33.500 | INFO     | 2051884030163619840 | AI处理成功 taskId=4, planId=7263
+2026-05-07 12:41:33.500 | ERROR    | N/A | 消息处理异常，将稍后重试: 'Producer' object has no attribute 'send_sync'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 69, in send_result
+    ret = self.producer.send_sync(msg)
+
+AttributeError: 'Producer' object has no attribute 'send_sync'. Did you mean: 'send_async'?
+2026-05-07 12:41:42.001 | INFO     | N/A | 收到停止信号，正在关闭...
+2026-05-07 12:41:42.010 | INFO     | N/A | ResultProducer 已关闭
+2026-05-07 12:41:42.010 | INFO     | N/A | TaskConsumer 已关闭
+2026-05-07 12:41:47.607 | INFO     | N/A | ResultProducer 启动成功
+2026-05-07 12:41:47.630 | INFO     | N/A | TaskConsumer 启动成功，连接至 Proxy 地址: 192.168.71.140:8081
+2026-05-07 12:41:47.630 | INFO     | N/A | Python 消费者已启动，等待消息...
+2026-05-07 12:41:48.659 | INFO     | 2051884030163619840 | 收到任务，taskId=4, query=去北京旅游
+2026-05-07 12:42:10.602 | INFO     | 2051884030163619840 | 开始处理任务 taskId=4
+2026-05-07 12:43:08.531 | INFO     | 2051884030163619840 | 收到任务，taskId=4, query=去北京旅游
+2026-05-07 12:43:22.416 | INFO     | 2051884030163619840 | 开始处理任务 taskId=4
+2026-05-07 12:43:28.508 | INFO     | 2051957059656814592 | 收到任务，taskId=7, query=去北京旅游
+2026-05-07 12:43:30.851 | INFO     | N/A | 收到停止信号，正在关闭...
+2026-05-07 12:43:30.864 | INFO     | N/A | ResultProducer 已关闭
+2026-05-07 12:43:30.866 | INFO     | N/A | TaskConsumer 已关闭
+2026-05-07 12:58:30.513 | INFO     | N/A | ResultProducer 启动成功
+2026-05-07 12:58:30.607 | INFO     | N/A | TaskConsumer 启动成功，连接至 Proxy 地址: 192.168.71.140:8081
+2026-05-07 12:58:30.607 | INFO     | N/A | Python 消费者已启动，等待消息...
+2026-05-07 12:58:31.637 | INFO     | 2051957059656814592 | 收到任务，taskId=7, query=去北京旅游
+2026-05-07 12:58:31.638 | INFO     | 2051957059656814592 | 开始处理任务 taskId=7
+2026-05-07 12:58:31.638 | INFO     | 2051954357266747392 | 收到任务，taskId=6, query=去北京旅游
+2026-05-07 12:58:31.639 | INFO     | 2051954357266747392 | 开始处理任务 taskId=6
+2026-05-07 12:59:01.328 | INFO     | 2051957059656814592 | AI处理成功 taskId=7, planId=1870
+2026-05-07 12:59:01.328 | ERROR    | N/A | 消息处理异常，将稍后重试: 'Producer' object has no attribute 'send_sync'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 69, in send_result
+    ret = self.producer.send_sync(msg)
+
+AttributeError: 'Producer' object has no attribute 'send_sync'. Did you mean: 'send_async'?
+2026-05-07 12:59:03.813 | ERROR    | N/A | AI模型调用失败: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 12:59:03.813 | ERROR    | 2051954357266747392 | 处理失败 taskId=6, error=AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 12:59:03.813 | ERROR    | N/A | 消息处理异常，将稍后重试: 'Producer' object has no attribute 'send_sync'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 69, in send_result
+    ret = self.producer.send_sync(msg)
+
+AttributeError: 'Producer' object has no attribute 'send_sync'. Did you mean: 'send_async'?
+2026-05-07 12:59:06.711 | INFO     | N/A | 收到停止信号，正在关闭...
+2026-05-07 12:59:06.718 | INFO     | N/A | ResultProducer 已关闭
+2026-05-07 12:59:06.719 | INFO     | N/A | TaskConsumer 已关闭
+2026-05-07 13:11:51.490 | INFO     | N/A | ResultProducer 启动成功
+2026-05-07 13:11:51.580 | INFO     | N/A | TaskConsumer 启动成功，连接至 Proxy 地址: 192.168.71.140:8081
+2026-05-07 13:11:51.580 | INFO     | N/A | Python 消费者已启动，等待消息...
+2026-05-07 13:11:52.601 | INFO     | 2051886031249281024 | 收到任务，taskId=5, query=去北京旅游
+2026-05-07 13:11:52.602 | INFO     | 2051957059656814592 | 收到任务，taskId=7, query=去北京旅游
+2026-05-07 13:11:52.602 | INFO     | 2051954357266747392 | 收到任务，taskId=6, query=去北京旅游
+2026-05-07 13:11:52.603 | INFO     | 2051954357266747392 | 开始处理任务 taskId=6
+2026-05-07 13:11:52.603 | INFO     | 2051957059656814592 | 开始处理任务 taskId=7
+2026-05-07 13:11:52.602 | INFO     | 2051886031249281024 | 开始处理任务 taskId=5
+2026-05-07 13:12:16.429 | INFO     | 2051886031249281024 | AI处理成功 taskId=5, planId=1594
+2026-05-07 13:12:16.448 | ERROR    | N/A | 消息处理异常，将稍后重试: failed to fetch topic:travel-task-result route.
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 80, in send_result
+    ret = self.producer.send(msg)
+
+  File "D:\python\Lib\site-packages\rocketmq\v5\producer\producer.py", line 160, in send
+    topic_queue = self.__select_send_queue(message)
+  File "D:\python\Lib\site-packages\rocketmq\v5\producer\producer.py", line 576, in __select_send_queue
+    raise e
+  File "D:\python\Lib\site-packages\rocketmq\v5\producer\producer.py", line 566, in __select_send_queue
+    route = self._retrieve_topic_route_data(message.topic)
+  File "D:\python\Lib\site-packages\rocketmq\v5\client\client.py", line 258, in _retrieve_topic_route_data
+    raise Exception(f"failed to fetch topic:{topic} route.")
+
+Exception: failed to fetch topic:travel-task-result route.
+2026-05-07 13:12:24.792 | ERROR    | N/A | AI模型调用失败: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:12:24.792 | ERROR    | N/A | AI模型调用失败: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:12:24.794 | ERROR    | 2051957059656814592 | 处理失败 taskId=7, error=AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:12:24.794 | ERROR    | 2051954357266747392 | 处理失败 taskId=6, error=AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:12:24.799 | ERROR    | N/A | 消息处理异常，将稍后重试: failed to fetch topic:travel-task-result route.
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 80, in send_result
+    ret = self.producer.send(msg)
+
+  File "D:\python\Lib\site-packages\rocketmq\v5\producer\producer.py", line 160, in send
+    topic_queue = self.__select_send_queue(message)
+  File "D:\python\Lib\site-packages\rocketmq\v5\producer\producer.py", line 576, in __select_send_queue
+    raise e
+  File "D:\python\Lib\site-packages\rocketmq\v5\producer\producer.py", line 566, in __select_send_queue
+    route = self._retrieve_topic_route_data(message.topic)
+  File "D:\python\Lib\site-packages\rocketmq\v5\client\client.py", line 258, in _retrieve_topic_route_data
+    raise Exception(f"failed to fetch topic:{topic} route.")
+
+Exception: failed to fetch topic:travel-task-result route.
+2026-05-07 13:12:24.801 | ERROR    | N/A | 消息处理异常，将稍后重试: failed to fetch topic:travel-task-result route.
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 80, in send_result
+    ret = self.producer.send(msg)
+
+  File "D:\python\Lib\site-packages\rocketmq\v5\producer\producer.py", line 160, in send
+    topic_queue = self.__select_send_queue(message)
+  File "D:\python\Lib\site-packages\rocketmq\v5\producer\producer.py", line 576, in __select_send_queue
+    raise e
+  File "D:\python\Lib\site-packages\rocketmq\v5\producer\producer.py", line 566, in __select_send_queue
+    route = self._retrieve_topic_route_data(message.topic)
+  File "D:\python\Lib\site-packages\rocketmq\v5\client\client.py", line 258, in _retrieve_topic_route_data
+    raise Exception(f"failed to fetch topic:{topic} route.")
+
+Exception: failed to fetch topic:travel-task-result route.
+2026-05-07 13:12:27.320 | INFO     | N/A | 收到停止信号，正在关闭...
+2026-05-07 13:12:27.327 | INFO     | N/A | ResultProducer 已关闭
+2026-05-07 13:12:27.328 | INFO     | N/A | TaskConsumer 已关闭
+2026-05-07 13:23:34.747 | INFO     | N/A | ResultProducer 启动成功
+2026-05-07 13:23:34.846 | INFO     | N/A | TaskConsumer 启动成功，连接至 Proxy 地址: 192.168.71.140:8081
+2026-05-07 13:23:34.846 | INFO     | N/A | Python 消费者已启动，等待消息...
+2026-05-07 13:23:35.866 | INFO     | 2051954357266747392 | 收到任务，taskId=6, query=去北京旅游
+2026-05-07 13:23:35.866 | INFO     | 2051957059656814592 | 收到任务，taskId=7, query=去北京旅游
+2026-05-07 13:23:35.867 | INFO     | 2051957059656814592 | 开始处理任务 taskId=7
+2026-05-07 13:23:35.866 | INFO     | 2051954357266747392 | 开始处理任务 taskId=6
+2026-05-07 13:24:08.028 | ERROR    | N/A | AI模型调用失败: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:24:08.028 | ERROR    | N/A | AI模型调用失败: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:24:08.029 | ERROR    | 2051957059656814592 | 处理失败 taskId=7, error=AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:24:08.029 | ERROR    | 2051954357266747392 | 处理失败 taskId=6, error=AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:24:08.086 | ERROR    | N/A | 消息处理异常，将稍后重试: 'SendReceipt' object has no attribute 'msg_id'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 81, in send_result
+    logger.info(f"结果消息发送成功, msgId={ret.msg_id}, taskId={task_id}, traceId={trace_id}")
+
+AttributeError: 'SendReceipt' object has no attribute 'msg_id'
+2026-05-07 13:24:08.086 | ERROR    | N/A | 消息处理异常，将稍后重试: 'SendReceipt' object has no attribute 'msg_id'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 81, in send_result
+    logger.info(f"结果消息发送成功, msgId={ret.msg_id}, taskId={task_id}, traceId={trace_id}")
+
+AttributeError: 'SendReceipt' object has no attribute 'msg_id'
+2026-05-07 13:24:17.563 | INFO     | N/A | 收到停止信号，正在关闭...
+2026-05-07 13:24:17.572 | INFO     | N/A | ResultProducer 已关闭
+2026-05-07 13:24:17.572 | INFO     | N/A | TaskConsumer 已关闭
+2026-05-07 13:28:37.104 | INFO     | N/A | ResultProducer 启动成功
+2026-05-07 13:28:37.215 | INFO     | N/A | TaskConsumer 启动成功，连接至 Proxy 地址: 192.168.71.140:8081
+2026-05-07 13:28:37.215 | INFO     | N/A | Python 消费者已启动，等待消息...
+2026-05-07 13:29:56.265 | INFO     | 2052259615977181184 | 收到任务，taskId=8, query=去北京旅游
+2026-05-07 13:29:56.266 | INFO     | 2052259615977181184 | 开始处理任务 taskId=8
+2026-05-07 13:30:28.415 | ERROR    | N/A | AI模型调用失败: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:30:28.416 | ERROR    | 2052259615977181184 | 处理失败 taskId=8, error=AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:30:28.416 | ERROR    | N/A | AI 处理失败，错误信息：AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:31:16.128 | INFO     | 2051957059656814592 | 收到任务，taskId=7, query=去北京旅游
+2026-05-07 13:31:16.128 | INFO     | 2051954357266747392 | 收到任务，taskId=6, query=去北京旅游
+2026-05-07 13:31:16.129 | INFO     | 2051957059656814592 | 开始处理任务 taskId=7
+2026-05-07 13:31:16.130 | INFO     | 2051954357266747392 | 开始处理任务 taskId=6
+2026-05-07 13:31:22.074 | INFO     | N/A | 收到停止信号，正在关闭...
+2026-05-07 13:31:22.085 | INFO     | N/A | ResultProducer 已关闭
+2026-05-07 13:31:22.085 | INFO     | N/A | TaskConsumer 已关闭
+2026-05-07 13:31:48.240 | ERROR    | N/A | AI模型调用失败: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:31:48.240 | ERROR    | 2051957059656814592 | 处理失败 taskId=7, error=AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:31:48.241 | ERROR    | N/A | AI 处理失败，错误信息：AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:31:48.285 | ERROR    | N/A | AI模型调用失败: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:31:48.285 | ERROR    | 2051954357266747392 | 处理失败 taskId=6, error=AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:31:48.286 | ERROR    | N/A | AI 处理失败，错误信息：AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 18:15:21.415 | INFO     | N/A | ResultProducer 启动成功
+2026-05-07 18:15:21.611 | INFO     | N/A | TaskConsumer 启动成功，连接至 Proxy 地址: 192.168.71.140:8081
+2026-05-07 18:15:21.611 | INFO     | N/A | Python 消费者已启动，等待消息...
+2026-05-07 18:15:22.635 | INFO     | 2051957059656814592 | 收到任务，taskId=7, query=去北京旅游
+2026-05-07 18:15:22.636 | INFO     | 2051957059656814592 | 开始处理任务 taskId=7
+2026-05-07 18:15:22.637 | INFO     | 2051954357266747392 | 收到任务，taskId=6, query=去北京旅游
+2026-05-07 18:15:22.637 | INFO     | 2051954357266747392 | 开始处理任务 taskId=6
+2026-05-07 18:15:22.638 | INFO     | 2051886031249281024 | 收到任务，taskId=5, query=去北京旅游
+2026-05-07 18:15:22.638 | INFO     | 2051886031249281024 | 开始处理任务 taskId=5
+2026-05-07 18:15:24.887 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:15:24.888 | ERROR    | N/A | 响应状态码: 404
+2026-05-07 18:15:24.888 | ERROR    | N/A | 响应内容: 
+2026-05-07 18:15:24.888 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:15:24.889 | ERROR    | 2051954357266747392 | 处理失败 taskId=6, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:15:24.890 | ERROR    | N/A | AI 处理失败，错误信息：AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:15:24.890 | ERROR    | N/A | 响应状态码: 404
+2026-05-07 18:15:24.891 | ERROR    | N/A | 响应内容: 
+2026-05-07 18:15:24.891 | ERROR    | 2051957059656814592 | 处理失败 taskId=7, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:15:24.892 | ERROR    | N/A | AI 处理失败，错误信息：AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:15:24.893 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:15:24.893 | ERROR    | N/A | 响应状态码: 404
+2026-05-07 18:15:24.894 | ERROR    | N/A | 响应内容: 
+2026-05-07 18:15:24.895 | ERROR    | 2051886031249281024 | 处理失败 taskId=5, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:15:24.896 | ERROR    | N/A | AI 处理失败，错误信息：AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:19:00.975 | INFO     | N/A | 收到停止信号，正在关闭...
+2026-05-07 18:19:00.986 | INFO     | N/A | ResultProducer 已关闭
+2026-05-07 18:19:00.986 | INFO     | N/A | TaskConsumer 已关闭
+2026-05-07 18:19:05.910 | INFO     | N/A | ResultProducer 启动成功
+2026-05-07 18:19:06.017 | INFO     | N/A | TaskConsumer 启动成功，连接至 Proxy 地址: 192.168.71.140:8081
+2026-05-07 18:19:06.017 | INFO     | N/A | Python 消费者已启动，等待消息...
+2026-05-07 18:19:32.853 | INFO     | 2052332498615209984 | 收到任务，taskId=9, query=去北京旅游
+2026-05-07 18:19:32.853 | INFO     | 2052332498615209984 | 开始处理任务 taskId=9
+2026-05-07 18:19:35.022 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/api/v1
+2026-05-07 18:19:35.023 | ERROR    | N/A | 响应状态码: 404
+2026-05-07 18:19:35.023 | ERROR    | N/A | 响应内容: 
+2026-05-07 18:19:35.023 | ERROR    | 2052332498615209984 | 处理失败 taskId=9, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/api/v1
+2026-05-07 18:19:35.025 | ERROR    | N/A | AI 处理失败，错误信息：AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/api/v1
+2026-05-07 18:22:15.668 | INFO     | N/A | 收到停止信号，正在关闭...
+2026-05-07 18:22:15.677 | INFO     | N/A | ResultProducer 已关闭
+2026-05-07 18:22:15.677 | INFO     | N/A | TaskConsumer 已关闭
+2026-05-07 18:22:19.712 | INFO     | N/A | ResultProducer 启动成功
+2026-05-07 18:22:19.825 | INFO     | N/A | TaskConsumer 启动成功，连接至 Proxy 地址: 192.168.71.140:8081
+2026-05-07 18:22:19.826 | INFO     | N/A | Python 消费者已启动，等待消息...
+2026-05-07 18:23:10.058 | INFO     | 2052333409706119168 | 收到任务，taskId=11, query=去北京旅游
+2026-05-07 18:23:10.059 | INFO     | 2052333409706119168 | 开始处理任务 taskId=11
+2026-05-07 18:23:12.224 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:23:12.225 | ERROR    | N/A | 响应状态码: 404
+2026-05-07 18:23:12.225 | ERROR    | N/A | 响应内容: 
+2026-05-07 18:23:12.225 | ERROR    | 2052333409706119168 | 处理失败 taskId=11, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:23:12.227 | ERROR    | N/A | AI 处理失败，错误信息：AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:23:30.017 | INFO     | 2052333230395428864 | 收到任务，taskId=10, query=去北京旅游
+2026-05-07 18:23:30.018 | INFO     | 2052333230395428864 | 开始处理任务 taskId=10
+2026-05-07 18:23:32.197 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:23:32.198 | ERROR    | N/A | 响应状态码: 404
+2026-05-07 18:23:32.198 | ERROR    | N/A | 响应内容: 
+2026-05-07 18:23:32.199 | ERROR    | 2052333230395428864 | 处理失败 taskId=10, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:23:32.200 | ERROR    | N/A | AI 处理失败，错误信息：AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:27:27.221 | INFO     | N/A | 收到停止信号，正在关闭...
+2026-05-07 18:27:27.230 | INFO     | N/A | ResultProducer 已关闭
+2026-05-07 18:27:27.230 | INFO     | N/A | TaskConsumer 已关闭
+2026-05-07 18:27:31.391 | INFO     | N/A | ResultProducer 启动成功
+2026-05-07 18:27:31.493 | INFO     | N/A | TaskConsumer 启动成功，连接至 Proxy 地址: 192.168.71.140:8081
+2026-05-07 18:27:31.493 | INFO     | N/A | Python 消费者已启动，等待消息...
+2026-05-07 18:27:47.426 | INFO     | 2052334573071831040 | 收到任务，taskId=12, query=去北京旅游
+2026-05-07 18:27:47.427 | INFO     | 2052334573071831040 | 开始处理任务 taskId=12
+2026-05-07 18:28:19.535 | ERROR    | N/A | AI模型调用失败: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 18:28:19.536 | ERROR    | 2052334573071831040 | 处理失败 taskId=12, error=AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 18:28:19.536 | ERROR    | N/A | AI 处理失败，错误信息：AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 18:33:49.327 | INFO     | N/A | 收到停止信号，正在关闭...
+2026-05-07 18:33:49.336 | INFO     | N/A | ResultProducer 已关闭
+2026-05-07 18:33:49.336 | INFO     | N/A | TaskConsumer 已关闭
+2026-05-07 18:33:54.318 | INFO     | N/A | ResultProducer 启动成功
+2026-05-07 18:33:54.436 | INFO     | N/A | TaskConsumer 启动成功，连接至 Proxy 地址: 192.168.71.140:8081
+2026-05-07 18:33:54.436 | INFO     | N/A | Python 消费者已启动，等待消息...
+2026-05-07 18:34:12.667 | INFO     | 2052336188889698304 | 收到任务，taskId=14, query=去北京旅游
+2026-05-07 18:34:12.668 | INFO     | 2052336188889698304 | 开始处理任务 taskId=14
+2026-05-07 18:35:12.569 | INFO     | 2052336136624476160 | 收到任务，taskId=13, query=去北京旅游
+2026-05-07 18:35:12.570 | INFO     | 2052336136624476160 | 开始处理任务 taskId=13
+2026-05-07 18:35:19.915 | INFO     | 2052336188889698304 | AI处理成功 taskId=14, planId=7693
+2026-05-07 18:35:19.915 | INFO     | N/A | AI 处理成功，planId=7693, 结果是：{"planId": 7693, "content": "这份5天北京休闲游规划已为你量身定制。整体节奏以**“每天1-2个核心景点+留白休息”**为主，避开特种兵式打卡，兼顾经典地标与本地生活气息。\n\n📌 **重要前提说明**\n- 预算5000元 **不含往返北京的大交通（机票/高铁）**，仅覆盖在京5天4晚的食宿、市内交通、门票及弹性消费。\n- 价格按淡旺季平均估算，实际可能浮动±10...
+2026-05-07 18:35:32.535 | INFO     | 2052336188889698304 | 收到任务，taskId=14, query=去北京旅游
+2026-05-07 18:35:32.536 | INFO     | 2052336188889698304 | 开始处理任务 taskId=14
+2026-05-07 18:36:16.763 | INFO     | 2052336136624476160 | AI处理成功 taskId=13, planId=3523
+2026-05-07 18:36:16.763 | INFO     | N/A | AI 处理成功，planId=3523, 结果是：{"planId": 3523, "content": "这份5天北京行程专为**“节奏休闲+5000元预算”**设计。5000元在北京属于**舒适型经济预算**（按单人计），只要提前规划、避开节假日、善用公共交通，完全可以实现不赶场、不踩坑的深度体验。\n\n---\n### 📅 5天休闲行程（每日1-2个核心点，留足休息与机动时间）\n\n| 日期 | 上午 | 下午 | 傍晚/晚上 | 节奏...
+2026-05-07 18:36:32.449 | INFO     | 2052336136624476160 | 收到任务，taskId=13, query=去北京旅游
+2026-05-07 18:36:32.450 | INFO     | 2052336136624476160 | 开始处理任务 taskId=13
+2026-05-07 18:36:38.257 | INFO     | 2052336188889698304 | AI处理成功 taskId=14, planId=5077
+2026-05-07 18:36:38.257 | INFO     | N/A | AI 处理成功，planId=5077, 结果是：{"planId": 5077, "content": "为你规划一份**5天4晚、预算5000元、节奏休闲**的北京旅行方案。为保证体验，本方案默认**5000元为北京当地花费（不含往返大交通）**，若需包含机票/高铁，需适当压缩住宿或餐饮标准，文末附调整建议。\n\n---\n### 📅 行程总览（休闲节奏：每天1-2个核心点+充足休息）\n| 日期 | 主题 | 核心安排 | 节奏提示 |\...
+2026-05-07 18:36:49.797 | INFO     | N/A | 收到停止信号，正在关闭...
+2026-05-07 18:36:49.808 | INFO     | N/A | ResultProducer 已关闭
+2026-05-07 18:36:49.808 | INFO     | N/A | TaskConsumer 已关闭
+2026-05-07 18:39:17.071 | INFO     | N/A | ResultProducer 启动成功
+2026-05-07 18:39:17.191 | INFO     | N/A | TaskConsumer 启动成功，连接至 Proxy 地址: 192.168.71.140:8081
+2026-05-07 18:39:17.191 | INFO     | N/A | Python 消费者已启动，等待消息...
+2026-05-07 18:39:18.214 | INFO     | 2052336136624476160 | 收到任务，taskId=13, query=去北京旅游
+2026-05-07 18:39:18.215 | INFO     | 2052336136624476160 | 开始处理任务 taskId=13
+2026-05-07 18:39:18.215 | INFO     | 2052336188889698304 | 收到任务，taskId=14, query=去北京旅游
+2026-05-07 18:39:18.216 | INFO     | 2052336188889698304 | 开始处理任务 taskId=14
+2026-05-07 18:40:28.325 | INFO     | 2052336136624476160 | AI处理成功 taskId=13, planId=9732
+2026-05-07 18:40:28.347 | ERROR    | N/A | 消息处理异常，将稍后重试: 'SendReceipt' object has no attribute 'msg_id'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 75, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 81, in send_result
+    logger.info(f"结果消息发送成功, msgId={ret.msg_id}, taskId={task_id}, traceId={trace_id}")
+
+AttributeError: 'SendReceipt' object has no attribute 'msg_id'
+2026-05-07 18:40:31.072 | INFO     | 2052336188889698304 | AI处理成功 taskId=14, planId=3643
+2026-05-07 18:40:31.080 | ERROR    | N/A | 消息处理异常，将稍后重试: 'SendReceipt' object has no attribute 'msg_id'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 75, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 81, in send_result
+    logger.info(f"结果消息发送成功, msgId={ret.msg_id}, taskId={task_id}, traceId={trace_id}")
+
+AttributeError: 'SendReceipt' object has no attribute 'msg_id'
+2026-05-07 18:40:38.096 | INFO     | 2052336188889698304 | 收到任务，taskId=14, query=去北京旅游
+2026-05-07 18:40:38.097 | INFO     | 2052336136624476160 | 收到任务，taskId=13, query=去北京旅游
+2026-05-07 18:40:38.097 | INFO     | 2052336136624476160 | 开始处理任务 taskId=13
+2026-05-07 18:40:38.097 | INFO     | 2052336188889698304 | 开始处理任务 taskId=14
+2026-05-07 18:40:39.821 | INFO     | N/A | 收到停止信号，正在关闭...
+2026-05-07 18:40:39.835 | INFO     | N/A | ResultProducer 已关闭
+2026-05-07 18:40:39.835 | INFO     | N/A | TaskConsumer 已关闭
+2026-05-07 18:47:40.071 | INFO     | N/A | ResultProducer 启动成功
+2026-05-07 18:47:40.193 | INFO     | N/A | TaskConsumer 启动成功，连接至 Proxy 地址: 192.168.71.140:8081
+2026-05-07 18:47:40.193 | INFO     | N/A | Python 消费者已启动，等待消息...
+2026-05-07 18:47:41.216 | INFO     | 2052336188889698304 | 收到任务，taskId=14, query=去北京旅游
+2026-05-07 18:47:41.217 | INFO     | 2052336188889698304 | 开始处理任务 taskId=14
+2026-05-07 18:47:41.217 | INFO     | 2052336136624476160 | 收到任务，taskId=13, query=去北京旅游
+2026-05-07 18:47:41.217 | INFO     | 2052336136624476160 | 开始处理任务 taskId=13
+2026-05-07 18:48:46.275 | INFO     | 2052336136624476160 | AI处理成功 taskId=13, planId=3162
+2026-05-07 18:48:46.291 | INFO     | N/A | 结果消息发送成功, msgId=01C43D1AD557774F280A0E080E00000000, taskId=13, traceId=2052336136624476160
+2026-05-07 18:49:01.083 | INFO     | 2052336188889698304 | 收到任务，taskId=14, query=去北京旅游
+2026-05-07 18:49:01.083 | INFO     | 2052336188889698304 | 开始处理任务 taskId=14
+2026-05-07 18:49:01.083 | INFO     | 2052336136624476160 | 收到任务，taskId=13, query=去北京旅游
+2026-05-07 18:49:01.084 | INFO     | 2052336136624476160 | 开始处理任务 taskId=13
+2026-05-07 18:49:05.980 | INFO     | 2052336188889698304 | AI处理成功 taskId=14, planId=5735
+2026-05-07 18:49:05.986 | INFO     | N/A | 结果消息发送成功, msgId=01C43D1AD557774F280A0E082100000001, taskId=14, traceId=2052336188889698304
+2026-05-07 18:50:05.544 | INFO     | 2052336188889698304 | AI处理成功 taskId=14, planId=9655
+2026-05-07 18:50:05.550 | INFO     | N/A | 结果消息发送成功, msgId=01C43D1AD557774F280A0E085D00000002, taskId=14, traceId=2052336188889698304
+2026-05-07 18:50:17.330 | INFO     | 2052336136624476160 | AI处理成功 taskId=13, planId=8831
+2026-05-07 18:50:17.338 | INFO     | N/A | 结果消息发送成功, msgId=01C43D1AD557774F280A0E086900000003, taskId=13, traceId=2052336136624476160
+2026-05-07 18:50:20.951 | INFO     | 2052336188889698304 | 收到任务，taskId=14, query=去北京旅游
+2026-05-07 18:50:20.952 | INFO     | 2052336188889698304 | 开始处理任务 taskId=14
+2026-05-07 18:50:20.952 | INFO     | 2052336136624476160 | 收到任务，taskId=13, query=去北京旅游
+2026-05-07 18:50:20.952 | INFO     | 2052336136624476160 | 开始处理任务 taskId=13
+2026-05-07 18:51:28.906 | INFO     | 2052336188889698304 | AI处理成功 taskId=14, planId=7322
+2026-05-07 18:51:28.913 | INFO     | N/A | 结果消息发送成功, msgId=01C43D1AD557774F280A0E08B000000004, taskId=14, traceId=2052336188889698304
+2026-05-07 18:51:37.426 | INFO     | 2052336136624476160 | AI处理成功 taskId=13, planId=3690
+2026-05-07 18:51:37.433 | INFO     | N/A | 结果消息发送成功, msgId=01C43D1AD557774F280A0E08B900000005, taskId=13, traceId=2052336136624476160
+2026-05-07 18:51:40.832 | INFO     | 2052336188889698304 | 收到任务，taskId=14, query=去北京旅游
+2026-05-07 18:51:40.833 | INFO     | 2052336188889698304 | 开始处理任务 taskId=14
+2026-05-07 18:51:40.833 | INFO     | 2052336136624476160 | 收到任务，taskId=13, query=去北京旅游
+2026-05-07 18:51:40.833 | INFO     | 2052336136624476160 | 开始处理任务 taskId=13
+2026-05-07 18:52:45.973 | INFO     | 2052336188889698304 | AI处理成功 taskId=14, planId=3295
+2026-05-07 18:52:45.979 | INFO     | N/A | 结果消息发送成功, msgId=01C43D1AD557774F280A0E08FD00000006, taskId=14, traceId=2052336188889698304
+2026-05-07 18:53:00.689 | INFO     | 2052336188889698304 | 收到任务，taskId=14, query=去北京旅游
+2026-05-07 18:53:00.689 | INFO     | 2052336188889698304 | 开始处理任务 taskId=14
+2026-05-07 18:53:00.690 | INFO     | 2052336136624476160 | 收到任务，taskId=13, query=去北京旅游
+2026-05-07 18:53:00.691 | INFO     | 2052336136624476160 | 开始处理任务 taskId=13
+2026-05-07 18:53:09.561 | INFO     | 2052336136624476160 | AI处理成功 taskId=13, planId=3421
+2026-05-07 18:53:09.569 | INFO     | N/A | 结果消息发送成功, msgId=01C43D1AD557774F280A0E091500000007, taskId=13, traceId=2052336136624476160
+2026-05-07 18:54:17.116 | INFO     | 2052336136624476160 | AI处理成功 taskId=13, planId=3673
+2026-05-07 18:54:17.123 | INFO     | N/A | 结果消息发送成功, msgId=01C43D1AD557774F280A0E095900000008, taskId=13, traceId=2052336136624476160
+2026-05-07 18:54:17.879 | INFO     | 2052336188889698304 | AI处理成功 taskId=14, planId=3921
+2026-05-07 18:54:17.886 | INFO     | N/A | 结果消息发送成功, msgId=01C43D1AD557774F280A0E095900000009, taskId=14, traceId=2052336188889698304
+2026-05-07 18:54:20.532 | INFO     | 2052336188889698304 | 收到任务，taskId=14, query=去北京旅游
+2026-05-07 18:54:20.532 | INFO     | 2052336188889698304 | 开始处理任务 taskId=14
+2026-05-07 18:54:20.532 | INFO     | 2052336136624476160 | 收到任务，taskId=13, query=去北京旅游
+2026-05-07 18:54:20.533 | INFO     | 2052336136624476160 | 开始处理任务 taskId=13
+2026-05-07 18:55:31.118 | INFO     | 2052336188889698304 | AI处理成功 taskId=14, planId=8196
+2026-05-07 18:55:31.125 | INFO     | N/A | 结果消息发送成功, msgId=01C43D1AD557774F280A0E09A30000000A, taskId=14, traceId=2052336188889698304
+2026-05-07 18:55:40.399 | INFO     | 2052336136624476160 | 收到任务，taskId=13, query=去北京旅游
+2026-05-07 18:55:40.400 | INFO     | 2052336136624476160 | 开始处理任务 taskId=13
+2026-05-07 18:55:40.400 | INFO     | 2052336188889698304 | 收到任务，taskId=14, query=去北京旅游
+2026-05-07 18:55:40.400 | INFO     | 2052336188889698304 | 开始处理任务 taskId=14
+2026-05-07 18:55:41.009 | INFO     | 2052336136624476160 | AI处理成功 taskId=13, planId=2985
+2026-05-07 18:55:41.018 | INFO     | N/A | 结果消息发送成功, msgId=01C43D1AD557774F280A0E09AD0000000B, taskId=13, traceId=2052336136624476160
+2026-05-07 18:56:45.097 | INFO     | 2052336136624476160 | AI处理成功 taskId=13, planId=6441
+2026-05-07 18:56:45.105 | INFO     | N/A | 结果消息发送成功, msgId=01C43D1AD557774F280A0E09ED0000000C, taskId=13, traceId=2052336136624476160
+2026-05-07 18:57:00.262 | INFO     | 2052336136624476160 | 收到任务，taskId=13, query=去北京旅游
+2026-05-07 18:57:00.262 | INFO     | 2052336136624476160 | 开始处理任务 taskId=13
+2026-05-07 18:57:00.262 | INFO     | 2052336188889698304 | 收到任务，taskId=14, query=去北京旅游
+2026-05-07 18:57:00.263 | INFO     | 2052336188889698304 | 开始处理任务 taskId=14
+2026-05-07 18:57:02.394 | INFO     | 2052336188889698304 | AI处理成功 taskId=14, planId=3764
+2026-05-07 18:57:02.402 | INFO     | N/A | 结果消息发送成功, msgId=01C43D1AD557774F280A0E09FE0000000D, taskId=14, traceId=2052336188889698304
+2026-05-07 18:58:09.948 | INFO     | 2052336188889698304 | AI处理成功 taskId=14, planId=4019
+2026-05-07 18:58:09.955 | INFO     | N/A | 结果消息发送成功, msgId=01C43D1AD557774F280A0E0A410000000E, taskId=14, traceId=2052336188889698304
+2026-05-07 18:58:20.139 | INFO     | 2052336136624476160 | 收到任务，taskId=13, query=去北京旅游
+2026-05-07 18:58:20.139 | INFO     | 2052336188889698304 | 收到任务，taskId=14, query=去北京旅游
+2026-05-07 18:58:20.140 | INFO     | 2052336188889698304 | 开始处理任务 taskId=14
+2026-05-07 18:58:20.140 | INFO     | 2052336136624476160 | 开始处理任务 taskId=13
+2026-05-07 18:58:30.464 | INFO     | 2052336136624476160 | AI处理成功 taskId=13, planId=9574
+2026-05-07 18:58:30.470 | INFO     | N/A | 结果消息发送成功, msgId=01C43D1AD557774F280A0E0A560000000F, taskId=13, traceId=2052336136624476160
+2026-05-07 18:59:32.385 | INFO     | 2052336136624476160 | AI处理成功 taskId=13, planId=7707
+2026-05-07 18:59:32.392 | INFO     | N/A | 结果消息发送成功, msgId=01C43D1AD557774F280A0E0A9400000010, taskId=13, traceId=2052336136624476160
+2026-05-07 18:59:33.777 | INFO     | 2052336188889698304 | AI处理成功 taskId=14, planId=9566
+2026-05-07 18:59:33.784 | INFO     | N/A | 结果消息发送成功, msgId=01C43D1AD557774F280A0E0A9500000011, taskId=14, traceId=2052336188889698304
+2026-05-07 18:59:39.995 | INFO     | 2052336136624476160 | 收到任务，taskId=13, query=去北京旅游
+2026-05-07 18:59:39.996 | INFO     | 2052336136624476160 | 开始处理任务 taskId=13
+2026-05-07 18:59:39.997 | INFO     | 2052336188889698304 | 收到任务，taskId=14, query=去北京旅游
+2026-05-07 18:59:39.997 | INFO     | 2052336188889698304 | 开始处理任务 taskId=14
+2026-05-07 19:00:37.900 | INFO     | 2052336136624476160 | AI处理成功 taskId=13, planId=2962
+2026-05-07 19:00:37.905 | INFO     | N/A | 结果消息发送成功, msgId=01C43D1AD557774F280A0E0AD500000012, taskId=13, traceId=2052336136624476160
+2026-05-07 19:00:56.468 | INFO     | 2052336188889698304 | AI处理成功 taskId=14, planId=5344
+2026-05-07 19:00:56.476 | INFO     | N/A | 结果消息发送成功, msgId=01C43D1AD557774F280A0E0AE800000013, taskId=14, traceId=2052336188889698304
+2026-05-07 19:00:59.841 | INFO     | 2052336188889698304 | 收到任务，taskId=14, query=去北京旅游
+2026-05-07 19:00:59.842 | INFO     | 2052336188889698304 | 开始处理任务 taskId=14
+2026-05-07 19:02:07.586 | INFO     | 2052336188889698304 | AI处理成功 taskId=14, planId=8503
+2026-05-07 19:02:07.591 | INFO     | N/A | 结果消息发送成功, msgId=01C43D1AD557774F280A0E0B2F00000014, taskId=14, traceId=2052336188889698304
+2026-05-07 19:45:04.211 | INFO     | N/A | 收到停止信号，正在关闭...
+2026-05-07 19:45:04.233 | INFO     | N/A | ResultProducer 已关闭
+2026-05-07 19:45:04.234 | INFO     | N/A | TaskConsumer 已关闭

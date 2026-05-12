@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travel.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.travel.entity.User">
+            <id property="user_id" column="user_id" jdbcType="BIGINT"/>
+            <result property="open_id" column="open_id" jdbcType="VARCHAR"/>
+            <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
+            <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+            <result property="budget" column="budget" jdbcType="OTHER"/>
+            <result property="pace" column="pace" jdbcType="OTHER"/>
+            <result property="status" column="status" jdbcType="TINYINT"/>
+            <result property="create_time" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="update_time" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        user_id,open_id,nickname,
+        avatar,budget,pace,
+        status,create_time,update_time
+    </sql>
+</mapper>

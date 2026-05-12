@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travel.mapper.ChatMessageMapper">
+
+    <resultMap id="BaseResultMap" type="com.travel.entity.ChatMessage">
+            <id property="msg_id" column="msg_id" jdbcType="BIGINT"/>
+            <result property="session_id" column="session_id" jdbcType="BIGINT"/>
+            <result property="user_id" column="user_id" jdbcType="BIGINT"/>
+            <result property="role" column="role" jdbcType="OTHER"/>
+            <result property="content" column="content" jdbcType="VARCHAR"/>
+            <result property="plan_json" column="plan_json" jdbcType="OTHER"/>
+            <result property="create_time" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        msg_id,session_id,user_id,
+        role,content,plan_json,
+        create_time
+    </sql>
+</mapper>

@@ -1,0 +1,404 @@
+2026-05-07 12:41:09.039 | ERROR    | N/A | 消息处理异常，将稍后重试: 'Producer' object has no attribute 'send_sync'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 69, in send_result
+    ret = self.producer.send_sync(msg)
+
+AttributeError: 'Producer' object has no attribute 'send_sync'. Did you mean: 'send_async'?
+2026-05-07 12:41:15.958 | ERROR    | N/A | 消息处理异常，将稍后重试: 'Producer' object has no attribute 'send_sync'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 69, in send_result
+    ret = self.producer.send_sync(msg)
+
+AttributeError: 'Producer' object has no attribute 'send_sync'. Did you mean: 'send_async'?
+2026-05-07 12:41:24.412 | ERROR    | N/A | 消息处理异常，将稍后重试: 'Producer' object has no attribute 'send_sync'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 69, in send_result
+    ret = self.producer.send_sync(msg)
+
+AttributeError: 'Producer' object has no attribute 'send_sync'. Did you mean: 'send_async'?
+2026-05-07 12:41:33.500 | ERROR    | N/A | 消息处理异常，将稍后重试: 'Producer' object has no attribute 'send_sync'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 69, in send_result
+    ret = self.producer.send_sync(msg)
+
+AttributeError: 'Producer' object has no attribute 'send_sync'. Did you mean: 'send_async'?
+2026-05-07 12:59:01.328 | ERROR    | N/A | 消息处理异常，将稍后重试: 'Producer' object has no attribute 'send_sync'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 69, in send_result
+    ret = self.producer.send_sync(msg)
+
+AttributeError: 'Producer' object has no attribute 'send_sync'. Did you mean: 'send_async'?
+2026-05-07 12:59:03.813 | ERROR    | N/A | AI模型调用失败: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 12:59:03.813 | ERROR    | 2051954357266747392 | 处理失败 taskId=6, error=AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 12:59:03.813 | ERROR    | N/A | 消息处理异常，将稍后重试: 'Producer' object has no attribute 'send_sync'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 69, in send_result
+    ret = self.producer.send_sync(msg)
+
+AttributeError: 'Producer' object has no attribute 'send_sync'. Did you mean: 'send_async'?
+2026-05-07 13:12:16.448 | ERROR    | N/A | 消息处理异常，将稍后重试: failed to fetch topic:travel-task-result route.
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 80, in send_result
+    ret = self.producer.send(msg)
+
+  File "D:\python\Lib\site-packages\rocketmq\v5\producer\producer.py", line 160, in send
+    topic_queue = self.__select_send_queue(message)
+  File "D:\python\Lib\site-packages\rocketmq\v5\producer\producer.py", line 576, in __select_send_queue
+    raise e
+  File "D:\python\Lib\site-packages\rocketmq\v5\producer\producer.py", line 566, in __select_send_queue
+    route = self._retrieve_topic_route_data(message.topic)
+  File "D:\python\Lib\site-packages\rocketmq\v5\client\client.py", line 258, in _retrieve_topic_route_data
+    raise Exception(f"failed to fetch topic:{topic} route.")
+
+Exception: failed to fetch topic:travel-task-result route.
+2026-05-07 13:12:24.792 | ERROR    | N/A | AI模型调用失败: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:12:24.792 | ERROR    | N/A | AI模型调用失败: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:12:24.794 | ERROR    | 2051957059656814592 | 处理失败 taskId=7, error=AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:12:24.794 | ERROR    | 2051954357266747392 | 处理失败 taskId=6, error=AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:12:24.799 | ERROR    | N/A | 消息处理异常，将稍后重试: failed to fetch topic:travel-task-result route.
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 80, in send_result
+    ret = self.producer.send(msg)
+
+  File "D:\python\Lib\site-packages\rocketmq\v5\producer\producer.py", line 160, in send
+    topic_queue = self.__select_send_queue(message)
+  File "D:\python\Lib\site-packages\rocketmq\v5\producer\producer.py", line 576, in __select_send_queue
+    raise e
+  File "D:\python\Lib\site-packages\rocketmq\v5\producer\producer.py", line 566, in __select_send_queue
+    route = self._retrieve_topic_route_data(message.topic)
+  File "D:\python\Lib\site-packages\rocketmq\v5\client\client.py", line 258, in _retrieve_topic_route_data
+    raise Exception(f"failed to fetch topic:{topic} route.")
+
+Exception: failed to fetch topic:travel-task-result route.
+2026-05-07 13:12:24.801 | ERROR    | N/A | 消息处理异常，将稍后重试: failed to fetch topic:travel-task-result route.
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 80, in send_result
+    ret = self.producer.send(msg)
+
+  File "D:\python\Lib\site-packages\rocketmq\v5\producer\producer.py", line 160, in send
+    topic_queue = self.__select_send_queue(message)
+  File "D:\python\Lib\site-packages\rocketmq\v5\producer\producer.py", line 576, in __select_send_queue
+    raise e
+  File "D:\python\Lib\site-packages\rocketmq\v5\producer\producer.py", line 566, in __select_send_queue
+    route = self._retrieve_topic_route_data(message.topic)
+  File "D:\python\Lib\site-packages\rocketmq\v5\client\client.py", line 258, in _retrieve_topic_route_data
+    raise Exception(f"failed to fetch topic:{topic} route.")
+
+Exception: failed to fetch topic:travel-task-result route.
+2026-05-07 13:24:08.028 | ERROR    | N/A | AI模型调用失败: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:24:08.028 | ERROR    | N/A | AI模型调用失败: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:24:08.029 | ERROR    | 2051957059656814592 | 处理失败 taskId=7, error=AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:24:08.029 | ERROR    | 2051954357266747392 | 处理失败 taskId=6, error=AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:24:08.086 | ERROR    | N/A | 消息处理异常，将稍后重试: 'SendReceipt' object has no attribute 'msg_id'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 81, in send_result
+    logger.info(f"结果消息发送成功, msgId={ret.msg_id}, taskId={task_id}, traceId={trace_id}")
+
+AttributeError: 'SendReceipt' object has no attribute 'msg_id'
+2026-05-07 13:24:08.086 | ERROR    | N/A | 消息处理异常，将稍后重试: 'SendReceipt' object has no attribute 'msg_id'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 56, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 81, in send_result
+    logger.info(f"结果消息发送成功, msgId={ret.msg_id}, taskId={task_id}, traceId={trace_id}")
+
+AttributeError: 'SendReceipt' object has no attribute 'msg_id'
+2026-05-07 13:30:28.415 | ERROR    | N/A | AI模型调用失败: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:30:28.416 | ERROR    | 2052259615977181184 | 处理失败 taskId=8, error=AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:30:28.416 | ERROR    | N/A | AI 处理失败，错误信息：AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:31:48.240 | ERROR    | N/A | AI模型调用失败: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:31:48.240 | ERROR    | 2051957059656814592 | 处理失败 taskId=7, error=AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:31:48.241 | ERROR    | N/A | AI 处理失败，错误信息：AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:31:48.285 | ERROR    | N/A | AI模型调用失败: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:31:48.285 | ERROR    | 2051954357266747392 | 处理失败 taskId=6, error=AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 13:31:48.286 | ERROR    | N/A | AI 处理失败，错误信息：AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 18:15:24.887 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:15:24.888 | ERROR    | N/A | 响应状态码: 404
+2026-05-07 18:15:24.888 | ERROR    | N/A | 响应内容: 
+2026-05-07 18:15:24.889 | ERROR    | 2051954357266747392 | 处理失败 taskId=6, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:15:24.890 | ERROR    | N/A | AI 处理失败，错误信息：AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:15:24.888 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:15:24.890 | ERROR    | N/A | 响应状态码: 404
+2026-05-07 18:15:24.891 | ERROR    | N/A | 响应内容: 
+2026-05-07 18:15:24.891 | ERROR    | 2051957059656814592 | 处理失败 taskId=7, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:15:24.892 | ERROR    | N/A | AI 处理失败，错误信息：AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:15:24.893 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:15:24.893 | ERROR    | N/A | 响应状态码: 404
+2026-05-07 18:15:24.894 | ERROR    | N/A | 响应内容: 
+2026-05-07 18:15:24.895 | ERROR    | 2051886031249281024 | 处理失败 taskId=5, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:15:24.896 | ERROR    | N/A | AI 处理失败，错误信息：AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:19:35.022 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/api/v1
+2026-05-07 18:19:35.023 | ERROR    | N/A | 响应状态码: 404
+2026-05-07 18:19:35.023 | ERROR    | N/A | 响应内容: 
+2026-05-07 18:19:35.023 | ERROR    | 2052332498615209984 | 处理失败 taskId=9, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/api/v1
+2026-05-07 18:19:35.025 | ERROR    | N/A | AI 处理失败，错误信息：AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/api/v1
+2026-05-07 18:23:12.224 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:23:12.225 | ERROR    | N/A | 响应状态码: 404
+2026-05-07 18:23:12.225 | ERROR    | N/A | 响应内容: 
+2026-05-07 18:23:12.225 | ERROR    | 2052333409706119168 | 处理失败 taskId=11, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:23:12.227 | ERROR    | N/A | AI 处理失败，错误信息：AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:23:32.197 | ERROR    | N/A | AI模型调用失败: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:23:32.198 | ERROR    | N/A | 响应状态码: 404
+2026-05-07 18:23:32.198 | ERROR    | N/A | 响应内容: 
+2026-05-07 18:23:32.199 | ERROR    | 2052333230395428864 | 处理失败 taskId=10, error=AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:23:32.200 | ERROR    | N/A | AI 处理失败，错误信息：AI模型错误: 404 Client Error: Not Found for url: https://dashscope.aliyuncs.com/compatible-mode/v1
+2026-05-07 18:28:19.535 | ERROR    | N/A | AI模型调用失败: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 18:28:19.536 | ERROR    | 2052334573071831040 | 处理失败 taskId=12, error=AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 18:28:19.536 | ERROR    | N/A | AI 处理失败，错误信息：AI模型错误: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=30)
+2026-05-07 18:40:28.347 | ERROR    | N/A | 消息处理异常，将稍后重试: 'SendReceipt' object has no attribute 'msg_id'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 75, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 81, in send_result
+    logger.info(f"结果消息发送成功, msgId={ret.msg_id}, taskId={task_id}, traceId={trace_id}")
+
+AttributeError: 'SendReceipt' object has no attribute 'msg_id'
+2026-05-07 18:40:31.080 | ERROR    | N/A | 消息处理异常，将稍后重试: 'SendReceipt' object has no attribute 'msg_id'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\consumer.py", line 75, in consume
+    self.result_producer.send_result(
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\producer.py", line 81, in send_result
+    logger.info(f"结果消息发送成功, msgId={ret.msg_id}, taskId={task_id}, traceId={trace_id}")
+
+AttributeError: 'SendReceipt' object has no attribute 'msg_id'
