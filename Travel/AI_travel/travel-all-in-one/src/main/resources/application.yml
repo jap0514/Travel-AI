@@ -69,8 +69,11 @@ jwt:
 # 自定义配置
 travel:
   mq:
-#    submit-topic: travel-task-submit  # 任务提交  Topic
-    submit-topic: travel-content-submit  # 对话内容提交  Topic
-    result-topic: travel-task-result  # 任务结果 Topic
+    content-topic: travel-content-exchange  # 对话内容提交  Topic
+    task-topic: travel-task-exchange  # 任务结果 Topic
+    result-topic: travel-result-exchange
+    content-tag: content-exchange
+    task-tag: task-exchange
+    result-tag: result-exchange
   security:
     sign-secret: ${SIGN_SECRET:defaultSecret123456}  # 签名密钥

@@ -56,6 +56,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         Long userId=jwtUtil.getUserIdByToken(token);
         request.setAttribute("userId",userId);
 
+        System.out.println("放行");
         //6、验证通过，放行
         return true;
     }
