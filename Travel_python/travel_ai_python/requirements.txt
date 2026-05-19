@@ -3,3 +3,11 @@ python-dotenv==1.0.0
 loguru==0.7.2
 requests==2.31.0
 PyJWT==2.8.0
+
+langgraph
+langchain
+langchain-openai  # 或 langchain-qwen 等
+langchain-mcp-adapters  # MCP 适配器（关键）
+mem0ai
+redis
+python-dotenv

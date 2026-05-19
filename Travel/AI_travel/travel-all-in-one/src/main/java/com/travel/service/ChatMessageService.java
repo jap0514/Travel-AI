@@ -3,6 +3,7 @@ package com.travel.service;
 import com.travel.dto.ChatMessageDTO;
 import com.travel.entity.ChatMessage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.travel.vo.ChatMessageVO;
 
 /**
 * @author 13922
@@ -15,5 +16,5 @@ public interface ChatMessageService extends IService<ChatMessage> {
      * 从用户的message里面获取到具体的内容content
      * @param chatMessageDTO
      */
-    void getContentFromMessage(ChatMessageDTO chatMessageDTO,Long userId);
+    ChatMessageVO getContentFromMessage(ChatMessageDTO chatMessageDTO, Long userId);
 }

@@ -3,9 +3,12 @@ import signal
 import sys
 from app.config.logger import logger
 from app.mq.consumer import TaskConsumer
+from app.mq.message_consumer import MessageConsumer
+
 
 def main():
-    consumer = TaskConsumer()
+    # consumer = TaskConsumer()
+    consumer=MessageConsumer()
     def signal_handler(sig, frame):
         logger.info("收到停止信号，正在关闭...")
         consumer.shutdown()

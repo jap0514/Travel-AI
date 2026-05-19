@@ -1,5 +1,7 @@
 import json
 import os
+
+from datetime import datetime
 from rocketmq.v5.client import ClientConfiguration,Credentials
 from rocketmq.v5.consumer.push.push_consumer import PushConsumer
 from rocketmq.v5.consumer.push.message_listener import MessageListener, ConsumeResult
@@ -7,13 +9,15 @@ from rocketmq.v5.model.filter_expression import FilterExpression, FilterType
 
 from app.config.settings import settings
 from app.config.logger import logger
+from app.model.message_model import ChatMessage
+from app.service.travel_agent import process_with_agent
 from app.utils.sign_utils import verify_sign
 from app.model.task_model import TravelTask
 from app.service.task_service import process_task
 from app.mq.producer import ResultProducer
 
 
-class TaskMessageListener(MessageListener):
+class ContentMessageListener(MessageListener):
     def __init__(self, result_producer: ResultProducer):
         self.result_producer = result_producer
 
@@ -34,42 +38,49 @@ class TaskMessageListener(MessageListener):
             # 2. 解析数据
             header = msg_dict.get("header", {})
             body = msg_dict.get("body", {})
-            task_data = body.get("taskData", {})
+            content_data = body.get("content", {})
 
             trace_id = header.get("trace_id") or header.get("traceId")
             log = logger.bind(trace_id=trace_id)
 
-            task = TravelTask(
-                task_id=body.get("taskId"),
-                trace_id=trace_id,
-                user_id=header.get("userId"),
-                user_query=task_data.get("userQuery"),
-                days=task_data.get("days"),
-                budget=task_data.get("budget"),
-                pace=task_data.get("pace")
+            # task = TravelTask(
+            #     task_id=body.get("taskId"),
+            #     trace_id=trace_id,
+            #     user_id=header.get("userId"),
+            #     user_query=task_data.get("userQuery"),
+            #     days=task_data.get("days"),
+            #     budget=task_data.get("budget"),
+            #     pace=task_data.get("pace")
+            # )
+            message=ChatMessage(
+                msg_id=header.get("msg_id") or header.get("msgId"),
+                session_id=body.get("session_id") or body.get("sessionId"),
+                user_id=body.get("user_id") or body.get("userId"),
+                role=body.get("role"),
+                content=content_data,
+                plan_json=body.get("planJson") or body.get("plan_json") or None,
+                create_time=datetime.now()
             )
-            log.info(f"收到任务，taskId={task.task_id}, query={task.user_query}")
+            log.info(f"收到消息，content={content_data}, trace_id={trace_id}")
 
-            # 3. 执行业务处理
-            result_status, result_data, plan_id, error_msg = process_task(task)
-
-            # 先不发送结果回去，先测试
-            # if result_status == "SUCCESS":
-            #     logger.info(f"AI 处理成功，planId={plan_id}, 结果是：{result_data[:200]}...")  # 只打印前200字符
-            # else:
-            #     logger.error(f"AI 处理失败，错误信息：{error_msg}")
+            # 从消息中得到content后，封装好message对象。将content发送给大模型进行内容分析。
+            task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+            log.info(f"task={task}, final_plan={final_plan}, parsed_plan={parsed_plan}")
+            # 大模型分析完之后会返回具体的任务task信息，将信息封装成Task对象。
+            # 然后再将Task发送给大模型进行真正的询问。
+            # 得到结果后封装成plan对象，返回给Java。
 
 
             # 4. 发送结果
-            self.result_producer.send_result(
-                trace_id=trace_id,
-                task_id=task.task_id,
-                user_id=task.user_id,
-                result_status=result_status,
-                result_data=result_data,
-                plan_id=plan_id,
-                error_msg=error_msg
-            )
+            # self.result_producer.send_result(
+            #     trace_id=trace_id,
+            #     task_id=task.task_id,
+            #     user_id=task.user_id,
+            #     result_status=result_status,
+            #     result_data=result_data,
+            #     plan_id=plan_id,
+            #     error_msg=error_msg
+            # )
             return ConsumeResult.SUCCESS
 
         except Exception as e:
@@ -77,7 +88,7 @@ class TaskMessageListener(MessageListener):
             return ConsumeResult.FAILURE
 
 
-class TaskConsumer:
+class MessageConsumer:
     def __init__(self):
         self.consumer = None
         # 确保 ResultProducer 也使用的是 v5 版本的 Producer
@@ -93,11 +104,11 @@ class TaskConsumer:
             credentials=Credentials()
         )
 
-        listener = TaskMessageListener(self.result_producer)
+        listener = ContentMessageListener(self.result_producer)
 
         # v5 必须在初始化时明确订阅关系
         topic_subscriptions = {
-            settings.SUBMIT_TOPIC: FilterExpression(settings.SUBMIT_TAG, FilterType.TAG)
+            settings.CONTENT_TOPIC: FilterExpression(settings.CONTENT_TAG, FilterType.TAG)
         }
 
         # 创建 PushConsumer
@@ -110,9 +121,9 @@ class TaskConsumer:
 
         try:
             self.consumer.startup()
-            logger.info(f"TaskConsumer 启动成功，连接至 Proxy 地址: {settings.NAMESRV_ADDR}")
+            logger.info(f"MessageConsumer 启动成功，连接至 Proxy 地址: {settings.NAMESRV_ADDR}")
         except Exception as e:
-            logger.error(f"TaskConsumer 启动失败: {e}")
+            logger.error(f"MessageConsumer 启动失败: {e}")
             raise e
 
     def shutdown(self):
@@ -122,4 +133,4 @@ class TaskConsumer:
             except Exception as e:
                 logger.error(f"Consumer 关闭异常: {e}")
         self.result_producer.shutdown()
-        logger.info("TaskConsumer 已关闭")
+        logger.info("MessageConsumer 已关闭")
