@@ -1,0 +1,1982 @@
+2026-05-19 18:20:25.575 | ERROR    | N/A | 消息处理异常，将稍后重试: module 'datetime' has no attribute 'now'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 61, in consume
+    create_time=datetime.now()
+
+AttributeError: module 'datetime' has no attribute 'now'
+2026-05-19 18:20:25.575 | ERROR    | N/A | 消息处理异常，将稍后重试: module 'datetime' has no attribute 'now'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 61, in consume
+    create_time=datetime.now()
+
+AttributeError: module 'datetime' has no attribute 'now'
+2026-05-19 18:20:25.576 | ERROR    | N/A | 消息处理异常，将稍后重试: module 'datetime' has no attribute 'now'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 61, in consume
+    create_time=datetime.now()
+
+AttributeError: module 'datetime' has no attribute 'now'
+2026-05-19 18:20:45.553 | ERROR    | N/A | 消息处理异常，将稍后重试: module 'datetime' has no attribute 'now'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 61, in consume
+    create_time=datetime.now()
+
+AttributeError: module 'datetime' has no attribute 'now'
+2026-05-19 18:20:45.555 | ERROR    | N/A | 消息处理异常，将稍后重试: module 'datetime' has no attribute 'now'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 61, in consume
+    create_time=datetime.now()
+
+AttributeError: module 'datetime' has no attribute 'now'
+2026-05-19 18:20:45.557 | ERROR    | N/A | 消息处理异常，将稍后重试: module 'datetime' has no attribute 'now'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 61, in consume
+    create_time=datetime.now()
+
+AttributeError: module 'datetime' has no attribute 'now'
+2026-05-19 18:21:05.531 | ERROR    | N/A | 消息处理异常，将稍后重试: module 'datetime' has no attribute 'now'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 61, in consume
+    create_time=datetime.now()
+
+AttributeError: module 'datetime' has no attribute 'now'
+2026-05-19 18:21:05.533 | ERROR    | N/A | 消息处理异常，将稍后重试: module 'datetime' has no attribute 'now'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 61, in consume
+    create_time=datetime.now()
+
+AttributeError: module 'datetime' has no attribute 'now'
+2026-05-19 18:21:05.534 | ERROR    | N/A | 消息处理异常，将稍后重试: module 'datetime' has no attribute 'now'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 61, in consume
+    create_time=datetime.now()
+
+AttributeError: module 'datetime' has no attribute 'now'
+2026-05-19 18:21:25.518 | ERROR    | N/A | 消息处理异常，将稍后重试: module 'datetime' has no attribute 'now'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 61, in consume
+    create_time=datetime.now()
+
+AttributeError: module 'datetime' has no attribute 'now'
+2026-05-19 18:21:25.520 | ERROR    | N/A | 消息处理异常，将稍后重试: module 'datetime' has no attribute 'now'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 61, in consume
+    create_time=datetime.now()
+
+AttributeError: module 'datetime' has no attribute 'now'
+2026-05-19 18:21:25.522 | ERROR    | N/A | 消息处理异常，将稍后重试: module 'datetime' has no attribute 'now'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 61, in consume
+    create_time=datetime.now()
+
+AttributeError: module 'datetime' has no attribute 'now'
+2026-05-19 18:22:05.476 | ERROR    | N/A | 消息处理异常，将稍后重试: module 'datetime' has no attribute 'now'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 61, in consume
+    create_time=datetime.now()
+
+AttributeError: module 'datetime' has no attribute 'now'
+2026-05-19 18:22:05.477 | ERROR    | N/A | 消息处理异常，将稍后重试: module 'datetime' has no attribute 'now'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 61, in consume
+    create_time=datetime.now()
+
+AttributeError: module 'datetime' has no attribute 'now'
+2026-05-19 18:22:05.478 | ERROR    | N/A | 消息处理异常，将稍后重试: module 'datetime' has no attribute 'now'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 61, in consume
+    create_time=datetime.now()
+
+AttributeError: module 'datetime' has no attribute 'now'
+2026-05-19 18:23:25.334 | ERROR    | N/A | 消息处理异常，将稍后重试: module 'datetime' has no attribute 'now'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 61, in consume
+    create_time=datetime.now()
+
+AttributeError: module 'datetime' has no attribute 'now'
+2026-05-19 18:23:25.337 | ERROR    | N/A | 消息处理异常，将稍后重试: module 'datetime' has no attribute 'now'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 61, in consume
+    create_time=datetime.now()
+
+AttributeError: module 'datetime' has no attribute 'now'
+2026-05-19 18:23:25.339 | ERROR    | N/A | 消息处理异常，将稍后重试: module 'datetime' has no attribute 'now'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 61, in consume
+    create_time=datetime.now()
+
+AttributeError: module 'datetime' has no attribute 'now'
+2026-05-19 18:25:45.120 | ERROR    | N/A | 消息处理异常，将稍后重试: module 'datetime' has no attribute 'now'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 61, in consume
+    create_time=datetime.now()
+
+AttributeError: module 'datetime' has no attribute 'now'
+2026-05-19 18:25:45.121 | ERROR    | N/A | 消息处理异常，将稍后重试: module 'datetime' has no attribute 'now'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 61, in consume
+    create_time=datetime.now()
+
+AttributeError: module 'datetime' has no attribute 'now'
+2026-05-19 18:25:45.122 | ERROR    | N/A | 消息处理异常，将稍后重试: module 'datetime' has no attribute 'now'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 61, in consume
+    create_time=datetime.now()
+
+AttributeError: module 'datetime' has no attribute 'now'
+2026-05-19 18:28:57.358 | ERROR    | N/A | 消息处理异常，将稍后重试: ChatMessage.__init__() missing 1 required positional argument: 'plan_json'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 55, in consume
+    message=ChatMessage(
+
+TypeError: ChatMessage.__init__() missing 1 required positional argument: 'plan_json'
+2026-05-19 18:28:57.359 | ERROR    | N/A | 消息处理异常，将稍后重试: ChatMessage.__init__() missing 1 required positional argument: 'plan_json'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 55, in consume
+    message=ChatMessage(
+
+TypeError: ChatMessage.__init__() missing 1 required positional argument: 'plan_json'
+2026-05-19 18:28:57.360 | ERROR    | N/A | 消息处理异常，将稍后重试: ChatMessage.__init__() missing 1 required positional argument: 'plan_json'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 55, in consume
+    message=ChatMessage(
+
+TypeError: ChatMessage.__init__() missing 1 required positional argument: 'plan_json'
+2026-05-19 18:33:16.984 | ERROR    | N/A | 消息处理异常，将稍后重试: ChatMessage.__init__() missing 1 required positional argument: 'plan_json'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 55, in consume
+    message=ChatMessage(
+
+TypeError: ChatMessage.__init__() missing 1 required positional argument: 'plan_json'
+2026-05-19 18:33:16.985 | ERROR    | N/A | 消息处理异常，将稍后重试: ChatMessage.__init__() missing 1 required positional argument: 'plan_json'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 55, in consume
+    message=ChatMessage(
+
+TypeError: ChatMessage.__init__() missing 1 required positional argument: 'plan_json'
+2026-05-19 18:33:16.986 | ERROR    | N/A | 消息处理异常，将稍后重试: ChatMessage.__init__() missing 1 required positional argument: 'plan_json'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 55, in consume
+    message=ChatMessage(
+
+TypeError: ChatMessage.__init__() missing 1 required positional argument: 'plan_json'
+2026-05-19 18:35:22.778 | ERROR    | N/A | 消息处理异常，将稍后重试: ChatMessage.__init__() missing 1 required positional argument: 'plan_json'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 55, in consume
+    message=ChatMessage(
+
+TypeError: ChatMessage.__init__() missing 1 required positional argument: 'plan_json'
+2026-05-19 18:35:42.773 | ERROR    | N/A | 消息处理异常，将稍后重试: ChatMessage.__init__() missing 1 required positional argument: 'plan_json'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 55, in consume
+    message=ChatMessage(
+
+TypeError: ChatMessage.__init__() missing 1 required positional argument: 'plan_json'
+2026-05-19 18:36:02.748 | ERROR    | N/A | 消息处理异常，将稍后重试: ChatMessage.__init__() missing 1 required positional argument: 'plan_json'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 55, in consume
+    message=ChatMessage(
+
+TypeError: ChatMessage.__init__() missing 1 required positional argument: 'plan_json'
+2026-05-19 18:36:22.726 | ERROR    | N/A | 消息处理异常，将稍后重试: ChatMessage.__init__() missing 1 required positional argument: 'plan_json'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 55, in consume
+    message=ChatMessage(
+
+TypeError: ChatMessage.__init__() missing 1 required positional argument: 'plan_json'
+2026-05-19 18:37:19.251 | ERROR    | N/A | Agent 处理失败: 4 validation errors for TravelTaskOutput
+days
+  Field required [type=missing, input_value={'destination': '北京',...2小时前往机场']}]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+budget
+  Field required [type=missing, input_value={'destination': '北京',...2小时前往机场']}]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+pace
+  Field required [type=missing, input_value={'destination': '北京',...2小时前往机场']}]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+user_query
+  Field required [type=missing, input_value={'destination': '北京',...2小时前往机场']}]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 127, in process_with_agent
+    result = travel_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 54, in extract_task_node
+    task_output = structured_llm.invoke([SystemMessage(content=prompt), HumanMessage(content=user_content)])
+
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 3333, in invoke
+    input_ = context.run(step.invoke, input_, config, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 5881, in invoke
+    return self.bound.invoke(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1659, in _generate
+    raise e
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1629, in _generate
+    response = raw_response.parse()
+  File "D:\python\Lib\site-packages\openai\_legacy_response.py", line 139, in parse
+    parsed = self._options.post_parser(parsed)
+  File "D:\python\Lib\site-packages\openai\resources\chat\completions\completions.py", line 185, in parser
+    return _parse_chat_completion(
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 146, in parse_chat_completion
+    "parsed": maybe_parse_content(
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 196, in maybe_parse_content
+    return _parse_content(response_format, message.content)
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 245, in _parse_content
+    return cast(ResponseFormatT, model_parse_json(response_format, content))
+  File "D:\python\Lib\site-packages\openai\_compat.py", line 178, in model_parse_json
+    return model.model_validate_json(data)
+  File "D:\python\Lib\site-packages\pydantic\main.py", line 782, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+
+pydantic_core._pydantic_core.ValidationError: 4 validation errors for TravelTaskOutput
+days
+  Field required [type=missing, input_value={'destination': '北京',...2小时前往机场']}]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+budget
+  Field required [type=missing, input_value={'destination': '北京',...2小时前往机场']}]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+pace
+  Field required [type=missing, input_value={'destination': '北京',...2小时前往机场']}]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+user_query
+  Field required [type=missing, input_value={'destination': '北京',...2小时前往机场']}]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+During task with name 'extract_task' and id 'dc47b8fa-23f4-145b-d94c-b051b704652b'
+2026-05-19 18:37:19.690 | ERROR    | N/A | 消息处理异常，将稍后重试: 4 validation errors for TravelTaskOutput
+days
+  Field required [type=missing, input_value={'destination': '北京',...2小时前往机场']}]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+budget
+  Field required [type=missing, input_value={'destination': '北京',...2小时前往机场']}]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+pace
+  Field required [type=missing, input_value={'destination': '北京',...2小时前往机场']}]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+user_query
+  Field required [type=missing, input_value={'destination': '北京',...2小时前往机场']}]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 127, in process_with_agent
+    result = travel_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 54, in extract_task_node
+    task_output = structured_llm.invoke([SystemMessage(content=prompt), HumanMessage(content=user_content)])
+
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 3333, in invoke
+    input_ = context.run(step.invoke, input_, config, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 5881, in invoke
+    return self.bound.invoke(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1659, in _generate
+    raise e
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1629, in _generate
+    response = raw_response.parse()
+  File "D:\python\Lib\site-packages\openai\_legacy_response.py", line 139, in parse
+    parsed = self._options.post_parser(parsed)
+  File "D:\python\Lib\site-packages\openai\resources\chat\completions\completions.py", line 185, in parser
+    return _parse_chat_completion(
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 146, in parse_chat_completion
+    "parsed": maybe_parse_content(
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 196, in maybe_parse_content
+    return _parse_content(response_format, message.content)
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 245, in _parse_content
+    return cast(ResponseFormatT, model_parse_json(response_format, content))
+  File "D:\python\Lib\site-packages\openai\_compat.py", line 178, in model_parse_json
+    return model.model_validate_json(data)
+  File "D:\python\Lib\site-packages\pydantic\main.py", line 782, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+
+pydantic_core._pydantic_core.ValidationError: 4 validation errors for TravelTaskOutput
+days
+  Field required [type=missing, input_value={'destination': '北京',...2小时前往机场']}]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+budget
+  Field required [type=missing, input_value={'destination': '北京',...2小时前往机场']}]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+pace
+  Field required [type=missing, input_value={'destination': '北京',...2小时前往机场']}]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+user_query
+  Field required [type=missing, input_value={'destination': '北京',...2小时前往机场']}]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+During task with name 'extract_task' and id 'dc47b8fa-23f4-145b-d94c-b051b704652b'
+2026-05-19 18:38:42.443 | ERROR    | N/A | Agent 处理失败: 2 validation errors for TravelTaskOutput
+pace
+  Field required [type=missing, input_value={'destination': '北京',...ecial_requirements': ''}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+user_query
+  Field required [type=missing, input_value={'destination': '北京',...ecial_requirements': ''}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 127, in process_with_agent
+    result = travel_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 54, in extract_task_node
+    task_output = structured_llm.invoke([SystemMessage(content=prompt), HumanMessage(content=user_content)])
+
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 3333, in invoke
+    input_ = context.run(step.invoke, input_, config, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 5881, in invoke
+    return self.bound.invoke(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1659, in _generate
+    raise e
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1629, in _generate
+    response = raw_response.parse()
+  File "D:\python\Lib\site-packages\openai\_legacy_response.py", line 139, in parse
+    parsed = self._options.post_parser(parsed)
+  File "D:\python\Lib\site-packages\openai\resources\chat\completions\completions.py", line 185, in parser
+    return _parse_chat_completion(
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 146, in parse_chat_completion
+    "parsed": maybe_parse_content(
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 196, in maybe_parse_content
+    return _parse_content(response_format, message.content)
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 245, in _parse_content
+    return cast(ResponseFormatT, model_parse_json(response_format, content))
+  File "D:\python\Lib\site-packages\openai\_compat.py", line 178, in model_parse_json
+    return model.model_validate_json(data)
+  File "D:\python\Lib\site-packages\pydantic\main.py", line 782, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+
+pydantic_core._pydantic_core.ValidationError: 2 validation errors for TravelTaskOutput
+pace
+  Field required [type=missing, input_value={'destination': '北京',...ecial_requirements': ''}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+user_query
+  Field required [type=missing, input_value={'destination': '北京',...ecial_requirements': ''}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+During task with name 'extract_task' and id '10d137e7-6169-0cf3-3b8d-7e2d9cf66792'
+2026-05-19 18:38:42.493 | ERROR    | N/A | 消息处理异常，将稍后重试: 2 validation errors for TravelTaskOutput
+pace
+  Field required [type=missing, input_value={'destination': '北京',...ecial_requirements': ''}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+user_query
+  Field required [type=missing, input_value={'destination': '北京',...ecial_requirements': ''}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 127, in process_with_agent
+    result = travel_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 54, in extract_task_node
+    task_output = structured_llm.invoke([SystemMessage(content=prompt), HumanMessage(content=user_content)])
+
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 3333, in invoke
+    input_ = context.run(step.invoke, input_, config, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 5881, in invoke
+    return self.bound.invoke(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1659, in _generate
+    raise e
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1629, in _generate
+    response = raw_response.parse()
+  File "D:\python\Lib\site-packages\openai\_legacy_response.py", line 139, in parse
+    parsed = self._options.post_parser(parsed)
+  File "D:\python\Lib\site-packages\openai\resources\chat\completions\completions.py", line 185, in parser
+    return _parse_chat_completion(
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 146, in parse_chat_completion
+    "parsed": maybe_parse_content(
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 196, in maybe_parse_content
+    return _parse_content(response_format, message.content)
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 245, in _parse_content
+    return cast(ResponseFormatT, model_parse_json(response_format, content))
+  File "D:\python\Lib\site-packages\openai\_compat.py", line 178, in model_parse_json
+    return model.model_validate_json(data)
+  File "D:\python\Lib\site-packages\pydantic\main.py", line 782, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+
+pydantic_core._pydantic_core.ValidationError: 2 validation errors for TravelTaskOutput
+pace
+  Field required [type=missing, input_value={'destination': '北京',...ecial_requirements': ''}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+user_query
+  Field required [type=missing, input_value={'destination': '北京',...ecial_requirements': ''}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+During task with name 'extract_task' and id '10d137e7-6169-0cf3-3b8d-7e2d9cf66792'
+2026-05-19 18:38:46.205 | ERROR    | N/A | Agent 处理失败: 3 validation errors for TravelTaskOutput
+budget
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/string_type
+pace
+  Field required [type=missing, input_value={'destination': '北京',...ecial_requirements': []}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+user_query
+  Field required [type=missing, input_value={'destination': '北京',...ecial_requirements': []}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 127, in process_with_agent
+    result = travel_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 54, in extract_task_node
+    task_output = structured_llm.invoke([SystemMessage(content=prompt), HumanMessage(content=user_content)])
+
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 3333, in invoke
+    input_ = context.run(step.invoke, input_, config, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 5881, in invoke
+    return self.bound.invoke(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1659, in _generate
+    raise e
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1629, in _generate
+    response = raw_response.parse()
+  File "D:\python\Lib\site-packages\openai\_legacy_response.py", line 139, in parse
+    parsed = self._options.post_parser(parsed)
+  File "D:\python\Lib\site-packages\openai\resources\chat\completions\completions.py", line 185, in parser
+    return _parse_chat_completion(
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 146, in parse_chat_completion
+    "parsed": maybe_parse_content(
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 196, in maybe_parse_content
+    return _parse_content(response_format, message.content)
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 245, in _parse_content
+    return cast(ResponseFormatT, model_parse_json(response_format, content))
+  File "D:\python\Lib\site-packages\openai\_compat.py", line 178, in model_parse_json
+    return model.model_validate_json(data)
+  File "D:\python\Lib\site-packages\pydantic\main.py", line 782, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+
+pydantic_core._pydantic_core.ValidationError: 3 validation errors for TravelTaskOutput
+budget
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/string_type
+pace
+  Field required [type=missing, input_value={'destination': '北京',...ecial_requirements': []}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+user_query
+  Field required [type=missing, input_value={'destination': '北京',...ecial_requirements': []}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+During task with name 'extract_task' and id 'f03572d1-d89e-36fa-bd1b-4bb3142652b2'
+2026-05-19 18:38:46.236 | ERROR    | N/A | 消息处理异常，将稍后重试: 3 validation errors for TravelTaskOutput
+budget
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/string_type
+pace
+  Field required [type=missing, input_value={'destination': '北京',...ecial_requirements': []}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+user_query
+  Field required [type=missing, input_value={'destination': '北京',...ecial_requirements': []}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 127, in process_with_agent
+    result = travel_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 54, in extract_task_node
+    task_output = structured_llm.invoke([SystemMessage(content=prompt), HumanMessage(content=user_content)])
+
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 3333, in invoke
+    input_ = context.run(step.invoke, input_, config, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 5881, in invoke
+    return self.bound.invoke(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1659, in _generate
+    raise e
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1629, in _generate
+    response = raw_response.parse()
+  File "D:\python\Lib\site-packages\openai\_legacy_response.py", line 139, in parse
+    parsed = self._options.post_parser(parsed)
+  File "D:\python\Lib\site-packages\openai\resources\chat\completions\completions.py", line 185, in parser
+    return _parse_chat_completion(
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 146, in parse_chat_completion
+    "parsed": maybe_parse_content(
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 196, in maybe_parse_content
+    return _parse_content(response_format, message.content)
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 245, in _parse_content
+    return cast(ResponseFormatT, model_parse_json(response_format, content))
+  File "D:\python\Lib\site-packages\openai\_compat.py", line 178, in model_parse_json
+    return model.model_validate_json(data)
+  File "D:\python\Lib\site-packages\pydantic\main.py", line 782, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+
+pydantic_core._pydantic_core.ValidationError: 3 validation errors for TravelTaskOutput
+budget
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/string_type
+pace
+  Field required [type=missing, input_value={'destination': '北京',...ecial_requirements': []}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+user_query
+  Field required [type=missing, input_value={'destination': '北京',...ecial_requirements': []}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+During task with name 'extract_task' and id 'f03572d1-d89e-36fa-bd1b-4bb3142652b2'
+2026-05-19 18:38:49.240 | ERROR    | N/A | Agent 处理失败: 3 validation errors for TravelTaskOutput
+budget
+  Field required [type=missing, input_value={'destination': '北京',... None, 'end_date': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+pace
+  Field required [type=missing, input_value={'destination': '北京',... None, 'end_date': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+user_query
+  Field required [type=missing, input_value={'destination': '北京',... None, 'end_date': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 127, in process_with_agent
+    result = travel_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 54, in extract_task_node
+    task_output = structured_llm.invoke([SystemMessage(content=prompt), HumanMessage(content=user_content)])
+
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 3333, in invoke
+    input_ = context.run(step.invoke, input_, config, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 5881, in invoke
+    return self.bound.invoke(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1659, in _generate
+    raise e
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1629, in _generate
+    response = raw_response.parse()
+  File "D:\python\Lib\site-packages\openai\_legacy_response.py", line 139, in parse
+    parsed = self._options.post_parser(parsed)
+  File "D:\python\Lib\site-packages\openai\resources\chat\completions\completions.py", line 185, in parser
+    return _parse_chat_completion(
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 146, in parse_chat_completion
+    "parsed": maybe_parse_content(
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 196, in maybe_parse_content
+    return _parse_content(response_format, message.content)
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 245, in _parse_content
+    return cast(ResponseFormatT, model_parse_json(response_format, content))
+  File "D:\python\Lib\site-packages\openai\_compat.py", line 178, in model_parse_json
+    return model.model_validate_json(data)
+  File "D:\python\Lib\site-packages\pydantic\main.py", line 782, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+
+pydantic_core._pydantic_core.ValidationError: 3 validation errors for TravelTaskOutput
+budget
+  Field required [type=missing, input_value={'destination': '北京',... None, 'end_date': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+pace
+  Field required [type=missing, input_value={'destination': '北京',... None, 'end_date': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+user_query
+  Field required [type=missing, input_value={'destination': '北京',... None, 'end_date': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+During task with name 'extract_task' and id '129903b0-5c34-d27c-e90b-4dd8cedde1d7'
+2026-05-19 18:38:49.265 | ERROR    | N/A | 消息处理异常，将稍后重试: 3 validation errors for TravelTaskOutput
+budget
+  Field required [type=missing, input_value={'destination': '北京',... None, 'end_date': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+pace
+  Field required [type=missing, input_value={'destination': '北京',... None, 'end_date': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+user_query
+  Field required [type=missing, input_value={'destination': '北京',... None, 'end_date': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 127, in process_with_agent
+    result = travel_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 54, in extract_task_node
+    task_output = structured_llm.invoke([SystemMessage(content=prompt), HumanMessage(content=user_content)])
+
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 3333, in invoke
+    input_ = context.run(step.invoke, input_, config, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 5881, in invoke
+    return self.bound.invoke(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1659, in _generate
+    raise e
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1629, in _generate
+    response = raw_response.parse()
+  File "D:\python\Lib\site-packages\openai\_legacy_response.py", line 139, in parse
+    parsed = self._options.post_parser(parsed)
+  File "D:\python\Lib\site-packages\openai\resources\chat\completions\completions.py", line 185, in parser
+    return _parse_chat_completion(
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 146, in parse_chat_completion
+    "parsed": maybe_parse_content(
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 196, in maybe_parse_content
+    return _parse_content(response_format, message.content)
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 245, in _parse_content
+    return cast(ResponseFormatT, model_parse_json(response_format, content))
+  File "D:\python\Lib\site-packages\openai\_compat.py", line 178, in model_parse_json
+    return model.model_validate_json(data)
+  File "D:\python\Lib\site-packages\pydantic\main.py", line 782, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+
+pydantic_core._pydantic_core.ValidationError: 3 validation errors for TravelTaskOutput
+budget
+  Field required [type=missing, input_value={'destination': '北京',... None, 'end_date': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+pace
+  Field required [type=missing, input_value={'destination': '北京',... None, 'end_date': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+user_query
+  Field required [type=missing, input_value={'destination': '北京',... None, 'end_date': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+During task with name 'extract_task' and id '129903b0-5c34-d27c-e90b-4dd8cedde1d7'
+2026-05-19 18:39:06.537 | ERROR    | N/A | Agent 处理失败: 4 validation errors for TravelTaskOutput
+days
+  Field required [type=missing, input_value={'destination': '北京', 'duration_days': 10}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+budget
+  Field required [type=missing, input_value={'destination': '北京', 'duration_days': 10}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+pace
+  Field required [type=missing, input_value={'destination': '北京', 'duration_days': 10}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+user_query
+  Field required [type=missing, input_value={'destination': '北京', 'duration_days': 10}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 127, in process_with_agent
+    result = travel_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 54, in extract_task_node
+    task_output = structured_llm.invoke([SystemMessage(content=prompt), HumanMessage(content=user_content)])
+
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 3333, in invoke
+    input_ = context.run(step.invoke, input_, config, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 5881, in invoke
+    return self.bound.invoke(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1659, in _generate
+    raise e
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1629, in _generate
+    response = raw_response.parse()
+  File "D:\python\Lib\site-packages\openai\_legacy_response.py", line 139, in parse
+    parsed = self._options.post_parser(parsed)
+  File "D:\python\Lib\site-packages\openai\resources\chat\completions\completions.py", line 185, in parser
+    return _parse_chat_completion(
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 146, in parse_chat_completion
+    "parsed": maybe_parse_content(
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 196, in maybe_parse_content
+    return _parse_content(response_format, message.content)
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 245, in _parse_content
+    return cast(ResponseFormatT, model_parse_json(response_format, content))
+  File "D:\python\Lib\site-packages\openai\_compat.py", line 178, in model_parse_json
+    return model.model_validate_json(data)
+  File "D:\python\Lib\site-packages\pydantic\main.py", line 782, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+
+pydantic_core._pydantic_core.ValidationError: 4 validation errors for TravelTaskOutput
+days
+  Field required [type=missing, input_value={'destination': '北京', 'duration_days': 10}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+budget
+  Field required [type=missing, input_value={'destination': '北京', 'duration_days': 10}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+pace
+  Field required [type=missing, input_value={'destination': '北京', 'duration_days': 10}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+user_query
+  Field required [type=missing, input_value={'destination': '北京', 'duration_days': 10}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+During task with name 'extract_task' and id 'e75a0f40-c3e1-669e-8e7a-832770e571bd'
+2026-05-19 18:39:06.573 | ERROR    | N/A | 消息处理异常，将稍后重试: 4 validation errors for TravelTaskOutput
+days
+  Field required [type=missing, input_value={'destination': '北京', 'duration_days': 10}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+budget
+  Field required [type=missing, input_value={'destination': '北京', 'duration_days': 10}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+pace
+  Field required [type=missing, input_value={'destination': '北京', 'duration_days': 10}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+user_query
+  Field required [type=missing, input_value={'destination': '北京', 'duration_days': 10}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 127, in process_with_agent
+    result = travel_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 54, in extract_task_node
+    task_output = structured_llm.invoke([SystemMessage(content=prompt), HumanMessage(content=user_content)])
+
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 3333, in invoke
+    input_ = context.run(step.invoke, input_, config, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 5881, in invoke
+    return self.bound.invoke(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1659, in _generate
+    raise e
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1629, in _generate
+    response = raw_response.parse()
+  File "D:\python\Lib\site-packages\openai\_legacy_response.py", line 139, in parse
+    parsed = self._options.post_parser(parsed)
+  File "D:\python\Lib\site-packages\openai\resources\chat\completions\completions.py", line 185, in parser
+    return _parse_chat_completion(
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 146, in parse_chat_completion
+    "parsed": maybe_parse_content(
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 196, in maybe_parse_content
+    return _parse_content(response_format, message.content)
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 245, in _parse_content
+    return cast(ResponseFormatT, model_parse_json(response_format, content))
+  File "D:\python\Lib\site-packages\openai\_compat.py", line 178, in model_parse_json
+    return model.model_validate_json(data)
+  File "D:\python\Lib\site-packages\pydantic\main.py", line 782, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+
+pydantic_core._pydantic_core.ValidationError: 4 validation errors for TravelTaskOutput
+days
+  Field required [type=missing, input_value={'destination': '北京', 'duration_days': 10}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+budget
+  Field required [type=missing, input_value={'destination': '北京', 'duration_days': 10}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+pace
+  Field required [type=missing, input_value={'destination': '北京', 'duration_days': 10}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+user_query
+  Field required [type=missing, input_value={'destination': '北京', 'duration_days': 10}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+During task with name 'extract_task' and id 'e75a0f40-c3e1-669e-8e7a-832770e571bd'
+2026-05-19 18:40:14.159 | ERROR    | N/A | Agent 处理失败: 'user_id'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 139, in process_with_agent
+    result = travel_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 88, in generate_plan_node
+    memories = get_user_memories(state["user_id"])
+
+KeyError: 'user_id'
+During task with name 'generate_plan' and id 'f48d251f-9483-4cab-5c46-a08453528d27'
+2026-05-19 18:40:14.171 | ERROR    | N/A | 消息处理异常，将稍后重试: 'user_id'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 139, in process_with_agent
+    result = travel_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 88, in generate_plan_node
+    memories = get_user_memories(state["user_id"])
+
+KeyError: 'user_id'
+During task with name 'generate_plan' and id 'f48d251f-9483-4cab-5c46-a08453528d27'
+2026-05-19 18:40:22.529 | ERROR    | N/A | Agent 处理失败: 'user_id'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 139, in process_with_agent
+    result = travel_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 88, in generate_plan_node
+    memories = get_user_memories(state["user_id"])
+
+KeyError: 'user_id'
+During task with name 'generate_plan' and id '7a2e6fd8-1158-1e76-739a-9d3bb6396b07'
+2026-05-19 18:40:22.540 | ERROR    | N/A | 消息处理异常，将稍后重试: 'user_id'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 139, in process_with_agent
+    result = travel_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 88, in generate_plan_node
+    memories = get_user_memories(state["user_id"])
+
+KeyError: 'user_id'
+During task with name 'generate_plan' and id '7a2e6fd8-1158-1e76-739a-9d3bb6396b07'
+2026-05-19 18:40:23.652 | ERROR    | N/A | Agent 处理失败: 'user_id'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 139, in process_with_agent
+    result = travel_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 88, in generate_plan_node
+    memories = get_user_memories(state["user_id"])
+
+KeyError: 'user_id'
+During task with name 'generate_plan' and id '8fa998cf-ca1a-6f9e-d011-af06fbab184e'
+2026-05-19 18:40:23.663 | ERROR    | N/A | 消息处理异常，将稍后重试: 'user_id'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 139, in process_with_agent
+    result = travel_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 88, in generate_plan_node
+    memories = get_user_memories(state["user_id"])
+
+KeyError: 'user_id'
+During task with name 'generate_plan' and id '8fa998cf-ca1a-6f9e-d011-af06fbab184e'
+2026-05-19 18:46:51.140 | ERROR    | N/A | Agent 处理失败: 'task'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 151, in process_with_agent
+    result = travel_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 95, in generate_plan_node
+    task: TravelTask = state["task"]
+
+KeyError: 'task'
+During task with name 'generate_plan' and id 'acc80690-bdcc-6125-80bb-8b5192d8f767'
+2026-05-19 18:46:51.154 | ERROR    | N/A | 消息处理异常，将稍后重试: 'task'
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 151, in process_with_agent
+    result = travel_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\travel_agent.py", line 95, in generate_plan_node
+    task: TravelTask = state["task"]
+
+KeyError: 'task'
+During task with name 'generate_plan' and id 'acc80690-bdcc-6125-80bb-8b5192d8f767'
+2026-05-19 18:50:12.107 | ERROR    | N/A | ❌ Mem0 添加记忆失败: shapes (0,1536) and (1024,) not aligned: 1536 (dim 1) != 1024 (dim 0)
+2026-05-19 18:50:15.622 | ERROR    | N/A | ❌ Mem0 添加记忆失败: shapes (0,1536) and (1024,) not aligned: 1536 (dim 1) != 1024 (dim 0)
+2026-05-19 18:50:37.947 | ERROR    | N/A | ❌ Mem0 添加记忆失败: shapes (0,1536) and (1024,) not aligned: 1536 (dim 1) != 1024 (dim 0)
+2026-05-19 18:53:05.889 | ERROR    | N/A | ❌ Mem0 添加记忆失败: shapes (0,1536) and (1024,) not aligned: 1536 (dim 1) != 1024 (dim 0)
+2026-05-19 18:53:21.577 | ERROR    | N/A | ❌ Mem0 添加记忆失败: shapes (0,1536) and (1024,) not aligned: 1536 (dim 1) != 1024 (dim 0)
+2026-05-19 18:53:37.149 | ERROR    | N/A | ❌ Mem0 添加记忆失败: shapes (0,1536) and (1024,) not aligned: 1536 (dim 1) != 1024 (dim 0)
+2026-05-19 18:56:28.299 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 404 - {'error': {'message': 'The model `text-embedding-3-small` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}, 'request_id': '08f9348a-2643-9dca-b571-dc2d9fbaa8fe'}
+2026-05-19 18:56:39.878 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 404 - {'error': {'message': 'The model `text-embedding-3-small` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}, 'request_id': '25cbb6a6-672b-9890-9770-78ec489994ba'}
+2026-05-19 18:56:58.325 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 404 - {'error': {'message': 'The model `text-embedding-3-small` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}, 'request_id': '780999b2-db79-9f32-8cfd-44b56ae669b2'}
+2026-05-19 18:57:35.692 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 404 - {'error': {'message': 'The model `text-embedding-3-small` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}, 'request_id': 'd0b56e3e-6aab-9b84-998e-cabac4f1dbe5'}
+2026-05-19 18:59:50.702 | ERROR    | N/A | ❌ Mem0 添加记忆失败: shapes (0,1536) and (1024,) not aligned: 1536 (dim 1) != 1024 (dim 0)
+2026-05-19 19:00:05.434 | ERROR    | N/A | ❌ Mem0 添加记忆失败: shapes (0,1536) and (1024,) not aligned: 1536 (dim 1) != 1024 (dim 0)
+2026-05-19 19:00:11.796 | ERROR    | N/A | ❌ Mem0 添加记忆失败: shapes (0,1536) and (1024,) not aligned: 1536 (dim 1) != 1024 (dim 0)
+2026-05-19 19:04:49.610 | ERROR    | N/A | ❌ Mem0 初始化失败: BaseEmbedderConfig.__init__() got an unexpected keyword argument 'dimensions'
+2026-05-19 19:04:49.610 | ERROR    | N/A | Mem0 默认初始化失败: 'Settings' object has no attribute 'AI_MODEL_API_KEY'
+2026-05-19 19:05:04.791 | ERROR    | N/A | ❌ Mem0 初始化失败: BaseEmbedderConfig.__init__() got an unexpected keyword argument 'dimensions'
+2026-05-19 19:05:04.792 | ERROR    | N/A | Mem0 默认初始化失败: 'Settings' object has no attribute 'AI_MODEL_API_KEY'
+2026-05-19 19:07:20.999 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 400 - {'error': {'message': 'Range of input length should be [1, 2048]', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': '6fae2fcd-3784-9d32-b3cd-71cda847e27c', 'request_id': '6fae2fcd-3784-9d32-b3cd-71cda847e27c'}
+2026-05-19 19:07:21.348 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 400 - {'error': {'message': 'Range of input length should be [1, 2048]', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': 'e8f6f4b0-670b-9abb-944e-d00d5e6a6632', 'request_id': 'e8f6f4b0-670b-9abb-944e-d00d5e6a6632'}
+2026-05-19 19:08:57.621 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 400 - {'error': {'message': 'Range of input length should be [1, 2048]', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': '6a5e6fe9-407e-9afe-a29b-4c96e58413bb', 'request_id': '6a5e6fe9-407e-9afe-a29b-4c96e58413bb'}
+2026-05-19 19:09:03.083 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 400 - {'error': {'message': 'Range of input length should be [1, 2048]', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': 'fa2acc6b-ee60-9e9c-aacc-10247107a533', 'request_id': 'fa2acc6b-ee60-9e9c-aacc-10247107a533'}
+2026-05-19 19:10:03.662 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 400 - {'error': {'message': 'Range of input length should be [1, 2048]', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': 'e395d432-843c-98fd-8eaa-659591fc8cde', 'request_id': 'e395d432-843c-98fd-8eaa-659591fc8cde'}
+2026-05-19 19:10:12.239 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 400 - {'error': {'message': 'Range of input length should be [1, 2048]', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': '6078e139-f3c5-95e9-b6e6-c57d7a4306fa', 'request_id': '6078e139-f3c5-95e9-b6e6-c57d7a4306fa'}
+2026-05-19 19:11:16.034 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 400 - {'error': {'message': 'Range of input length should be [1, 2048]', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': '41d851e8-d1ac-9d75-ace6-012f660c6221', 'request_id': '41d851e8-d1ac-9d75-ace6-012f660c6221'}
+2026-05-19 19:11:18.146 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 400 - {'error': {'message': 'Range of input length should be [1, 2048]', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': '1ab32bc4-1327-9571-94f2-8a9b1b66361e', 'request_id': '1ab32bc4-1327-9571-94f2-8a9b1b66361e'}
+2026-05-19 19:12:59.554 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 400 - {'error': {'message': 'Range of input length should be [1, 2048]', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': 'fc597d3c-e6aa-9745-9d1a-9a27315778a7', 'request_id': 'fc597d3c-e6aa-9745-9d1a-9a27315778a7'}
+2026-05-19 19:12:59.758 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 400 - {'error': {'message': 'Range of input length should be [1, 2048]', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': '88470090-e603-9923-b4e3-708bdbb2a57a', 'request_id': '88470090-e603-9923-b4e3-708bdbb2a57a'}
+2026-05-19 19:14:02.325 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 400 - {'error': {'message': 'Range of input length should be [1, 2048]', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': 'cd6fe497-8972-97ca-9096-f0dc9189cdcb', 'request_id': 'cd6fe497-8972-97ca-9096-f0dc9189cdcb'}
+2026-05-19 19:14:18.016 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 400 - {'error': {'message': 'Range of input length should be [1, 2048]', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': '6eee94aa-18c8-95e5-9342-903893cac8aa', 'request_id': '6eee94aa-18c8-95e5-9342-903893cac8aa'}
+2026-05-19 19:15:22.596 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 400 - {'error': {'message': 'Range of input length should be [1, 2048]', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': '32f9c49f-ae14-90a6-93cf-d28a68b54c73', 'request_id': '32f9c49f-ae14-90a6-93cf-d28a68b54c73'}
+2026-05-19 19:15:28.116 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 400 - {'error': {'message': 'Range of input length should be [1, 2048]', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': 'f5fa61b5-22d5-9f7d-9e16-a94f3d0a2cb0', 'request_id': 'f5fa61b5-22d5-9f7d-9e16-a94f3d0a2cb0'}
+2026-05-19 19:16:42.269 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 400 - {'error': {'message': 'Range of input length should be [1, 2048]', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': 'a6de7a26-4b0c-9073-8cbd-d787d841980d', 'request_id': 'a6de7a26-4b0c-9073-8cbd-d787d841980d'}
+2026-05-19 19:17:01.138 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 400 - {'error': {'message': 'Range of input length should be [1, 2048]', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': 'd3add974-acc7-9edf-b4b1-23570a113248', 'request_id': 'd3add974-acc7-9edf-b4b1-23570a113248'}
+2026-05-19 19:18:06.950 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 400 - {'error': {'message': 'Range of input length should be [1, 2048]', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': '9d1d4561-9f49-9259-85e9-0c621c00fd94', 'request_id': '9d1d4561-9f49-9259-85e9-0c621c00fd94'}
+2026-05-19 19:18:15.854 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 400 - {'error': {'message': 'Range of input length should be [1, 2048]', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': '5fad3010-7764-9246-8b84-467ce4eb6418', 'request_id': '5fad3010-7764-9246-8b84-467ce4eb6418'}
+2026-05-19 19:19:40.795 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 400 - {'error': {'message': 'Range of input length should be [1, 2048]', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': '4126a3e7-49bc-9e11-8c27-1608e6f4ac94', 'request_id': '4126a3e7-49bc-9e11-8c27-1608e6f4ac94'}
+2026-05-19 19:19:55.457 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 400 - {'error': {'message': 'Range of input length should be [1, 2048]', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': 'f028d90b-3baf-9281-a5be-7b198df9126a', 'request_id': 'f028d90b-3baf-9281-a5be-7b198df9126a'}
+2026-05-19 19:20:56.216 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 400 - {'error': {'message': 'Range of input length should be [1, 2048]', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': 'c2ca014e-24b0-9d7f-b110-248df28794e4', 'request_id': 'c2ca014e-24b0-9d7f-b110-248df28794e4'}
+2026-05-19 19:21:01.107 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 400 - {'error': {'message': 'Range of input length should be [1, 2048]', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': '8f8426fe-08a5-93ec-b8a5-91cddede02cf', 'request_id': '8f8426fe-08a5-93ec-b8a5-91cddede02cf'}
+2026-05-19 19:22:17.897 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 400 - {'error': {'message': 'Range of input length should be [1, 2048]', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': 'a94bc1bf-a6c3-9579-bf2d-dd8361dc6320', 'request_id': 'a94bc1bf-a6c3-9579-bf2d-dd8361dc6320'}
+2026-05-19 19:23:36.331 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 400 - {'error': {'message': 'Range of input length should be [1, 2048]', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': '30398692-c8c0-9b1d-b164-237fbd30bbfb', 'request_id': '30398692-c8c0-9b1d-b164-237fbd30bbfb'}
+2026-05-19 19:25:08.181 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 400 - {'error': {'message': 'Range of input length should be [1, 2048]', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': 'a7f5a8a8-0c1a-90ae-9f2e-76c056b65c57', 'request_id': 'a7f5a8a8-0c1a-90ae-9f2e-76c056b65c57'}

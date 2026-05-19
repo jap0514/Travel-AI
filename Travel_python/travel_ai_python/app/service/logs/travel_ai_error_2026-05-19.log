@@ -1,0 +1,5 @@
+2026-05-19 13:01:46.538 | ERROR    | N/A | ❌ Mem0 初始化失败: BaseEmbedderConfig.__init__() got an unexpected keyword argument 'base_url'
+2026-05-19 13:01:46.539 | ERROR    | N/A | Mem0 默认初始化也失败: Missing credentials. Please pass an `api_key`, `workload_identity`, `admin_api_key`, or set the `OPENAI_API_KEY` or `OPENAI_ADMIN_KEY` environment variable.
+2026-05-19 13:06:23.079 | ERROR    | N/A | ❌ Mem0 初始化失败: BaseEmbedderConfig.__init__() got an unexpected keyword argument 'base_url'
+2026-05-19 13:06:23.081 | ERROR    | N/A | Mem0 默认初始化也失败: Missing credentials. Please pass an `api_key`, `workload_identity`, `admin_api_key`, or set the `OPENAI_API_KEY` or `OPENAI_ADMIN_KEY` environment variable.
+2026-05-19 13:09:02.482 | ERROR    | N/A | ❌ Mem0 初始化失败: OpenAIConfig.__init__() got an unexpected keyword argument 'base_url'. Did you mean 'site_url'?

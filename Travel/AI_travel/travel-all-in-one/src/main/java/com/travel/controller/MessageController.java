@@ -29,7 +29,7 @@ public class MessageController {
                                              @RequestAttribute Long userId){
         //获取到message里面的消息内容部分
         System.out.println("到sendMessage了");
-        chatMessageService.getContentFromMessage(chatMessageDTO,userId);
-        return Result.success();
+        ChatMessageVO chatMessageVO = chatMessageService.getContentFromMessage(chatMessageDTO, userId);
+        return Result.success(chatMessageVO);
     }
 }

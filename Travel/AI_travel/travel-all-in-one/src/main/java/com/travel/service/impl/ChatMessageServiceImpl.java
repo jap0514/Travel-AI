@@ -4,9 +4,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.travel.common.ChatMessageRoleEnum;
 import com.travel.dto.ChatMessageDTO;
 import com.travel.entity.ChatMessage;
+import com.travel.mapper.UserMapper;
 import com.travel.service.ChatMessageService;
 import com.travel.mapper.ChatMessageMapper;
 import com.travel.util.MqMessageUtil;
+import com.travel.vo.ChatMessageVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,13 +45,16 @@ public class ChatMessageServiceImpl extends ServiceImpl<ChatMessageMapper, ChatM
     @Autowired
     private ChatMessageMapper chatMessageMapper;
 
+    @Autowired
+    private UserMapper userMapper;
+
     /**
      * 从用户的message里面获取到具体的内容content
      * @param chatMessageDTO
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void getContentFromMessage(ChatMessageDTO chatMessageDTO,Long userId) {
+    public ChatMessageVO getContentFromMessage(ChatMessageDTO chatMessageDTO, Long userId) {
         //1、获取DTO里面的信息
         Long sessionId = chatMessageDTO.getSessionId();
         String content = chatMessageDTO.getContent();
@@ -88,6 +93,18 @@ public class ChatMessageServiceImpl extends ServiceImpl<ChatMessageMapper, ChatM
             //根据业务决定是否抛出异常（例如可记录失败等待重试）
             throw new RuntimeException("MQ消息发送失败",e);
         }
+
+        ChatMessageVO chatMessageVO=new ChatMessageVO();
+        chatMessageVO.setContent(content);
+        chatMessageVO.setRole(ChatMessageRoleEnum.USER);
+        chatMessageVO.setCreateTime(chatMessage.getCreate_time());
+        chatMessageVO.setMsgId(chatMessage.getMsg_id());
+        chatMessageVO.setSessionId(chatMessage.getSession_id());
+        chatMessageVO.setPlanJson(chatMessage.getPlan_json().toString());
+        chatMessageVO.setUserId(chatMessage.getUser_id());
+        chatMessageVO.setUserNickname(userMapper.selectById(userId).getNickname());
+
+        return chatMessageVO;
     }
 }
 
