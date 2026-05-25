@@ -1,0 +1,750 @@
+2026-05-25 18:36:29.053 | ERROR    | N/A | 多智能体处理失败: At key 'draft_plan': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\last_value.py", line 64, in update
+    raise InvalidUpdateError(msg)
+
+langgraph.errors.InvalidUpdateError: At key 'draft_plan': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+2026-05-25 18:36:29.181 | ERROR    | N/A | 消息处理异常，将稍后重试: At key 'draft_plan': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\last_value.py", line 64, in update
+    raise InvalidUpdateError(msg)
+
+langgraph.errors.InvalidUpdateError: At key 'draft_plan': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+2026-05-25 18:37:29.163 | ERROR    | N/A | 多智能体处理失败: At key 'draft_plan': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\last_value.py", line 64, in update
+    raise InvalidUpdateError(msg)
+
+langgraph.errors.InvalidUpdateError: At key 'draft_plan': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+2026-05-25 18:37:29.166 | ERROR    | N/A | 消息处理异常，将稍后重试: At key 'draft_plan': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\last_value.py", line 64, in update
+    raise InvalidUpdateError(msg)
+
+langgraph.errors.InvalidUpdateError: At key 'draft_plan': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+2026-05-25 18:38:33.192 | ERROR    | N/A | 多智能体处理失败: At key 'draft_plan': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\last_value.py", line 64, in update
+    raise InvalidUpdateError(msg)
+
+langgraph.errors.InvalidUpdateError: At key 'draft_plan': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+2026-05-25 18:38:33.196 | ERROR    | N/A | 消息处理异常，将稍后重试: At key 'draft_plan': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\last_value.py", line 64, in update
+    raise InvalidUpdateError(msg)
+
+langgraph.errors.InvalidUpdateError: At key 'draft_plan': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+2026-05-25 18:38:56.937 | ERROR    | N/A | 多智能体处理失败: At key 'draft_plan': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\last_value.py", line 64, in update
+    raise InvalidUpdateError(msg)
+
+langgraph.errors.InvalidUpdateError: At key 'draft_plan': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+2026-05-25 18:38:57.060 | ERROR    | N/A | 消息处理异常，将稍后重试: At key 'draft_plan': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\last_value.py", line 64, in update
+    raise InvalidUpdateError(msg)
+
+langgraph.errors.InvalidUpdateError: At key 'draft_plan': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+2026-05-25 18:39:22.461 | ERROR    | N/A | 多智能体处理失败: At key 'draft_plan': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\last_value.py", line 64, in update
+    raise InvalidUpdateError(msg)
+
+langgraph.errors.InvalidUpdateError: At key 'draft_plan': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+2026-05-25 18:39:22.524 | ERROR    | N/A | 消息处理异常，将稍后重试: At key 'draft_plan': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\last_value.py", line 64, in update
+    raise InvalidUpdateError(msg)
+
+langgraph.errors.InvalidUpdateError: At key 'draft_plan': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+2026-05-25 18:40:28.278 | ERROR    | N/A | 多智能体处理失败: At key 'draft_plan': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\last_value.py", line 64, in update
+    raise InvalidUpdateError(msg)
+
+langgraph.errors.InvalidUpdateError: At key 'draft_plan': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+2026-05-25 18:40:28.675 | ERROR    | N/A | 消息处理异常，将稍后重试: At key 'draft_plan': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\last_value.py", line 64, in update
+    raise InvalidUpdateError(msg)
+
+langgraph.errors.InvalidUpdateError: At key 'draft_plan': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+2026-05-25 19:01:16.687 | ERROR    | N/A | 多智能体处理失败: At key 'next': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\last_value.py", line 64, in update
+    raise InvalidUpdateError(msg)
+
+langgraph.errors.InvalidUpdateError: At key 'next': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+2026-05-25 19:01:16.699 | ERROR    | N/A | 消息处理异常，将稍后重试: At key 'next': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\last_value.py", line 64, in update
+    raise InvalidUpdateError(msg)
+
+langgraph.errors.InvalidUpdateError: At key 'next': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+2026-05-25 19:01:33.941 | ERROR    | N/A | 多智能体处理失败: At key 'next': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\last_value.py", line 64, in update
+    raise InvalidUpdateError(msg)
+
+langgraph.errors.InvalidUpdateError: At key 'next': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+2026-05-25 19:01:33.945 | ERROR    | N/A | 消息处理异常，将稍后重试: At key 'next': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\last_value.py", line 64, in update
+    raise InvalidUpdateError(msg)
+
+langgraph.errors.InvalidUpdateError: At key 'next': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+2026-05-25 19:35:22.729 | ERROR    | N/A | 多智能体处理失败: Error code: 403 - {'error': {'message': 'The free tier of the model has been exhausted. If you wish to continue access the model on a paid basis, please disable the "use free tier only" mode in the management console.', 'type': 'AllocationQuota.FreeTierOnly', 'param': None, 'code': 'AllocationQuota.FreeTierOnly'}, 'id': 'chatcmpl-b850f326-9730-9bf1-8744-bb38fbe92381', 'request_id': 'b850f326-9730-9bf1-8744-bb38fbe92381'}
+Traceback (most recent call last):
+
+  File "D:\software\Tools\PycharmCommunity\PyCharm Community Edition 2025.2.6\plugins\python-ce\helpers\pycharm\_jb_pytest_runner.py", line 84, in <module>
+    sys.exit(pytest.main(args, plugins_to_load + [Plugin]))
+
+  File "D:\python\Lib\site-packages\_pytest\config\__init__.py", line 199, in main
+    ret: ExitCode | int = config.hook.pytest_cmdline_main(config=config)
+  File "D:\python\Lib\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "D:\python\Lib\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "D:\python\Lib\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "D:\python\Lib\site-packages\_pytest\main.py", line 365, in pytest_cmdline_main
+    return wrap_session(config, _main)
+  File "D:\python\Lib\site-packages\_pytest\main.py", line 318, in wrap_session
+    session.exitstatus = doit(config, session) or 0
+  File "D:\python\Lib\site-packages\_pytest\main.py", line 372, in _main
+    config.hook.pytest_runtestloop(session=session)
+  File "D:\python\Lib\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "D:\python\Lib\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "D:\python\Lib\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "D:\python\Lib\site-packages\_pytest\main.py", line 396, in pytest_runtestloop
+    item.config.hook.pytest_runtest_protocol(item=item, nextitem=nextitem)
+  File "D:\python\Lib\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "D:\python\Lib\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "D:\python\Lib\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "D:\python\Lib\site-packages\_pytest\runner.py", line 118, in pytest_runtest_protocol
+    runtestprotocol(item, nextitem=nextitem)
+  File "D:\python\Lib\site-packages\_pytest\runner.py", line 137, in runtestprotocol
+    reports.append(call_and_report(item, "call", log))
+  File "D:\python\Lib\site-packages\_pytest\runner.py", line 244, in call_and_report
+    call = CallInfo.from_call(
+  File "D:\python\Lib\site-packages\_pytest\runner.py", line 353, in from_call
+    result: TResult | None = func()
+  File "D:\python\Lib\site-packages\_pytest\runner.py", line 245, in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+  File "D:\python\Lib\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "D:\python\Lib\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "D:\python\Lib\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "D:\python\Lib\site-packages\_pytest\runner.py", line 179, in pytest_runtest_call
+    item.runtest()
+  File "D:\python\Lib\site-packages\_pytest\python.py", line 1720, in runtest
+    self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+  File "D:\python\Lib\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "D:\python\Lib\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "D:\python\Lib\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "D:\python\Lib\site-packages\_pytest\python.py", line 166, in pytest_pyfunc_call
+    result = testfunction(**testargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 26, in test
+    task, final_plan, parsed_plan = process_with_agent(message, "10001")
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 10, in researcher_node
+    response = llm.bind_tools(tools).invoke([SystemMessage(content=prompt)])
+
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 5881, in invoke
+    return self.bound.invoke(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1655, in _generate
+    _handle_openai_api_error(e)
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1650, in _generate
+    raw_response = self.client.with_raw_response.create(**payload)
+  File "D:\python\Lib\site-packages\openai\_legacy_response.py", line 367, in wrapped
+    return cast(LegacyAPIResponse[R], func(*args, **kwargs))
+  File "D:\python\Lib\site-packages\openai\_utils\_utils.py", line 298, in wrapper
+    return func(*args, **kwargs)
+  File "D:\python\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1215, in create
+    return self._post(
+  File "D:\python\Lib\site-packages\openai\_base_client.py", line 1332, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "D:\python\Lib\site-packages\openai\_base_client.py", line 1105, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.PermissionDeniedError: Error code: 403 - {'error': {'message': 'The free tier of the model has been exhausted. If you wish to continue access the model on a paid basis, please disable the "use free tier only" mode in the management console.', 'type': 'AllocationQuota.FreeTierOnly', 'param': None, 'code': 'AllocationQuota.FreeTierOnly'}, 'id': 'chatcmpl-b850f326-9730-9bf1-8744-bb38fbe92381', 'request_id': 'b850f326-9730-9bf1-8744-bb38fbe92381'}
+During task with name 'researcher' and id '95cebd70-a90b-b74c-a09f-df88d2c10b69'
+2026-05-25 20:28:44.800 | ERROR    | N/A | 多智能体处理失败: 'TravelTask' object has no attribute 'destination'
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 30, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 26, in main1
+    task, final_plan, parsed_plan = process_with_agent(message, "10001")
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 86, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 7, in researcher_node
+    prompt = f"""请为{task.destination or '用户指定城市'} {task.days}日游（{task.budget}预算，{task.pace}节奏）收集实用信息，包括景点推荐、天气建议、门票价格、注意事项等。"""
+
+AttributeError: 'TravelTask' object has no attribute 'destination'
+During task with name 'researcher' and id '2c03e6c6-d8c7-136b-d260-3865bc437414'

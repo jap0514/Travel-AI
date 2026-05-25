@@ -1,0 +1,909 @@
+2026-05-21 19:58:27.021 | WARNING  | N/A | 未配置 MCP_SERVERS，使用模拟工具
+2026-05-21 19:58:28.609 | WARNING  | N/A | 未配置 MCP_SERVERS，使用模拟工具
+2026-05-21 19:58:31.795 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-05-21 19:58:31.815 | INFO     | N/A | ResultProducer 启动成功
+2026-05-21 19:58:34.849 | INFO     | N/A | MessageConsumer 启动成功，连接至 Proxy 地址: 192.168.71.140:8081
+2026-05-21 19:58:34.850 | INFO     | N/A | Python 消费者已启动，等待消息...
+2026-05-21 20:02:16.248 | INFO     | N/A | 收到停止信号，正在关闭...
+2026-05-21 20:02:16.250 | INFO     | N/A | ResultProducer 已关闭
+2026-05-21 20:02:16.250 | INFO     | N/A | MessageConsumer 已关闭
+2026-05-21 20:02:19.370 | WARNING  | N/A | 未配置 MCP_SERVERS，使用模拟工具
+2026-05-21 20:02:20.705 | WARNING  | N/A | 未配置 MCP_SERVERS，使用模拟工具
+2026-05-21 20:02:22.286 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-05-21 20:02:22.301 | INFO     | N/A | ResultProducer 启动成功
+2026-05-21 20:02:22.760 | INFO     | N/A | MessageConsumer 启动成功，连接至 Proxy 地址: 192.168.71.140:8081
+2026-05-21 20:02:22.761 | INFO     | N/A | Python 消费者已启动，等待消息...
+2026-05-21 20:02:24.031 | INFO     | fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142
+2026-05-21 20:03:43.933 | INFO     | fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142
+2026-05-21 20:05:03.821 | INFO     | fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142
+2026-05-21 20:05:18.114 | ERROR    | N/A | 多智能体处理失败: 6 validation errors for CritiqueScore
+overall_score
+  Field required [type=missing, input_value={'评审结论': {'综合...化方案后执行。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+feasibility
+  Field required [type=missing, input_value={'评审结论': {'综合...化方案后执行。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+budget_balance
+  Field required [type=missing, input_value={'评审结论': {'综合...化方案后执行。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+pace_suitability
+  Field required [type=missing, input_value={'评审结论': {'综合...化方案后执行。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+attractions_diversity
+  Field required [type=missing, input_value={'评审结论': {'综合...化方案后执行。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+feedback
+  Field required [type=missing, input_value={'评审结论': {'综合...化方案后执行。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\critic.py", line 31, in critic_node
+    critique = structured_llm.invoke([SystemMessage(content=prompt)])
+
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 3333, in invoke
+    input_ = context.run(step.invoke, input_, config, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 5881, in invoke
+    return self.bound.invoke(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1659, in _generate
+    raise e
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1629, in _generate
+    response = raw_response.parse()
+  File "D:\python\Lib\site-packages\openai\_legacy_response.py", line 139, in parse
+    parsed = self._options.post_parser(parsed)
+  File "D:\python\Lib\site-packages\openai\resources\chat\completions\completions.py", line 185, in parser
+    return _parse_chat_completion(
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 146, in parse_chat_completion
+    "parsed": maybe_parse_content(
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 196, in maybe_parse_content
+    return _parse_content(response_format, message.content)
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 245, in _parse_content
+    return cast(ResponseFormatT, model_parse_json(response_format, content))
+  File "D:\python\Lib\site-packages\openai\_compat.py", line 178, in model_parse_json
+    return model.model_validate_json(data)
+  File "D:\python\Lib\site-packages\pydantic\main.py", line 782, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+
+pydantic_core._pydantic_core.ValidationError: 6 validation errors for CritiqueScore
+overall_score
+  Field required [type=missing, input_value={'评审结论': {'综合...化方案后执行。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+feasibility
+  Field required [type=missing, input_value={'评审结论': {'综合...化方案后执行。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+budget_balance
+  Field required [type=missing, input_value={'评审结论': {'综合...化方案后执行。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+pace_suitability
+  Field required [type=missing, input_value={'评审结论': {'综合...化方案后执行。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+attractions_diversity
+  Field required [type=missing, input_value={'评审结论': {'综合...化方案后执行。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+feedback
+  Field required [type=missing, input_value={'评审结论': {'综合...化方案后执行。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+During task with name 'critic' and id '5f9a0147-3378-b3a5-613e-dc648c17339f'
+2026-05-21 20:05:18.326 | ERROR    | N/A | 消息处理异常，将稍后重试: 6 validation errors for CritiqueScore
+overall_score
+  Field required [type=missing, input_value={'评审结论': {'综合...化方案后执行。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+feasibility
+  Field required [type=missing, input_value={'评审结论': {'综合...化方案后执行。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+budget_balance
+  Field required [type=missing, input_value={'评审结论': {'综合...化方案后执行。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+pace_suitability
+  Field required [type=missing, input_value={'评审结论': {'综合...化方案后执行。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+attractions_diversity
+  Field required [type=missing, input_value={'评审结论': {'综合...化方案后执行。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+feedback
+  Field required [type=missing, input_value={'评审结论': {'综合...化方案后执行。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\critic.py", line 31, in critic_node
+    critique = structured_llm.invoke([SystemMessage(content=prompt)])
+
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 3333, in invoke
+    input_ = context.run(step.invoke, input_, config, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 5881, in invoke
+    return self.bound.invoke(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1659, in _generate
+    raise e
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1629, in _generate
+    response = raw_response.parse()
+  File "D:\python\Lib\site-packages\openai\_legacy_response.py", line 139, in parse
+    parsed = self._options.post_parser(parsed)
+  File "D:\python\Lib\site-packages\openai\resources\chat\completions\completions.py", line 185, in parser
+    return _parse_chat_completion(
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 146, in parse_chat_completion
+    "parsed": maybe_parse_content(
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 196, in maybe_parse_content
+    return _parse_content(response_format, message.content)
+  File "D:\python\Lib\site-packages\openai\lib\_parsing\_completions.py", line 245, in _parse_content
+    return cast(ResponseFormatT, model_parse_json(response_format, content))
+  File "D:\python\Lib\site-packages\openai\_compat.py", line 178, in model_parse_json
+    return model.model_validate_json(data)
+  File "D:\python\Lib\site-packages\pydantic\main.py", line 782, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+
+pydantic_core._pydantic_core.ValidationError: 6 validation errors for CritiqueScore
+overall_score
+  Field required [type=missing, input_value={'评审结论': {'综合...化方案后执行。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+feasibility
+  Field required [type=missing, input_value={'评审结论': {'综合...化方案后执行。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+budget_balance
+  Field required [type=missing, input_value={'评审结论': {'综合...化方案后执行。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+pace_suitability
+  Field required [type=missing, input_value={'评审结论': {'综合...化方案后执行。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+attractions_diversity
+  Field required [type=missing, input_value={'评审结论': {'综合...化方案后执行。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+feedback
+  Field required [type=missing, input_value={'评审结论': {'综合...化方案后执行。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+During task with name 'critic' and id '5f9a0147-3378-b3a5-613e-dc648c17339f'
+2026-05-21 20:05:53.120 | INFO     | N/A | 收到停止信号，正在关闭...
+2026-05-21 20:05:53.173 | INFO     | N/A | ResultProducer 已关闭
+2026-05-21 20:05:53.173 | INFO     | N/A | MessageConsumer 已关闭
+2026-05-21 20:08:44.790 | WARNING  | N/A | 未配置 MCP_SERVERS，使用模拟工具
+2026-05-21 20:08:46.170 | WARNING  | N/A | 未配置 MCP_SERVERS，使用模拟工具
+2026-05-21 20:08:47.786 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-05-21 20:08:47.803 | INFO     | N/A | ResultProducer 启动成功
+2026-05-21 20:08:47.837 | INFO     | N/A | MessageConsumer 启动成功，连接至 Proxy 地址: 192.168.71.140:8081
+2026-05-21 20:08:47.837 | INFO     | N/A | Python 消费者已启动，等待消息...
+2026-05-21 20:08:48.877 | INFO     | fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142
+2026-05-21 20:10:08.764 | INFO     | fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142
+2026-05-21 20:11:01.392 | INFO     | N/A | 迭代次数=1
+2026-05-21 20:11:28.643 | INFO     | fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142
+2026-05-21 20:12:20.884 | INFO     | N/A | 迭代次数=1
+2026-05-21 20:12:48.508 | INFO     | fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142
+2026-05-21 20:13:38.961 | INFO     | N/A | 迭代次数=1
+2026-05-21 20:14:08.406 | INFO     | fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142
+2026-05-21 20:14:36.353 | INFO     | N/A | 迭代次数=2
+2026-05-21 20:15:17.498 | INFO     | N/A | 迭代次数=1
+2026-05-21 20:15:17.621 | ERROR    | N/A | 多智能体处理失败: At key 'next': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\last_value.py", line 64, in update
+    raise InvalidUpdateError(msg)
+
+langgraph.errors.InvalidUpdateError: At key 'next': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+2026-05-21 20:15:17.657 | ERROR    | N/A | 消息处理异常，将稍后重试: At key 'next': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\last_value.py", line 64, in update
+    raise InvalidUpdateError(msg)
+
+langgraph.errors.InvalidUpdateError: At key 'next': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+2026-05-21 20:15:28.286 | INFO     | fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142
+2026-05-21 20:16:16.880 | INFO     | N/A | 迭代次数=1
+2026-05-21 20:16:48.174 | INFO     | fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142
+2026-05-21 20:18:08.053 | INFO     | fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142
+2026-05-21 20:18:10.092 | INFO     | N/A | 迭代次数=1
+2026-05-21 20:18:18.365 | ERROR    | N/A | 多智能体处理失败: At key 'next': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\last_value.py", line 64, in update
+    raise InvalidUpdateError(msg)
+
+langgraph.errors.InvalidUpdateError: At key 'next': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+2026-05-21 20:18:18.369 | ERROR    | N/A | 消息处理异常，将稍后重试: At key 'next': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\last_value.py", line 64, in update
+    raise InvalidUpdateError(msg)
+
+langgraph.errors.InvalidUpdateError: At key 'next': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+2026-05-21 20:18:46.033 | INFO     | N/A | 迭代次数=2
+2026-05-21 20:19:24.028 | ERROR    | N/A | 多智能体处理失败: At key 'next': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\last_value.py", line 64, in update
+    raise InvalidUpdateError(msg)
+
+langgraph.errors.InvalidUpdateError: At key 'next': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+2026-05-21 20:19:24.032 | ERROR    | N/A | 消息处理异常，将稍后重试: At key 'next': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\last_value.py", line 64, in update
+    raise InvalidUpdateError(msg)
+
+langgraph.errors.InvalidUpdateError: At key 'next': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+2026-05-21 20:19:27.939 | INFO     | fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142
+2026-05-21 20:19:34.525 | INFO     | N/A | 迭代次数=1
+2026-05-21 20:20:23.169 | INFO     | N/A | 迭代次数=1
+2026-05-21 20:20:23.254 | ERROR    | N/A | 多智能体处理失败: At key 'next': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\last_value.py", line 64, in update
+    raise InvalidUpdateError(msg)
+
+langgraph.errors.InvalidUpdateError: At key 'next': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+2026-05-21 20:20:23.260 | ERROR    | N/A | 消息处理异常，将稍后重试: At key 'next': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\last_value.py", line 64, in update
+    raise InvalidUpdateError(msg)
+
+langgraph.errors.InvalidUpdateError: At key 'next': Can receive only one value per step. Use an Annotated key to handle multiple values.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE
+2026-05-21 20:20:30.086 | INFO     | N/A | 迭代次数=2
+2026-05-21 20:20:47.813 | INFO     | fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142
+2026-05-21 20:21:48.360 | INFO     | N/A | 收到停止信号，正在关闭...
+2026-05-21 20:21:48.371 | INFO     | N/A | ResultProducer 已关闭
+2026-05-21 20:21:48.371 | INFO     | N/A | MessageConsumer 已关闭
+2026-05-21 20:21:56.627 | ERROR    | N/A | 多智能体处理失败: cannot schedule new futures after interpreter shutdown
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 260, in tick
+    fut = self.submit()(  # type: ignore[misc]
+  File "D:\python\Lib\site-packages\langgraph\pregel\_executor.py", line 71, in submit
+    task = self.executor.submit(ctx.run, fn, *args, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\runnables\config.py", line 586, in submit
+    return super().submit(
+  File "D:\python\Lib\concurrent\futures\thread.py", line 207, in submit
+    raise RuntimeError('cannot schedule new futures after '
+
+RuntimeError: cannot schedule new futures after interpreter shutdown
+2026-05-21 20:21:56.656 | ERROR    | N/A | 消息处理异常，将稍后重试: cannot schedule new futures after interpreter shutdown
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 260, in tick
+    fut = self.submit()(  # type: ignore[misc]
+  File "D:\python\Lib\site-packages\langgraph\pregel\_executor.py", line 71, in submit
+    task = self.executor.submit(ctx.run, fn, *args, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\runnables\config.py", line 586, in submit
+    return super().submit(
+  File "D:\python\Lib\concurrent\futures\thread.py", line 207, in submit
+    raise RuntimeError('cannot schedule new futures after '
+
+RuntimeError: cannot schedule new futures after interpreter shutdown
+2026-05-21 20:22:03.319 | WARNING  | N/A | 未配置 MCP_SERVERS，使用模拟工具
+2026-05-21 20:22:04.649 | WARNING  | N/A | 未配置 MCP_SERVERS，使用模拟工具
+2026-05-21 20:22:10.616 | WARNING  | N/A | 未配置 MCP_SERVERS，使用模拟工具
+2026-05-21 20:22:11.953 | WARNING  | N/A | 未配置 MCP_SERVERS，使用模拟工具
+2026-05-21 20:22:13.516 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-05-21 20:22:13.532 | INFO     | N/A | ResultProducer 启动成功
+2026-05-21 20:22:13.556 | INFO     | N/A | MessageConsumer 启动成功，连接至 Proxy 地址: 192.168.71.140:8081
+2026-05-21 20:22:13.557 | INFO     | N/A | Python 消费者已启动，等待消息...
+2026-05-21 20:23:10.373 | INFO     | a4f623e6-740a-4665-8451-8be0a64a12c7_1001_1779366190358 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=a4f623e6-740a-4665-8451-8be0a64a12c7_1001_1779366190358
+2026-05-21 20:23:10.374 | INFO     | fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142
+2026-05-21 20:24:30.262 | INFO     | a4f623e6-740a-4665-8451-8be0a64a12c7_1001_1779366190358 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=a4f623e6-740a-4665-8451-8be0a64a12c7_1001_1779366190358
+2026-05-21 20:24:30.263 | INFO     | fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=fdcb5c10-fb0e-4a22-bdef-ede4875c04fe_1001_1779364927142
+2026-05-21 20:25:50.175 | INFO     | a4f623e6-740a-4665-8451-8be0a64a12c7_1001_1779366190358 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=a4f623e6-740a-4665-8451-8be0a64a12c7_1001_1779366190358
+2026-05-21 20:27:10.059 | INFO     | a4f623e6-740a-4665-8451-8be0a64a12c7_1001_1779366190358 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=a4f623e6-740a-4665-8451-8be0a64a12c7_1001_1779366190358
+2026-05-21 20:28:29.931 | INFO     | a4f623e6-740a-4665-8451-8be0a64a12c7_1001_1779366190358 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=a4f623e6-740a-4665-8451-8be0a64a12c7_1001_1779366190358
+2026-05-21 20:29:49.821 | INFO     | a4f623e6-740a-4665-8451-8be0a64a12c7_1001_1779366190358 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=a4f623e6-740a-4665-8451-8be0a64a12c7_1001_1779366190358
+2026-05-21 20:30:01.132 | INFO     | N/A | 收到停止信号，正在关闭...
+2026-05-21 20:30:01.172 | INFO     | N/A | ResultProducer 已关闭
+2026-05-21 20:30:01.172 | INFO     | N/A | MessageConsumer 已关闭
+2026-05-21 20:30:35.777 | WARNING  | N/A | 未配置 MCP_SERVERS，使用模拟工具
+2026-05-21 20:30:37.276 | WARNING  | N/A | 未配置 MCP_SERVERS，使用模拟工具
+2026-05-21 20:30:39.007 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-05-21 20:30:39.025 | INFO     | N/A | ResultProducer 启动成功
+2026-05-21 20:30:39.299 | INFO     | N/A | MessageConsumer 启动成功，连接至 Proxy 地址: 192.168.71.140:8081
+2026-05-21 20:30:39.299 | INFO     | N/A | Python 消费者已启动，等待消息...
+2026-05-21 20:30:48.322 | INFO     | N/A | 收到停止信号，正在关闭...
+2026-05-21 20:30:48.339 | INFO     | N/A | ResultProducer 已关闭
+2026-05-21 20:30:48.340 | INFO     | N/A | MessageConsumer 已关闭
+2026-05-21 20:30:51.446 | WARNING  | N/A | 未配置 MCP_SERVERS，使用模拟工具
+2026-05-21 20:30:52.781 | WARNING  | N/A | 未配置 MCP_SERVERS，使用模拟工具
+2026-05-21 20:30:54.328 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-05-21 20:30:54.344 | INFO     | N/A | ResultProducer 启动成功
+2026-05-21 20:30:54.379 | INFO     | N/A | MessageConsumer 启动成功，连接至 Proxy 地址: 192.168.71.140:8081
+2026-05-21 20:30:54.379 | INFO     | N/A | Python 消费者已启动，等待消息...
+2026-05-21 20:31:01.255 | INFO     | 76c020d4-da55-4bfc-8a71-21fed462626b_1001_1779366661151 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=76c020d4-da55-4bfc-8a71-21fed462626b_1001_1779366661151
+2026-05-21 20:31:21.263 | INFO     | a4f623e6-740a-4665-8451-8be0a64a12c7_1001_1779366190358 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=a4f623e6-740a-4665-8451-8be0a64a12c7_1001_1779366190358
+2026-05-21 20:32:21.208 | INFO     | 76c020d4-da55-4bfc-8a71-21fed462626b_1001_1779366661151 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=76c020d4-da55-4bfc-8a71-21fed462626b_1001_1779366661151
+2026-05-21 20:32:41.189 | INFO     | a4f623e6-740a-4665-8451-8be0a64a12c7_1001_1779366190358 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=a4f623e6-740a-4665-8451-8be0a64a12c7_1001_1779366190358
+2026-05-21 20:33:48.753 | ERROR    | N/A | 多智能体处理失败: 
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\binop.py", line 129, in update
+    self.value = self.operator(self.value, value)
+
+MemoryError
+2026-05-21 20:33:48.950 | INFO     | a4f623e6-740a-4665-8451-8be0a64a12c7_1001_1779366190358 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=a4f623e6-740a-4665-8451-8be0a64a12c7_1001_1779366190358
+2026-05-21 20:33:48.965 | ERROR    | N/A | 消息处理异常，将稍后重试: 
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\binop.py", line 129, in update
+    self.value = self.operator(self.value, value)
+
+MemoryError
+2026-05-21 20:34:28.638 | ERROR    | N/A | 多智能体处理失败: 
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\binop.py", line 129, in update
+    self.value = self.operator(self.value, value)
+
+MemoryError
+2026-05-21 20:34:29.041 | ERROR    | N/A | 消息处理异常，将稍后重试: 
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\binop.py", line 129, in update
+    self.value = self.operator(self.value, value)
+
+MemoryError
+2026-05-21 20:34:41.421 | ERROR    | N/A | 多智能体处理失败: 
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\binop.py", line 129, in update
+    self.value = self.operator(self.value, value)
+
+MemoryError
+2026-05-21 20:34:41.620 | ERROR    | N/A | 消息处理异常，将稍后重试: 
+Traceback (most recent call last):
+
+  File "D:\python\Lib\threading.py", line 1044, in _bootstrap
+    self._bootstrap_inner()
+  File "D:\python\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+  File "D:\python\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 119, in _worker
+    work_item.run(ctx)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\rocketmq\v5\consumer\push\consumption.py", line 46, in __consume
+    consume_result = self.__message_listener.consume(message)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\mq\message_consumer.py", line 67, in consume
+    task, final_plan,parsed_plan=process_with_agent(message,trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 85, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2953, in stream
+    loop.after_tick()
+  File "D:\python\Lib\site-packages\langgraph\pregel\_loop.py", line 671, in after_tick
+    self.updated_channels = apply_writes(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_algo.py", line 319, in apply_writes
+    if channels[chan].update(vals) and next_version is not None:
+  File "D:\python\Lib\site-packages\langgraph\channels\binop.py", line 129, in update
+    self.value = self.operator(self.value, value)
+
+MemoryError
+2026-05-21 20:34:51.118 | INFO     | 76c020d4-da55-4bfc-8a71-21fed462626b_1001_1779366661151 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=76c020d4-da55-4bfc-8a71-21fed462626b_1001_1779366661151
+2026-05-21 20:34:51.119 | INFO     | a4f623e6-740a-4665-8451-8be0a64a12c7_1001_1779366190358 | 收到消息，content=请帮我规划一个桂林1日游, trace_id=a4f623e6-740a-4665-8451-8be0a64a12c7_1001_1779366190358
+2026-05-21 20:35:10.092 | INFO     | N/A | 收到停止信号，正在关闭...
+2026-05-21 20:35:10.821 | INFO     | N/A | ResultProducer 已关闭
+2026-05-21 20:35:10.852 | INFO     | N/A | MessageConsumer 已关闭
