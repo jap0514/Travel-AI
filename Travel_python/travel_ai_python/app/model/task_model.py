@@ -15,3 +15,4 @@ class TravelTask:
     plan_id: Optional[int] = None
     error_msg: Optional[str] = None
     result_status: Optional[str] = None
+    destination: str = "未知城市"

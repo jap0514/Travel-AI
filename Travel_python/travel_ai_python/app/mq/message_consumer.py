@@ -10,11 +10,11 @@ from rocketmq.v5.model.filter_expression import FilterExpression, FilterType
 from app.config.settings import settings
 from app.config.logger import logger
 from app.model.message_model import ChatMessage
-from app.service.travel_agent import process_with_agent
 from app.utils.sign_utils import verify_sign
 from app.model.task_model import TravelTask
 from app.service.task_service import process_task
 from app.mq.producer import ResultProducer
+from app.service.multi_agent_travel import process_with_agent
 
 
 class ContentMessageListener(MessageListener):
