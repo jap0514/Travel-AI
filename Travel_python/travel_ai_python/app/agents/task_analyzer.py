@@ -3,11 +3,14 @@ from app.config.logger import logger
 from app.utils.mem0_client import get_user_memories
 from app.model.task_model import TravelTask
 from app.agents.base import llm
+from app.config.settings import settings
 
 def task_analyzer_node(state):
     """1. Task Analyzer"""
     user_content = state["messages"][-1].content
     user_id = state.get("user_id", 0)
+
+    logger.info(f"实际调用的大模型={settings.AI_MODEL_NAME}")
 
     try:
         memories = get_user_memories(user_id)

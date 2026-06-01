@@ -11,3 +11,4 @@ langchain-mcp-adapters  # MCP 适配器（关键）
 mem0ai
 redis
 python-dotenv
+fastmcp

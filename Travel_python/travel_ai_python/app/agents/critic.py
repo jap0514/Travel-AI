@@ -2,6 +2,7 @@ from langchain_core.messages import SystemMessage
 from pydantic import BaseModel, Field
 from app.agents.base import llm
 from app.agents.state import AgentState
+from app.config.logger import logger
 
 
 class CritiqueScore(BaseModel):
@@ -18,30 +19,42 @@ def critic_node(state: AgentState):
     task = state["task"]
     iteration = state.get("iteration", 0)
 
-    prompt = f"""你是一位极其严格、专业的旅行行程评审专家。
-请严格按照JSON格式输出，不要输出任何解释、 markdown、代码块或其他文字。
+    logger.info(f"第{iteration}次的分数：{state.get("scores")}")
 
-任务信息：{task.days}天 {task.budget}预算 {task.pace}节奏
+    prompt = f"""你是一位极其严格、挑剔的专业旅行行程评审专家，标准极高。
 
-当前行程草案：
-{draft}
+    **任务**：对以下 {task.days}天旅行行程进行全面评审。
 
-请严格输出以下JSON格式（字段必须完全一致）：
+    **任务背景**：
+    - 预算水平：{task.budget}
+    - 节奏要求：{task.pace}
+    - 用户核心需求：{getattr(task, 'user_query', '')}
 
-{{
-  "overall_score": 85,
-  "feasibility": 88,
-  "budget_balance": 82,
-  "pace_suitability": 90,
-  "attractions_diversity": 75,
-  "feedback": "这里写详细的评审意见和具体改进建议..."
-}}
+    **当前行程草案**：
+    {draft}
 
-注意：
-- 所有评分必须是0-100的数字
-- feedback 必须是字符串，详细指出问题
-- 不要添加任何其他字段，不要写```json
-"""
+    **请严格按照以下JSON格式输出**，不要输出任何其他内容：
+
+    {{
+      "overall_score": 82,
+      "feasibility": 85,
+      "budget_balance": 78,
+      "pace_suitability": 90,
+      "attractions_diversity": 75,
+      "feedback": "这里写详细、具体、有建设性的批评和改进建议..."
+    }}
+
+    **详细评分标准**（请严格参考）：
+    - overall_score（0-100）：综合质量，考虑所有维度
+    - feasibility（0-100）：时间安排是否现实、交通是否合理、每天活动量是否合适
+    - budget_balance（0-100）：预算分配是否合理，是否超出或过于节省
+    - pace_suitability（0-100）：节奏舒适度（太赶扣很多分，太松也扣分）
+    - attractions_diversity（0-100）：景点类型是否丰富均衡（文化、美食、自然、休闲等）
+
+    **要求**：
+    - 作为严格的评审专家，请敢于打低分
+    - feedback 必须具体指出问题，并给出明确的改进方向
+    """
 
     try:
         structured_llm = llm.with_structured_output(CritiqueScore, method="json_mode")

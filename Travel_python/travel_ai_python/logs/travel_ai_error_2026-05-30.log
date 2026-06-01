@@ -1,0 +1,214 @@
+2026-05-30 14:33:26.235 | ERROR    | N/A | 多智能体处理失败: Timeout connecting to server
+Traceback (most recent call last):
+
+  File "D:\python\Lib\site-packages\redis\connection.py", line 1003, in connect_check_health
+    sock = self._connect()
+  File "D:\python\Lib\site-packages\redis\connection.py", line 1515, in _connect
+    raise err
+  File "D:\python\Lib\site-packages\redis\connection.py", line 1499, in _connect
+    sock.connect(socket_address)
+
+TimeoutError: [WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 30, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 26, in main1
+    task, final_plan, parsed_plan = process_with_agent(message, "10001")
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 83, in process_with_agent
+    session_messages = get_session_context(chat_message.session_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\utils\redis_client.py", line 12, in get_session_context
+    data = redis_client.get(key)
+
+  File "D:\python\Lib\site-packages\redis\commands\core.py", line 2073, in get
+    return self.execute_command("GET", name, keys=[name])
+  File "D:\python\Lib\site-packages\redis\client.py", line 716, in execute_command
+    return self._execute_command(*args, **options)
+  File "D:\python\Lib\site-packages\redis\client.py", line 722, in _execute_command
+    conn = self.connection or pool.get_connection()
+  File "D:\python\Lib\site-packages\redis\utils.py", line 236, in wrapper
+    return func(*args, **kwargs)
+  File "D:\python\Lib\site-packages\redis\connection.py", line 3041, in get_connection
+    connection.connect()
+  File "D:\python\Lib\site-packages\redis\connection.py", line 976, in connect
+    self.retry.call_with_retry(
+  File "D:\python\Lib\site-packages\redis\retry.py", line 132, in call_with_retry
+    raise error
+  File "D:\python\Lib\site-packages\redis\retry.py", line 120, in call_with_retry
+    return do()
+  File "D:\python\Lib\site-packages\redis\connection.py", line 977, in <lambda>
+    lambda: self.connect_check_health(
+  File "D:\python\Lib\site-packages\redis\connection.py", line 1014, in connect_check_health
+    raise e
+
+redis.exceptions.TimeoutError: Timeout connecting to server
+2026-05-30 14:44:43.548 | ERROR    | N/A | 多智能体处理失败: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 30, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 26, in main1
+    task, final_plan, parsed_plan = process_with_agent(message, "10001")
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 86, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 10, in researcher_node
+    response = llm.bind_tools(tools).invoke([SystemMessage(content=prompt)])
+
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 5881, in invoke
+    return self.bound.invoke(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1653, in _generate
+    _handle_openai_bad_request(e)
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1650, in _generate
+    raw_response = self.client.with_raw_response.create(**payload)
+  File "D:\python\Lib\site-packages\openai\_legacy_response.py", line 367, in wrapped
+    return cast(LegacyAPIResponse[R], func(*args, **kwargs))
+  File "D:\python\Lib\site-packages\openai\_utils\_utils.py", line 298, in wrapper
+    return func(*args, **kwargs)
+  File "D:\python\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1215, in create
+    return self._post(
+  File "D:\python\Lib\site-packages\openai\_base_client.py", line 1332, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "D:\python\Lib\site-packages\openai\_base_client.py", line 1105, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+During task with name 'researcher' and id 'bfe1e8f8-724d-3dde-9c1c-be5fe3af41af'
+2026-05-30 21:21:41.546 | ERROR    | N/A | 多智能体处理失败: Error 10061 connecting to 192.168.71.140:6379. 由于目标计算机积极拒绝，无法连接。.
+Traceback (most recent call last):
+
+  File "D:\python\Lib\site-packages\redis\connection.py", line 1003, in connect_check_health
+    sock = self._connect()
+  File "D:\python\Lib\site-packages\redis\connection.py", line 1515, in _connect
+    raise err
+  File "D:\python\Lib\site-packages\redis\connection.py", line 1499, in _connect
+    sock.connect(socket_address)
+
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 30, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 26, in main1
+    task, final_plan, parsed_plan = process_with_agent(message, "10001")
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 84, in process_with_agent
+    session_messages = get_session_context(chat_message.session_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\utils\redis_client.py", line 12, in get_session_context
+    data = redis_client.get(key)
+
+  File "D:\python\Lib\site-packages\redis\commands\core.py", line 2073, in get
+    return self.execute_command("GET", name, keys=[name])
+  File "D:\python\Lib\site-packages\redis\client.py", line 716, in execute_command
+    return self._execute_command(*args, **options)
+  File "D:\python\Lib\site-packages\redis\client.py", line 722, in _execute_command
+    conn = self.connection or pool.get_connection()
+  File "D:\python\Lib\site-packages\redis\utils.py", line 236, in wrapper
+    return func(*args, **kwargs)
+  File "D:\python\Lib\site-packages\redis\connection.py", line 3041, in get_connection
+    connection.connect()
+  File "D:\python\Lib\site-packages\redis\connection.py", line 976, in connect
+    self.retry.call_with_retry(
+  File "D:\python\Lib\site-packages\redis\retry.py", line 132, in call_with_retry
+    raise error
+  File "D:\python\Lib\site-packages\redis\retry.py", line 120, in call_with_retry
+    return do()
+  File "D:\python\Lib\site-packages\redis\connection.py", line 977, in <lambda>
+    lambda: self.connect_check_health(
+  File "D:\python\Lib\site-packages\redis\connection.py", line 1025, in connect_check_health
+    raise e
+
+redis.exceptions.ConnectionError: Error 10061 connecting to 192.168.71.140:6379. 由于目标计算机积极拒绝，无法连接。.
+2026-05-30 21:23:35.019 | ERROR    | N/A | 多智能体处理失败: Error code: 404 - {'error': {'message': "model 'qwen2.5' not found", 'type': 'not_found_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 30, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 26, in main1
+    task, final_plan, parsed_plan = process_with_agent(message, "10001")
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 87, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 10, in researcher_node
+    response = llm.bind_tools(tools).invoke([SystemMessage(content=prompt)])
+
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 5881, in invoke
+    return self.bound.invoke(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1655, in _generate
+    _handle_openai_api_error(e)
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1650, in _generate
+    raw_response = self.client.with_raw_response.create(**payload)
+  File "D:\python\Lib\site-packages\openai\_legacy_response.py", line 367, in wrapped
+    return cast(LegacyAPIResponse[R], func(*args, **kwargs))
+  File "D:\python\Lib\site-packages\openai\_utils\_utils.py", line 298, in wrapper
+    return func(*args, **kwargs)
+  File "D:\python\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1215, in create
+    return self._post(
+  File "D:\python\Lib\site-packages\openai\_base_client.py", line 1332, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "D:\python\Lib\site-packages\openai\_base_client.py", line 1105, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.NotFoundError: Error code: 404 - {'error': {'message': "model 'qwen2.5' not found", 'type': 'not_found_error', 'param': None, 'code': None}}
+During task with name 'researcher' and id '38a877c7-ecee-9b2c-56e5-c61c47c48adb'

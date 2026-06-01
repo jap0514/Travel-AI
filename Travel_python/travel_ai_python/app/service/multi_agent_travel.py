@@ -80,6 +80,7 @@ def process_with_agent(chat_message, trace_id):
     log.info(f"进入process_with_agent")
 
     try:
+        # 获取Redis中会话的短期上下文
         session_messages = get_session_context(chat_message.session_id)
         session_messages.append({"role": chat_message.role, "content": chat_message.content})
 

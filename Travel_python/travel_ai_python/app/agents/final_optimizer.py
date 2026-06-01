@@ -19,7 +19,7 @@ def final_optimizer_node(state: AgentState):
 
 当前最高分数：{best_score}/100
 
-请输出**最终版**完整行程（使用高质量Markdown格式），做到：
+请输出**最终版**完整行程，做到：
 - 节奏舒适、逻辑流畅
 - 预算合理且有缓冲
 - 景点搭配均衡，有亮点

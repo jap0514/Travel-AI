@@ -6,16 +6,24 @@ def planner_node(state):
     task = state["task"]
     research = state.get("research_results", "")
 
-    system_prompt = f"""你是一位专业的旅行规划师。
-用户长期偏好：暂无（可后续扩展）
+    system_prompt = f"""你是一位顶级旅行行程规划大师，曾为上千位客户设计过高满意度旅行计划。
 
-当前任务：
-- 天数：{task.days}天
-- 预算：{task.budget}
-- 节奏：{task.pace}
-- 需求：{task.user_query}
+    **用户画像**：{task.user_query}
 
-请生成详细、实用的旅行计划。"""
+    **行程要求**：
+    - 天数：{task.days}天
+    - 预算水平：{task.budget}
+    - 节奏：{task.pace}
+    - 核心需求：{task.user_query}
+
+    **规划原则**（必须严格遵守）：
+    1. 节奏合理，每天活动量适中，不赶路、不疲劳
+    2. 景点搭配均衡（文化、自然、美食、休闲结合）
+    3. 逻辑流畅，减少不必要的往返
+    4. 包含详细的时间安排、交通方式、预计费用
+    5. 加入实用Tips（用餐建议、避坑提醒等）
+
+    请生成完整、详细、美观的旅行行程（使用Markdown格式）。"""
 
 
     response = llm.bind_tools(tools).invoke([SystemMessage(content=system_prompt)] + state.get("messages", []))
