@@ -33,9 +33,9 @@ class Settings:   # 将配置封装成一个类，便于统一管理和引用。
     SIGN_SECRET: str = os.getenv("MQ_SIGN_SECRET", "defaultSecret123456")
 
     # AI模型
-    AI_API_URL: str = os.getenv("AI_MODEL_API_URL", "")
-    AI_API_KEY: str = os.getenv("AI_MODEL_API_KEY", "")
-    AI_MODEL_NAME: str = os.getenv("AI_MODEL_NAME", "qwen-max")
+    AI_API_URL: str = os.getenv("LOCAL_AI_MODEL_API_URL", "")
+    AI_API_KEY: str = os.getenv("LOCAL_AI_MODEL_API_KEY", "")
+    AI_MODEL_NAME: str = os.getenv("LOCAL_MODEL_NAME", "deepseek-r1:1.5b")
 
     # 日志级别
     LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")
@@ -58,23 +58,32 @@ class Settings:   # 将配置封装成一个类，便于统一管理和引用。
             "provider": "openai",
             "config": {
                 "model": "text-embedding-v2",
-                "api_key": os.getenv("AI_MODEL_API_KEY"),
-                "openai_base_url": os.getenv("AI_MODEL_API_URL")  # ← 关键字段！
+                "api_key": os.getenv("LOCAL_AI_MODEL_API_KEY"),
+                "openai_base_url": os.getenv("LOCAL_AI_MODEL_API_URL")  # ← 关键字段！
             }
         },
         "llm": {
             "provider": "openai",
             "config": {
                 "model": AI_MODEL_NAME,
-                "api_key": os.getenv("AI_MODEL_API_KEY"),
-                "openai_base_url": os.getenv("AI_MODEL_API_URL"),
+                "api_key": os.getenv("LOCAL_AI_MODEL_API_KEY"),
+                "openai_base_url": os.getenv("LOCAL_AI_MODEL_API_URL"),
                 "temperature": 0.7
             }
         }
     }
 
+    # 心知天气配置
+    XINGZHI_WEATHER_API_KEY: str = os.getenv("XINGZHI_WEATHER_API_KEY", "")
+    XINGZHI_WEATHER_BASE_URL: str = "https://api.seniverse.com/v3/weather"
+
     # MCP 工具服务器（可选）
-    MCP_SERVERS: list = []
+    MCP_SERVERS: dict = {
+        "travel_tools": {
+            "transport": "sse",
+            "url": "http://localhost:9997/sse"
+        }
+    }
 
 
 settings = Settings()

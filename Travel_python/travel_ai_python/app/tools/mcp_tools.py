@@ -1,6 +1,7 @@
 from app.config.settings import settings
 from app.config.logger import logger
 from langchain_mcp_adapters.client import MultiServerMCPClient, asyncio
+import requests
 
 tools = None
 
@@ -35,8 +36,62 @@ def get_mock_tools():
 
     @tool
     def search_weather(city: str, date: str = None):
-        """查询天气"""
-        return f"{city} 近期天气晴朗，18-25℃，适合出行。"
+        """查询天气（优先使用心知天气API）"""
+        logger.info(f"开始调用查询天气工具")
+        if not settings.XINZHI_WEATHER_API_KEY:
+            return f"[{city}] 近期天气晴朗，18-25℃，适合出行。（提示：请在 .env 中配置 XINZHI_WEATHER_API_KEY）"
+
+        try:
+            # 实时天气
+            if date is None or date.lower() in ["today", "now", "今日", "今天"]:
+                url = f"{settings.XINZHI_WEATHER_BASE_URL}/now.json"
+                params = {
+                    "key": settings.XINZHI_WEATHER_API_KEY,
+                    "location": city,
+                    "language": "zh-Hans",
+                    "unit": "c"
+                }
+                resp = requests.get(url, params=params, timeout=10)
+                resp.raise_for_status()
+                data = resp.json()
+
+                now = data["results"][0]["now"]
+                location = data["results"][0]["location"]
+
+                return f"""🌤️ {location['name']} 当前天气：
+    • 天气：{now['text']}
+    • 温度：{now['temperature']}℃
+    • 体感：{now['feels_like']}℃
+    • 湿度：{now['humidity']}%
+    • 风向：{now['wind_direction']} {now['wind_speed']}级
+    • 更新时间：{data['results'][0]['last_update']}"""
+
+            # 未来几天预报（简单实现）
+            else:
+                url = f"{settings.XINZHI_WEATHER_BASE_URL}/daily.json"
+                params = {
+                    "key": settings.XINZHI_WEATHER_API_KEY,
+                    "location": city,
+                    "language": "zh-Hans",
+                    "unit": "c",
+                    "start": 0,
+                    "days": 3
+                }
+                resp = requests.get(url, params=params, timeout=10)
+                data = resp.json()
+                days = data["results"][0]["daily"]
+
+                result = f"🌤️ {city} 未来天气预报：\n"
+                for day in days[:3]:
+                    result += f"• {day['date']}: {day['text_day']}，{day['low']}~{day['high']}℃，{day['wind_direction_day']}\n"
+                return result
+
+        except requests.exceptions.RequestException as e:
+            logger.error(f"心知天气API请求失败: {e}")
+            return f"查询 {city} 天气失败，请稍后重试或检查 API Key。"
+        except Exception as e:
+            logger.error(f"心知天气工具异常: {e}")
+            return f"查询 {city} 天气时发生错误。"
 
     @tool
     def search_flights(departure: str, destination: str, date: str):

@@ -1,0 +1,409 @@
+2026-05-30 14:33:00.094 | WARNING  | N/A | 未配置 MCP_SERVERS，使用模拟工具
+2026-05-30 14:33:01.760 | WARNING  | N/A | 未配置 MCP_SERVERS，使用模拟工具
+2026-05-30 14:33:05.152 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-05-30 14:33:05.180 | INFO     | 10001 | 进入process_with_agent
+2026-05-30 14:33:26.235 | ERROR    | N/A | 多智能体处理失败: Timeout connecting to server
+Traceback (most recent call last):
+
+  File "D:\python\Lib\site-packages\redis\connection.py", line 1003, in connect_check_health
+    sock = self._connect()
+  File "D:\python\Lib\site-packages\redis\connection.py", line 1515, in _connect
+    raise err
+  File "D:\python\Lib\site-packages\redis\connection.py", line 1499, in _connect
+    sock.connect(socket_address)
+
+TimeoutError: [WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 30, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 26, in main1
+    task, final_plan, parsed_plan = process_with_agent(message, "10001")
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 83, in process_with_agent
+    session_messages = get_session_context(chat_message.session_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\utils\redis_client.py", line 12, in get_session_context
+    data = redis_client.get(key)
+
+  File "D:\python\Lib\site-packages\redis\commands\core.py", line 2073, in get
+    return self.execute_command("GET", name, keys=[name])
+  File "D:\python\Lib\site-packages\redis\client.py", line 716, in execute_command
+    return self._execute_command(*args, **options)
+  File "D:\python\Lib\site-packages\redis\client.py", line 722, in _execute_command
+    conn = self.connection or pool.get_connection()
+  File "D:\python\Lib\site-packages\redis\utils.py", line 236, in wrapper
+    return func(*args, **kwargs)
+  File "D:\python\Lib\site-packages\redis\connection.py", line 3041, in get_connection
+    connection.connect()
+  File "D:\python\Lib\site-packages\redis\connection.py", line 976, in connect
+    self.retry.call_with_retry(
+  File "D:\python\Lib\site-packages\redis\retry.py", line 132, in call_with_retry
+    raise error
+  File "D:\python\Lib\site-packages\redis\retry.py", line 120, in call_with_retry
+    return do()
+  File "D:\python\Lib\site-packages\redis\connection.py", line 977, in <lambda>
+    lambda: self.connect_check_health(
+  File "D:\python\Lib\site-packages\redis\connection.py", line 1014, in connect_check_health
+    raise e
+
+redis.exceptions.TimeoutError: Timeout connecting to server
+2026-05-30 14:44:08.876 | WARNING  | N/A | 未配置 MCP_SERVERS，使用模拟工具
+2026-05-30 14:44:11.283 | WARNING  | N/A | 未配置 MCP_SERVERS，使用模拟工具
+2026-05-30 14:44:13.660 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-05-30 14:44:13.683 | INFO     | 10001 | 进入process_with_agent
+2026-05-30 14:44:13.702 | INFO     | N/A | 进入supervisor_node
+2026-05-30 14:44:13.703 | INFO     | N/A | 下一步task_analyzer
+2026-05-30 14:44:13.704 | INFO     | N/A | 实际调用的大模型=deepseek-r1:1.5b
+2026-05-30 14:44:43.385 | INFO     | N/A | 进入supervisor_node
+2026-05-30 14:44:43.386 | INFO     | N/A | 下一步researcher
+2026-05-30 14:44:43.548 | ERROR    | N/A | 多智能体处理失败: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 30, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 26, in main1
+    task, final_plan, parsed_plan = process_with_agent(message, "10001")
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 86, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 10, in researcher_node
+    response = llm.bind_tools(tools).invoke([SystemMessage(content=prompt)])
+
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 5881, in invoke
+    return self.bound.invoke(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1653, in _generate
+    _handle_openai_bad_request(e)
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1650, in _generate
+    raw_response = self.client.with_raw_response.create(**payload)
+  File "D:\python\Lib\site-packages\openai\_legacy_response.py", line 367, in wrapped
+    return cast(LegacyAPIResponse[R], func(*args, **kwargs))
+  File "D:\python\Lib\site-packages\openai\_utils\_utils.py", line 298, in wrapper
+    return func(*args, **kwargs)
+  File "D:\python\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1215, in create
+    return self._post(
+  File "D:\python\Lib\site-packages\openai\_base_client.py", line 1332, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "D:\python\Lib\site-packages\openai\_base_client.py", line 1105, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+During task with name 'researcher' and id 'bfe1e8f8-724d-3dde-9c1c-be5fe3af41af'
+2026-05-30 21:21:34.882 | WARNING  | N/A | 未配置 MCP_SERVERS，使用模拟工具
+2026-05-30 21:21:36.871 | WARNING  | N/A | 未配置 MCP_SERVERS，使用模拟工具
+2026-05-30 21:21:39.485 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-05-30 21:21:39.518 | INFO     | 10001 | 进入process_with_agent
+2026-05-30 21:21:41.546 | ERROR    | N/A | 多智能体处理失败: Error 10061 connecting to 192.168.71.140:6379. 由于目标计算机积极拒绝，无法连接。.
+Traceback (most recent call last):
+
+  File "D:\python\Lib\site-packages\redis\connection.py", line 1003, in connect_check_health
+    sock = self._connect()
+  File "D:\python\Lib\site-packages\redis\connection.py", line 1515, in _connect
+    raise err
+  File "D:\python\Lib\site-packages\redis\connection.py", line 1499, in _connect
+    sock.connect(socket_address)
+
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 30, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 26, in main1
+    task, final_plan, parsed_plan = process_with_agent(message, "10001")
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 84, in process_with_agent
+    session_messages = get_session_context(chat_message.session_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\utils\redis_client.py", line 12, in get_session_context
+    data = redis_client.get(key)
+
+  File "D:\python\Lib\site-packages\redis\commands\core.py", line 2073, in get
+    return self.execute_command("GET", name, keys=[name])
+  File "D:\python\Lib\site-packages\redis\client.py", line 716, in execute_command
+    return self._execute_command(*args, **options)
+  File "D:\python\Lib\site-packages\redis\client.py", line 722, in _execute_command
+    conn = self.connection or pool.get_connection()
+  File "D:\python\Lib\site-packages\redis\utils.py", line 236, in wrapper
+    return func(*args, **kwargs)
+  File "D:\python\Lib\site-packages\redis\connection.py", line 3041, in get_connection
+    connection.connect()
+  File "D:\python\Lib\site-packages\redis\connection.py", line 976, in connect
+    self.retry.call_with_retry(
+  File "D:\python\Lib\site-packages\redis\retry.py", line 132, in call_with_retry
+    raise error
+  File "D:\python\Lib\site-packages\redis\retry.py", line 120, in call_with_retry
+    return do()
+  File "D:\python\Lib\site-packages\redis\connection.py", line 977, in <lambda>
+    lambda: self.connect_check_health(
+  File "D:\python\Lib\site-packages\redis\connection.py", line 1025, in connect_check_health
+    raise e
+
+redis.exceptions.ConnectionError: Error 10061 connecting to 192.168.71.140:6379. 由于目标计算机积极拒绝，无法连接。.
+2026-05-30 21:23:29.664 | WARNING  | N/A | 未配置 MCP_SERVERS，使用模拟工具
+2026-05-30 21:23:32.035 | WARNING  | N/A | 未配置 MCP_SERVERS，使用模拟工具
+2026-05-30 21:23:34.860 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-05-30 21:23:34.883 | INFO     | 10001 | 进入process_with_agent
+2026-05-30 21:23:34.899 | INFO     | N/A | 进入supervisor_node
+2026-05-30 21:23:34.899 | INFO     | N/A | 下一步task_analyzer
+2026-05-30 21:23:34.901 | INFO     | N/A | 实际调用的大模型=qwen2.5
+2026-05-30 21:23:34.983 | WARNING  | N/A | Task 提取失败，使用默认值: Error code: 404 - {'error': {'message': "model 'qwen2.5' not found", 'type': 'not_found_error', 'param': None, 'code': None}}
+2026-05-30 21:23:34.985 | INFO     | N/A | 进入supervisor_node
+2026-05-30 21:23:34.985 | INFO     | N/A | 下一步researcher
+2026-05-30 21:23:35.019 | ERROR    | N/A | 多智能体处理失败: Error code: 404 - {'error': {'message': "model 'qwen2.5' not found", 'type': 'not_found_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 30, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 26, in main1
+    task, final_plan, parsed_plan = process_with_agent(message, "10001")
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 87, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 10, in researcher_node
+    response = llm.bind_tools(tools).invoke([SystemMessage(content=prompt)])
+
+  File "D:\python\Lib\site-packages\langchain_core\runnables\base.py", line 5881, in invoke
+    return self.bound.invoke(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1655, in _generate
+    _handle_openai_api_error(e)
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1650, in _generate
+    raw_response = self.client.with_raw_response.create(**payload)
+  File "D:\python\Lib\site-packages\openai\_legacy_response.py", line 367, in wrapped
+    return cast(LegacyAPIResponse[R], func(*args, **kwargs))
+  File "D:\python\Lib\site-packages\openai\_utils\_utils.py", line 298, in wrapper
+    return func(*args, **kwargs)
+  File "D:\python\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1215, in create
+    return self._post(
+  File "D:\python\Lib\site-packages\openai\_base_client.py", line 1332, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "D:\python\Lib\site-packages\openai\_base_client.py", line 1105, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.NotFoundError: Error code: 404 - {'error': {'message': "model 'qwen2.5' not found", 'type': 'not_found_error', 'param': None, 'code': None}}
+During task with name 'researcher' and id '38a877c7-ecee-9b2c-56e5-c61c47c48adb'
+2026-05-30 22:26:19.741 | WARNING  | N/A | 未配置 MCP_SERVERS，使用模拟工具
+2026-05-30 22:26:21.228 | WARNING  | N/A | 未配置 MCP_SERVERS，使用模拟工具
+2026-05-30 22:26:24.360 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-05-30 22:26:24.381 | INFO     | 10001 | 进入process_with_agent
+2026-05-30 22:26:24.389 | INFO     | N/A | 进入supervisor_node
+2026-05-30 22:26:24.390 | INFO     | N/A | 下一步task_analyzer
+2026-05-30 22:26:24.390 | INFO     | N/A | 实际调用的大模型=qwen2.5
+2026-05-30 22:26:37.445 | INFO     | N/A | 进入supervisor_node
+2026-05-30 22:26:37.445 | INFO     | N/A | 下一步researcher
+2026-05-30 22:26:59.929 | INFO     | N/A | 进入supervisor_node
+2026-05-30 22:26:59.929 | INFO     | N/A | 下一步planner
+2026-05-30 22:27:34.324 | INFO     | N/A | 进入supervisor_node
+2026-05-30 22:27:34.324 | INFO     | N/A | 下一步critic
+2026-05-30 22:28:05.077 | INFO     | N/A | 进入supervisor_node
+2026-05-30 22:28:05.077 | INFO     | N/A | 下一步final_plan=final_optimizer
+2026-05-30 22:30:17.573 | INFO     | N/A | 已完成完成最后的规划=```markdown
+# 广州一日游计划
+
+## 行程概览
+为了给您提供一个充实且舒适的广州一日游体验，请参考以下行程安排。我们将确保您的旅程既充满乐趣又富有文化意义。
+
+### 出发日期确认
+请告知我们您具体的出发日期，以便我们为您定制最合适的行程。
+
+### 特别偏好
+如果您有任何特别的兴趣或活动类型（如美食、历史文化、自然风光等），请提前告诉我们，这样我们可以更好地满足您的需求。如果没有具体偏好，我们将为您提供一个综合性的游览方案。
+
+## 综合性游览方案
+
+### 08:30 - 09:00 抵达广州
+- **交通方式**：建议选择高铁或飞机抵达广州南站或白云机场。
+- **注意事项**：提前1小时到达车站，以免错过火车/航班。携带足够的现金和手机充电器。
+
+### 09:00 - 10:30 超市街与美食探索
+- **地点**：北京路步行街
+- **活动内容**：漫步于历史悠久的北京路步行街，品尝地道的广东早茶和特色小吃。推荐尝试虾饺、叉烧包等经典点心。
+- **交通方式**：地铁1号线或2号线直达。
+
+### 10:30 - 12:00 广州塔观光
+- **地点**：广州塔（小蛮腰）
+- **活动内容**：乘坐电梯至观景台，俯瞰整个广州市区。建议提前在线购票以避免排队。
+- **交通方式**：地铁5号线或APM线直达。
+
+### 12:00 - 13:30 午餐与文化体验
+- **地点**：陈家祠
+- **活动内容**：参观具有岭南特色的传统建筑——陈家祠，了解广东传统文化。午餐可在附近品尝粤菜。
+- **交通方式**：地铁5号线或APM线直达。
+
+### 13:30 - 15:00 超市街与购物
+- **地点**：北京路步行街
+- **活动内容**：继续在步行街上逛街购物，挑选特色纪念品。
+- **交通方式**：步行即可。
+
+### 15:00 - 16:30 番禺莲花山公园
+- **地点**：番禺莲花山公园
+- **活动内容**：游览公园内的古庙、观景台和湖边步道，享受自然风光。
+- **交通方式**：地铁4号线或公交直达。
+
+### 16:30 - 18:00 超市街与休闲时光
+- **地点**：北京路步行街
+- **活动内容**：在步行街上漫步，寻找心仪的店铺。傍晚时分，可以尝试一些夜宵。
+- **交通方式**：步行即可。
+
+### 18:00 - 20:00 晚餐与夜游珠江
+- **地点**：珠江新城或海心沙
+- **活动内容**：乘坐游船游览珠江，欣赏广州的夜景。晚餐可在附近享用。
+- **交通方式**：地铁3号线或APM线直达。
+
+### 20:00 - 21:00 结束行程
+返回酒店休息或继续享受广州的夜晚生活。
+
+## 预算与建议
+- **预算控制**：总体预算约为500元至800元人民币，包括交通、餐饮和门票费用。具体可根据个人消费习惯调整。
+- **时间安排**：每个景点停留时间为1.5小时至2小时，确保行程节奏适中。
+- **注意事项**：
+  - 购票时请关注官方信息，避免购买假票。
+  - 外出就餐时注意食品安全和卫生。
+  - 携带足够的现金或使用移动支付工具。
+
+希望这个行程能够满足您的需求。如有任何疑问，请随时联系我们！
+```
+
+此行程涵盖了历史文化、自然风光与美食体验，确保了多样性和均衡性，并提供了实用的交通建议和时间安排。祝您在广州度过一个愉快的一日游！,分数=85.0
+2026-05-30 22:30:17.574 | INFO     | N/A | 进入supervisor_node
+2026-05-30 22:30:17.576 | INFO     | N/A | 下一步final_plan
+2026-05-30 22:33:49.596 | INFO     | N/A | 已完成完成最后的规划=```markdown
+# 广州一日游计划
+
+## 行程概览
+为了给您提供一个充实且舒适的广州一日游体验，请参考以下行程安排。我们将确保您的旅程既充满乐趣又富有文化意义。
+
+### 出发日期确认
+请告知我们您具体的出发日期，以便我们为您定制最合适的行程。
+
+### 特别偏好
+如果您有任何特别的兴趣或活动类型（如美食、历史文化、自然风光等），请提前告诉我们，这样我们可以更好地满足您的需求。如果没有具体偏好，我们将为您提供一个综合性的游览方案。
+
+## 综合性游览方案
+
+### 08:30 - 09:00 抵达广州
+- **交通方式**：建议选择高铁或飞机抵达广州南站或白云机场。
+- **注意事项**：提前1小时到达车站，以免错过火车/航班。携带足够的现金和手机充电器。
+
+### 09:00 - 10:30 超市街与美食探索
+- **地点**：北京路步行街
+- **活动内容**：漫步于历史悠久的北京路步行街，品尝地道的广东早茶和特色小吃。推荐尝试虾饺、叉烧包等经典点心。
+- **交通方式**：地铁1号线或2号线直达。
+
+### 10:30 - 12:00 广州塔观光
+- **地点**：广州塔（小蛮腰）
+- **活动内容**：乘坐电梯至观景台，俯瞰整个广州市区。建议提前在线购票以避免排队。
+- **交通方式**：地铁5号线或APM线直达。
+
+### 12:00 - 13:30 午餐与文化体验
+- **地点**：陈家祠
+- **活动内容**：参观具有岭南特色的传统建筑——陈家祠，了解广东传统文化。午餐可在附近品尝粤菜。
+- **交通方式**：地铁5号线或APM线直达。
+
+### 13:30 - 15:00 超市街与购物
+- **地点**：北京路步行街
+- **活动内容**：继续在步行街上逛街购物，挑选特色纪念品。
+- **交通方式**：步行即可。
+
+### 15:00 - 16:30 番禺莲花山公园
+- **地点**：番禺莲花山公园
+- **活动内容**：游览公园内的古庙、观景台和湖边步道，享受自然风光。
+- **交通方式**：地铁4号线或公交直达。
+
+### 16:30 - 18:00 超市街与休闲时光
+- **地点**：北京路步行街
+- **活动内容**：在步行街上漫步，寻找心仪的店铺。傍晚时分，可以尝试一些夜宵。
+- **交通方式**：步行即可。
+
+### 18:00 - 20:00 晚餐与珠江夜游
+- **地点**：珠江新城或海心沙
+- **活动内容**：乘坐游船游览珠江，欣赏广州的夜景。晚餐可在附近享用。
+- **交通方式**：地铁3号线或APM线直达。
+
+### 20:00 - 21:00 结束行程
+返回酒店休息或继续享受广州的夜晚生活。
+
+## 预算与建议
+- **预算控制**：总体预算约为500元至800元人民币，包括交通、餐饮和门票费用。具体可根据个人消费习惯调整。
+- **时间安排**：
+  - 北京路步行街（1.5小时）
+  - 广州塔观光（2小时）
+  - 陈家祠（1.5小时）
+  - 莲花山公园（1.5小时）
+  - 珠江夜游（2小时）
+- **注意事项**：
+  - 购票时请关注官方信息，避免购买假票。
+  - 外出就餐时注意食品安全和卫生。
+  - 携带足够的现金或使用移动支付工具。
+
+## 行程亮点
+1. **广州塔观光**：俯瞰广州市区全景，感受现代都市的魅力。
+2. **陈家祠文化体验**：深入了解岭南传统文化与建筑艺术。
+3. **珠江夜游**：夜晚的珠江更加迷人，提供独特的城市景观体验。
+
+希望这个行程能够满足您的需求。如有任何疑问，请随时联系我们！
+
+祝您在广州度过一个愉快的一日游！
+```
+
+此行程涵盖了历史文化、自然风光与美食体验，确保了多样性和均衡性，并提供了实用的交通建议和时间安排。预算合理且有缓冲，节奏舒适、逻辑流畅。,分数=85.0
+2026-05-30 22:33:49.597 | INFO     | N/A | 进入supervisor_node
+2026-05-30 22:33:49.598 | INFO     | N/A | 下一步final_plan
+2026-05-30 22:36:13.022 | INFO     | N/A | ✅ Plan 结构化解析成功 | 共 4 天

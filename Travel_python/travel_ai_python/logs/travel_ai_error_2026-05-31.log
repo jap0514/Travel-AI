@@ -1,0 +1,1 @@
+2026-05-31 16:50:03.243 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 404 - {'error': {'message': 'model "text-embedding-v2" not found, try pulling it first', 'type': 'not_found_error', 'param': None, 'code': None}}

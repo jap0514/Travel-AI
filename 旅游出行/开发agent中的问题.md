@@ -42,3 +42,67 @@ LangGraph 的 Supervisor 模式下，**路由节点必须返回字典**，而不
 多智能体系统中，状态（State）的传递非常重要，每个节点都要保证把下游需要的数据放进去。
 
 遇到 Expected dict, got xxx 错误，99% 是路由节点返回值类型不对。
+
+
+
+3、模型有时候会犯浑，会按照prompt里面的模版数据
+
+
+
+4、
+
+
+
+**1. 核心流程循环问题（最严重）**
+
+- **final_optimizer 被多次重复执行**（输出好几版几乎相同的“终版”行程）
+- **critic → final_optimizer → supervisor → critic** 形成循环
+- should_end 和 final_plan 判断不生效，导致流程无法干净终止
+- iteration 计数不递增（一直显示1）
+
+------
+
+**2. Task 解析相关问题**
+
+- **Task Analyzer 解析失败**：'int' object has no attribute 'get'
+- 默认值提取不准确（用户说“广州1日游”，却经常解析成5天）
+- TravelTask 模型缺少 destination 字段
+
+------
+
+**3. 节点具体 Bug**
+
+- **researcher_node**：硬编码“北京”，且访问 task.destination 导致 AttributeError
+- **critic_node**：iteration 更新后没有正确返回到 state
+- **supervisor_node**：终止条件判断优先级不够高
+- **parse_plan** 执行后流程虽然结束，但后续处理较弱
+
+------
+
+**4. 状态管理（State）问题**
+
+- should_end 字段未在 AgentState 中声明
+- iteration 的 reducer 配置不完善（可能缺少 Annotated + last_value）
+- 部分字段更新后没有被 LangGraph 正确合并
+
+------
+
+**5. 模型切换相关问题**
+
+- 当前使用的是通义千问（Dashscope）
+- 想切换到本地 Ollama（DeepSeek-R1:1.5B）
+- 需要同步修改 .env + settings.py + Mem0 配置
+
+------
+
+**6. 其他次要/环境问题**
+
+- Mem0 依赖缺失警告（spaCy、fastembed）
+- Qdrant 关闭时的 Python 清理警告（无害）
+- 日志中出现中文和英文混杂，阅读不便
+- 测试用例固定为“广州1日游”，方便调试但覆盖面有限
+
+
+
+
+

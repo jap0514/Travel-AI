@@ -56,7 +56,8 @@ def parse_plan_node(state):
             daily_plans=daily_plans,
             raw_markdown=final_plan
         )
-        logger.info(f"✅ Plan 结构化解析成功 | 共 {len(daily_plans)} 天")
+        logger.info(f"✅ Plan 结构化解析成功 | 共 {parsed_plan.days} 天")
+        logger.info(f"最后的解析完的计划：{parsed_plan}")
     except Exception as e:
         logger.warning(f"Plan 结构化解析失败: {e}")
         parsed_plan = TravelPlan(
