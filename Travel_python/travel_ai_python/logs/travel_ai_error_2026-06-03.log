@@ -1,0 +1,107 @@
+2026-06-03 20:00:22.709 | ERROR    | N/A | 多智能体处理失败: 'supervisor'
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 30, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 26, in main1
+    task, final_plan, parsed_plan = process_with_agent(message, "10001")
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 100, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 686, in invoke
+    input = step.invoke(input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\graph\_branch.py", line 167, in _route
+    return self._finish(writer, input, result, config)
+  File "D:\python\Lib\site-packages\langgraph\graph\_branch.py", line 203, in _finish
+    r if isinstance(r, Send) else self.ends[r] for r in result
+
+KeyError: 'supervisor'
+During task with name 'Intent_Recognition' and id 'babda06d-cc78-60bf-693e-47047018069e'
+2026-06-03 20:02:47.748 | ERROR    | N/A | 多智能体处理失败: 'Intent_Recognition'
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 30, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 26, in main1
+    task, final_plan, parsed_plan = process_with_agent(message, "10001")
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 100, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 686, in invoke
+    input = step.invoke(input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\graph\_branch.py", line 167, in _route
+    return self._finish(writer, input, result, config)
+  File "D:\python\Lib\site-packages\langgraph\graph\_branch.py", line 203, in _finish
+    r if isinstance(r, Send) else self.ends[r] for r in result
+
+KeyError: 'Intent_Recognition'
+During task with name 'Intent_Recognition' and id '8e8824e4-2a4e-91b5-4c16-b0abf9ac8ecf'
+2026-06-03 20:09:37.362 | ERROR    | N/A | 多智能体处理失败: 'str' object has no attribute 'days'
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 30, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 26, in main1
+    task, final_plan, parsed_plan = process_with_agent(message, "10001")
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 118, in process_with_agent
+    {"role": "assistant", "content": f"已生成{task.days}天行程"}
+
+AttributeError: 'str' object has no attribute 'days'
+2026-06-03 20:16:36.828 | ERROR    | N/A | 多智能体处理失败: No synchronous function provided to "general_QA".
+Either initialize with a synchronous function or invoke via the async API (ainvoke, astream, etc.)
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 30, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 26, in main1
+    task, final_plan, parsed_plan = process_with_agent(message, "10001")
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 100, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 357, in invoke
+    raise TypeError(
+
+TypeError: No synchronous function provided to "general_QA".
+Either initialize with a synchronous function or invoke via the async API (ainvoke, astream, etc.)
+During task with name 'general_QA' and id 'dbd30356-c9ed-cff2-cbdc-efef0fc7c086'
+2026-06-03 20:23:09.842 | ERROR    | N/A | MCP 加载失败: asyncio.run() cannot be called from a running event loop，使用模拟工具
+2026-06-03 20:27:33.636 | ERROR    | N/A | MCP 加载失败: asyncio.run() cannot be called from a running event loop，使用模拟工具
+2026-06-03 20:48:19.244 | ERROR    | N/A | MCP 加载失败: asyncio.run() cannot be called from a running event loop，使用模拟工具

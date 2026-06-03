@@ -8,6 +8,11 @@ def researcher_node(state):
 
     **任务**：
     为以下旅行需求收集最新、最实用的研究信息，你可以使用tools里面的工具来完成。
+    **可用工具**：
+    - search_classic_routes(destination, days) ：获取经典行程模板
+    - search_attractions(city, keyword) ：获取景点历史、亮点、贴士
+    - search_user_plans(destination, preferences) ：获取真实用户行程
+    - search_weather, search_hotels, search_flights ：补充实用信息
 
     **旅行需求**：
     - 目的地：{task.destination or '用户指定城市'}
