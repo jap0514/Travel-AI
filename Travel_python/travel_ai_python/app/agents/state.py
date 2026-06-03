@@ -28,3 +28,5 @@ class AgentState(TypedDict):
     iteration: int = 0  # 当前迭代次数
     max_iterations: int = 3  # 最大迭代次数
     should_end: Annotated[bool, last_value] = False  # 用来判断是否结束
+    intent: Optional[str]  # "plan" or "qa"
+    qa_answer: Optional[str]  # 最终返回的普通问答内容

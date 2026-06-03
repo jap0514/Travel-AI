@@ -72,12 +72,27 @@ services:
       - NAMESRV_ADDR=namesrv:9876
     restart: always
 
+    # Qdrant 向量数据库
+  qdrant:
+    image: qdrant/qdrant:v1.13.2
+    container_name: travel_qdrant
+    ports:
+      - "6333:6333"      # HTTP API 端口
+      - "6334:6334"      # gRPC 端口（可选）
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    environment:
+      - QDRANT__SERVICE__HTTP_PORT=6333
+      - QDRANT__SERVICE__GRPC_PORT=6334
+    restart: always
+
 volumes:
   mysql_data:
   redis_data:
   rocketmq_namesrv_logs:
   rocketmq_broker_logs:
   rocketmq_broker_store:
+  qdrant_storage:
 
 #  # RabbitMQ 3.13（带管理面板）
 #  rabbitmq:

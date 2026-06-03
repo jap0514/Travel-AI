@@ -82,6 +82,10 @@ class Settings:   # 将配置封装成一个类，便于统一管理和引用。
         "travel_tools": {
             "transport": "sse",
             "url": "http://localhost:9997/sse"
+        },
+        "qdrant_rag": {  # 新增
+            "transport": "sse",
+            "url": "http://localhost:9996/sse"
         }
     }
 
