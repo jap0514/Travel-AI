@@ -1,0 +1,474 @@
+2026-06-04 19:29:16.125 | ERROR    | N/A | MCP 加载失败: unhandled errors in a TaskGroup (1 sub-exception)，使用模拟工具
+2026-06-04 19:29:23.349 | ERROR    | N/A | MCP 加载失败: unhandled errors in a TaskGroup (1 sub-exception)，使用模拟工具
+2026-06-04 19:29:26.951 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-04 19:29:26.995 | INFO     | 10001 | 进入process_with_agent
+2026-06-04 19:29:29.029 | ERROR    | N/A | 多智能体处理失败: Error 10061 connecting to 192.168.71.140:6379. 由于目标计算机积极拒绝，无法连接。.
+Traceback (most recent call last):
+
+  File "D:\python\Lib\site-packages\redis\connection.py", line 1003, in connect_check_health
+    sock = self._connect()
+  File "D:\python\Lib\site-packages\redis\connection.py", line 1515, in _connect
+    raise err
+  File "D:\python\Lib\site-packages\redis\connection.py", line 1499, in _connect
+    sock.connect(socket_address)
+
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 32, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 28, in main1
+    task, final_plan, parsed_plan =process_with_agent(message, "10001")
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 99, in process_with_agent
+    session_messages = get_session_context(chat_message.session_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\utils\redis_client.py", line 12, in get_session_context
+    data = redis_client.get(key)
+
+  File "D:\python\Lib\site-packages\redis\commands\core.py", line 2073, in get
+    return self.execute_command("GET", name, keys=[name])
+  File "D:\python\Lib\site-packages\redis\client.py", line 716, in execute_command
+    return self._execute_command(*args, **options)
+  File "D:\python\Lib\site-packages\redis\client.py", line 722, in _execute_command
+    conn = self.connection or pool.get_connection()
+  File "D:\python\Lib\site-packages\redis\utils.py", line 236, in wrapper
+    return func(*args, **kwargs)
+  File "D:\python\Lib\site-packages\redis\connection.py", line 3041, in get_connection
+    connection.connect()
+  File "D:\python\Lib\site-packages\redis\connection.py", line 976, in connect
+    self.retry.call_with_retry(
+  File "D:\python\Lib\site-packages\redis\retry.py", line 132, in call_with_retry
+    raise error
+  File "D:\python\Lib\site-packages\redis\retry.py", line 120, in call_with_retry
+    return do()
+  File "D:\python\Lib\site-packages\redis\connection.py", line 977, in <lambda>
+    lambda: self.connect_check_health(
+  File "D:\python\Lib\site-packages\redis\connection.py", line 1025, in connect_check_health
+    raise e
+
+redis.exceptions.ConnectionError: Error 10061 connecting to 192.168.71.140:6379. 由于目标计算机积极拒绝，无法连接。.
+2026-06-04 19:37:01.002 | ERROR    | N/A | MCP 加载失败: unhandled errors in a TaskGroup (1 sub-exception)，使用模拟工具
+2026-06-04 19:38:17.583 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 19:38:19.807 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 19:38:21.383 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-04 19:38:21.407 | INFO     | 10001 | 进入process_with_agent
+2026-06-04 19:38:30.717 | ERROR    | N/A | 多智能体处理失败: Error code: 502
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 32, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 28, in main1
+    task, final_plan, parsed_plan =process_with_agent(message, "10001")
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 102, in process_with_agent
+    result = asyncio.run(multi_agent.ainvoke({
+
+  File "D:\python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\python\Lib\asyncio\base_events.py", line 719, in run_until_complete
+    return future.result()
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 4057, in ainvoke
+    async for chunk in self.astream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3407, in astream
+    async for _ in runner.atick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 706, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\runnables\config.py", line 667, in run_in_executor
+    return await asyncio.get_running_loop().run_in_executor(
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\runnables\config.py", line 658, in wrapper
+    return func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\Intent_Recognition.py", line 16, in intent_recognition_node
+    response = llm.invoke([SystemMessage(content=prompt)])
+
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1655, in _generate
+    _handle_openai_api_error(e)
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1650, in _generate
+    raw_response = self.client.with_raw_response.create(**payload)
+  File "D:\python\Lib\site-packages\openai\_legacy_response.py", line 367, in wrapped
+    return cast(LegacyAPIResponse[R], func(*args, **kwargs))
+  File "D:\python\Lib\site-packages\openai\_utils\_utils.py", line 298, in wrapper
+    return func(*args, **kwargs)
+  File "D:\python\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1215, in create
+    return self._post(
+  File "D:\python\Lib\site-packages\openai\_base_client.py", line 1332, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "D:\python\Lib\site-packages\openai\_base_client.py", line 1105, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.InternalServerError: Error code: 502
+During task with name 'Intent_Recognition' and id '9ad8be2a-7d0a-391a-09ed-946c63d56e9a'
+2026-06-04 19:39:26.204 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 19:39:28.394 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 19:39:29.986 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-04 19:39:30.007 | INFO     | 10001 | 进入process_with_agent
+2026-06-04 19:39:39.526 | ERROR    | N/A | 多智能体处理失败: Error code: 502
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 32, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 28, in main1
+    task, final_plan, parsed_plan =process_with_agent(message, "10001")
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 102, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\Intent_Recognition.py", line 16, in intent_recognition_node
+    response = llm.invoke([SystemMessage(content=prompt)])
+
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1655, in _generate
+    _handle_openai_api_error(e)
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1650, in _generate
+    raw_response = self.client.with_raw_response.create(**payload)
+  File "D:\python\Lib\site-packages\openai\_legacy_response.py", line 367, in wrapped
+    return cast(LegacyAPIResponse[R], func(*args, **kwargs))
+  File "D:\python\Lib\site-packages\openai\_utils\_utils.py", line 298, in wrapper
+    return func(*args, **kwargs)
+  File "D:\python\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1215, in create
+    return self._post(
+  File "D:\python\Lib\site-packages\openai\_base_client.py", line 1332, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "D:\python\Lib\site-packages\openai\_base_client.py", line 1105, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.InternalServerError: Error code: 502
+During task with name 'Intent_Recognition' and id 'a0aa1b55-25a1-39ad-7295-8e6cf673c76c'
+2026-06-04 19:41:37.059 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 19:41:39.183 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 19:41:41.539 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-04 19:41:41.582 | INFO     | 10001 | 进入process_with_agent
+2026-06-04 19:41:53.507 | ERROR    | N/A | 多智能体处理失败: No synchronous function provided to "general_QA".
+Either initialize with a synchronous function or invoke via the async API (ainvoke, astream, etc.)
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 32, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 28, in main1
+    task, final_plan, parsed_plan =process_with_agent(message, "10001")
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 102, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 357, in invoke
+    raise TypeError(
+
+TypeError: No synchronous function provided to "general_QA".
+Either initialize with a synchronous function or invoke via the async API (ainvoke, astream, etc.)
+During task with name 'general_QA' and id 'e29467df-181b-7cd3-3811-5db72bf045e3'
+2026-06-04 19:45:42.426 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 19:45:44.746 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 19:45:46.335 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-04 19:45:46.360 | INFO     | 10001 | 进入process_with_agent
+2026-06-04 19:45:46.777 | INFO     | N/A | General QA 处理用户问题: 北京有什么著名的景点
+2026-06-04 19:45:47.714 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 19:45:56.375 | INFO     | N/A | 景点查询
+2026-06-04 19:45:56.375 | WARNING  | N/A | 调用 search_attractions 失败: argument of type 'coroutine' is not a container or iterable
+2026-06-04 19:45:56.376 | INFO     | N/A | 历史行程查询
+2026-06-04 19:45:56.381 | WARNING  | N/A | 调用 search_user_plans 失败: argument of type 'coroutine' is not a container or iterable
+2026-06-04 19:46:21.692 | INFO     | N/A | General QA 回答已生成，长度 230
+2026-06-04 19:46:21.694 | INFO     | 10001 | ✅ 问答处理完成
+2026-06-04 19:46:21.694 | INFO     | 10001 | 回答：暂未找到相关答案，建议你提供更详细的关键词或查看官方渠道。不过，我可以为你推荐一些北京的著名景点供参考：
+
+1. 故宫博物院：又称紫禁城，是明清两代的皇家宫殿。
+2. 长城（八达岭长城）：世界文化遗产之一，位于北京市延庆区。
+3. 天安门广场：中国最大的城市中心广场，也是世界上最大的城市中心广场之一。
+4. 颐和园：以昆明湖、万寿山为基础，是中国保存最完整的一座皇家园林。
+5. 鸟巢（国家体育场）与水立方（国家游泳中心）：2008年北京奥运会的标志性建筑。
+2026-06-04 19:47:42.974 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 19:47:45.052 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 19:47:46.484 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-04 19:47:46.503 | INFO     | 10001 | 进入process_with_agent
+2026-06-04 19:47:51.623 | INFO     | N/A | General QA 处理用户问题: 北京有什么著名的景点
+2026-06-04 19:47:52.515 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 19:48:01.347 | INFO     | N/A | 景点查询
+2026-06-04 19:48:01.347 | WARNING  | N/A | 调用 search_attractions 失败: StructuredTool does not support sync invocation.
+2026-06-04 19:48:01.347 | INFO     | N/A | 历史行程查询
+2026-06-04 19:48:01.348 | WARNING  | N/A | 调用 search_user_plans 失败: StructuredTool does not support sync invocation.
+2026-06-04 19:48:13.804 | INFO     | N/A | General QA 回答已生成，长度 85
+2026-06-04 19:48:13.806 | INFO     | 10001 | ✅ 问答处理完成
+2026-06-04 19:48:13.806 | INFO     | 10001 | 回答：暂未找到相关答案，建议你提供更详细的关键词或查看官方渠道。不过我可以为你推荐一些北京的著名景点，如故宫、天安门广场、长城等。这些地方都是游客必去的地方，希望对你有所帮助！
+2026-06-04 19:51:31.100 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 19:51:33.195 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 19:51:34.645 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-04 19:51:34.663 | INFO     | 10001 | 进入process_with_agent
+2026-06-04 19:51:39.611 | INFO     | N/A | General QA 处理用户问题: 北京有什么著名的景点
+2026-06-04 19:51:39.611 | ERROR    | N/A | MCP 加载失败: asyncio.run() cannot be called from a running event loop，使用模拟工具
+2026-06-04 19:51:48.146 | INFO     | N/A | 景点查询
+2026-06-04 19:51:48.146 | INFO     | N/A | 历史行程查询
+2026-06-04 19:51:59.986 | INFO     | N/A | General QA 回答已生成，长度 78
+2026-06-04 19:51:59.989 | INFO     | 10001 | ✅ 问答处理完成
+2026-06-04 19:51:59.989 | INFO     | 10001 | 回答：暂未找到相关答案，建议你提供更详细的关键词或查看官方渠道。北京拥有众多著名景点，例如故宫、天安门广场、长城等，请告诉我你感兴趣的方面，我会为你提供更多信息。
+2026-06-04 19:53:34.572 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 19:53:36.764 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 19:53:38.999 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-04 19:53:39.027 | INFO     | 10001 | 进入process_with_agent
+2026-06-04 19:53:39.032 | ERROR    | N/A | 多智能体处理失败: asyncio.run() cannot be called from a running event loop
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 32, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 28, in main1
+    task, final_plan, parsed_plan =asyncio.run(process_with_agent(message, "10001"))
+
+  File "D:\python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 102, in process_with_agent
+    result = asyncio.run(multi_agent.ainvoke({
+
+  File "D:\python\Lib\asyncio\runners.py", line 200, in run
+    raise RuntimeError(
+
+RuntimeError: asyncio.run() cannot be called from a running event loop
+2026-06-04 19:54:13.965 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 19:54:16.133 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 19:54:18.377 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-04 19:54:18.413 | INFO     | 10001 | 进入process_with_agent
+2026-06-04 19:54:18.420 | ERROR    | N/A | 多智能体处理失败: asyncio.run() cannot be called from a running event loop
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 32, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 28, in main1
+    task, final_plan, parsed_plan =asyncio.run(process_with_agent(message, "10001"))
+
+  File "D:\python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 102, in process_with_agent
+    result =await asyncio.run(multi_agent.ainvoke({
+
+  File "D:\python\Lib\asyncio\runners.py", line 200, in run
+    raise RuntimeError(
+
+RuntimeError: asyncio.run() cannot be called from a running event loop
+2026-06-04 19:54:41.870 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 19:54:44.019 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 19:54:45.497 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-04 19:54:45.516 | INFO     | 10001 | 进入process_with_agent
+2026-06-04 19:54:50.676 | INFO     | N/A | General QA 处理用户问题: 北京有什么著名的景点
+2026-06-04 19:54:50.676 | ERROR    | N/A | MCP 加载失败: asyncio.run() cannot be called from a running event loop，使用模拟工具
+2026-06-04 19:54:59.337 | INFO     | N/A | 景点查询
+2026-06-04 19:54:59.337 | INFO     | N/A | 历史行程查询
+2026-06-04 19:55:23.704 | INFO     | N/A | General QA 回答已生成，长度 217
+2026-06-04 19:55:23.707 | INFO     | 10001 | ✅ 问答处理完成
+2026-06-04 19:55:23.707 | INFO     | 10001 | 回答：暂未找到相关答案，建议你提供更详细的关键词或查看官方渠道。不过，我可以为你推荐一些北京的著名景点供参考：
+
+1. 故宫博物院：又称紫禁城，是明清两代的皇家宫殿。
+2. 长城（八达岭长城）：位于北京市延庆区，是中国古代防御工程的重要组成部分。
+3. 天安门广场：位于北京市中心，是世界上最大的城市中心广场之一。
+4. 颐和园：是一座大型的皇家园林，以昆明湖、万寿山为基础建造而成。
+5. 北京动物园：拥有丰富的动物种类和美丽的自然景观。
+2026-06-04 20:09:02.079 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-04 20:12:58.090 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-04 20:12:58.111 | INFO     | 10001 | 进入process_with_agent
+2026-06-04 20:13:08.109 | INFO     | N/A | General QA 处理用户问题: 北京有什么著名的景点
+2026-06-04 20:13:08.111 | ERROR    | N/A | 多智能体处理失败: 'coroutine' object is not iterable
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 32, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 28, in main1
+    task, final_plan, parsed_plan =asyncio.run(process_with_agent(message, "10001"))
+
+  File "D:\python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 102, in process_with_agent
+    result =await multi_agent.ainvoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 4057, in ainvoke
+    async for chunk in self.astream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3407, in astream
+    async for _ in runner.atick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 706, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\general_QA.py", line 17, in general_qa_node
+    tool_dict = {tool.name: tool for tool in tools}
+
+TypeError: 'coroutine' object is not iterable
+During task with name 'general_QA' and id '6813b112-51b6-4389-bde2-47e66417478b'
+2026-06-04 20:18:03.378 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-04 20:18:03.429 | INFO     | 10001 | 进入process_with_agent
+2026-06-04 20:18:03.835 | INFO     | N/A | General QA 处理用户问题: 北京有什么著名的景点
+2026-06-04 20:18:05.220 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 20:18:13.504 | INFO     | N/A | 景点查询
+2026-06-04 20:18:14.560 | WARNING  | N/A | 调用 search_attractions 失败: Error calling tool 'search_attractions': 'QdrantClient' object has no attribute 'search'
+2026-06-04 20:18:14.561 | INFO     | N/A | 历史行程查询
+2026-06-04 20:18:15.327 | WARNING  | N/A | 调用 search_user_plans 失败: Error calling tool 'search_user_plans': 'QdrantClient' object has no attribute 'search'
+2026-06-04 20:18:30.120 | INFO     | N/A | General QA 回答已生成，长度 103
+2026-06-04 20:18:30.122 | INFO     | 10001 | ✅ 问答处理完成
+2026-06-04 20:18:30.123 | INFO     | 10001 | 回答：暂未找到相关答案，建议你提供更详细的关键词或查看官方渠道。不过，我可以为你推荐一些北京的著名景点，如故宫、天安门广场、长城、颐和园等。这些地方都是游客必去的地方，你可以根据自己的兴趣选择合适的景点进行游览。
+2026-06-04 20:23:15.866 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-04 20:23:15.886 | INFO     | 10001 | 进入process_with_agent
+2026-06-04 20:23:20.669 | INFO     | N/A | General QA 处理用户问题: 北京有什么著名的景点
+2026-06-04 20:23:21.537 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 20:23:29.900 | INFO     | N/A | 景点查询
+2026-06-04 20:23:30.371 | WARNING  | N/A | 调用 search_attractions 失败: Error calling tool 'search_attractions': 'QdrantClient' object has no attribute 'search'
+2026-06-04 20:23:30.372 | INFO     | N/A | 历史行程查询
+2026-06-04 20:23:30.918 | WARNING  | N/A | 调用 search_user_plans 失败: Error calling tool 'search_user_plans': 'QdrantClient' object has no attribute 'search'
+2026-06-04 20:23:57.442 | INFO     | N/A | General QA 回答已生成，长度 238
+2026-06-04 20:23:57.445 | INFO     | 10001 | ✅ 问答处理完成
+2026-06-04 20:23:57.445 | INFO     | 10001 | 回答：暂未找到相关答案，建议你提供更详细的关键词或查看官方渠道。不过，我可以为你列举一些北京的著名景点供参考：
+
+1. 故宫博物院 - 世界上最大的古代文化艺术博物馆之一。
+2. 长城 - 尤其是八达岭长城，是中国的象征性建筑之一。
+3. 天安门广场 - 是世界上最大的城市中心广场之一。
+4. 颐和园 - 游客可以欣赏到美丽的皇家园林景观。
+5. 北京动物园 - 适合家庭游玩，可以看到各种动物。
+6. 圆明园遗址公园 - 曾经是清朝皇帝的离宫别苑。
+
+希望这些信息对你有所帮助！
+2026-06-04 20:25:55.118 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-04 20:25:55.140 | INFO     | 10001 | 进入process_with_agent
+2026-06-04 20:26:00.741 | INFO     | N/A | General QA 处理用户问题: 北京有什么著名的景点
+2026-06-04 20:26:01.637 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 20:26:11.534 | INFO     | N/A | 景点查询
+2026-06-04 20:26:12.173 | INFO     | N/A | 历史行程查询
+2026-06-04 20:26:53.972 | INFO     | N/A | General QA 回答已生成，长度 200
+2026-06-04 20:26:53.975 | INFO     | 10001 | ✅ 问答处理完成
+2026-06-04 20:26:53.975 | INFO     | 10001 | 回答：北京有许多著名的景点，其中故宫博物院是一个不可错过的地方。它始建于1406年，于1420年建成，是明清两代的皇家宫殿，距今已有600余年的历史。这里有许多亮点值得一看，如太和殿、金水桥、九龙壁以及珍宝馆和钟表馆等。
+
+游览故宫时，请注意以下几点：
+- 必须提前7天在官网预约门票。
+- 周一闭馆。
+- 建议您尽量早些进入，大约在上午8:30开门的时候进去，这样可以避免人流高峰期，获得更好的参观体验。
+2026-06-04 20:48:38.988 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-04 20:48:39.007 | INFO     | 10001 | 进入process_with_agent
+2026-06-04 20:48:50.002 | INFO     | N/A | General QA 处理用户问题: 北京有什么著名的景点
+2026-06-04 20:48:51.303 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 20:49:11.177 | INFO     | N/A | 调用工具：search_attractions,参数：{'city': '北京', 'keyword': '著名景点', 'limit': 5}
+2026-06-04 20:49:49.328 | INFO     | N/A | General QA 回答已生成，长度 219
+2026-06-04 20:49:49.331 | INFO     | 10001 | ✅ 问答处理完成
+2026-06-04 20:49:49.331 | INFO     | 10001 | 回答：北京有许多著名的景点，其中故宫博物院非常值得一游。以下是关于故宫的一些信息：
+
+- 历史悠久：故宫始建于1406年，于1420年建成，是明清两代的皇家宫殿，至今已有600多年的历史。
+- 主要亮点包括太和殿、金水桥、九龙壁以及珍宝馆和钟表馆等。
+- 预约提示：建议您提前7天在官方网站上进行门票预约；需要注意的是，故宫每周一闭馆。为了获得更好的参观体验，请尽量选择早上8:30开门时进入，此时游客较少。
+
+希望这些信息对您的旅行有所帮助！
+2026-06-04 20:59:35.900 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-04 20:59:35.923 | INFO     | 10001 | 进入process_with_agent
+2026-06-04 20:59:43.538 | INFO     | N/A | General QA 处理用户问题: 北京有什么著名的景点
+2026-06-04 20:59:44.473 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 21:00:06.321 | INFO     | N/A | 调用工具：search_attractions,参数：{'city': '北京', 'keyword': '著名景点', 'limit': 5}
+2026-06-04 21:00:44.296 | INFO     | N/A | General QA 回答已生成，长度 201
+2026-06-04 21:00:44.299 | INFO     | 10001 | ✅ 问答处理完成
+2026-06-04 21:00:44.299 | INFO     | 10001 | 回答：【故宫博物院】
+- 历史：始建于1406年，1420年建成，是明清两代的皇家宫殿，距今已有600余年的历史。
+- 亮点：太和殿、金水桥、九龙壁、珍宝馆、钟表馆等。
+- 贴士：
+  - 必须提前7天在官网预约门票；
+  - 周一闭馆；
+  - 建议上午8:30开门就进去，人少体验好。
+
+北京还有许多其他著名的景点，如长城、颐和园、天安门广场等。如果您对这些景点感兴趣，请告诉我，我可以为您提供更多信息。
+2026-06-04 21:03:55.263 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-04 21:03:55.283 | INFO     | 10001 | 进入process_with_agent
+2026-06-04 21:04:00.145 | INFO     | N/A | General QA 处理用户问题: 北京有什么著名的景点
+2026-06-04 21:04:01.017 | INFO     | N/A | ✅ 已加载 6 个 MCP 工具
+2026-06-04 21:04:20.619 | INFO     | N/A | 调用工具：search_attractions,参数：{'city': '北京', 'keyword': '著名景点', 'limit': 5}
+2026-06-04 21:04:52.780 | INFO     | N/A | General QA 回答已生成，长度 160
+2026-06-04 21:04:52.783 | INFO     | 10001 | ✅ 问答处理完成
+2026-06-04 21:04:52.783 | INFO     | 10001 | 回答：北京有许多著名的景点，其中故宫博物院是一个不可错过的地方。它始建于1406年，于1420年建成，是明清两代的皇家宫殿，距今已有600余年的历史。主要亮点包括太和殿、金水桥、九龙壁以及珍宝馆和钟表馆等。建议您提前7天在官网预约门票，并注意周一闭馆。为了获得更好的参观体验，请尽量在上午8:30左右开门时进入，此时游客较少。

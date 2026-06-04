@@ -3,32 +3,43 @@ from app.config.logger import logger
 from langchain_mcp_adapters.client import MultiServerMCPClient, asyncio
 import requests
 
-tools = None
+_tools = None
+_tools_lock=asyncio.Lock()
 
 
-def init_mcp_tools():
-    global tools
+async def init_mcp_tools_async():
+    global _tools
+    if _tools is not None:
+        return _tools
+    async with _tools_lock:
+        if _tools is not None:
+            return _tools
     if not settings.MCP_SERVERS:
         logger.warning("未配置 MCP_SERVERS，使用模拟工具")
-        tools = get_mock_tools()
-        return tools
+        _tools = get_mock_tools()
+        return _tools
 
     try:
 
 
         mcp_client = MultiServerMCPClient(settings.MCP_SERVERS)
 
-        async def load_tools():
-            return await mcp_client.get_tools()
-
-        tools = asyncio.run(load_tools())
-        logger.info(f"✅ 已加载 {len(tools)} 个 MCP 工具")
-        return tools
+        _tools=await mcp_client.get_tools()
+        logger.info(f"✅ 已加载 {len(_tools)} 个 MCP 工具")
+        return _tools
     except Exception as e:
         logger.error(f"MCP 加载失败: {e}，使用模拟工具")
-        tools = get_mock_tools()
-        return tools
+        _tools = get_mock_tools()
+        return _tools
 
+def init_mcp_tools_sync():
+    """同步获取工具"""
+    try:
+        loop=asyncio.get_running_loop()
+        logger.info("在异步事件循环中调用同步初始化，返回模拟工具")
+        return get_mock_tools()
+    except RuntimeError:
+        return asyncio.run(init_mcp_tools_async())
 
 def get_mock_tools():
     """模拟工具"""
@@ -104,7 +115,3 @@ def get_mock_tools():
         return f"{city} 推荐酒店：丽思卡尔顿（¥1200/晚）、汉庭（¥350/晚）"
 
     return [search_weather, search_flights, search_hotels]
-
-
-# 模块导入时自动初始化
-tools = init_mcp_tools()
