@@ -23,14 +23,14 @@ def _search(collection: str, query: str, city: Optional[str] = None, limit: int 
         filter_cond = Filter(
             must=[FieldCondition(key="city", match=MatchValue(value=city))]
         )
-    results = qdrant_client.search(
+    results = qdrant_client.query_points(
         collection_name=collection,
-        query_vector=vector,
+        query=vector,
         query_filter=filter_cond,
         limit=limit,
         with_payload=True
     )
-    return results
+    return results.points
 
 @mcp.tool
 def search_classic_routes(destination: str, days: int, limit: int = 3) -> str:

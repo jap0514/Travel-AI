@@ -25,7 +25,7 @@ def main1():
     # logger.info(f"收到消息，content={content_data}, trace_id={trace_id}")
 
     # 从消息中得到content后，封装好message对象。将content发送给大模型进行内容分析。
-    task, final_plan, parsed_plan =process_with_agent(message, "10001")
+    task, final_plan, parsed_plan =asyncio.run(process_with_agent(message, "10001"))
 
 
 if __name__ == "__main__":

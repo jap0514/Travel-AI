@@ -7,7 +7,7 @@ from dataclasses import asdict
 
 from app.model.plan_model import TravelPlan, DailyActivity
 from app.model.task_model import TravelTask
-from app.tools.mcp_tools import init_mcp_tools
+from app.tools.mcp_tools import init_mcp_tools_async
 from app.utils.redis_client import get_session_context, save_session_context
 from app.utils.mem0_client import get_user_memories, add_to_memory
 from app.config.settings import settings
@@ -23,7 +23,7 @@ llm = ChatOpenAI(
 )
 
 
-tools = init_mcp_tools()
+tools = init_mcp_tools_async()
 tool_node = ToolNode(tools)
 
 

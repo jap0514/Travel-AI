@@ -1,9 +1,11 @@
 from langchain_core.messages import SystemMessage
-from app.agents.base import llm, tools
+from app.agents.base import llm, get_tools
 
-def researcher_node(state):
+
+async def researcher_node(state):
     """2. Researcher"""
     task = state["task"]
+    tools = await get_tools()
     prompt = f"""你是一位经验丰富的旅行研究专家，擅长为不同预算和节奏的旅客提供实用、高价值的信息。
 
     **任务**：
@@ -34,7 +36,7 @@ def researcher_node(state):
     提供结构清晰、信息量大、实用性强的研究报告。请使用Markdown格式组织内容。
     """
 
-    response = llm.bind_tools(tools).invoke([SystemMessage(content=prompt)])
+    response =await llm.bind_tools(tools).ainvoke([SystemMessage(content=prompt)])
 
     return {
         "research_results": response.content,

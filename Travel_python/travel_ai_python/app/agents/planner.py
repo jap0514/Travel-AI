@@ -1,9 +1,11 @@
 from langchain_core.messages import SystemMessage
-from app.agents.base import llm, tools
+from app.agents.base import llm, get_tools
 
-def planner_node(state):
+
+async def planner_node(state):
     """3. Itinerary Planner"""
     task = state["task"]
+    tools = await get_tools()
     research = state.get("research_results", "")
 
     system_prompt = f"""你是一位顶级旅行行程规划大师，曾为上千位客户设计过高满意度旅行计划。
@@ -26,7 +28,7 @@ def planner_node(state):
     请生成完整、详细、美观的旅行行程（使用Markdown格式）。"""
 
 
-    response = llm.bind_tools(tools).invoke([SystemMessage(content=system_prompt)] + state.get("messages", []))
+    response =await llm.bind_tools(tools).ainvoke([SystemMessage(content=system_prompt)] + state.get("messages", []))
 
     return {
         "draft_plan": response.content,

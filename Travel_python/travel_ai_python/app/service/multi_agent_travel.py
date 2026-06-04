@@ -16,7 +16,7 @@ from app.agents.researcher import researcher_node
 from app.agents.planner import planner_node
 from app.agents.critic import critic_node
 from app.agents.parse_plan import parse_plan_node
-from app.agents.base import llm, tools
+from app.agents.base import llm
 from app.agents.state import AgentState
 
 from app.config.logger import logger
@@ -90,7 +90,7 @@ workflow.add_conditional_edges(
 multi_agent = workflow.compile()
 
 
-def process_with_agent(chat_message, trace_id):
+async def process_with_agent(chat_message, trace_id):
     log = logger.bind(trace_id=trace_id)
     log.info(f"进入process_with_agent")
 
@@ -99,14 +99,14 @@ def process_with_agent(chat_message, trace_id):
         session_messages = get_session_context(chat_message.session_id)
         session_messages.append({"role": chat_message.role, "content": chat_message.content})
 
-        result = asyncio.run(multi_agent.ainvoke({
+        result =await multi_agent.ainvoke({
             "messages": [HumanMessage(content=chat_message.content)],
             "user_id": chat_message.user_id,
             "session_id": chat_message.session_id,
             "msg_id": chat_message.msg_id,
             "trace_id": trace_id,
             "next": "Intent_Recognition"  # 初始 next
-        }))
+        })
 
         final_plan = result.get("final_plan", "")
         parsed_plan = result.get("parsed_plan","")

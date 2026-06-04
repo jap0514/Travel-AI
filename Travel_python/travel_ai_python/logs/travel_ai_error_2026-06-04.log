@@ -1,0 +1,307 @@
+2026-06-04 19:29:16.125 | ERROR    | N/A | MCP 加载失败: unhandled errors in a TaskGroup (1 sub-exception)，使用模拟工具
+2026-06-04 19:29:23.349 | ERROR    | N/A | MCP 加载失败: unhandled errors in a TaskGroup (1 sub-exception)，使用模拟工具
+2026-06-04 19:29:29.029 | ERROR    | N/A | 多智能体处理失败: Error 10061 connecting to 192.168.71.140:6379. 由于目标计算机积极拒绝，无法连接。.
+Traceback (most recent call last):
+
+  File "D:\python\Lib\site-packages\redis\connection.py", line 1003, in connect_check_health
+    sock = self._connect()
+  File "D:\python\Lib\site-packages\redis\connection.py", line 1515, in _connect
+    raise err
+  File "D:\python\Lib\site-packages\redis\connection.py", line 1499, in _connect
+    sock.connect(socket_address)
+
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 32, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 28, in main1
+    task, final_plan, parsed_plan =process_with_agent(message, "10001")
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 99, in process_with_agent
+    session_messages = get_session_context(chat_message.session_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\utils\redis_client.py", line 12, in get_session_context
+    data = redis_client.get(key)
+
+  File "D:\python\Lib\site-packages\redis\commands\core.py", line 2073, in get
+    return self.execute_command("GET", name, keys=[name])
+  File "D:\python\Lib\site-packages\redis\client.py", line 716, in execute_command
+    return self._execute_command(*args, **options)
+  File "D:\python\Lib\site-packages\redis\client.py", line 722, in _execute_command
+    conn = self.connection or pool.get_connection()
+  File "D:\python\Lib\site-packages\redis\utils.py", line 236, in wrapper
+    return func(*args, **kwargs)
+  File "D:\python\Lib\site-packages\redis\connection.py", line 3041, in get_connection
+    connection.connect()
+  File "D:\python\Lib\site-packages\redis\connection.py", line 976, in connect
+    self.retry.call_with_retry(
+  File "D:\python\Lib\site-packages\redis\retry.py", line 132, in call_with_retry
+    raise error
+  File "D:\python\Lib\site-packages\redis\retry.py", line 120, in call_with_retry
+    return do()
+  File "D:\python\Lib\site-packages\redis\connection.py", line 977, in <lambda>
+    lambda: self.connect_check_health(
+  File "D:\python\Lib\site-packages\redis\connection.py", line 1025, in connect_check_health
+    raise e
+
+redis.exceptions.ConnectionError: Error 10061 connecting to 192.168.71.140:6379. 由于目标计算机积极拒绝，无法连接。.
+2026-06-04 19:37:01.002 | ERROR    | N/A | MCP 加载失败: unhandled errors in a TaskGroup (1 sub-exception)，使用模拟工具
+2026-06-04 19:38:30.717 | ERROR    | N/A | 多智能体处理失败: Error code: 502
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 32, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 28, in main1
+    task, final_plan, parsed_plan =process_with_agent(message, "10001")
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 102, in process_with_agent
+    result = asyncio.run(multi_agent.ainvoke({
+
+  File "D:\python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\python\Lib\asyncio\base_events.py", line 719, in run_until_complete
+    return future.result()
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 4057, in ainvoke
+    async for chunk in self.astream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3407, in astream
+    async for _ in runner.atick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 706, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\runnables\config.py", line 667, in run_in_executor
+    return await asyncio.get_running_loop().run_in_executor(
+  File "D:\python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\runnables\config.py", line 658, in wrapper
+    return func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\Intent_Recognition.py", line 16, in intent_recognition_node
+    response = llm.invoke([SystemMessage(content=prompt)])
+
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1655, in _generate
+    _handle_openai_api_error(e)
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1650, in _generate
+    raw_response = self.client.with_raw_response.create(**payload)
+  File "D:\python\Lib\site-packages\openai\_legacy_response.py", line 367, in wrapped
+    return cast(LegacyAPIResponse[R], func(*args, **kwargs))
+  File "D:\python\Lib\site-packages\openai\_utils\_utils.py", line 298, in wrapper
+    return func(*args, **kwargs)
+  File "D:\python\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1215, in create
+    return self._post(
+  File "D:\python\Lib\site-packages\openai\_base_client.py", line 1332, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "D:\python\Lib\site-packages\openai\_base_client.py", line 1105, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.InternalServerError: Error code: 502
+During task with name 'Intent_Recognition' and id '9ad8be2a-7d0a-391a-09ed-946c63d56e9a'
+2026-06-04 19:39:39.526 | ERROR    | N/A | 多智能体处理失败: Error code: 502
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 32, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 28, in main1
+    task, final_plan, parsed_plan =process_with_agent(message, "10001")
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 102, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\Intent_Recognition.py", line 16, in intent_recognition_node
+    response = llm.invoke([SystemMessage(content=prompt)])
+
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "D:\python\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1655, in _generate
+    _handle_openai_api_error(e)
+  File "D:\python\Lib\site-packages\langchain_openai\chat_models\base.py", line 1650, in _generate
+    raw_response = self.client.with_raw_response.create(**payload)
+  File "D:\python\Lib\site-packages\openai\_legacy_response.py", line 367, in wrapped
+    return cast(LegacyAPIResponse[R], func(*args, **kwargs))
+  File "D:\python\Lib\site-packages\openai\_utils\_utils.py", line 298, in wrapper
+    return func(*args, **kwargs)
+  File "D:\python\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1215, in create
+    return self._post(
+  File "D:\python\Lib\site-packages\openai\_base_client.py", line 1332, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "D:\python\Lib\site-packages\openai\_base_client.py", line 1105, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.InternalServerError: Error code: 502
+During task with name 'Intent_Recognition' and id 'a0aa1b55-25a1-39ad-7295-8e6cf673c76c'
+2026-06-04 19:41:53.507 | ERROR    | N/A | 多智能体处理失败: No synchronous function provided to "general_QA".
+Either initialize with a synchronous function or invoke via the async API (ainvoke, astream, etc.)
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 32, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 28, in main1
+    task, final_plan, parsed_plan =process_with_agent(message, "10001")
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 102, in process_with_agent
+    result = multi_agent.invoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3880, in invoke
+    for chunk in self.stream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 2936, in stream
+    for _ in runner.tick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 585, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 357, in invoke
+    raise TypeError(
+
+TypeError: No synchronous function provided to "general_QA".
+Either initialize with a synchronous function or invoke via the async API (ainvoke, astream, etc.)
+During task with name 'general_QA' and id 'e29467df-181b-7cd3-3811-5db72bf045e3'
+2026-06-04 19:51:39.611 | ERROR    | N/A | MCP 加载失败: asyncio.run() cannot be called from a running event loop，使用模拟工具
+2026-06-04 19:53:39.032 | ERROR    | N/A | 多智能体处理失败: asyncio.run() cannot be called from a running event loop
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 32, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 28, in main1
+    task, final_plan, parsed_plan =asyncio.run(process_with_agent(message, "10001"))
+
+  File "D:\python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 102, in process_with_agent
+    result = asyncio.run(multi_agent.ainvoke({
+
+  File "D:\python\Lib\asyncio\runners.py", line 200, in run
+    raise RuntimeError(
+
+RuntimeError: asyncio.run() cannot be called from a running event loop
+2026-06-04 19:54:18.420 | ERROR    | N/A | 多智能体处理失败: asyncio.run() cannot be called from a running event loop
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 32, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 28, in main1
+    task, final_plan, parsed_plan =asyncio.run(process_with_agent(message, "10001"))
+
+  File "D:\python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 102, in process_with_agent
+    result =await asyncio.run(multi_agent.ainvoke({
+
+  File "D:\python\Lib\asyncio\runners.py", line 200, in run
+    raise RuntimeError(
+
+RuntimeError: asyncio.run() cannot be called from a running event loop
+2026-06-04 19:54:50.676 | ERROR    | N/A | MCP 加载失败: asyncio.run() cannot be called from a running event loop，使用模拟工具
+2026-06-04 20:13:08.111 | ERROR    | N/A | 多智能体处理失败: 'coroutine' object is not iterable
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 32, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 28, in main1
+    task, final_plan, parsed_plan =asyncio.run(process_with_agent(message, "10001"))
+
+  File "D:\python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 102, in process_with_agent
+    result =await multi_agent.ainvoke({
+
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 4057, in ainvoke
+    async for chunk in self.astream(
+  File "D:\python\Lib\site-packages\langgraph\pregel\main.py", line 3407, in astream
+    async for _ in runner.atick(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\python\Lib\site-packages\langgraph\pregel\_retry.py", line 706, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\python\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\general_QA.py", line 17, in general_qa_node
+    tool_dict = {tool.name: tool for tool in tools}
+
+TypeError: 'coroutine' object is not iterable
+During task with name 'general_QA' and id '6813b112-51b6-4389-bde2-47e66417478b'
