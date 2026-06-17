@@ -6,19 +6,51 @@ from app.tools.mcp_tools import init_mcp_tools_async
 import json
 import re
 
+
+async def rewrite_query(original_query: str, state: AgentState) -> str:
+    """RAG 查询改写：让查询更清晰、完整、更适合向量检索"""
+    task = state.get("task")
+
+    prompt = f"""你是一个专业的查询优化专家。请将用户的旅行相关问题改写成更适合向量数据库检索的形式。
+
+要求：
+- 更正式、完整、具体
+- 保留核心意图
+- 增加关键旅行要素（目的地、时间、类型等）
+- 长度适中（1-2句话）
+
+原始查询：{original_query}
+
+上下文（如果有）：{task.user_query if task else ''}
+
+请直接输出改写后的查询，不要解释。"""
+
+    try:
+        response = await llm.ainvoke([SystemMessage(content=prompt)])
+        rewritten = response.content.strip()
+        # 防止改写失败回退
+        return rewritten if len(rewritten) > 5 else original_query
+    except Exception as e:
+        logger.warning(f"查询改写失败: {e}")
+        return original_query
+
 # 可用工具的描述（供 LLM 选择）
 TOOLS_DESCRIPTION = """
 可用工具：
 1. search_attractions(city, keyword, limit=5) - 查询景点的历史、亮点、贴士。
 2. search_user_plans(destination, preferences, limit=3) - 查找历史用户的真实行程规划。
 3. search_classic_routes(destination, days, limit=3) - 查找经典的行程模板（如北京3日游）。
-4. search_weather(city) - 查询城市天气。
+4. search_weather(city, date=None) - 查询城市天气。
 5. 如果不适合以上任何工具，返回 {"tool": "none"}。
 """
 
 async def general_qa_node(state: AgentState):
     user_query = state["messages"][-1].content
     logger.info(f"General QA 处理用户问题: {user_query}")
+
+    # ==================== 新增：RAG 查询改写 ====================
+    rewritten_query = await rewrite_query(user_query, state)
+    logger.info(f"原始查询: {user_query} → 改写后: {rewritten_query}")
 
     # 1. 获取所有可用工具
     tools =await get_tools()
@@ -38,7 +70,7 @@ async def general_qa_node(state: AgentState):
 
 注意：只输出 JSON，不要有其他文字。确保参数名与工具定义一致。
 示例：
-{{"tool": "search_attractions", "arguments": {{"city": "北京", "keyword": "著名景点", "limit": 5}}}}
+{{"tool": "search_attractions", "arguments": {{"city": "北京", "keyword": "著名景点", "limit": 5,"date": "今天"}}}}
 {{"tool": "none"}}
 """
 

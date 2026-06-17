@@ -74,8 +74,8 @@ class Settings:   # 将配置封装成一个类，便于统一管理和引用。
     }
 
     # 心知天气配置
-    XINGZHI_WEATHER_API_KEY: str = os.getenv("XINGZHI_WEATHER_API_KEY", "")
-    XINGZHI_WEATHER_BASE_URL: str = "https://api.seniverse.com/v3/weather"
+    XINZHI_WEATHER_API_KEY: str = os.getenv("XINZHI_WEATHER_API_KEY", "")
+    XINZHI_WEATHER_BASE_URL: str = "https://api.seniverse.com/v3/weather"
 
     # MCP 工具服务器（可选）
     MCP_SERVERS: dict = {

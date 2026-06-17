@@ -30,8 +30,7 @@ def search_weather(city: str, date: str = None):
             return f"""🌤️ {loc['name']} 当前天气：
 • 天气：{now['text']}
 • 温度：{now['temperature']}℃
-• 体感：{now['feels_like']}℃   
-• 湿度：{now['humidity']}%"""
+"""
         else:
             # 未来天气...
             return f"{city} 未来几天天气预报（开发中）"

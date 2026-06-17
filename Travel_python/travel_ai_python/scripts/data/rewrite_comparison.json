@@ -1,0 +1,377 @@
+{
+  "summary": {
+    "total_cases": 10,
+    "before_total_hits": 25,
+    "after_total_hits": 23,
+    "before_pass": 10,
+    "after_pass": 9,
+    "hit_improvement": -2,
+    "pass_rate_improvement": -10.0
+  },
+  "detailed": [
+    {
+      "query": "北京有什么好玩的",
+      "before": {
+        "hit_count": 3,
+        "hit_keywords": [
+          "故宫",
+          "长城",
+          "颐和园"
+        ],
+        "miss_keywords": [
+          "天坛"
+        ],
+        "min_hit_satisfied": true,
+        "result_count": 3,
+        "top_score": 0.716412
+      },
+      "after": {
+        "hit_count": 3,
+        "hit_keywords": [
+          "故宫",
+          "长城",
+          "颐和园"
+        ],
+        "miss_keywords": [
+          "天坛"
+        ],
+        "min_hit_satisfied": true,
+        "result_count": 3,
+        "top_score": 0.66494536
+      },
+      "rewrite": {
+        "rewritten": "北京 热门景点 必去 推荐",
+        "city": "北京",
+        "variants": [
+          "北京 旅游攻略 经典景点",
+          "北京 家庭友好 景点推荐"
+        ]
+      }
+    },
+    {
+      "query": "故宫好不好玩",
+      "before": {
+        "hit_count": 3,
+        "hit_keywords": [
+          "故宫",
+          "明清",
+          "皇家"
+        ],
+        "miss_keywords": [
+          "紫禁城"
+        ],
+        "min_hit_satisfied": true,
+        "result_count": 3,
+        "top_score": 0.20609038
+      },
+      "after": {
+        "hit_count": 3,
+        "hit_keywords": [
+          "故宫",
+          "明清",
+          "皇家"
+        ],
+        "miss_keywords": [
+          "紫禁城"
+        ],
+        "min_hit_satisfied": true,
+        "result_count": 3,
+        "top_score": 0.3978005
+      },
+      "rewrite": {
+        "rewritten": "故宫 评价 亮点 游玩体验",
+        "city": "北京",
+        "variants": [
+          "故宫 历史 故事",
+          "故宫 热门 景点"
+        ]
+      }
+    },
+    {
+      "query": "带娃去哪玩比较好",
+      "before": {
+        "hit_count": 3,
+        "hit_keywords": [
+          "亲子",
+          "科技馆",
+          "动物园"
+        ],
+        "miss_keywords": [
+          "海洋馆"
+        ],
+        "min_hit_satisfied": true,
+        "result_count": 5,
+        "top_score": 0.21670978
+      },
+      "after": {
+        "hit_count": 3,
+        "hit_keywords": [
+          "亲子",
+          "科技馆",
+          "动物园"
+        ],
+        "miss_keywords": [
+          "海洋馆"
+        ],
+        "min_hit_satisfied": true,
+        "result_count": 5,
+        "top_score": 0.21670978
+      },
+      "rewrite": {
+        "rewritten": "带娃去哪玩比较好",
+        "city": "",
+        "variants": []
+      }
+    },
+    {
+      "query": "西安3天怎么安排",
+      "before": {
+        "hit_count": 2,
+        "hit_keywords": [
+          "兵马俑",
+          "回民街"
+        ],
+        "miss_keywords": [
+          "古城墙",
+          "陕西历史博物馆"
+        ],
+        "min_hit_satisfied": true,
+        "result_count": 4,
+        "top_score": 0.17663035
+      },
+      "after": {
+        "hit_count": 2,
+        "hit_keywords": [
+          "古城墙",
+          "回民街"
+        ],
+        "miss_keywords": [
+          "兵马俑",
+          "陕西历史博物馆"
+        ],
+        "min_hit_satisfied": true,
+        "result_count": 5,
+        "top_score": 0.541551
+      },
+      "rewrite": {
+        "rewritten": "西安3天怎么安排",
+        "city": "",
+        "variants": []
+      }
+    },
+    {
+      "query": "便宜又好玩的地方",
+      "before": {
+        "hit_count": 1,
+        "hit_keywords": [
+          "免费"
+        ],
+        "miss_keywords": [
+          "经济",
+          "性价比"
+        ],
+        "min_hit_satisfied": true,
+        "result_count": 5,
+        "top_score": 0.44649485
+      },
+      "after": {
+        "hit_count": 1,
+        "hit_keywords": [
+          "免费"
+        ],
+        "miss_keywords": [
+          "经济",
+          "性价比"
+        ],
+        "min_hit_satisfied": true,
+        "result_count": 5,
+        "top_score": 0.44649485
+      },
+      "rewrite": {
+        "rewritten": "便宜又好玩的地方",
+        "city": "",
+        "variants": []
+      }
+    },
+    {
+      "query": "杭州西湖值得去吗",
+      "before": {
+        "hit_count": 3,
+        "hit_keywords": [
+          "西湖",
+          "苏堤",
+          "雷峰塔"
+        ],
+        "miss_keywords": [],
+        "min_hit_satisfied": true,
+        "result_count": 2,
+        "top_score": 0.657166
+      },
+      "after": {
+        "hit_count": 3,
+        "hit_keywords": [
+          "西湖",
+          "苏堤",
+          "雷峰塔"
+        ],
+        "miss_keywords": [],
+        "min_hit_satisfied": true,
+        "result_count": 2,
+        "top_score": 0.68484676
+      },
+      "rewrite": {
+        "rewritten": "杭州 西湖 景点 评价 推荐 游玩体验",
+        "city": "杭州",
+        "variants": [
+          "杭州 西湖 美景",
+          "西湖 历史文化"
+        ]
+      }
+    },
+    {
+      "query": "三亚几天合适",
+      "before": {
+        "hit_count": 3,
+        "hit_keywords": [
+          "三亚",
+          "亚龙湾",
+          "天涯海角"
+        ],
+        "miss_keywords": [
+          "海滩"
+        ],
+        "min_hit_satisfied": true,
+        "result_count": 2,
+        "top_score": 0.25951824
+      },
+      "after": {
+        "hit_count": 3,
+        "hit_keywords": [
+          "三亚",
+          "亚龙湾",
+          "天涯海角"
+        ],
+        "miss_keywords": [
+          "海滩"
+        ],
+        "min_hit_satisfied": true,
+        "result_count": 2,
+        "top_score": 0.43262923
+      },
+      "rewrite": {
+        "rewritten": "三亚 最佳旅行时间 时长",
+        "city": "三亚",
+        "variants": [
+          "三亚 游玩天数",
+          "三亚 旅游季节"
+        ]
+      }
+    },
+    {
+      "query": "成都必吃美食",
+      "before": {
+        "hit_count": 1,
+        "hit_keywords": [
+          "锦里"
+        ],
+        "miss_keywords": [
+          "火锅",
+          "小吃",
+          "川菜"
+        ],
+        "min_hit_satisfied": true,
+        "result_count": 4,
+        "top_score": 0.64501816
+      },
+      "after": {
+        "hit_count": 1,
+        "hit_keywords": [
+          "锦里"
+        ],
+        "miss_keywords": [
+          "火锅",
+          "小吃",
+          "川菜"
+        ],
+        "min_hit_satisfied": true,
+        "result_count": 3,
+        "top_score": 0.5230316
+      },
+      "rewrite": {
+        "rewritten": "成都 美食 推荐 著名 尝试",
+        "city": "成都",
+        "variants": [
+          "成都 地方小吃 名店",
+          "成都 餐厅 点赞"
+        ]
+      }
+    },
+    {
+      "query": "厦门3日游攻略",
+      "before": {
+        "hit_count": 2,
+        "hit_keywords": [
+          "鼓浪屿",
+          "曾厝垵"
+        ],
+        "miss_keywords": [
+          "厦门大学"
+        ],
+        "min_hit_satisfied": true,
+        "result_count": 2,
+        "top_score": 0.3904617
+      },
+      "after": {
+        "hit_count": 0,
+        "hit_keywords": [],
+        "miss_keywords": [
+          "鼓浪屿",
+          "厦门大学",
+          "曾厝垵"
+        ],
+        "min_hit_satisfied": false,
+        "result_count": 5,
+        "top_score": 0.690823
+      },
+      "rewrite": {
+        "rewritten": "厦门3日游攻略",
+        "city": "",
+        "variants": []
+      }
+    },
+    {
+      "query": "丽江古城怎么样",
+      "before": {
+        "hit_count": 4,
+        "hit_keywords": [
+          "丽江",
+          "古城",
+          "纳西",
+          "玉龙雪山"
+        ],
+        "miss_keywords": [],
+        "min_hit_satisfied": true,
+        "result_count": 2,
+        "top_score": 0.5459528
+      },
+      "after": {
+        "hit_count": 4,
+        "hit_keywords": [
+          "丽江",
+          "古城",
+          "纳西",
+          "玉龙雪山"
+        ],
+        "miss_keywords": [],
+        "min_hit_satisfied": true,
+        "result_count": 5,
+        "top_score": 0.7139916
+      },
+      "rewrite": {
+        "rewritten": "丽江古城怎么样",
+        "city": "",
+        "variants": []
+      }
+    }
+  ]
+}
