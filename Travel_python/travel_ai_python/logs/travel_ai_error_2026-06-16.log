@@ -1,0 +1,107 @@
+2026-06-16 19:03:18.164 | ERROR    | N/A | 多智能体处理失败: create_react_agent() got unexpected keyword arguments: {'state_modifier': '你是一位经验丰富的旅行研究专家，擅长为不同预算和节奏的旅客提供实用、高价值的信息。\n\n    **任务**：\n    为以下旅行需求收集最新、最实用的研究信息，你可以使用tools里面的工具来完成。\n    **可用工具**：\n    - search_classic_routes(destination, days) ：获取经典行程模板\n    - search_attractions(city, keyword) ：获取景点历史、亮点、贴士\n    - search_user_plans(destination, preferences) ：获取真实用户行程\n    - search_weather, search_hotels, search_flights ：补充实用信息\n\n    **旅行需求**：\n    - 目的地：广州\n    - 天数：3天\n    - 预算水平：中等\n    - 节奏：适中\n\n    **你需要重点研究的内容**：\n    1. 核心必去景点及特色体验\n    2. 门票价格、开放时间、预订建议\n    3. 交通方式推荐（含机场/高铁接驳）\n    4. 当地美食推荐及人均消费\n    5. 最佳游玩顺序建议\n    6. 天气与穿着建议\n    7. 安全注意事项与文化禁忌\n    8. 预算分配建议（住宿、餐饮、交通、门票）\n\n    **输出要求**：\n    提供结构清晰、信息量大、实用性强的研究报告。请使用Markdown格式组织内容。\n    '}
+Traceback (most recent call last):
+
+  File "D:\software\Tools\PycharmCommunity\PyCharm Community Edition 2025.2.6\plugins\python-ce\helpers\pydev\pydevd.py", line 2391, in <module>
+    main()
+
+  File "D:\software\Tools\PycharmCommunity\PyCharm Community Edition 2025.2.6\plugins\python-ce\helpers\pydev\pydevd.py", line 2372, in main
+    globals = debugger.run(setup['file'], None, None, is_module)
+
+  File "D:\software\Tools\PycharmCommunity\PyCharm Community Edition 2025.2.6\plugins\python-ce\helpers\pydev\pydevd.py", line 1640, in run
+    return self._exec(is_module, entry_point_fn, module_name, file, globals, locals)
+
+  File "D:\software\Tools\PycharmCommunity\PyCharm Community Edition 2025.2.6\plugins\python-ce\helpers\pydev\pydevd.py", line 1647, in _exec
+    pydev_imports.execfile(file, globals, locals)  # execute the script
+
+  File "D:\software\Tools\PycharmCommunity\PyCharm Community Edition 2025.2.6\plugins\python-ce\helpers\pydev\_pydev_imps\_pydev_execfile.py", line 18, in execfile
+    exec(compile(contents+"\n", file, 'exec'), glob, loc)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 32, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 28, in main1
+    task, final_plan, parsed_plan =asyncio.run(process_with_agent(message, "10001"))
+
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 102, in process_with_agent
+    result =await multi_agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 41, in researcher_node
+    agent = create_react_agent(
+
+  File "D:\Python\Lib\_py_warnings.py", line 800, in wrapper
+    return arg(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\chat_agent_executor.py", line 529, in create_react_agent
+    raise TypeError(
+
+TypeError: create_react_agent() got unexpected keyword arguments: {'state_modifier': '你是一位经验丰富的旅行研究专家，擅长为不同预算和节奏的旅客提供实用、高价值的信息。\n\n    **任务**：\n    为以下旅行需求收集最新、最实用的研究信息，你可以使用tools里面的工具来完成。\n    **可用工具**：\n    - search_classic_routes(destination, days) ：获取经典行程模板\n    - search_attractions(city, keyword) ：获取景点历史、亮点、贴士\n    - search_user_plans(destination, preferences) ：获取真实用户行程\n    - search_weather, search_hotels, search_flights ：补充实用信息\n\n    **旅行需求**：\n    - 目的地：广州\n    - 天数：3天\n    - 预算水平：中等\n    - 节奏：适中\n\n    **你需要重点研究的内容**：\n    1. 核心必去景点及特色体验\n    2. 门票价格、开放时间、预订建议\n    3. 交通方式推荐（含机场/高铁接驳）\n    4. 当地美食推荐及人均消费\n    5. 最佳游玩顺序建议\n    6. 天气与穿着建议\n    7. 安全注意事项与文化禁忌\n    8. 预算分配建议（住宿、餐饮、交通、门票）\n\n    **输出要求**：\n    提供结构清晰、信息量大、实用性强的研究报告。请使用Markdown格式组织内容。\n    '}
+During task with name 'researcher' and id 'b6bd57de-96cb-575b-4523-99fea1beafca'
+2026-06-16 19:12:03.012 | ERROR    | N/A | 多智能体处理失败: create_agent() got an unexpected keyword argument 'state_modifier'
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 32, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 28, in main1
+    task, final_plan, parsed_plan =asyncio.run(process_with_agent(message, "10001"))
+
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 102, in process_with_agent
+    result =await multi_agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 41, in researcher_node
+    agent = create_agent(
+
+TypeError: create_agent() got an unexpected keyword argument 'state_modifier'
+During task with name 'researcher' and id 'f95a43c1-4934-0bb0-c30b-e8abb87e5bd9'
+2026-06-16 19:45:15.398 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 404 - {'error': {'message': 'model "text-embedding-v2" not found, try pulling it first', 'type': 'not_found_error', 'param': None, 'code': None}}

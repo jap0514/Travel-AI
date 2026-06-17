@@ -7,7 +7,7 @@ from qdrant_client.models import VectorParams, Distance, PointStruct
 QDRANT_HOST = "192.168.71.140"
 QDRANT_PORT = 6333
 EMBEDDING_MODEL = "paraphrase-multilingual-MiniLM-L12-v2"
-JSON_PATH = r"D:\毕业设计\Travel_python\travel_ai_python\scripts\data\travel_knowledge.json"
+JSON_PATH = r"D:\毕业设计\Travel_python\travel_ai_python\scripts\data\travel_knowledge2.json"
 
 # 初始化
 model = SentenceTransformer(EMBEDDING_MODEL)
@@ -39,14 +39,15 @@ def insert_items(collection_name, items_list):
         text = item["embedding_text"]
         vector = model.encode(text).tolist()
         point_id = item["id"]
-        payload = {k: v for k, v in item.items() if k != "embedding_text"}
+        payload = dict(item)  # 保留所有原始字段
+        payload["content"] = text  # 增加标准 content 字段（供评估和检索使用）
         points.append(PointStruct(id=point_id, vector=vector, payload=payload))
     if points:
         client.upsert(collection_name=collection_name, points=points)
         print(f"插入 {len(points)} 条到 {collection_name}")
 
 # 分组
-classic = [i for i in items if i["type"] == "classic_route"]
+classic = [i for i in items if i["type"] == "route"]
 attractions = [i for i in items if i["type"] == "attraction"]
 user_plans = [i for i in items if i["type"] == "user_plan"]
 

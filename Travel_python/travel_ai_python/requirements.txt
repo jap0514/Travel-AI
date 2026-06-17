@@ -4,10 +4,14 @@ loguru==0.7.2
 requests==2.31.0
 PyJWT==2.8.0
 
+# 测试框架
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+
 langgraph
 langchain
 langchain-openai  # 或 langchain-qwen 等
-langchain-mcp-adapters  # MCP 适配器（关键）
+langchain-mcp-adapters>=0.2.2  # MCP 适配器（关键）
 mem0ai
 redis
 python-dotenv

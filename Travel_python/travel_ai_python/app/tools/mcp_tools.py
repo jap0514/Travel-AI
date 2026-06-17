@@ -72,9 +72,6 @@ def get_mock_tools():
                 return f"""🌤️ {location['name']} 当前天气：
     • 天气：{now['text']}
     • 温度：{now['temperature']}℃
-    • 体感：{now['feels_like']}℃
-    • 湿度：{now['humidity']}%
-    • 风向：{now['wind_direction']} {now['wind_speed']}级
     • 更新时间：{data['results'][0]['last_update']}"""
 
             # 未来几天预报（简单实现）

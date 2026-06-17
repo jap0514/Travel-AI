@@ -1,5 +1,6 @@
 from langchain_core.messages import SystemMessage
 from app.agents.base import llm, get_tools
+from langchain.agents import create_agent
 
 
 async def researcher_node(state):
@@ -36,9 +37,20 @@ async def researcher_node(state):
     提供结构清晰、信息量大、实用性强的研究报告。请使用Markdown格式组织内容。
     """
 
-    response =await llm.bind_tools(tools).ainvoke([SystemMessage(content=prompt)])
+    # 创建 ReAct Agent（自动循环：LLM → Tool → LLM）
+    agent = create_agent(
+        model=llm,
+        tools=tools,
+        system_prompt=prompt
+    )
+
+    result = await agent.ainvoke({
+        "messages": state["messages"][-1:]  # 只传入最新用户消息
+    })
+
+    final_content = result["messages"][-1].content
 
     return {
-        "research_results": response.content,
-        "messages": state["messages"]
+        "research_results": final_content,
+        "messages": state["messages"]+ result["messages"]
     }

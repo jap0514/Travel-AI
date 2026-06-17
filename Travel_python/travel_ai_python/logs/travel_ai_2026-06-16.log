@@ -1,0 +1,318 @@
+2026-06-16 18:16:17.223 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-16 18:16:17.274 | INFO     | 10001 | 进入process_with_agent
+2026-06-16 18:16:34.264 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 18:16:34.265 | INFO     | N/A | 下一步 → task_analyzer
+2026-06-16 18:16:34.266 | INFO     | N/A | 实际调用的大模型=qwen2.5
+2026-06-16 18:16:55.312 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 18:16:55.312 | INFO     | N/A | 下一步 → researcher
+2026-06-16 18:16:56.935 | INFO     | N/A | ✅ 已加载 14 个 MCP 工具
+2026-06-16 18:19:22.165 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'research_results', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 18:19:22.166 | INFO     | N/A | 下一步 → researcher
+2026-06-16 18:19:54.209 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'research_results', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 18:19:54.210 | INFO     | N/A | 下一步 → researcher
+2026-06-16 18:20:24.520 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'research_results', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 18:20:24.520 | INFO     | N/A | 下一步 → researcher
+2026-06-16 18:20:54.911 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'research_results', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 18:20:54.911 | INFO     | N/A | 下一步 → researcher
+2026-06-16 18:21:27.850 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'research_results', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 18:21:27.850 | INFO     | N/A | 下一步 → researcher
+2026-06-16 18:21:59.098 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'research_results', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 18:21:59.099 | INFO     | N/A | 下一步 → researcher
+2026-06-16 18:22:30.029 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'research_results', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 18:22:30.030 | INFO     | N/A | 下一步 → researcher
+2026-06-16 18:23:03.278 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'research_results', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 18:23:03.279 | INFO     | N/A | 下一步 → researcher
+2026-06-16 18:27:20.391 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-16 18:27:20.641 | INFO     | 10001 | 进入process_with_agent
+2026-06-16 18:27:30.007 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 18:27:30.008 | INFO     | N/A | 下一步 → task_analyzer
+2026-06-16 18:27:30.018 | INFO     | N/A | 实际调用的大模型=qwen2.5
+2026-06-16 18:27:47.894 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 18:27:47.895 | INFO     | N/A | 下一步 → researcher
+2026-06-16 18:27:49.360 | INFO     | N/A | ✅ 已加载 14 个 MCP 工具
+2026-06-16 18:31:33.828 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-16 18:31:34.040 | INFO     | 10001 | 进入process_with_agent
+2026-06-16 18:31:40.822 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 18:31:40.823 | INFO     | N/A | 下一步 → task_analyzer
+2026-06-16 18:31:40.831 | INFO     | N/A | 实际调用的大模型=qwen2.5
+2026-06-16 18:31:58.316 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 18:31:58.317 | INFO     | N/A | 下一步 → researcher
+2026-06-16 18:32:00.100 | INFO     | N/A | ✅ 已加载 14 个 MCP 工具
+2026-06-16 19:02:41.152 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-16 19:02:41.454 | INFO     | 10001 | 进入process_with_agent
+2026-06-16 19:02:58.661 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 19:02:58.662 | INFO     | N/A | 下一步 → task_analyzer
+2026-06-16 19:02:58.669 | INFO     | N/A | 实际调用的大模型=qwen2.5
+2026-06-16 19:03:16.537 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 19:03:16.538 | INFO     | N/A | 下一步 → researcher
+2026-06-16 19:03:18.160 | INFO     | N/A | ✅ 已加载 14 个 MCP 工具
+2026-06-16 19:03:18.164 | ERROR    | N/A | 多智能体处理失败: create_react_agent() got unexpected keyword arguments: {'state_modifier': '你是一位经验丰富的旅行研究专家，擅长为不同预算和节奏的旅客提供实用、高价值的信息。\n\n    **任务**：\n    为以下旅行需求收集最新、最实用的研究信息，你可以使用tools里面的工具来完成。\n    **可用工具**：\n    - search_classic_routes(destination, days) ：获取经典行程模板\n    - search_attractions(city, keyword) ：获取景点历史、亮点、贴士\n    - search_user_plans(destination, preferences) ：获取真实用户行程\n    - search_weather, search_hotels, search_flights ：补充实用信息\n\n    **旅行需求**：\n    - 目的地：广州\n    - 天数：3天\n    - 预算水平：中等\n    - 节奏：适中\n\n    **你需要重点研究的内容**：\n    1. 核心必去景点及特色体验\n    2. 门票价格、开放时间、预订建议\n    3. 交通方式推荐（含机场/高铁接驳）\n    4. 当地美食推荐及人均消费\n    5. 最佳游玩顺序建议\n    6. 天气与穿着建议\n    7. 安全注意事项与文化禁忌\n    8. 预算分配建议（住宿、餐饮、交通、门票）\n\n    **输出要求**：\n    提供结构清晰、信息量大、实用性强的研究报告。请使用Markdown格式组织内容。\n    '}
+Traceback (most recent call last):
+
+  File "D:\software\Tools\PycharmCommunity\PyCharm Community Edition 2025.2.6\plugins\python-ce\helpers\pydev\pydevd.py", line 2391, in <module>
+    main()
+
+  File "D:\software\Tools\PycharmCommunity\PyCharm Community Edition 2025.2.6\plugins\python-ce\helpers\pydev\pydevd.py", line 2372, in main
+    globals = debugger.run(setup['file'], None, None, is_module)
+
+  File "D:\software\Tools\PycharmCommunity\PyCharm Community Edition 2025.2.6\plugins\python-ce\helpers\pydev\pydevd.py", line 1640, in run
+    return self._exec(is_module, entry_point_fn, module_name, file, globals, locals)
+
+  File "D:\software\Tools\PycharmCommunity\PyCharm Community Edition 2025.2.6\plugins\python-ce\helpers\pydev\pydevd.py", line 1647, in _exec
+    pydev_imports.execfile(file, globals, locals)  # execute the script
+
+  File "D:\software\Tools\PycharmCommunity\PyCharm Community Edition 2025.2.6\plugins\python-ce\helpers\pydev\_pydev_imps\_pydev_execfile.py", line 18, in execfile
+    exec(compile(contents+"\n", file, 'exec'), glob, loc)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 32, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 28, in main1
+    task, final_plan, parsed_plan =asyncio.run(process_with_agent(message, "10001"))
+
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 102, in process_with_agent
+    result =await multi_agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 41, in researcher_node
+    agent = create_react_agent(
+
+  File "D:\Python\Lib\_py_warnings.py", line 800, in wrapper
+    return arg(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\chat_agent_executor.py", line 529, in create_react_agent
+    raise TypeError(
+
+TypeError: create_react_agent() got unexpected keyword arguments: {'state_modifier': '你是一位经验丰富的旅行研究专家，擅长为不同预算和节奏的旅客提供实用、高价值的信息。\n\n    **任务**：\n    为以下旅行需求收集最新、最实用的研究信息，你可以使用tools里面的工具来完成。\n    **可用工具**：\n    - search_classic_routes(destination, days) ：获取经典行程模板\n    - search_attractions(city, keyword) ：获取景点历史、亮点、贴士\n    - search_user_plans(destination, preferences) ：获取真实用户行程\n    - search_weather, search_hotels, search_flights ：补充实用信息\n\n    **旅行需求**：\n    - 目的地：广州\n    - 天数：3天\n    - 预算水平：中等\n    - 节奏：适中\n\n    **你需要重点研究的内容**：\n    1. 核心必去景点及特色体验\n    2. 门票价格、开放时间、预订建议\n    3. 交通方式推荐（含机场/高铁接驳）\n    4. 当地美食推荐及人均消费\n    5. 最佳游玩顺序建议\n    6. 天气与穿着建议\n    7. 安全注意事项与文化禁忌\n    8. 预算分配建议（住宿、餐饮、交通、门票）\n\n    **输出要求**：\n    提供结构清晰、信息量大、实用性强的研究报告。请使用Markdown格式组织内容。\n    '}
+During task with name 'researcher' and id 'b6bd57de-96cb-575b-4523-99fea1beafca'
+2026-06-16 19:08:41.517 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-16 19:11:30.331 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-16 19:11:30.444 | INFO     | 10001 | 进入process_with_agent
+2026-06-16 19:11:43.057 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 19:11:43.057 | INFO     | N/A | 下一步 → task_analyzer
+2026-06-16 19:11:43.058 | INFO     | N/A | 实际调用的大模型=qwen2.5
+2026-06-16 19:11:59.824 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 19:11:59.825 | INFO     | N/A | 下一步 → researcher
+2026-06-16 19:12:03.010 | INFO     | N/A | ✅ 已加载 14 个 MCP 工具
+2026-06-16 19:12:03.012 | ERROR    | N/A | 多智能体处理失败: create_agent() got an unexpected keyword argument 'state_modifier'
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 32, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 28, in main1
+    task, final_plan, parsed_plan =asyncio.run(process_with_agent(message, "10001"))
+
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 102, in process_with_agent
+    result =await multi_agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 41, in researcher_node
+    agent = create_agent(
+
+TypeError: create_agent() got an unexpected keyword argument 'state_modifier'
+During task with name 'researcher' and id 'f95a43c1-4934-0bb0-c30b-e8abb87e5bd9'
+2026-06-16 19:14:09.970 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-16 19:14:10.084 | INFO     | 10001 | 进入process_with_agent
+2026-06-16 19:14:17.578 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 19:14:17.578 | INFO     | N/A | 下一步 → task_analyzer
+2026-06-16 19:14:17.580 | INFO     | N/A | 实际调用的大模型=qwen2.5
+2026-06-16 19:14:35.232 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 19:14:35.232 | INFO     | N/A | 下一步 → researcher
+2026-06-16 19:14:36.763 | INFO     | N/A | ✅ 已加载 14 个 MCP 工具
+2026-06-16 19:20:57.738 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'research_results', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 19:20:57.740 | INFO     | N/A | 下一步 → planner
+2026-06-16 19:25:07.732 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-16 19:25:07.787 | INFO     | 10001 | 进入process_with_agent
+2026-06-16 19:25:13.445 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 19:25:13.445 | INFO     | N/A | 下一步 → task_analyzer
+2026-06-16 19:25:13.447 | INFO     | N/A | 实际调用的大模型=qwen2.5
+2026-06-16 19:25:27.215 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 19:25:27.215 | INFO     | N/A | 下一步 → researcher
+2026-06-16 19:25:28.123 | INFO     | N/A | ✅ 已加载 14 个 MCP 工具
+2026-06-16 19:32:10.237 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'research_results', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 19:32:10.238 | INFO     | N/A | 下一步 → planner
+2026-06-16 19:35:56.687 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'research_results', 'draft_plan', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 19:35:56.687 | INFO     | N/A | 下一步 → final_optimizer（单次高质量生成）
+2026-06-16 19:40:32.115 | INFO     | N/A | 已完成完成最后的规划=### 广州3日游行程规划
+
+#### 第1天：文化与美食之旅
+- **上午**：
+  - 09:00 - 12:00：参观陈家祠（广州市越秀区文德路44号），了解广东传统建筑艺术。
+  
+- **中午**：
+  - 12:00 - 13:30：在附近的茶楼享用早茶，品尝广州特色美食如虾饺、烧卖等。
+
+- **下午**：
+  - 13:30 - 17:00：游览北京路步行街（广州市越秀区），体验繁华的商业街区和各种时尚店铺。
+  
+- **晚上**：
+  - 18:00 - 20:00：乘坐珠江夜游游船，欣赏广州城市夜景。
+
+#### 第2天：自然与休闲之旅
+- **上午**：
+  - 09:30 - 12:00：参观白云山风景区（广州市白云区），享受清新的空气和美丽的自然风光。
+  
+- **中午**：
+  - 12:00 - 13:30：在白云山上或周边享用午餐，品尝当地特色美食。
+
+- **下午**：
+  - 14:00 - 17:00：游览广州动物园（广州市越秀区），近距离接触各种珍稀动物。
+  
+- **晚上**：
+  - 18:30 - 20:30：前往天河城购物中心（广州市天河区）购物休闲。
+
+#### 第3天：历史与现代交融之旅
+- **上午**：
+  - 09:00 - 12:00：参观广州博物馆（广州市越秀区），了解广州的历史文化。
+  
+- **中午**：
+  - 12:00 - 13:30：在博物馆附近享用午餐，品尝地道的广东菜。
+
+- **下午**：
+  - 14:00 - 17:00：游览海心沙公园（广州市天河区），享受户外休闲时光。
+  
+- **晚上**：
+  - 18:00 - 20:00：前往广州塔观景台（广州市越秀区），俯瞰整个城市的夜景。
+
+### 实用Tips
+- **用餐建议**：广州的早茶文化非常有名，在陈家祠附近的茶楼可以品尝到正宗的广东早茶。
+- **避坑提醒**：
+  - 珠江夜游时请注意安全，尽量选择正规的游船服务。在天河城购物中心购物时要留意商品价格和质量。
+  - 避免高峰期出行，以免遇到交通拥堵。
+
+### 交通方式
+- 地铁是广州最便捷的交通工具之一，建议使用地铁出行。
+- 出租车和网约车也很方便，但高峰期可能会遇到拥堵情况。可以考虑在非高峰时段出行或选择打车软件预订车辆。
+- 公交车线路较多，覆盖范围广，适合短途出行。
+
+### 预算规划
+- **每日餐饮**：约100元/人（早茶、午餐）
+- **交通费**：约50元/天（地铁+出租车）
+- **票务费用**：根据具体景点而定，预计200元左右
+
+### 总预算
+- 3日总预算：600 - 800元/人
+
+希望这个行程规划能够帮助您在广州度过一个愉快的假期！如果有任何问题或需要进一步的帮助，请随时告诉我。
+
+---
+
+**最终版完整行程**：
+
+### 广州3日游行程规划
+
+#### 第1天：文化与美食之旅
+- **上午**：
+  - 09:00 - 12:00：参观陈家祠（广州市越秀区文德路44号），了解广东传统建筑艺术。
+  
+- **中午**：
+  - 12:00 - 13:30：在附近的茶楼享用早茶，品尝广州特色美食如虾饺、烧卖等。
+
+- **下午**：
+  - 13:30 - 17:00：游览北京路步行街（广州市越秀区），体验繁华的商业街区和各种时尚店铺。
+  
+- **晚上**：
+  - 18:00 - 20:00：乘坐珠江夜游游船，欣赏广州城市夜景。
+
+#### 第2天：自然与休闲之旅
+- **上午**：
+  - 09:30 - 12:00：参观白云山风景区（广州市白云区），享受清新的空气和美丽的自然风光。
+  
+- **中午**：
+  - 12:00 - 13:30：在白云山上或周边享用午餐，品尝当地特色美食。
+
+- **下午**：
+  - 14:00 - 17:00：游览广州动物园（广州市越秀区），近距离接触各种珍稀动物。
+  
+- **晚上**：
+  - 18:30 - 20:30：前往天河城购物中心（广州市天河区）购物休闲。
+
+#### 第3天：历史与现代交融之旅
+- **上午**：
+  - 09:00 - 12:00：参观广州博物馆（广州市越秀区），了解广州的历史文化。
+  
+- **中午**：
+  - 12:00 - 13:30：在博物馆附近享用午餐，品尝地道的广东菜。
+
+- **下午**：
+  - 14:00 - 17:00：游览海心沙公园（广州市天河区），享受户外休闲时光。
+  
+- **晚上**：
+  - 18:00 - 20:00：前往广州塔观景台（广州市越秀区），俯瞰整个城市的夜景。
+
+### 实用Tips
+- **用餐建议**：广州的早茶文化非常有名，在陈家祠附近的茶楼可以品尝到正宗的广东早茶。
+- **避坑提醒**：
+  - 珠江夜游时请注意安全，尽量选择正规的游船服务。在天河城购物中心购物时要留意商品价格和质量。
+  - 避免高峰期出行，以免遇到交通拥堵。
+
+### 交通方式
+- 地铁是广州最便捷的交通工具之一，建议使用地铁出行。
+- 出租车和网约车也很方便，但高峰期可能会遇到拥堵情况。可以考虑在非高峰时段出行或选择打车软件预订车辆。
+- 公交车线路较多，覆盖范围广，适合短途出行。
+
+### 预算规划
+- **每日餐饮**：约100元/人（早茶、午餐）
+- **交通费**：约50元/天（地铁+出租车）
+- **票务费用**：根据具体景点而定，预计200元左右
+
+### 总预算
+- 3日总预算：600 - 800元/人
+
+希望这个行程规划能够帮助您在广州度过一个愉快的假期！如果有任何问题或需要进一步的帮助，请随时告诉我。,分数=0
+2026-06-16 19:40:32.120 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'research_results', 'draft_plan', 'final_plan', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-16 19:40:32.120 | INFO     | N/A | ✅ 已生成最终计划，下一步解析
+2026-06-16 19:45:15.378 | INFO     | N/A | ✅ Plan 结构化解析成功 | 共 3 天
+2026-06-16 19:45:15.379 | INFO     | N/A | 最后的解析完的计划：TravelPlan(user_id=1, daily_plans=[DailyActivity(day=1, theme='文化与美食之旅', activities=['09:00 - 12:00：参观陈家祠（广州市越秀区文德路44号），了解广东传统建筑艺术。', '12:00 - 13:30：在附近的茶楼享用早茶，品尝广州特色美食如虾饺、烧卖等。', '13:30 - 17:00：游览北京路步行街（广州市越秀区），体验繁华的商业街区和各种时尚店铺。', '18:00 - 20:00：乘坐珠江夜游游船，欣赏广州城市夜景。'], location='陈家祠、北京路步行街、珠江', transportation='地铁/公交', meals=None, tips=None, estimated_cost=300), DailyActivity(day=2, theme='自然与休闲之旅', activities=['09:30 - 12:00：参观白云山风景区（广州市白云区），享受清新的空气和美丽的自然风光。', '12:00 - 13:30：在白云山上或周边享用午餐，品尝当地特色美食。', '14:00 - 17:00：游览广州动物园（广州市越秀区），近距离接触各种珍稀动物。', '18:30 - 20:30：前往天河城购物中心（广州市天河区）购物休闲。'], location='白云山风景区、广州动物园、天河城购物中心', transportation='地铁/公交', meals=None, tips=None, estimated_cost=400), DailyActivity(day=3, theme='历史与现代交融之旅', activities=['09:00 - 12:00：参观广州博物馆（广州市越秀区），了解广州的历史文化。', '12:00 - 13:30：在博物馆附近享用午餐，品尝地道的广东菜。', '14:00 - 17:00：游览海心沙公园（广州市天河区），享受户外休闲时光。', '18:00 - 20:00：前往广州塔观景台（广州市越秀区），俯瞰整个城市的夜景。'], location='广州博物馆、海心沙公园、广州塔', transportation='地铁/公交', meals=None, tips=None, estimated_cost=300)], title='广州3日游行程规划', days=3, budget='中等', pace='适中', task_id=None, plan_id=None, destination='广州', start_date=None, total_estimated_cost=None, notes=None, raw_markdown='### 广州3日游行程规划\n\n#### 第1天：文化与美食之旅\n- **上午**：\n  - 09:00 - 12:00：参观陈家祠（广州市越秀区文德路44号），了解广东传统建筑艺术。\n  \n- **中午**：\n  - 12:00 - 13:30：在附近的茶楼享用早茶，品尝广州特色美食如虾饺、烧卖等。\n\n- **下午**：\n  - 13:30 - 17:00：游览北京路步行街（广州市越秀区），体验繁华的商业街区和各种时尚店铺。\n  \n- **晚上**：\n  - 18:00 - 20:00：乘坐珠江夜游游船，欣赏广州城市夜景。\n\n#### 第2天：自然与休闲之旅\n- **上午**：\n  - 09:30 - 12:00：参观白云山风景区（广州市白云区），享受清新的空气和美丽的自然风光。\n  \n- **中午**：\n  - 12:00 - 13:30：在白云山上或周边享用午餐，品尝当地特色美食。\n\n- **下午**：\n  - 14:00 - 17:00：游览广州动物园（广州市越秀区），近距离接触各种珍稀动物。\n  \n- **晚上**：\n  - 18:30 - 20:30：前往天河城购物中心（广州市天河区）购物休闲。\n\n#### 第3天：历史与现代交融之旅\n- **上午**：\n  - 09:00 - 12:00：参观广州博物馆（广州市越秀区），了解广州的历史文化。\n  \n- **中午**：\n  - 12:00 - 13:30：在博物馆附近享用午餐，品尝地道的广东菜。\n\n- **下午**：\n  - 14:00 - 17:00：游览海心沙公园（广州市天河区），享受户外休闲时光。\n  \n- **晚上**：\n  - 18:00 - 20:00：前往广州塔观景台（广州市越秀区），俯瞰整个城市的夜景。\n\n### 实用Tips\n- **用餐建议**：广州的早茶文化非常有名，在陈家祠附近的茶楼可以品尝到正宗的广东早茶。\n- **避坑提醒**：\n  - 珠江夜游时请注意安全，尽量选择正规的游船服务。在天河城购物中心购物时要留意商品价格和质量。\n  - 避免高峰期出行，以免遇到交通拥堵。\n\n### 交通方式\n- 地铁是广州最便捷的交通工具之一，建议使用地铁出行。\n- 出租车和网约车也很方便，但高峰期可能会遇到拥堵情况。可以考虑在非高峰时段出行或选择打车软件预订车辆。\n- 公交车线路较多，覆盖范围广，适合短途出行。\n\n### 预算规划\n- **每日餐饮**：约100元/人（早茶、午餐）\n- **交通费**：约50元/天（地铁+出租车）\n- **票务费用**：根据具体景点而定，预计200元左右\n\n### 总预算\n- 3日总预算：600 - 800元/人\n\n希望这个行程规划能够帮助您在广州度过一个愉快的假期！如果有任何问题或需要进一步的帮助，请随时告诉我。\n\n---\n\n**最终版完整行程**：\n\n### 广州3日游行程规划\n\n#### 第1天：文化与美食之旅\n- **上午**：\n  - 09:00 - 12:00：参观陈家祠（广州市越秀区文德路44号），了解广东传统建筑艺术。\n  \n- **中午**：\n  - 12:00 - 13:30：在附近的茶楼享用早茶，品尝广州特色美食如虾饺、烧卖等。\n\n- **下午**：\n  - 13:30 - 17:00：游览北京路步行街（广州市越秀区），体验繁华的商业街区和各种时尚店铺。\n  \n- **晚上**：\n  - 18:00 - 20:00：乘坐珠江夜游游船，欣赏广州城市夜景。\n\n#### 第2天：自然与休闲之旅\n- **上午**：\n  - 09:30 - 12:00：参观白云山风景区（广州市白云区），享受清新的空气和美丽的自然风光。\n  \n- **中午**：\n  - 12:00 - 13:30：在白云山上或周边享用午餐，品尝当地特色美食。\n\n- **下午**：\n  - 14:00 - 17:00：游览广州动物园（广州市越秀区），近距离接触各种珍稀动物。\n  \n- **晚上**：\n  - 18:30 - 20:30：前往天河城购物中心（广州市天河区）购物休闲。\n\n#### 第3天：历史与现代交融之旅\n- **上午**：\n  - 09:00 - 12:00：参观广州博物馆（广州市越秀区），了解广州的历史文化。\n  \n- **中午**：\n  - 12:00 - 13:30：在博物馆附近享用午餐，品尝地道的广东菜。\n\n- **下午**：\n  - 14:00 - 17:00：游览海心沙公园（广州市天河区），享受户外休闲时光。\n  \n- **晚上**：\n  - 18:00 - 20:00：前往广州塔观景台（广州市越秀区），俯瞰整个城市的夜景。\n\n### 实用Tips\n- **用餐建议**：广州的早茶文化非常有名，在陈家祠附近的茶楼可以品尝到正宗的广东早茶。\n- **避坑提醒**：\n  - 珠江夜游时请注意安全，尽量选择正规的游船服务。在天河城购物中心购物时要留意商品价格和质量。\n  - 避免高峰期出行，以免遇到交通拥堵。\n\n### 交通方式\n- 地铁是广州最便捷的交通工具之一，建议使用地铁出行。\n- 出租车和网约车也很方便，但高峰期可能会遇到拥堵情况。可以考虑在非高峰时段出行或选择打车软件预订车辆。\n- 公交车线路较多，覆盖范围广，适合短途出行。\n\n### 预算规划\n- **每日餐饮**：约100元/人（早茶、午餐）\n- **交通费**：约50元/天（地铁+出租车）\n- **票务费用**：根据具体景点而定，预计200元左右\n\n### 总预算\n- 3日总预算：600 - 800元/人\n\n希望这个行程规划能够帮助您在广州度过一个愉快的假期！如果有任何问题或需要进一步的帮助，请随时告诉我。')
+2026-06-16 19:45:15.398 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 404 - {'error': {'message': 'model "text-embedding-v2" not found, try pulling it first', 'type': 'not_found_error', 'param': None, 'code': None}}
+2026-06-16 19:45:15.399 | INFO     | 10001 | ✅ 8-Agent 多智能体处理完成

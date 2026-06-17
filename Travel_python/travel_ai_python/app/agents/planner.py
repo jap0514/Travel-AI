@@ -1,5 +1,6 @@
 from langchain_core.messages import SystemMessage
 from app.agents.base import llm, get_tools
+from langchain.agents import create_agent
 
 
 async def planner_node(state):
@@ -27,12 +28,20 @@ async def planner_node(state):
 
     请生成完整、详细、美观的旅行行程（使用Markdown格式）。"""
 
+    agent = create_agent(
+        model=llm,
+        tools=tools,
+        system_prompt=system_prompt,
+    )
 
-    response =await llm.bind_tools(tools).ainvoke([SystemMessage(content=system_prompt)] + state.get("messages", []))
+    result = await agent.ainvoke({"messages": []})
+
+
+    # response =await llm.bind_tools(tools).ainvoke([SystemMessage(content=system_prompt)] + state.get("messages", []))
 
     return {
-        "draft_plan": response.content,
-        "messages": state["messages"] + [response],
+        "draft_plan": result["messages"][-1].content,
+        "messages": state["messages"] + result.get("messages", []),
         "user_id": state.get("user_id"),
         "session_id": state.get("session_id")
     }
