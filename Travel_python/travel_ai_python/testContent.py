@@ -18,7 +18,7 @@ def main1():
         session_id=1001,
         user_id=1,
         role="USER",
-        content="广州3日游",
+        content="我想去北京玩两天，我想看北京的长城很久了",
         plan_json=None,
         create_time=datetime.now()
     )

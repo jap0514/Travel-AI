@@ -26,6 +26,15 @@ async def planner_node(state):
     4. 包含详细的时间安排、交通方式、预计费用
     5. 加入实用Tips（用餐建议、避坑提醒等）
 
+    **可用工具**（如需查询信息可调用）：
+    - search_attractions(city, keyword, limit) ：查询景点历史、亮点、贴士
+    - search_classic_routes(destination, days, limit) ：获取经典行程模板参考
+    - search_user_plans(destination, preferences, limit) ：参考真实用户行程
+    - hybrid_search(query, collection_type, city, limit, alpha) ：混合检索
+    - search_weather(city, date) ：查询天气预报
+    - search_hotels(city, checkin, checkout, budget) ：查询酒店
+    - search_flights(departure, destination, date) ：查询航班
+
     请生成完整、详细、美观的旅行行程（使用Markdown格式）。"""
 
     agent = create_agent(

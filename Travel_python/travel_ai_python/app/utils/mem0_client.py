@@ -12,8 +12,8 @@ except Exception as e:
     try:
         import os
 
-        os.environ.setdefault("OPENAI_API_KEY", settings.AI_MODEL_API_KEY)
-        os.environ.setdefault("OPENAI_BASE_URL", settings.AI_MODEL_API_URL)
+        os.environ.setdefault("LOCAL_AI_MODEL_API_KEY", settings.AI_API_KEY)
+        os.environ.setdefault("LOCAL_AI_MODEL_API_URL", settings.AI_API_URL)
         memory = Memory()
         logger.info("✅ Mem0 已使用默认配置初始化")
     except Exception as e2:

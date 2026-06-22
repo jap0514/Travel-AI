@@ -40,8 +40,14 @@ TOOLS_DESCRIPTION = """
 1. search_attractions(city, keyword, limit=5) - 查询景点的历史、亮点、贴士。
 2. search_user_plans(destination, preferences, limit=3) - 查找历史用户的真实行程规划。
 3. search_classic_routes(destination, days, limit=3) - 查找经典的行程模板（如北京3日游）。
-4. search_weather(city, date=None) - 查询城市天气。
-5. 如果不适合以上任何工具，返回 {"tool": "none"}。
+4. hybrid_search(query, collection_type, city, limit, alpha) - 混合检索（向量+关键词），推荐用于 RAG 查询。可选 collection_type: attractions / classic_routes / user_plans。
+5. list_collections() - 列出所有可用的 collection 名称。
+6. get_collection_stats(knowledge_type) - 获取指定 collection 的统计信息（向量数量、维度等）。knowledge_type 可选: classic_route / attraction / user_plan。
+7. get_knowledge_by_id(knowledge_type, point_id) - 根据 ID 查询单条知识详情。
+8. search_weather(city, date=None) - 查询城市天气。
+9. search_flights(departure, destination, date) - 查询航班信息。
+10. search_hotels(city, checkin, checkout, budget) - 查询酒店推荐。
+11. 如果不适合以上任何工具，返回 {"tool": "none"}。
 """
 
 async def general_qa_node(state: AgentState):

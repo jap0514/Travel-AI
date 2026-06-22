@@ -1,11 +1,19 @@
 import os
+import sys
+import zlib
 from datetime import datetime
+
+# 确保项目根目录在 sys.path 中，使 app 模块可导入
+_current = os.path.dirname(os.path.abspath(__file__))
+_root = os.path.dirname(os.path.dirname(_current))  # travel_ai_python/
+if _root not in sys.path:
+    sys.path.insert(0, _root)
 
 from sentence_transformers import SentenceTransformer,CrossEncoder
 from typing import Optional
 from mcp.server.fastmcp import FastMCP
 from qdrant_client import QdrantClient
-from qdrant_client.models import PointStruct, Filter, FieldCondition, MatchValue, Range
+from qdrant_client.models import PointStruct, Filter, FieldCondition, MatchValue, Range, SparseVector, Prefetch, FusionQuery
 from typing import Dict, Any, List, Optional
 import uuid
 from app.config.logger import logger
@@ -55,64 +63,59 @@ def _search(
     logger.info(f"🔍 执行混合检索 | Collection: {collection} | Query: {query} | City: {city}")
 
     try:
-        vector = model.encode(query).tolist()
+        query_vector = model.encode(query).tolist()
 
         # 构建过滤条件（按城市过滤）
         filter_cond = None
         if city:
             filter_cond = Filter(must=[FieldCondition(key="city", match=MatchValue(value=city))])
 
-        # ==================== 1. 向量检索 (Semantic Search) ====================
-        vector_results = qdrant_client.query_points(
-            collection_name=collection,
-            query=vector,
-            query_filter=filter_cond,
-            limit=rerank_top_k * 2,
-            with_payload=True
-        ).points
-
-        # ==================== 2. 关键词检索 (Full-text / BM25) ====================
-        keyword_results = []
+        # ==================== 混合检索：FusionQuery (RRF) ====================
+        # 使用 RRF (Reciprocal Rank Fusion) 融合向量检索和关键词检索
+        merged_results = []
         try:
-            keyword_results = qdrant_client.query_points(
+            sparse_vec = _compute_query_sparse(query)
+            if sparse_vec["indices"]:
+                results = qdrant_client.query_points(
+                    collection_name=collection,
+                    query=FusionQuery(fusion='rrf'),
+                    prefetch=[
+                        Prefetch(query=query_vector, limit=rerank_top_k * 2),
+                        Prefetch(
+                            query=SparseVector(
+                                indices=sparse_vec["indices"],
+                                values=sparse_vec["values"]
+                            ),
+                            using="text",
+                            limit=rerank_top_k * 2
+                        ),
+                    ],
+                    query_filter=filter_cond,
+                    limit=rerank_top_k * 2,
+                    with_payload=True
+                ).points
+                merged_results = results
+                logger.info(f"混合检索完成 → 召回 {len(merged_results)} 条")
+            else:
+                logger.warning("Query sparse vector 为空，仅使用向量搜索")
+                results = qdrant_client.query_points(
+                    collection_name=collection,
+                    query=query_vector,
+                    query_filter=filter_cond,
+                    limit=rerank_top_k * 2,
+                    with_payload=True
+                ).points
+                merged_results = results
+        except Exception as e:
+            logger.warning(f"关键词搜索失败: {e}，仅使用向量搜索")
+            results = qdrant_client.query_points(
                 collection_name=collection,
-                query=query,                    # 直接使用 query 做全文检索
+                query=query_vector,
                 query_filter=filter_cond,
                 limit=rerank_top_k * 2,
                 with_payload=True
             ).points
-        except Exception as e:
-            logger.warning(f"关键词搜索失败: {e}，仅使用向量搜索")
-
-        # ==================== 3. 结果融合 + 加权打分 ====================
-        combined = {}
-        for hit in vector_results:
-            combined[hit.id] = {
-                "point": hit,
-                "vector_score": float(hit.score),
-                "keyword_score": 0.0
-            }
-
-        for hit in keyword_results:
-            if hit.id in combined:
-                combined[hit.id]["keyword_score"] = float(hit.score)
-            else:
-                combined[hit.id] = {
-                    "point": hit,
-                    "vector_score": 0.0,
-                    "keyword_score": float(hit.score)
-                }
-
-        # 加权最终分数
-        scored_results = []
-        for data in combined.values():
-            final_score = alpha * data["vector_score"] + (1 - alpha) * data["keyword_score"]
-            scored_results.append((final_score, data["point"]))
-
-        scored_results.sort(key=lambda x: x[0], reverse=True)
-        merged_results = [item[1] for item in scored_results]
-
-        logger.info(f"混合检索完成 → 召回 {len(merged_results)} 条")
+            merged_results = results
 
         # ==================== 4. 重排序 (Reranking) ====================
         if rerank and len(merged_results) > 3 and reranker is not None:
@@ -122,17 +125,14 @@ def _search(
             top_candidates = merged_results[:rerank_top_k]
 
             for hit in top_candidates:
-                # 优先使用 content 或 embedding_text 字段
                 text = (hit.payload.get("content") or
                        hit.payload.get("embedding_text") or
                        hit.payload.get("history") or
                        str(hit.payload))
                 rerank_pairs.append((query, text))
 
-            # 执行重排序
             scores = reranker.predict(rerank_pairs)
 
-            # 按重排序分数排序
             reranked = sorted(
                 zip(top_candidates, scores),
                 key=lambda x: x[1],
@@ -148,11 +148,10 @@ def _search(
 
     except Exception as e:
         logger.error(f"_search 执行失败: {e}")
-        # 降级：只返回向量搜索结果
         try:
             vector_results = qdrant_client.query_points(
                 collection_name=collection,
-                query=vector,
+                query=query_vector,
                 query_filter=filter_cond,
                 limit=limit,
                 with_payload=True
@@ -160,6 +159,37 @@ def _search(
             return vector_results
         except:
             return []
+
+
+def _compute_query_sparse(query: str) -> dict:
+    """
+    计算查询文本的 BM25 sparse vector
+    与 init_qdrant_rag.py 中的 tokenize 和 BM25 算法保持一致
+    """
+    import math
+
+    def tokenize(text: str) -> list:
+        tokens = []
+        for i in range(len(text)):
+            tokens.append(text[i])
+        for i in range(len(text) - 1):
+            tokens.append(text[i:i+2])
+        return tokens
+
+    tokens = tokenize(query)
+    # 返回与 Qdrant sparse vector 格式一致的 dict
+    # 注意：这里只返回 indices/values，BM25 score 作为 values
+    # 由于我们没有全局 doc_freqs，这里简化为 term frequency 作为 score
+    tf = {}
+    for t in tokens:
+        tf[t] = tf.get(t, 0) + 1
+
+    # 取 top 64 个 term
+    sorted_terms = sorted(tf.items(), key=lambda x: x[1], reverse=True)[:64]
+    indices = [zlib.crc32(t.encode()) % 100000 for t, _ in sorted_terms]
+    values = [float(s) for _, s in sorted_terms]
+
+    return {"indices": indices, "values": values}
 
 
 

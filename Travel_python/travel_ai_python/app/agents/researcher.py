@@ -12,10 +12,16 @@ async def researcher_node(state):
     **任务**：
     为以下旅行需求收集最新、最实用的研究信息，你可以使用tools里面的工具来完成。
     **可用工具**：
-    - search_classic_routes(destination, days) ：获取经典行程模板
-    - search_attractions(city, keyword) ：获取景点历史、亮点、贴士
-    - search_user_plans(destination, preferences) ：获取真实用户行程
-    - search_weather, search_hotels, search_flights ：补充实用信息
+    - search_classic_routes(destination, days, limit) ：获取经典行程模板
+    - search_attractions(city, keyword, limit) ：获取景点历史、亮点、贴士
+    - search_user_plans(destination, preferences, limit) ：获取真实用户行程
+    - hybrid_search(query, collection_type, city, limit, alpha) ：混合检索（向量+关键词），适合 RAG 查询。collection_type 可选: attractions / classic_routes / user_plans
+    - list_collections() ：列出所有可用的 collection
+    - get_collection_stats(knowledge_type) ：获取 collection 统计信息（向量数量、维度等）
+    - get_knowledge_by_id(knowledge_type, point_id) ：根据 ID 查询单条知识详情
+    - search_weather(city, date) ：查询城市天气
+    - search_hotels(city, checkin, checkout, budget) ：查询酒店推荐
+    - search_flights(departure, destination, date) ：查询航班信息
 
     **旅行需求**：
     - 目的地：{task.destination or '用户指定城市'}
