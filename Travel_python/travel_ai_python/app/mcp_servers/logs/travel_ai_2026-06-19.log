@@ -1,0 +1,373 @@
+2026-06-19 18:22:08.485 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 18:22:08.825 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Format error in JSON body: Expected some form of vector, id, or a type of query at line 1 column 176"},"time":0.0}'，仅使用向量搜索
+2026-06-19 18:22:08.825 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 18:22:08.826 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 18:22:08.915 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Format error in JSON body: Expected some form of vector, id, or a type of query at line 1 column 176"},"time":0.0}'，仅使用向量搜索
+2026-06-19 18:22:08.916 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 18:22:08.916 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 18:22:09.007 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Format error in JSON body: Expected some form of vector, id, or a type of query at line 1 column 176"},"time":0.0}'，仅使用向量搜索
+2026-06-19 18:22:09.008 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 18:22:09.008 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 18:22:09.115 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Format error in JSON body: Expected some form of vector, id, or a type of query at line 1 column 176"},"time":0.0}'，仅使用向量搜索
+2026-06-19 18:22:09.115 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 18:22:09.116 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 18:22:09.204 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Format error in JSON body: Expected some form of vector, id, or a type of query at line 1 column 176"},"time":0.0}'，仅使用向量搜索
+2026-06-19 18:22:09.205 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 18:22:09.206 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 18:22:09.359 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Format error in JSON body: Expected some form of vector, id, or a type of query at line 1 column 176"},"time":0.0}'，仅使用向量搜索
+2026-06-19 18:22:09.360 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 18:22:09.360 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 18:22:09.477 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Format error in JSON body: Expected some form of vector, id, or a type of query at line 1 column 176"},"time":0.0}'，仅使用向量搜索
+2026-06-19 18:22:09.478 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 18:22:09.479 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 18:22:09.572 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Format error in JSON body: Expected some form of vector, id, or a type of query at line 1 column 176"},"time":0.0}'，仅使用向量搜索
+2026-06-19 18:22:09.573 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 18:22:09.573 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 18:22:09.664 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Format error in JSON body: Expected some form of vector, id, or a type of query at line 1 column 176"},"time":0.0}'，仅使用向量搜索
+2026-06-19 18:22:09.665 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 18:22:09.665 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 18:22:09.772 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Format error in JSON body: Expected some form of vector, id, or a type of query at line 1 column 176"},"time":0.0}'，仅使用向量搜索
+2026-06-19 18:22:09.773 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 18:22:09.774 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 上海外滩景点推荐 | City: 上海
+2026-06-19 18:22:09.863 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Format error in JSON body: Expected some form of vector, id, or a type of query at line 1 column 161"},"time":0.0}'，仅使用向量搜索
+2026-06-19 18:22:09.864 | INFO     | N/A | 混合检索完成 → 召回 4 条
+2026-06-19 18:22:09.864 | INFO     | N/A | 开始重排序 Top-4 → Top-5
+2026-06-19 18:22:09.943 | INFO     | N/A | ✅ 重排序完成，最终返回 4 条结果
+2026-06-19 18:22:09.944 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 上海外滩景点推荐 | City: 上海
+2026-06-19 18:22:10.045 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Format error in JSON body: Expected some form of vector, id, or a type of query at line 1 column 161"},"time":0.0}'，仅使用向量搜索
+2026-06-19 18:22:10.046 | INFO     | N/A | 混合检索完成 → 召回 4 条
+2026-06-19 18:22:10.046 | INFO     | N/A | 开始重排序 Top-4 → Top-5
+2026-06-19 18:22:10.086 | INFO     | N/A | ✅ 重排序完成，最终返回 4 条结果
+2026-06-19 18:22:10.086 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 上海外滩景点推荐 | City: 上海
+2026-06-19 18:22:10.182 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Format error in JSON body: Expected some form of vector, id, or a type of query at line 1 column 161"},"time":0.0}'，仅使用向量搜索
+2026-06-19 18:22:10.183 | INFO     | N/A | 混合检索完成 → 召回 4 条
+2026-06-19 18:22:10.183 | INFO     | N/A | 开始重排序 Top-4 → Top-5
+2026-06-19 18:22:10.227 | INFO     | N/A | ✅ 重排序完成，最终返回 4 条结果
+2026-06-19 18:22:10.228 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 西安三日游经典行程 | City: 西安
+2026-06-19 18:22:10.315 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Format error in JSON body: Expected some form of vector, id, or a type of query at line 1 column 164"},"time":0.0}'，仅使用向量搜索
+2026-06-19 18:22:10.316 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-19 18:22:10.316 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 西安三日游经典行程 | City: 西安
+2026-06-19 18:22:10.372 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Format error in JSON body: Expected some form of vector, id, or a type of query at line 1 column 164"},"time":0.0}'，仅使用向量搜索
+2026-06-19 18:22:10.373 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-19 18:22:10.373 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 西安三日游经典行程 | City: 西安
+2026-06-19 18:22:10.428 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Format error in JSON body: Expected some form of vector, id, or a type of query at line 1 column 164"},"time":0.0}'，仅使用向量搜索
+2026-06-19 18:22:10.429 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-19 18:22:10.430 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 成都旅游美食攻略 | City: 成都
+2026-06-19 18:22:10.541 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Format error in JSON body: Expected some form of vector, id, or a type of query at line 1 column 161"},"time":0.0}'，仅使用向量搜索
+2026-06-19 18:22:10.542 | INFO     | N/A | 混合检索完成 → 召回 4 条
+2026-06-19 18:22:10.542 | INFO     | N/A | 开始重排序 Top-4 → Top-5
+2026-06-19 18:22:10.580 | INFO     | N/A | ✅ 重排序完成，最终返回 4 条结果
+2026-06-19 18:22:10.581 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 成都旅游美食攻略 | City: 成都
+2026-06-19 18:22:10.683 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Format error in JSON body: Expected some form of vector, id, or a type of query at line 1 column 161"},"time":0.0}'，仅使用向量搜索
+2026-06-19 18:22:10.684 | INFO     | N/A | 混合检索完成 → 召回 4 条
+2026-06-19 18:22:10.684 | INFO     | N/A | 开始重排序 Top-4 → Top-5
+2026-06-19 18:22:10.730 | INFO     | N/A | ✅ 重排序完成，最终返回 4 条结果
+2026-06-19 18:22:10.730 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 成都旅游美食攻略 | City: 成都
+2026-06-19 18:22:10.833 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Format error in JSON body: Expected some form of vector, id, or a type of query at line 1 column 161"},"time":0.0}'，仅使用向量搜索
+2026-06-19 18:22:10.834 | INFO     | N/A | 混合检索完成 → 召回 4 条
+2026-06-19 18:22:10.835 | INFO     | N/A | 开始重排序 Top-4 → Top-5
+2026-06-19 18:22:10.876 | INFO     | N/A | ✅ 重排序完成，最终返回 4 条结果
+2026-06-19 18:22:10.877 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 18:22:10.971 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Format error in JSON body: Expected some form of vector, id, or a type of query at line 1 column 176"},"time":0.0}'，仅使用向量搜索
+2026-06-19 18:22:10.971 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 18:22:10.972 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 上海外滩景点推荐 | City: 上海
+2026-06-19 18:22:11.061 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Format error in JSON body: Expected some form of vector, id, or a type of query at line 1 column 161"},"time":0.0}'，仅使用向量搜索
+2026-06-19 18:22:11.062 | INFO     | N/A | 混合检索完成 → 召回 4 条
+2026-06-19 18:22:11.062 | INFO     | N/A | 开始重排序 Top-4 → Top-5
+2026-06-19 18:22:11.104 | INFO     | N/A | ✅ 重排序完成，最终返回 4 条结果
+2026-06-19 18:22:11.105 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 西安三日游经典行程 | City: 西安
+2026-06-19 18:22:11.154 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Format error in JSON body: Expected some form of vector, id, or a type of query at line 1 column 164"},"time":0.0}'，仅使用向量搜索
+2026-06-19 18:22:11.155 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-19 18:22:11.156 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 成都旅游美食攻略 | City: 成都
+2026-06-19 18:22:11.272 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Format error in JSON body: Expected some form of vector, id, or a type of query at line 1 column 161"},"time":0.0}'，仅使用向量搜索
+2026-06-19 18:22:11.272 | INFO     | N/A | 混合检索完成 → 召回 4 条
+2026-06-19 18:22:11.273 | INFO     | N/A | 开始重排序 Top-4 → Top-5
+2026-06-19 18:22:11.322 | INFO     | N/A | ✅ 重排序完成，最终返回 4 条结果
+2026-06-19 18:22:11.323 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 18:22:11.410 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Format error in JSON body: Expected some form of vector, id, or a type of query at line 1 column 176"},"time":0.0}'，仅使用向量搜索
+2026-06-19 18:22:11.411 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 18:57:44.986 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 18:57:45.240 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.000461989}'，仅使用向量搜索
+2026-06-19 18:57:45.240 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 18:57:45.242 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 18:57:45.344 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.00021448}'，仅使用向量搜索
+2026-06-19 18:57:45.345 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 18:57:45.346 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 18:57:45.454 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.000354794}'，仅使用向量搜索
+2026-06-19 18:57:45.455 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 18:57:45.456 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 18:57:45.572 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.000388952}'，仅使用向量搜索
+2026-06-19 18:57:45.573 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 18:57:45.574 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 18:57:45.795 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.000474291}'，仅使用向量搜索
+2026-06-19 18:57:45.796 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 18:57:45.798 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 18:57:45.923 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.000313334}'，仅使用向量搜索
+2026-06-19 18:57:45.924 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 18:57:45.926 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 18:57:46.082 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.000356623}'，仅使用向量搜索
+2026-06-19 18:57:46.083 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 18:57:46.085 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 18:57:46.203 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.000383544}'，仅使用向量搜索
+2026-06-19 18:57:46.204 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 18:57:46.205 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 18:57:46.340 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.000447604}'，仅使用向量搜索
+2026-06-19 18:57:46.341 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 18:57:46.342 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 18:57:46.474 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.000265511}'，仅使用向量搜索
+2026-06-19 18:57:46.475 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 18:57:46.476 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 上海外滩景点推荐 | City: 上海
+2026-06-19 18:57:46.582 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.000456735}'，仅使用向量搜索
+2026-06-19 18:57:46.583 | INFO     | N/A | 混合检索完成 → 召回 4 条
+2026-06-19 18:57:46.584 | INFO     | N/A | 开始重排序 Top-4 → Top-5
+2026-06-19 18:57:46.670 | INFO     | N/A | ✅ 重排序完成，最终返回 4 条结果
+2026-06-19 18:57:46.671 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 上海外滩景点推荐 | City: 上海
+2026-06-19 18:57:46.792 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.00056887}'，仅使用向量搜索
+2026-06-19 18:57:46.793 | INFO     | N/A | 混合检索完成 → 召回 4 条
+2026-06-19 18:57:46.793 | INFO     | N/A | 开始重排序 Top-4 → Top-5
+2026-06-19 18:57:46.860 | INFO     | N/A | ✅ 重排序完成，最终返回 4 条结果
+2026-06-19 18:57:46.861 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 上海外滩景点推荐 | City: 上海
+2026-06-19 18:57:46.999 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.00034198}'，仅使用向量搜索
+2026-06-19 18:57:47.000 | INFO     | N/A | 混合检索完成 → 召回 4 条
+2026-06-19 18:57:47.001 | INFO     | N/A | 开始重排序 Top-4 → Top-5
+2026-06-19 18:57:47.074 | INFO     | N/A | ✅ 重排序完成，最终返回 4 条结果
+2026-06-19 18:57:47.076 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 西安三日游经典行程 | City: 西安
+2026-06-19 18:57:47.154 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.000721519}'，仅使用向量搜索
+2026-06-19 18:57:47.155 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-19 18:57:47.156 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 西安三日游经典行程 | City: 西安
+2026-06-19 18:57:47.224 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.000427274}'，仅使用向量搜索
+2026-06-19 18:57:47.225 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-19 18:57:47.226 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 西安三日游经典行程 | City: 西安
+2026-06-19 18:57:47.310 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.00032965}'，仅使用向量搜索
+2026-06-19 18:57:47.311 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-19 18:57:47.313 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 成都旅游美食攻略 | City: 成都
+2026-06-19 18:57:47.431 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.000241517}'，仅使用向量搜索
+2026-06-19 18:57:47.432 | INFO     | N/A | 混合检索完成 → 召回 4 条
+2026-06-19 18:57:47.433 | INFO     | N/A | 开始重排序 Top-4 → Top-5
+2026-06-19 18:57:47.506 | INFO     | N/A | ✅ 重排序完成，最终返回 4 条结果
+2026-06-19 18:57:47.507 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 成都旅游美食攻略 | City: 成都
+2026-06-19 18:57:47.639 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.000373522}'，仅使用向量搜索
+2026-06-19 18:57:47.640 | INFO     | N/A | 混合检索完成 → 召回 4 条
+2026-06-19 18:57:47.641 | INFO     | N/A | 开始重排序 Top-4 → Top-5
+2026-06-19 18:57:47.713 | INFO     | N/A | ✅ 重排序完成，最终返回 4 条结果
+2026-06-19 18:57:47.714 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 成都旅游美食攻略 | City: 成都
+2026-06-19 18:57:47.850 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.000412623}'，仅使用向量搜索
+2026-06-19 18:57:47.851 | INFO     | N/A | 混合检索完成 → 召回 4 条
+2026-06-19 18:57:47.852 | INFO     | N/A | 开始重排序 Top-4 → Top-5
+2026-06-19 18:57:47.917 | INFO     | N/A | ✅ 重排序完成，最终返回 4 条结果
+2026-06-19 18:57:47.918 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 18:57:48.039 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.000336846}'，仅使用向量搜索
+2026-06-19 18:57:48.040 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 18:57:48.042 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 上海外滩景点推荐 | City: 上海
+2026-06-19 18:57:48.148 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.000453848}'，仅使用向量搜索
+2026-06-19 18:57:48.150 | INFO     | N/A | 混合检索完成 → 召回 4 条
+2026-06-19 18:57:48.150 | INFO     | N/A | 开始重排序 Top-4 → Top-5
+2026-06-19 18:57:48.207 | INFO     | N/A | ✅ 重排序完成，最终返回 4 条结果
+2026-06-19 18:57:48.209 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 西安三日游经典行程 | City: 西安
+2026-06-19 18:57:48.272 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.00025949}'，仅使用向量搜索
+2026-06-19 18:57:48.272 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-19 18:57:48.273 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 成都旅游美食攻略 | City: 成都
+2026-06-19 18:57:48.354 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.00019939}'，仅使用向量搜索
+2026-06-19 18:57:48.354 | INFO     | N/A | 混合检索完成 → 召回 4 条
+2026-06-19 18:57:48.355 | INFO     | N/A | 开始重排序 Top-4 → Top-5
+2026-06-19 18:57:48.393 | INFO     | N/A | ✅ 重排序完成，最终返回 4 条结果
+2026-06-19 18:57:48.394 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 18:57:48.473 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.000242874}'，仅使用向量搜索
+2026-06-19 18:57:48.474 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 19:33:01.039 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 19:33:01.137 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 19:33:01.137 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 19:33:01.212 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 19:33:01.213 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 19:33:01.273 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 19:33:01.274 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 19:33:01.343 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 19:33:01.344 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 19:33:01.410 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 19:33:01.411 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 19:33:01.476 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 19:33:01.476 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 19:33:01.546 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 19:33:01.547 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 19:33:01.608 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 19:33:01.608 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 19:33:01.683 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 19:33:01.683 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 19:33:01.744 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 19:33:01.744 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 上海外滩景点推荐 | City: 上海
+2026-06-19 19:33:01.804 | INFO     | N/A | 混合检索完成 → 召回 4 条
+2026-06-19 19:33:01.804 | INFO     | N/A | 开始重排序 Top-4 → Top-5
+2026-06-19 19:33:01.840 | INFO     | N/A | ✅ 重排序完成，最终返回 4 条结果
+2026-06-19 19:33:01.840 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 上海外滩景点推荐 | City: 上海
+2026-06-19 19:33:01.925 | INFO     | N/A | 混合检索完成 → 召回 4 条
+2026-06-19 19:33:01.926 | INFO     | N/A | 开始重排序 Top-4 → Top-5
+2026-06-19 19:33:01.948 | INFO     | N/A | ✅ 重排序完成，最终返回 4 条结果
+2026-06-19 19:33:01.949 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 上海外滩景点推荐 | City: 上海
+2026-06-19 19:33:02.015 | INFO     | N/A | 混合检索完成 → 召回 4 条
+2026-06-19 19:33:02.016 | INFO     | N/A | 开始重排序 Top-4 → Top-5
+2026-06-19 19:33:02.039 | INFO     | N/A | ✅ 重排序完成，最终返回 4 条结果
+2026-06-19 19:33:02.039 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 西安三日游经典行程 | City: 西安
+2026-06-19 19:33:02.065 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-19 19:33:02.066 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 西安三日游经典行程 | City: 西安
+2026-06-19 19:33:02.097 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-19 19:33:02.097 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 西安三日游经典行程 | City: 西安
+2026-06-19 19:33:02.115 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-19 19:33:02.116 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 成都旅游美食攻略 | City: 成都
+2026-06-19 19:33:02.182 | INFO     | N/A | 混合检索完成 → 召回 4 条
+2026-06-19 19:33:02.183 | INFO     | N/A | 开始重排序 Top-4 → Top-5
+2026-06-19 19:33:02.210 | INFO     | N/A | ✅ 重排序完成，最终返回 4 条结果
+2026-06-19 19:33:02.211 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 成都旅游美食攻略 | City: 成都
+2026-06-19 19:33:02.290 | INFO     | N/A | 混合检索完成 → 召回 4 条
+2026-06-19 19:33:02.290 | INFO     | N/A | 开始重排序 Top-4 → Top-5
+2026-06-19 19:33:02.314 | INFO     | N/A | ✅ 重排序完成，最终返回 4 条结果
+2026-06-19 19:33:02.314 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 成都旅游美食攻略 | City: 成都
+2026-06-19 19:33:02.381 | INFO     | N/A | 混合检索完成 → 召回 4 条
+2026-06-19 19:33:02.382 | INFO     | N/A | 开始重排序 Top-4 → Top-5
+2026-06-19 19:33:02.406 | INFO     | N/A | ✅ 重排序完成，最终返回 4 条结果
+2026-06-19 19:33:02.407 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 19:33:02.472 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 19:33:02.473 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 上海外滩景点推荐 | City: 上海
+2026-06-19 19:33:02.549 | INFO     | N/A | 混合检索完成 → 召回 4 条
+2026-06-19 19:33:02.550 | INFO     | N/A | 开始重排序 Top-4 → Top-5
+2026-06-19 19:33:02.573 | INFO     | N/A | ✅ 重排序完成，最终返回 4 条结果
+2026-06-19 19:33:02.573 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 西安三日游经典行程 | City: 西安
+2026-06-19 19:33:02.597 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-19 19:33:02.598 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 成都旅游美食攻略 | City: 成都
+2026-06-19 19:33:02.676 | INFO     | N/A | 混合检索完成 → 召回 4 条
+2026-06-19 19:33:02.676 | INFO     | N/A | 开始重排序 Top-4 → Top-5
+2026-06-19 19:33:02.704 | INFO     | N/A | ✅ 重排序完成，最终返回 4 条结果
+2026-06-19 19:33:02.704 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京故宫历史背景和亮点特色 | City: 北京
+2026-06-19 19:33:02.788 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 20:17:17.875 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 北京 2日游 经典行程 | City: 北京
+2026-06-19 20:17:18.102 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.000176791}'，仅使用向量搜索
+2026-06-19 20:17:18.103 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-19 20:17:18.111 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京  景点 历史文化 特色 | City: 北京
+2026-06-19 20:17:18.199 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.000174078}'，仅使用向量搜索
+2026-06-19 20:17:18.199 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 20:17:18.202 | INFO     | N/A | 🔍 执行混合检索 | Collection: user_plans | Query: 北京 适中 游记 行程 | City: 北京
+2026-06-19 20:17:18.234 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.000139078}'，仅使用向量搜索
+2026-06-19 20:17:18.235 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-19 20:21:38.580 | INFO     | N/A | 进入天气查询工具
+2026-06-19 20:21:57.514 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 北京 2日游 经典行程 | City: 北京
+2026-06-19 20:21:57.544 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.000126913}'，仅使用向量搜索
+2026-06-19 20:21:57.544 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-19 21:10:06.850 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 北京 2日游 经典行程 | City: 北京
+2026-06-19 21:10:06.934 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.00016164}'，仅使用向量搜索
+2026-06-19 21:10:06.934 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-19 21:10:21.776 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京  景点 历史文化 特色 | City: 北京
+2026-06-19 21:10:21.949 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.00054404}'，仅使用向量搜索
+2026-06-19 21:10:21.950 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-19 21:13:32.579 | INFO     | N/A | 进入天气查询工具
+2026-06-19 21:13:56.233 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 北京 3日游 经典行程 | City: 北京
+2026-06-19 21:13:56.336 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Bad request: A query is needed to merge the prefetches. Can\'t have prefetches without defining a query."},"time":0.000107485}'，仅使用向量搜索
+2026-06-19 21:13:56.336 | INFO     | N/A | 混合检索完成 → 召回 0 条

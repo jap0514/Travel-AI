@@ -1,3 +1,12 @@
+import sys
+import os
+# 确保项目根目录在 sys.path 中，使 app 模块可导入
+_current = os.path.dirname(os.path.abspath(__file__))
+_root = os.path.dirname(os.path.dirname(_current))  # travel_ai_python/
+if _root not in sys.path:
+    sys.path.insert(0, _root)
+
+
 from fastmcp import FastMCP
 import requests
 from typing import Optional

@@ -1,0 +1,50 @@
+2026-06-22 20:59:59.045 | INFO     | N/A | 进入天气查询工具
+2026-06-22 21:00:20.857 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 北京 2日游 经典行程 | City: 北京
+2026-06-22 21:00:21.330 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-22 21:16:03.940 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 北京 2日游 经典行程 | City: 北京
+2026-06-22 21:16:03.968 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-22 21:16:22.323 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京  景点 历史文化 特色 | City: 北京
+2026-06-22 21:16:22.408 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-22 21:17:55.850 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京 美食 景点 历史文化 特色 | City: 北京
+2026-06-22 21:17:55.943 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-22 21:18:23.405 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京 美食 景点 历史文化 特色 | City: 北京
+2026-06-22 21:18:23.486 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-22 21:18:50.143 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京 美食 景点 历史文化 特色 | City: 北京
+2026-06-22 21:18:50.208 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-22 21:19:18.445 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京 美食 景点 历史文化 特色 | City: 北京
+2026-06-22 21:19:18.520 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-22 21:19:45.953 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京 美食 景点 历史文化 特色 | City: 北京
+2026-06-22 21:19:46.059 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-22 21:20:14.162 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京 美食 景点 历史文化 特色 | City: 北京
+2026-06-22 21:20:14.240 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-22 21:20:43.152 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京 美食 景点 历史文化 特色 | City: 北京
+2026-06-22 21:20:43.231 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-22 21:21:12.765 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京 美食 景点 历史文化 特色 | City: 北京
+2026-06-22 21:21:12.826 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-22 21:26:58.261 | INFO     | N/A | 进入天气查询工具
+2026-06-22 22:37:07.808 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 北京 2日游 经典行程 | City: 北京
+2026-06-22 22:37:07.903 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-22 22:37:24.820 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京  景点 历史文化 特色 | City: 北京
+2026-06-22 22:37:24.910 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-22 22:39:09.583 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京美食 | City: 北京
+2026-06-22 22:39:09.670 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-22 22:39:48.367 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京 美食 景点 历史文化 特色 | City: 北京
+2026-06-22 22:39:48.442 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-22 22:40:24.749 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京 美食 景点 历史文化 特色 | City: 北京
+2026-06-22 22:40:24.835 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-22 22:41:04.685 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京美食 | City: 北京
+2026-06-22 22:41:04.749 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-22 22:41:50.601 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京 美食 景点 历史文化 特色 | City: 北京
+2026-06-22 22:41:50.676 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-22 22:42:36.635 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京美食 | City: 北京
+2026-06-22 22:42:36.727 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-22 22:43:26.614 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京 美食 景点 历史文化 特色 | City: 北京
+2026-06-22 22:43:26.679 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-22 22:48:31.482 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京 美食 景点 历史文化 特色 | City: 北京
+2026-06-22 22:48:31.544 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-22 22:56:23.129 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 北京 2日游 经典行程 | City: 北京
+2026-06-22 22:56:23.155 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-22 22:56:46.995 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京  景点 历史文化 特色 | City: 北京
+2026-06-22 22:56:47.086 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-22 22:57:22.427 | INFO     | N/A | 🔍 执行混合检索 | Collection: user_plans | Query: 北京 适中节奏, 中等预算 游记 行程 | City: 北京
+2026-06-22 22:57:22.465 | INFO     | N/A | 混合检索完成 → 召回 0 条

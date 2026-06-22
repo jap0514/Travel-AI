@@ -51,15 +51,16 @@ class Settings:   # 将配置封装成一个类，便于统一管理和引用。
             "config": {
                 "path": "./mem0_qdrant_db",
                 "collection_name": "travel_memories",
-                "on_disk": True
+                "on_disk": True,
+                "embedding_model_dims": 768
             }
         },
         "embedder": {
-            "provider": "openai",
+            "provider": "ollama",
             "config": {
-                "model": "text-embedding-v2",
+                "model": "nomic-embed-text",
                 "api_key": os.getenv("LOCAL_AI_MODEL_API_KEY"),
-                "openai_base_url": os.getenv("LOCAL_AI_MODEL_API_URL")  # ← 关键字段！
+                "ollama_base_url": os.getenv("LOCAL_AI_MODEL_API_URL", "").rstrip("/v1").rstrip("/")
             }
         },
         "llm": {

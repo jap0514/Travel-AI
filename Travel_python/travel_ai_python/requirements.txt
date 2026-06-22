@@ -16,3 +16,4 @@ mem0ai
 redis
 python-dotenv
 fastmcp
+sentence_transformers==5.5.1

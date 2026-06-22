@@ -106,3 +106,15 @@ LangGraph 的 Supervisor 模式下，**路由节点必须返回字典**，而不
 
 
 
+5、
+
+问题1：关键词搜索（BM25）完全失效
+关键词搜索失败: Unexpected Response: 400 (Bad Request) "Expected some form of vector, id, or a type of query"
+  qdrant_client.query_points 不支持直接传入字符串做全文检索，需要用不同的 API 方式。
+
+
+
+Qdrant 的混合检索需要两个条件：
+  1. Collection 配置了 sparse_vectors
+  2. 数据同时导入了 sparse_vector（BM25 向量）
+

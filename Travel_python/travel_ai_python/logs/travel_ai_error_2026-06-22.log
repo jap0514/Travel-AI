@@ -1,0 +1,3 @@
+2026-06-22 21:07:33.124 | ERROR    | N/A | ❌ Mem0 添加记忆失败: shapes (0,1536) and (768,) not aligned: 1536 (dim 1) != 768 (dim 0)
+2026-06-22 21:35:01.105 | ERROR    | N/A | ❌ Mem0 添加记忆失败: shapes (0,1536) and (768,) not aligned: 1536 (dim 1) != 768 (dim 0)
+2026-06-22 21:42:50.123 | ERROR    | N/A | ❌ Mem0 添加记忆失败: shapes (0,1536) and (768,) not aligned: 1536 (dim 1) != 768 (dim 0)

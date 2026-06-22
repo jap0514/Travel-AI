@@ -1,0 +1,7 @@
+2026-06-19 20:31:02.966 | ERROR    | N/A | ❌ Mem0 添加记忆失败: Error code: 404 - {'error': {'message': 'model "text-embedding-v2" not found, try pulling it first', 'type': 'not_found_error', 'param': None, 'code': None}}
+2026-06-19 20:52:56.598 | ERROR    | N/A | ❌ Mem0 初始化失败: 404 page not found (status code: 404)
+2026-06-19 20:52:56.600 | ERROR    | N/A | Mem0 默认初始化失败: 'Settings' object has no attribute 'AI_MODEL_API_KEY'
+2026-06-19 20:55:47.222 | ERROR    | N/A | ❌ Mem0 初始化失败: 404 page not found (status code: 404)
+2026-06-19 20:55:47.224 | ERROR    | N/A | Mem0 默认初始化失败: 'Settings' object has no attribute 'AI_MODEL_API_KEY'
+2026-06-19 20:59:23.807 | ERROR    | N/A | ❌ Mem0 初始化失败: 404 page not found (status code: 404)
+2026-06-19 21:48:56.536 | ERROR    | N/A | ❌ Mem0 添加记忆失败: shapes (2,1536) and (768,) not aligned: 1536 (dim 1) != 768 (dim 0)
