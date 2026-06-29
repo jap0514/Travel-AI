@@ -1,0 +1,46 @@
+2026-06-24 21:43:23.029 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 北极 5日游 经典行程 | City: 北极
+2026-06-24 21:43:23.270 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-24 21:43:27.719 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 冰岛 5日游 经典行程 | City: 冰岛
+2026-06-24 21:43:27.779 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-24 21:43:27.787 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 特罗姆瑟 5日游 经典行程 | City: 特罗姆瑟
+2026-06-24 21:43:27.821 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-24 21:43:27.825 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 芬兰拉普兰 5日游 经典行程 | City: 芬兰拉普兰
+2026-06-24 21:43:27.854 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-24 21:43:27.858 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 挪威 5日游 经典行程 | City: 挪威
+2026-06-24 21:43:27.881 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-24 21:43:32.011 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北极 特罗姆瑟 极光 景点 | City: None
+2026-06-24 21:43:32.033 | INFO     | N/A | 混合检索完成 → 召回 24 条
+2026-06-24 21:43:32.033 | INFO     | N/A | 开始重排序 Top-12 → Top-5
+2026-06-24 21:43:32.400 | INFO     | N/A | ✅ 重排序完成，最终返回 5 条结果
+2026-06-24 21:43:32.406 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 北极旅游 极光 雪橇 狗拉雪橇 | City: None
+2026-06-24 21:43:32.435 | INFO     | N/A | 混合检索完成 → 召回 8 条
+2026-06-24 21:43:32.436 | INFO     | N/A | 开始重排序 Top-8 → Top-5
+2026-06-24 21:43:32.474 | INFO     | N/A | ✅ 重排序完成，最终返回 5 条结果
+2026-06-24 21:43:32.478 | INFO     | N/A | 🔍 执行混合检索 | Collection: user_plans | Query: 北极 极光 5天行程 旅行计划 | City: None
+2026-06-24 21:43:32.503 | INFO     | N/A | 混合检索完成 → 召回 5 条
+2026-06-24 21:43:32.503 | INFO     | N/A | 开始重排序 Top-5 → Top-5
+2026-06-24 21:43:32.531 | INFO     | N/A | ✅ 重排序完成，最终返回 5 条结果
+2026-06-24 21:43:36.852 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: Arctic 极地 冰雪 探险 | City: None
+2026-06-24 21:43:36.880 | INFO     | N/A | 混合检索完成 → 召回 24 条
+2026-06-24 21:43:36.880 | INFO     | N/A | 开始重排序 Top-12 → Top-3
+2026-06-24 21:43:36.934 | INFO     | N/A | ✅ 重排序完成，最终返回 3 条结果
+2026-06-24 21:43:36.955 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 斯瓦尔巴 朗伊尔城 北极熊 | City: None
+2026-06-24 21:43:36.979 | WARNING  | N/A | 关键词搜索失败: Unexpected Response: 422 (Unprocessable Entity)
+Raw response content:
+b'{"status":{"error":"Validation error in JSON body: [internal.prefetch[1].query.indices: Validation error: must be unique [{}]]"},"time":0.0}'，仅使用向量搜索
+2026-06-24 21:43:36.989 | INFO     | N/A | 开始重排序 Top-12 → Top-3
+2026-06-24 21:43:37.044 | INFO     | N/A | ✅ 重排序完成，最终返回 3 条结果
+2026-06-24 21:43:47.025 | INFO     | N/A | 进入天气查询工具
+2026-06-24 21:43:47.026 | INFO     | N/A | 进入天气查询工具
+2026-06-24 21:43:47.027 | INFO     | N/A | 进入天气查询工具
+2026-06-24 21:50:34.421 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 北京 2日游 经典行程 | City: 北京
+2026-06-24 21:50:34.443 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-24 21:54:11.992 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京  景点 历史文化 特色 | City: 北京
+2026-06-24 21:54:12.000 | INFO     | N/A | 进入天气查询工具
+2026-06-24 21:54:12.096 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-24 23:08:45.486 | INFO     | N/A | 🔍 执行混合检索 | Collection: classic_routes | Query: 北京 2日游 经典行程 | City: 北京
+2026-06-24 23:08:45.543 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-24 23:09:06.055 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 文化游 北京 | City: 北京
+2026-06-24 23:09:06.162 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-24 23:17:21.779 | INFO     | N/A | 进入天气查询工具
+2026-06-24 23:22:12.207 | INFO     | N/A | 进入天气查询工具

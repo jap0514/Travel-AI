@@ -1,3 +1,6 @@
+import asyncio
+import functools
+
 from app.config.settings import settings
 from app.config.logger import logger
 from mem0 import Memory
@@ -39,10 +42,30 @@ def get_user_memories(user_id: int, query: str = None, top_k: int = 5):
 
 
 def add_to_memory(messages: list, user_id: int):
-    """将对话存入长期记忆"""
+    """将对话存入长期记忆（同步版本）"""
     try:
         if messages and len(messages) > 0:
             memory.add(messages, user_id=str(user_id))
             logger.info(f"✅ Mem0 记忆更新成功 - user_id: {user_id}")
     except Exception as e:
         logger.error(f"❌ Mem0 添加记忆失败: {e}")
+
+
+def add_memory_background(messages: list, user_id: int):
+    """『即发即忘』— 在后台存入记忆，不等待完成"""
+    if messages and len(messages) > 0:
+        loop = asyncio.get_event_loop()
+        loop.run_in_executor(
+            None,
+            functools.partial(_do_add_memory, messages, user_id)
+        )
+
+
+def _do_add_memory(messages: list, user_id: int):
+    """后台线程执行的记忆存储（带超时保护）"""
+    try:
+        # Mem0 内部含 LLM 调用 + embedding，可能很慢
+        memory.add(messages, user_id=str(user_id))
+        logger.info(f"✅ Mem0 记忆更新成功(后台) - user_id: {user_id}")
+    except Exception as e:
+        logger.error(f"❌ Mem0 添加记忆失败(后台): {e}")

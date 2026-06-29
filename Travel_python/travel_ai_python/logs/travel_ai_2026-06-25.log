@@ -1,0 +1,369 @@
+2026-06-25 19:23:54.933 | WARNING  | N/A | Plan 结构化解析失败: Error code: 502
+2026-06-25 19:23:59.947 | ERROR    | N/A | 多智能体处理失败: Timeout connecting to server
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\connection.py", line 1351, in can_read
+    return self._parser.can_read(timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\base.py", line 160, in can_read
+    return self._buffer.can_read(timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 97, in can_read
+    return bool(self.unread_bytes()) or self._read_from_socket(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 64, in _read_from_socket
+    data = sock.recv(socket_read_size)
+
+ConnectionResetError: [WinError 10054] 远程主机强迫关闭了一个现有的连接。
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\connection.py", line 3146, in get_connection
+    connection.can_read()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\connection.py", line 1355, in can_read
+    raise ConnectionError(f"Error while reading from {host_error}: {e.args}")
+
+redis.exceptions.ConnectionError: Error while reading from 192.168.71.140:6379: (10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None)
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\connection.py", line 1033, in connect_check_health
+    sock = self._connect()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\connection.py", line 1581, in _connect
+    raise err
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\connection.py", line 1565, in _connect
+    sock.connect(socket_address)
+
+TimeoutError: timed out
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 32, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 28, in main1
+    task, final_plan, parsed_plan =asyncio.run(process_with_agent(message, "10001"))
+
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 136, in process_with_agent
+    save_session_context(chat_message.session_id, session_messages)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\utils\redis_client.py", line 18, in save_session_context
+    redis_client.set(key, json.dumps(messages), ex=settings.REDIS_SESSION_TTL)
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\utils.py", line 523, in wrapper
+    return func(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\commands\core.py", line 4315, in set
+    return self.execute_command("SET", *pieces, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 787, in execute_command
+    return self._execute_command(*args, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 793, in _execute_command
+    conn = self.connection or pool.get_connection()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\utils.py", line 258, in wrapper
+    return func(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\connection.py", line 3153, in get_connection
+    connection.connect()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\connection.py", line 1006, in connect
+    self.retry.call_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 132, in call_with_retry
+    raise error
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 120, in call_with_retry
+    return do()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\connection.py", line 1007, in <lambda>
+    lambda: self.connect_check_health(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\connection.py", line 1044, in connect_check_health
+    raise e
+
+redis.exceptions.TimeoutError: Timeout connecting to server
+2026-06-25 20:18:09.610 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-25 20:18:10.203 | INFO     | N/A | 🌐 Travel AI Web 服务启动中...
+2026-06-25 20:18:10.203 | INFO     | N/A | 📄 前端页面: http://localhost:8000
+2026-06-25 20:18:10.203 | INFO     | N/A | 🔌 API 文档: http://localhost:8000/docs
+2026-06-25 20:18:10.203 | INFO     | N/A | 💡 确保 MCP 服务已启动以获得完整功能！
+2026-06-25 20:23:23.776 | INFO     | N/A | 👋 Travel AI Web 服务已关闭
+2026-06-25 20:23:32.329 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-25 20:23:32.772 | INFO     | N/A | 🌐 Travel AI Web 服务启动中...
+2026-06-25 20:23:32.772 | INFO     | N/A | 📄 前端页面: http://localhost:8000
+2026-06-25 20:23:32.772 | INFO     | N/A | 🔌 API 文档: http://localhost:8000/docs
+2026-06-25 20:23:32.773 | INFO     | N/A | 💡 确保 MCP 服务已启动以获得完整功能！
+2026-06-25 20:26:05.359 | INFO     | N/A | 👋 Travel AI Web 服务已关闭
+2026-06-25 20:26:14.058 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-25 20:26:14.493 | INFO     | N/A | 🌐 Travel AI Web 服务启动中...
+2026-06-25 20:26:14.493 | INFO     | N/A | 📄 前端页面: http://localhost:8000
+2026-06-25 20:26:14.493 | INFO     | N/A | 🔌 API 文档: http://localhost:8000/docs
+2026-06-25 20:26:14.493 | INFO     | N/A | 💡 确保 MCP 服务已启动以获得完整功能！
+2026-06-25 20:26:32.967 | INFO     | 56dc7716-0800-4b96-bda4-2729a98f32e2 | 🌐 Web API 收到消息: 今天天气如何...
+2026-06-25 20:26:32.968 | INFO     | 56dc7716-0800-4b96-bda4-2729a98f32e2 | 进入process_with_agent
+2026-06-25 20:26:50.580 | INFO     | N/A | 路线：qa（原始：qa）
+2026-06-25 20:26:50.584 | INFO     | N/A | General QA 处理用户问题: 今天天气如何
+2026-06-25 20:26:58.080 | INFO     | N/A | 原始查询: 今天天气如何 → 改写后: 请问今日在北京的天气情况如何？
+2026-06-25 20:26:59.157 | INFO     | N/A | ✅ 已加载 15 个 MCP 工具
+2026-06-25 20:27:47.772 | INFO     | N/A | 调用工具：search_weather, 参数：{'city': '北京'}
+2026-06-25 20:28:29.512 | INFO     | N/A | General QA 回答已生成，长度 93
+2026-06-25 20:34:37.858 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-25 20:34:39.069 | INFO     | N/A | 🌐 Travel AI Web 服务启动中...
+2026-06-25 20:34:39.069 | INFO     | N/A | 📄 前端页面: http://localhost:8000
+2026-06-25 20:34:39.069 | INFO     | N/A | 🔌 API 文档: http://localhost:8000/docs
+2026-06-25 20:34:39.069 | INFO     | N/A | 💡 确保 MCP 服务已启动以获得完整功能！
+2026-06-25 20:34:53.907 | INFO     | bf4b6ef4-2bcc-4593-8fc0-400178b7699c | 🌐 Web API 收到消息: 广州今天天气如何...
+2026-06-25 20:34:53.907 | INFO     | bf4b6ef4-2bcc-4593-8fc0-400178b7699c | 进入process_with_agent
+2026-06-25 20:35:04.721 | INFO     | N/A | 路线：qa（原始：qa）
+2026-06-25 20:35:04.725 | INFO     | N/A | General QA 处理用户问题: 广州今天天气如何
+2026-06-25 20:35:12.802 | INFO     | N/A | 原始查询: 广州今天天气如何 → 改写后: 在广州地区，今日的天气状况如何？
+2026-06-25 20:35:13.752 | INFO     | N/A | ✅ 已加载 15 个 MCP 工具
+2026-06-25 20:36:02.751 | INFO     | N/A | 调用工具：search_weather, 参数：{'city': '广州'}
+2026-06-25 20:36:44.942 | INFO     | N/A | General QA 回答已生成，长度 103
+2026-06-25 20:48:28.463 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-25 20:48:29.520 | INFO     | N/A | 🌐 Travel AI Web 服务启动中...
+2026-06-25 20:48:29.520 | INFO     | N/A | 📄 前端页面: http://localhost:8000
+2026-06-25 20:48:29.520 | INFO     | N/A | 🔌 API 文档: http://localhost:8000/docs
+2026-06-25 20:48:29.520 | INFO     | N/A | 💡 确保 MCP 服务已启动以获得完整功能！
+2026-06-25 20:48:44.566 | INFO     | a51c36c2-92c3-4a56-947e-ab2ca3db30f8 | 🌐 Web API 收到消息: 广州今天天气如何...
+2026-06-25 20:48:44.566 | INFO     | a51c36c2-92c3-4a56-947e-ab2ca3db30f8 | 进入process_with_agent
+2026-06-25 20:49:02.316 | INFO     | N/A | 路线：qa（原始：qa）
+2026-06-25 20:49:02.318 | INFO     | N/A | General QA 处理用户问题: 广州今天天气如何
+2026-06-25 20:49:09.969 | INFO     | N/A | 原始查询: 广州今天天气如何 → 改写后: 在广州地区，今日的气象状况如何？
+2026-06-25 20:49:10.877 | INFO     | N/A | ✅ 已加载 15 个 MCP 工具
+2026-06-25 20:50:00.260 | INFO     | N/A | 调用工具：search_weather, 参数：{'city': '广州'}
+2026-06-25 20:50:40.773 | INFO     | N/A | General QA 回答已生成，长度 85
+2026-06-25 20:50:40.777 | INFO     | a51c36c2-92c3-4a56-947e-ab2ca3db30f8 | ✅ 问答处理完成
+2026-06-25 20:50:40.777 | INFO     | a51c36c2-92c3-4a56-947e-ab2ca3db30f8 | 回答：广州今天的天气情况如下：
+• 天气：大雨
+• 温度：25℃
+
+建议您注意携带雨具，出行时请留意交通安全。如果您计划前往北京看长城，请告诉我，我可以为您规划一个两天的行程。
+2026-06-25 20:50:40.777 | INFO     | a51c36c2-92c3-4a56-947e-ab2ca3db30f8 | ✅ Web API 响应完成 | type=qa | content_len=85
+2026-06-25 20:57:14.089 | INFO     | N/A | ✅ Mem0 记忆更新成功(后台) - user_id: 1
+2026-06-25 21:38:02.558 | INFO     | N/A | 👋 Travel AI Web 服务已关闭
+2026-06-25 21:38:15.699 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-25 21:38:16.896 | INFO     | N/A | 🌐 Travel AI Web 服务启动中...
+2026-06-25 21:38:16.896 | INFO     | N/A | 📄 前端页面: http://localhost:8000
+2026-06-25 21:38:16.896 | INFO     | N/A | 🔌 API 文档: http://localhost:8000/docs
+2026-06-25 21:38:16.896 | INFO     | N/A | 💡 确保 MCP 服务已启动以获得完整功能！
+2026-06-25 21:39:13.658 | INFO     | 6da5947e-8173-437a-9a74-1fc97cea7dee | 🌐 Web API 收到消息: 帮我规划广州2日游，我想去看广州塔...
+2026-06-25 21:39:13.658 | INFO     | 6da5947e-8173-437a-9a74-1fc97cea7dee | 进入process_with_agent
+2026-06-25 21:39:32.194 | INFO     | N/A | 路线：plan（原始：plan）
+2026-06-25 21:39:32.197 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-25 21:39:32.197 | INFO     | N/A | 下一步 → task_analyzer
+2026-06-25 21:39:32.199 | INFO     | N/A | 实际调用的大模型=qwen2.5
+2026-06-25 21:39:32.228 | INFO     | N/A | Mem0 长期记忆：广州今天的天气情况如下：　　• 天气：大雨
+　　• 温度：25℃
+Assistant proposed a 2-day Beijing itinerary
+Assistant recommended Great Wall sections for the user's Beijing 2-day trip: 慕田峪 (scenic, fewer crowds, recommended for first-timers), 八达岭 (most famous, easy transport), 金山岭 (pristine, best for hiking/photography), 司马台 (steep, for adventurers)
+Assistant proposed a 2-day Beijing itinerary: Day 1 — Great Wall day trip (suggested cable car up, hike down, ~1.5-2hr each way by tour bus/carpool); Day 2 — Tiananmen Square → Forbidden City (requires advance booking), then Jingshan Park or Temple of Heaven, evening at Wangfujing/Nanluoguxiang
+用户想去北京玩两天，想看长城
+2026-06-25 21:39:32.230 | INFO     | N/A | 用户 Profile：{"preferred_destinations": ["北京"], "preferred_budgets": ["未指定"], "preferred_paces": ["适中"], "travel_style": ["文化游"], "last_updated": "2026-06-24T22:13:05.946852"}
+2026-06-25 21:40:05.103 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-25 21:40:05.103 | INFO     | N/A | 下一步 → researcher
+2026-06-25 21:40:06.074 | INFO     | N/A | ✅ 已加载 15 个 MCP 工具
+2026-06-25 21:48:57.043 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'research_results', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-25 21:48:57.044 | INFO     | N/A | 下一步 → planner
+2026-06-25 21:55:22.167 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'research_results', 'draft_plan', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-25 21:55:22.167 | INFO     | N/A | 下一步 → final_optimizer（单次高质量生成）
+2026-06-25 22:00:15.611 | INFO     | N/A | 已完成完成最后的规划=# 北京文化游行程安排（2天）
+
+## 第一天：上午 - 故宫
+
+- **时间**：8:30 – 17:00
+- **门票价格**：60元（淡季）/120元（旺季）
+- **特色体验**：
+  - 参观太和殿、中和殿、保和殿等主要建筑。
+  - 欣赏精美的文物和艺术品。
+
+## 第一天：下午 - 天坛公园
+
+- **时间**：全天开放，建议避开中午人流高峰。
+- **门票价格**：免费（需购买5元保险费进入祈年殿）
+- **特色体验**：
+  - 观察祈年殿、皇穹宇等重要建筑。
+  - 欣赏古树名木。
+
+## 第二天：上午 - 颐和园
+
+- **时间**：6:30 – 18:00
+- **门票价格**：40元
+- **特色体验**：
+  - 游览昆明湖、万寿山等景点。
+  - 欣赏十七孔桥、佛香阁等标志性建筑。
+
+## 第二天：下午 - 798艺术区
+
+- **时间**：全天开放，建议提前规划行程。
+- **门票价格**：免费（需购买5元保险费进入祈年殿）
+- **特色体验**：
+  - 探索现代艺术画廊和创意工作室。
+  - 尝试当地特色小吃。
+
+## 实用信息
+
+### 天气与穿着建议
+北京当前多云，温度26℃。请携带轻薄外套以备早晚温差。
+
+### 交通方式推荐
+- 地铁、公交便捷；飞机或高铁出行方便。
+
+### 住宿推荐
+- 经济型酒店/民宿约每晚200元；
+- 中高端酒店约1500元以上。
+
+### 餐饮建议
+- 尝试豆汁儿+焦圈、炸酱面和烤鸭等传统美食。
+- 推荐餐厅：全聚德（烤鸭）、鼓楼小吃街。
+
+### 安全注意事项与文化禁忌
+
+1. **尊重当地习俗**：在参观寺庙或皇宫时，请遵守相关规定，如不触摸文物、保持安静等。
+2. **注意个人财物安全**：尤其是在人多的地方要特别小心保管好随身物品。
+3. **遵守景区规定**：确保自己和家人了解并遵守各景点的游览规则。
+
+### 预算分配建议（住宿、餐饮、交通、门票）
+
+- **住宿**：
+  - 经济型酒店/民宿约每晚200元；
+  - 中高端酒店约1500元以上。
+  
+- **餐饮**：每人每天约50元。
+  
+- **交通**：飞机或高铁往返费用根据选择的航班/车次而定，建议提前预订。
+
+- **门票**：
+  - 故宫、天坛公园等景点门票共计230元左右。
+
+## 行程安排总结
+
+### 第一天
+- 上午：参观故宫（8:30 – 17:00）
+- 下午：游览天坛公园（全天）
+
+### 第二天
+- 上午：游览颐和园（6:30 – 18:00）
+- 下午：探访798艺术区
+
+## 实用Tips
+
+- **用餐建议**：
+  - 尝试豆汁儿+焦圈、炸酱面和烤鸭等传统美食。
+  - 推荐餐厅：全聚德（烤鸭）、鼓楼小吃街。
+
+- **避坑提醒**：
+  - 避开人流高峰时段，如故宫的10:30 – 12:00。
+  - 注意个人财物安全，尤其是在人多的地方要特别小心保管好随身物品。
+
+## 行程亮点与均衡搭配
+
+### 第一天
+- **上午**：故宫——感受皇家历史文化的厚重底蕴。
+- **下午**：天坛公园——体验古代祭天文化及自然美景。
+
+### 第二天
+- **上午**：颐和园——欣赏古典园林之美，领略皇家园林的精致。
+- **下午**：798艺术区——探索现代艺术与创意设计的魅力。
+
+## 预算建议
+
+- **住宿**：
+  - 经济型酒店/民宿约每晚200元；
+  - 中高端酒店约1500元以上。
+
+- **餐饮**：每人每天约50元，总计两天约300元左右。
+  
+- **交通**：往返北京的机票或高铁票根据选择而定，建议提前预订，预计人均400-600元。
+  
+- **门票**：
+  - 故宫、天坛公园等景点门票共计230元左右。
+
+### 总预算
+- 住宿（两天）：约1000-3000元；
+- 餐饮（两天）：约300元；
+- 交通（往返+当地）：约400-600元；
+- 门票（主要景点）：230元。
+
+### 总计
+- 约1760-3590元
+
+希望这份报告对您有所帮助！如有其他问题，请随时联系我们。祝旅途愉快！
+
+---
+
+**最终版行程安排总结**
+
+### 第一天
+- 上午：参观故宫（8:30 – 17:00）
+- 下午：游览天坛公园（全天）
+
+### 第二天
+- 上午：游览颐和园（6:30 – 18:00）
+- 下午：探访798艺术区
+
+## 实用Tips
+
+- **用餐建议**：
+  - 尝试豆汁儿+焦圈、炸酱面和烤鸭等传统美食。
+  - 推荐餐厅：全聚德（烤鸭）、鼓楼小吃街。
+
+- **避坑提醒**：
+  - 避开人流高峰时段，如故宫的10:30 – 12:00。
+  - 注意个人财物安全，尤其是在人多的地方要特别小心保管好随身物品。
+
+希望您在北京的文化之旅中享受美好时光！,分数=0
+2026-06-25 22:00:15.622 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'research_results', 'draft_plan', 'final_plan', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-25 22:00:15.622 | INFO     | N/A | ✅ 已生成最终计划，下一步解析
+2026-06-25 22:04:34.648 | INFO     | N/A | ✅ Plan 结构化解析成功 | 共 2 天
+2026-06-25 22:04:34.652 | INFO     | N/A | 最后的解析完的计划：TravelPlan(user_id=1, daily_plans=[DailyActivity(day=1, theme='第一天文化探索', activities=['参观故宫', '游览天坛公园'], location='', transportation='地铁/公交', meals=None, tips=None, estimated_cost=160), DailyActivity(day=2, theme='第二天文化探索', activities=['游览颐和园', '探访798艺术区'], location='', transportation='地铁/公交', meals=None, tips=None, estimated_cost=40)], title='北京10日深度游', days=2, budget='未指定', pace='适中', task_id=None, plan_id=None, destination='北京', start_date=None, total_estimated_cost=None, notes=None, raw_markdown='# 北京文化游行程安排（2天）\n\n## 第一天：上午 - 故宫\n\n- **时间**：8:30 – 17:00\n- **门票价格**：60元（淡季）/120元（旺季）\n- **特色体验**：\n  - 参观太和殿、中和殿、保和殿等主要建筑。\n  - 欣赏精美的文物和艺术品。\n\n## 第一天：下午 - 天坛公园\n\n- **时间**：全天开放，建议避开中午人流高峰。\n- **门票价格**：免费（需购买5元保险费进入祈年殿）\n- **特色体验**：\n  - 观察祈年殿、皇穹宇等重要建筑。\n  - 欣赏古树名木。\n\n## 第二天：上午 - 颐和园\n\n- **时间**：6:30 – 18:00\n- **门票价格**：40元\n- **特色体验**：\n  - 游览昆明湖、万寿山等景点。\n  - 欣赏十七孔桥、佛香阁等标志性建筑。\n\n## 第二天：下午 - 798艺术区\n\n- **时间**：全天开放，建议提前规划行程。\n- **门票价格**：免费（需购买5元保险费进入祈年殿）\n- **特色体验**：\n  - 探索现代艺术画廊和创意工作室。\n  - 尝试当地特色小吃。\n\n## 实用信息\n\n### 天气与穿着建议\n北京当前多云，温度26℃。请携带轻薄外套以备早晚温差。\n\n### 交通方式推荐\n- 地铁、公交便捷；飞机或高铁出行方便。\n\n### 住宿推荐\n- 经济型酒店/民宿约每晚200元；\n- 中高端酒店约1500元以上。\n\n### 餐饮建议\n- 尝试豆汁儿+焦圈、炸酱面和烤鸭等传统美食。\n- 推荐餐厅：全聚德（烤鸭）、鼓楼小吃街。\n\n### 安全注意事项与文化禁忌\n\n1. **尊重当地习俗**：在参观寺庙或皇宫时，请遵守相关规定，如不触摸文物、保持安静等。\n2. **注意个人财物安全**：尤其是在人多的地方要特别小心保管好随身物品。\n3. **遵守景区规定**：确保自己和家人了解并遵守各景点的游览规则。\n\n### 预算分配建议（住宿、餐饮、交通、门票）\n\n- **住宿**：\n  - 经济型酒店/民宿约每晚200元；\n  - 中高端酒店约1500元以上。\n  \n- **餐饮**：每人每天约50元。\n  \n- **交通**：飞机或高铁往返费用根据选择的航班/车次而定，建议提前预订。\n\n- **门票**：\n  - 故宫、天坛公园等景点门票共计230元左右。\n\n## 行程安排总结\n\n### 第一天\n- 上午：参观故宫（8:30 – 17:00）\n- 下午：游览天坛公园（全天）\n\n### 第二天\n- 上午：游览颐和园（6:30 – 18:00）\n- 下午：探访798艺术区\n\n## 实用Tips\n\n- **用餐建议**：\n  - 尝试豆汁儿+焦圈、炸酱面和烤鸭等传统美食。\n  - 推荐餐厅：全聚德（烤鸭）、鼓楼小吃街。\n\n- **避坑提醒**：\n  - 避开人流高峰时段，如故宫的10:30 – 12:00。\n  - 注意个人财物安全，尤其是在人多的地方要特别小心保管好随身物品。\n\n## 行程亮点与均衡搭配\n\n### 第一天\n- **上午**：故宫——感受皇家历史文化的厚重底蕴。\n- **下午**：天坛公园——体验古代祭天文化及自然美景。\n\n### 第二天\n- **上午**：颐和园——欣赏古典园林之美，领略皇家园林的精致。\n- **下午**：798艺术区——探索现代艺术与创意设计的魅力。\n\n## 预算建议\n\n- **住宿**：\n  - 经济型酒店/民宿约每晚200元；\n  - 中高端酒店约1500元以上。\n\n- **餐饮**：每人每天约50元，总计两天约300元左右。\n  \n- **交通**：往返北京的机票或高铁票根据选择而定，建议提前预订，预计人均400-600元。\n  \n- **门票**：\n  - 故宫、天坛公园等景点门票共计230元左右。\n\n### 总预算\n- 住宿（两天）：约1000-3000元；\n- 餐饮（两天）：约300元；\n- 交通（往返+当地）：约400-600元；\n- 门票（主要景点）：230元。\n\n### 总计\n- 约1760-3590元\n\n希望这份报告对您有所帮助！如有其他问题，请随时联系我们。祝旅途愉快！\n\n---\n\n**最终版行程安排总结**\n\n### 第一天\n- 上午：参观故宫（8:30 – 17:00）\n- 下午：游览天坛公园（全天）\n\n### 第二天\n- 上午：游览颐和园（6:30 – 18:00）\n- 下午：探访798艺术区\n\n## 实用Tips\n\n- **用餐建议**：\n  - 尝试豆汁儿+焦圈、炸酱面和烤鸭等传统美食。\n  - 推荐餐厅：全聚德（烤鸭）、鼓楼小吃街。\n\n- **避坑提醒**：\n  - 避开人流高峰时段，如故宫的10:30 – 12:00。\n  - 注意个人财物安全，尤其是在人多的地方要特别小心保管好随身物品。\n\n希望您在北京的文化之旅中享受美好时光！')
+2026-06-25 22:04:34.670 | INFO     | 6da5947e-8173-437a-9a74-1fc97cea7dee | ✅ 8-Agent 多智能体处理完成
+2026-06-25 22:04:34.671 | INFO     | 6da5947e-8173-437a-9a74-1fc97cea7dee | ✅ Web API 响应完成 | type=plan | content_len=2021
+2026-06-25 22:09:07.863 | INFO     | N/A | LLM 偏好提取结果: {'dietary_restrictions': [], 'preferred_foods': [], 'accommodation_preference': '', 'travel_style': ['文化游']}
+2026-06-25 22:09:07.865 | INFO     | N/A | ✅ Profile 更新成功: {'preferred_destinations': ['北京'], 'preferred_budgets': ['未指定'], 'preferred_paces': ['适中'], 'travel_style': ['文化游'], 'last_updated': '2026-06-25T22:09:07.864322'}
+2026-06-25 22:23:04.819 | INFO     | N/A | ✅ Mem0 记忆更新成功(后台) - user_id: 1
+2026-06-25 23:06:09.062 | INFO     | N/A | 👋 Travel AI Web 服务已关闭
+2026-06-25 23:06:21.840 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-25 23:06:23.018 | INFO     | N/A | 🌐 Travel AI Web 服务启动中...
+2026-06-25 23:06:23.019 | INFO     | N/A | 📄 前端页面: http://localhost:8000
+2026-06-25 23:06:23.019 | INFO     | N/A | 🔌 API 文档: http://localhost:8000/docs
+2026-06-25 23:06:23.019 | INFO     | N/A | 💡 确保 MCP 服务已启动以获得完整功能！
+2026-06-25 23:13:17.772 | INFO     | 9c0a33e5-7d76-43d7-97b7-8107b395f416 | 🌐 Web API 收到消息: 帮我规划广州2日游，我想看广州塔...
+2026-06-25 23:13:17.772 | INFO     | 9c0a33e5-7d76-43d7-97b7-8107b395f416 | 进入process_with_agent
+2026-06-25 23:13:34.240 | INFO     | N/A | 路线：plan（原始：plan）
+2026-06-25 23:13:34.243 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-25 23:13:34.243 | INFO     | N/A | 下一步 → task_analyzer
+2026-06-25 23:13:34.246 | INFO     | N/A | 实际调用的大模型=qwen2.5
+2026-06-25 23:13:34.277 | INFO     | N/A | Mem0 长期记忆：用户想去广州玩两天，想去看广州塔
+广州今天的天气情况如下：　　• 天气：大雨
+　　• 温度：25℃
+Assistant proposed a 2-day Beijing itinerary
+广州今天的天气情况如下：
+• 天气：大雨
+• 温度：25℃
+Assistant recommended Great Wall sections for the user's Beijing 2-day trip: 慕田峪 (scenic, fewer crowds, recommended for first-timers), 八达岭 (most famous, easy transport), 金山岭 (pristine, best for hiking/photography), 司马台 (steep, for adventurers)
+Assistant proposed a 2-day Beijing itinerary: Day 1 — Great Wall day trip (suggested cable car up, hike down, ~1.5-2hr each way by tour bus/carpool); Day 2 — Tiananmen Square → Forbidden City (requires advance booking), then Jingshan Park or Temple of Heaven, evening at Wangfujing/Nanluoguxiang
+用户想去北京玩两天，想看长城
+2026-06-25 23:13:34.279 | INFO     | N/A | 用户 Profile：{"preferred_destinations": ["北京"], "preferred_budgets": ["未指定"], "preferred_paces": ["适中"], "travel_style": ["文化游"], "last_updated": "2026-06-25T22:09:07.864322"}
+2026-06-25 23:14:17.746 | INFO     | N/A | ✅ 任务提取结果: destination=广州, days=2, budget=中等, pace=适中
+2026-06-25 23:14:17.749 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-25 23:14:17.749 | INFO     | N/A | 下一步 → researcher
+2026-06-25 23:14:18.692 | INFO     | N/A | ✅ 已加载 15 个 MCP 工具
+2026-06-25 23:23:26.664 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'research_results', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-25 23:23:26.665 | INFO     | N/A | 下一步 → planner
+2026-06-25 23:28:25.570 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'research_results', 'draft_plan', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-25 23:28:25.572 | INFO     | N/A | 下一步 → final_optimizer（单次高质量生成）

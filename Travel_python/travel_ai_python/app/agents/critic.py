@@ -1,5 +1,5 @@
 import asyncio
-from langchain_core.messages import SystemMessage
+from langchain_core.messages import HumanMessage
 from pydantic import BaseModel, Field
 from app.agents.base import llm
 from app.agents.state import AgentState
@@ -96,7 +96,7 @@ async def critic_node(state: AgentState):
     async def call_expert(prompt: str, output_model):
         structured_llm = llm.with_structured_output(output_model, method="json_mode")
         try:
-            result = await structured_llm.ainvoke([SystemMessage(content=prompt)])
+            result = await structured_llm.ainvoke([HumanMessage(content=prompt)])
             return result
         except Exception as e:
             logger.warning(f"专家评审失败: {e}")

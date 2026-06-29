@@ -1,0 +1,30 @@
+2026-06-27 18:45:22.336 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-27 18:45:23.708 | INFO     | N/A | 🌐 Travel AI Web 服务启动中...
+2026-06-27 18:45:23.709 | INFO     | N/A | 📄 前端页面: http://localhost:8000
+2026-06-27 18:45:23.709 | INFO     | N/A | 🔌 API 文档: http://localhost:8000/docs
+2026-06-27 18:45:23.709 | INFO     | N/A | 💡 确保 MCP 服务已启动以获得完整功能！
+2026-06-27 18:49:01.494 | INFO     | 34c1631f-d172-4612-b249-74510b44f0d2 | 🌐 [SSE] Web API 收到消息: 我想去西安旅游2日...
+2026-06-27 18:49:01.496 | INFO     | 34c1631f-d172-4612-b249-74510b44f0d2 | 进入process_with_agent
+2026-06-27 18:49:19.783 | INFO     | N/A | 路线：plan（原始：plan）
+2026-06-27 18:49:19.791 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-27 18:49:19.791 | INFO     | N/A | 下一步 → task_analyzer
+2026-06-27 18:49:19.797 | INFO     | N/A | 实际调用的大模型=qwen2.5
+2026-06-27 18:49:19.841 | INFO     | N/A | Mem0 长期记忆：用户想去广州玩两天，想去看广州塔
+广州今天的天气情况如下：　　• 天气：大雨
+　　• 温度：25℃
+Assistant proposed a 2-day Beijing itinerary
+广州今天的天气情况如下：
+• 天气：大雨
+• 温度：25℃
+Assistant recommended Great Wall sections for the user's Beijing 2-day trip: 慕田峪 (scenic, fewer crowds, recommended for first-timers), 八达岭 (most famous, easy transport), 金山岭 (pristine, best for hiking/photography), 司马台 (steep, for adventurers)
+Assistant proposed a 2-day Beijing itinerary: Day 1 — Great Wall day trip (suggested cable car up, hike down, ~1.5-2hr each way by tour bus/carpool); Day 2 — Tiananmen Square → Forbidden City (requires advance booking), then Jingshan Park or Temple of Heaven, evening at Wangfujing/Nanluoguxiang
+用户想去北京玩两天，想看长城
+2026-06-27 18:49:19.843 | INFO     | N/A | 用户 Profile：{"preferred_destinations": ["北京"], "preferred_budgets": ["未指定"], "preferred_paces": ["适中"], "travel_style": ["文化游"], "last_updated": "2026-06-25T22:09:07.864322"}
+2026-06-27 18:50:10.816 | INFO     | N/A | ✅ 任务提取结果: destination=西安, days=2, budget=中等, pace=适中
+2026-06-27 18:50:10.819 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-27 18:50:10.820 | INFO     | N/A | 下一步 → researcher
+2026-06-27 18:50:11.865 | INFO     | N/A | ✅ 已加载 15 个 MCP 工具
+2026-06-27 18:54:21.652 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'research_results', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-27 18:54:21.653 | INFO     | N/A | 下一步 → planner
+2026-06-27 19:02:04.094 | ERROR    | N/A | ❌ Mem0 初始化失败: EOF when reading a line
+2026-06-27 19:02:08.011 | INFO     | N/A | ✅ Mem0 已使用默认配置初始化

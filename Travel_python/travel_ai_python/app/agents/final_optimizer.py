@@ -1,4 +1,4 @@
-from langchain_core.messages import SystemMessage
+from langchain_core.messages import HumanMessage
 from app.agents.base import llm
 from app.agents.state import AgentState
 from app.config.logger import logger
@@ -25,7 +25,7 @@ def final_optimizer_node(state: AgentState):
 - 景点搭配均衡，有亮点
 - 实用性强（包含交通、时间、tips等）"""
 
-    response = llm.invoke([SystemMessage(content=prompt)])
+    response = llm.invoke([HumanMessage(content=prompt)])
 
     logger.info(f"已完成完成最后的规划={response.content},分数={best_score}")
 

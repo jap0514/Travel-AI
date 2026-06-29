@@ -1,0 +1,767 @@
+2026-06-24 21:09:48.909 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-24 21:09:48.989 | INFO     | 10001 | 进入process_with_agent
+2026-06-24 21:09:49.776 | ERROR    | N/A | 多智能体处理失败: Error code: 400 - {'type': 'error', 'error': {'type': 'bad_request_error', 'message': 'invalid params, chat content is empty (2013)', 'http_code': '400'}, 'request_id': '068b0a1ede666e521ba03119ab78da58'}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 32, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 28, in main1
+    task, final_plan, parsed_plan =asyncio.run(process_with_agent(message, "10001"))
+
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 102, in process_with_agent
+    result =await multi_agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\runnables\config.py", line 707, in run_in_executor
+    return await asyncio.get_running_loop().run_in_executor(
+  File "D:\Python\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "D:\Python\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\runnables\config.py", line 698, in wrapper
+    return func(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\Intent_Recognition.py", line 16, in intent_recognition_node
+    response = llm.invoke([SystemMessage(content=prompt)])
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 476, in invoke
+    self.generate_prompt(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1849, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1656, in generate
+    self._generate_with_cache(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1994, in _generate_with_cache
+    result = self._generate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1690, in _generate
+    _handle_openai_bad_request(e)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1687, in _generate
+    raw_response = self.client.with_raw_response.create(**payload)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_legacy_response.py", line 367, in wrapped
+    return cast(LegacyAPIResponse[R], func(*args, **kwargs))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_utils\_utils.py", line 298, in wrapper
+    return func(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1251, in create
+    return self._post(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1332, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1105, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'bad_request_error', 'message': 'invalid params, chat content is empty (2013)', 'http_code': '400'}, 'request_id': '068b0a1ede666e521ba03119ab78da58'}
+During task with name 'Intent_Recognition' and id 'de565b13-d58f-e675-70ac-1bbe76c581c7'
+2026-06-24 21:17:21.237 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-24 21:17:21.294 | INFO     | 10001 | 进入process_with_agent
+2026-06-24 21:17:22.504 | INFO     | N/A | General QA 处理用户问题: 我想去北京玩两天，我想看北京的长城很久了
+2026-06-24 21:17:26.135 | INFO     | N/A | 原始查询: 我想去北京玩两天，我想看北京的长城很久了 → 改写后: <think>
+The user wants me to optimize a travel-related query for vector database retrieval. Let me analyze the original query:
+
+Original: "我想去北京玩两天，我想看北京的长城很久了"
+
+Key information:
+- Destination: 北京 (Beijing)
+- Duration: 两天 (2 days)
+- Interest: 长城 (Great Wall) - has been wanting to see it for a long time
+- Travel type: 观光/旅游 (sightseeing/tourism)
+
+I need to rewrite this to be more formal, complete, and specific, with key travel elements added. Length should be 1-2 sentences.
+
+Let me craft a good rewrite:
+</think>
+用户计划前往北京进行为期两天的旅游，核心需求为游览长城，希望了解适合短途行程的长城景区推荐、游览路线及交通方式等信息。
+2026-06-24 21:17:26.974 | INFO     | N/A | ✅ 已加载 15 个 MCP 工具
+2026-06-24 21:17:34.174 | WARNING  | N/A | 解析查询信息失败: Expecting value: line 1 column 1 (char 0)，使用默认空值
+2026-06-24 21:17:34.174 | INFO     | N/A | LLM 决定不调用工具，将使用自身知识回答
+2026-06-24 21:17:57.584 | INFO     | N/A | General QA 回答已生成，长度 1518
+2026-06-24 21:18:15.684 | INFO     | N/A | ✅ Mem0 记忆更新成功 - user_id: 1
+2026-06-24 21:18:15.684 | INFO     | 10001 | ✅ 问答处理完成
+2026-06-24 21:18:15.684 | INFO     | 10001 | 回答：<think>The user wants to visit Beijing for two days and see the Great Wall. There are no direct search results, but based on the user's long-term memory and general knowledge about Beijing tourism, I can provide helpful suggestions.
+
+Let me organize a helpful response about visiting the Great Wall in Beijing for a two-day trip.
+
+Key points to cover:
+1. Which sections of the Great Wall to visit (Mutianyu, Badaling, Jinshanling, etc.)
+2. A suggested two-day itinerary
+3. Transportation tips
+4. Other Beijing highlights to combine with the Great Wall
+
+I should note that there are no direct search results but provide helpful information based on general knowledge.</think>
+
+你好！北京是个非常棒的目的地，两天时间游览长城完全够用。虽然目前暂未检索到具体的实时旅游信息，但我根据长期记忆了解到你一直想看长城，结合北京旅游的通用信息，为你整理了一份参考建议：
+
+---
+
+## 🏯 长城怎么选？
+
+北京周边有多个长城段落，热门推荐如下：
+
+| 长城段落 | 特点 | 适合人群 |
+|---------|------|---------|
+| **慕田峪长城** | 风景秀丽，人流适中，缆车/滑道设施完善 | ⭐ 首次游玩首选 |
+| **八达岭长城** | 最知名，交通最便利，设施成熟 | 首次到访、怕折腾 |
+| **金山岭长城** | 原生态雄伟，人少景美，徒步体验最佳 | 喜欢深度游、摄影 |
+| **司马台长城** | 以险峻著称（部分需预约） | 探险爱好者 |
+
+> 💡 个人建议：若你是第一次看长城，**慕田峪**是性价比和体验感最好的选择。
+
+---
+
+## 📅 两天行程建议
+
+### Day 1：长城一日游
+- 早上从市区出发（建议包车/拼车/旅游专线，约1.5-2小时到达）
+- 上午：登城游览（建议缆车上山，徒步下山，更轻松）
+- 下午：返程途中可考虑顺路游览其他景点
+
+### Day 2：市区文化游
+- **上午**：天安门广场 → 故宫（需提前预约！）
+- **下午**：景山公园（俯瞰故宫全景）或 天坛
+- **晚上**：王府井/南锣鼓巷感受老北京氛围
+
+---
+
+## ⚠️ 实用提醒
+
+1. **提前预约**：故宫、国家博物馆等需提前1-7天网上预约。
+2. **天气**：北京春秋季舒适但风大，冬季寒冷，夏季暴晒，建议关注天气。
+3. **装备**：登长城建议穿舒适运动鞋，带上水和零食。
+4. **交通**：地铁覆盖主要景点，去长城建议选择**旅游专线巴士**或**包车**。
+
+---
+
+如果你能告诉我：
+- 📆 计划出行的时间（季节）？
+- 👥 同行人数？
+- 💰 预算偏好？
+
+我可以帮你进一步细化行程哦！😊
+2026-06-24 21:23:55.055 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-24 21:23:55.104 | INFO     | 10001 | 进入process_with_agent
+2026-06-24 21:23:57.852 | INFO     | N/A | General QA 处理用户问题: 我想去北京玩两天，我想看北京的长城很久了
+2026-06-24 21:24:03.706 | INFO     | N/A | 原始查询: 我想去北京玩两天，我想看北京的长城很久了 → 改写后: <think>
+The user wants me to rewrite their travel query into a more formal, complete, and specific form suitable for vector database retrieval. Let me analyze the original query:
+
+Original: "我想去北京玩两天，我想看北京的长城很久了"
+Key elements:
+- Destination: 北京 (Beijing)
+- Duration: 两天 (two days)
+- Main attraction: 长城 (Great Wall)
+- User sentiment: 很久了 (long-time desire/wish)
+
+I need to rewrite this to be:
+- More formal and complete
+- Keep core intent
+- Add key travel elements
+- 1-2 sentences
+
+Let me craft a good rewrite that includes destination, duration, main attraction, and possibly related elements like transportation, best time to visit, etc.
+</think>
+用户计划前往北京进行为期两天的短期旅游，核心需求是游览长城，希望了解适合两日游的长城相关景点推荐、行程安排、参观路线及交通方式等信息。
+2026-06-24 21:24:04.544 | INFO     | N/A | ✅ 已加载 15 个 MCP 工具
+2026-06-24 21:24:12.963 | WARNING  | N/A | 解析查询信息失败: Expecting value: line 1 column 1 (char 0)，使用默认空值
+2026-06-24 21:24:12.964 | INFO     | N/A | LLM 决定不调用工具，将使用自身知识回答
+2026-06-24 21:24:43.397 | INFO     | N/A | General QA 回答已生成，长度 2199
+2026-06-24 21:24:52.725 | INFO     | N/A | ✅ Mem0 记忆更新成功 - user_id: 1
+2026-06-24 21:24:52.725 | INFO     | 10001 | ✅ 问答处理完成
+2026-06-24 21:24:52.726 | INFO     | 10001 | 回答：<think>The user wants to go to Beijing for 2 days and has been wanting to see the Great Wall for a long time. 
+
+Looking at the context, there's already conversation history where the assistant:
+1. Recommended Great Wall sections: 慕田峪 (scenic, fewer crowds, recommended for first-timers), 八达岭 (most famous, easy transport), 金山岭 (pristine, best for hiking/photography), 司马台 (steep, for adventurers)
+2. Proposed a 2-day Beijing itinerary: Day 1 — Great Wall day trip (suggested cable car up, hike down, ~1.5-2hr each way by tour bus/carpool); Day 2 — Tiananmen Square → Forbidden City (requires advance booking), then Jingshan Park or Temple of Heaven, evening at Wangfujing/Nanluoguxiang
+
+So the user is now asking again or following up. The previous assistant message seems to be the previous response. The user is repeating their request. Let me provide a helpful answer based on the existing context and memory.
+
+Since there are no new retrieval results, but we have mem0 long-term memory and conversation context, I should use those to answer. The assistant should provide information about Great Wall sections and the 2-day itinerary.
+
+Let me craft a warm, professional response in Chinese that:
+1. Acknowledges the user's wish to see the Great Wall
+2. Recommends different Great Wall sections based on different preferences
+3. Suggests a 2-day itinerary
+4. Provides practical tips
+
+I should organize this nicely with sections and lists as instructed.</think>
+
+# 🏯 北京2日游攻略：长城篇
+
+很高兴能帮你规划这次期待已久的长城之旅！北京两天时间刚刚好，可以一天留给长城，一天逛市区经典景点。
+
+---
+
+## 🚧 长城段落推荐
+
+北京周边有多个长城段落，各有特色，可以根据自己的喜好来选：
+
+| 段落 | 特点 | 适合人群 |
+|------|------|----------|
+| **慕田峪** | 风景秀丽、人相对较少 | ⭐ 首次去长城的首选 |
+| **八达岭** | 最著名、交通最方便 | 想打卡经典地标的朋友 |
+| **金山岭** | 原生态保存完好 | 喜欢徒步、摄影 |
+| **司马台** | 陡峭险峻、景色独特 | 喜欢探险、追求挑战 |
+
+> 💡 **小建议**：如果你是第一次去长城，推荐 **慕田峪**，景色美、人不多，体验感最好。
+
+---
+
+## 📅 建议行程安排
+
+### Day 1：长城一日游
+- 早上出发，建议坐 **旅游大巴/拼车** 前往（单程约1.5–2小时）
+- 到达后可以 **坐缆车上山，徒步下山**，比较省力
+- 下午返程回市区
+
+### Day 2：市区经典路线
+- **天安门广场** → **故宫**（⚠️ 需提前预约购票）
+- 下午可以去 **景山公园** 或 **天坛**
+- 晚上逛 **王府井** 或 **南锣鼓巷**，感受老北京风情
+
+---
+
+## 🎒 出行小贴士
+
+- ✅ **提前订票**：故宫一定要提前在网上预约
+- ✅ **舒适穿搭**：长城徒步建议穿运动鞋，带好防晒
+- ✅ **避开高峰**：尽量选工作日或早出发，周末人比较多
+
+---
+
+如果你告诉我更多你的偏好（比如喜欢轻松游还是徒步挑战、预算多少），我可以帮你进一步细化行程哦！😊
+2026-06-24 21:27:12.310 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-24 21:27:12.363 | INFO     | 10001 | 进入process_with_agent
+2026-06-24 21:27:16.756 | INFO     | N/A | 路线：<think>the user wants to go to beijing for two days and wants to see the great wall. this involves planning a trip with specific days, so it's "plan".</think>
+
+plan
+2026-06-24 21:27:16.758 | INFO     | N/A | General QA 处理用户问题: 我想去北京玩两天，我想看北京的长城很久了
+2026-06-24 21:27:19.711 | INFO     | N/A | 原始查询: 我想去北京玩两天，我想看北京的长城很久了 → 改写后: <think>
+The user wants me to rewrite a travel-related query for better vector database retrieval. The original query is casual and informal. I need to make it more formal, complete, and specific while preserving the core intent and adding key travel elements.
+
+Original: "我想去北京玩两天，我想看北京的长城很久了"
+
+Key elements to extract:
+- Destination: 北京 (Beijing)
+- Duration: 两天 (two days)
+- Main attraction: 长城 (Great Wall)
+- It's a long-awaited trip
+
+I should rewrite this in a more formal, complete way suitable for vector search.
+</think>
+北京两日游，重点参观慕名已久的长城，希望了解经典线路、行程安排和必游景点。
+2026-06-24 21:27:20.559 | INFO     | N/A | ✅ 已加载 15 个 MCP 工具
+2026-06-24 21:27:28.295 | WARNING  | N/A | 解析查询信息失败: Expecting value: line 1 column 1 (char 0)，使用默认空值
+2026-06-24 21:27:28.295 | INFO     | N/A | LLM 决定不调用工具，将使用自身知识回答
+2026-06-24 21:27:45.367 | INFO     | N/A | General QA 回答已生成，长度 1606
+2026-06-24 21:30:32.708 | INFO     | N/A | ✅ Mem0 记忆更新成功 - user_id: 1
+2026-06-24 21:30:32.709 | INFO     | 10001 | ✅ 问答处理完成
+2026-06-24 21:30:32.709 | INFO     | 10001 | 回答：<think>The user wants to go to Beijing for two days and see the Great Wall. Based on the long-term memory (Mem0), I already have relevant information about Great Wall sections and a 2-day Beijing itinerary that was previously proposed. Let me use that information to provide a helpful response.
+
+Since there's no direct search result, I should rely on the Mem0 long-term memory which contains:
+1. Great Wall sections recommendation: 慕田峪 (Mutianyu - scenic, fewer crowds, recommended for first-timers), 八达岭 (Badaling - most famous, easy transport), 金山岭 (Jinshanling - pristine, best for hiking/photography), 司马台 (Simatai - steep, for adventurers)
+2. A proposed 2-day Beijing itinerary
+
+Let me craft a warm, professional response that references the previous recommendations and helps the user plan their trip.</think>
+
+你好！很高兴帮你规划这次北京之行 🏯 长城确实是来北京必打卡的经典景点，两天时间安排得刚好。
+
+## 🏔️ 长城段落推荐
+
+北京周边有多个长城段落，各有特色，结合你的时间和兴趣，我帮你梳理一下：
+
+| 段落 | 特色 | 适合人群 |
+|------|------|----------|
+| **慕田峪** | 风景秀丽、人少景美 | 🌟 第一次去长城首选 |
+| **八达岭** | 最著名、交通最便利 | 想打卡经典地标 |
+| **金山岭** | 原汁原味、风光壮阔 | 喜欢徒步和摄影 |
+| **司马台** | 坡度陡、险峻刺激 | 喜欢冒险和挑战 |
+
+> 💡 **小建议**：如果你是第一次去长城，**慕田峪**会是综合体验最好的选择——景色不输八达岭，但游客明显更少，拍照也不用担心"人比长城多"。
+
+## 📅 两天行程参考
+
+**Day 1：长城一日游**
+- 建议早出发（7:30 左右），可选择拼车 / 跟团 / 包车前往，车程约 1.5–2 小时
+- 推荐坐缆车上山，步行下山，既省力又能慢慢欣赏风景
+- 傍晚返回市区休息
+
+**Day 2：市区文化游**
+- 上午：**天安门广场** → **故宫**（⚠️ 务必提前在官方渠道预约门票，通常提前 7 天开放）
+- 中午：附近用餐
+- 下午：**景山公园**（可俯瞰故宫全景）或 **天坛**
+- 晚上：**王府井** 或 **南锣鼓巷** 逛吃，感受老北京胡同氛围
+
+---
+
+## ❓ 想帮你更精准地推荐，方便告诉我几点吗？
+
+1. 你**最想去哪个段落**？还是让我帮你选？
+2. 出行**季节**是？（不同季节穿搭和风景差异大）
+3. 偏好**自由行**还是**跟团**？
+4. 预算和体力情况如何？（徒步爱好者 vs 想轻松游）
+
+把这些告诉我，我可以帮你把行程细化到每一天的每个时段 😊
+2026-06-24 21:32:47.792 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-24 21:32:47.846 | INFO     | 10001 | 进入process_with_agent
+2026-06-24 21:32:50.886 | INFO     | N/A | 路线：<think>the user is expressing a desire to go to beijing for two days and wants to see the great wall. this is a trip planning request with specific duration (2 days) and a desire to create an itinerary. this falls under "plan".</think>
+
+plan
+2026-06-24 21:32:50.888 | INFO     | N/A | General QA 处理用户问题: 我想去北京玩两天，我想看北京的长城很久了
+2026-06-24 21:32:55.536 | INFO     | N/A | 原始查询: 我想去北京玩两天，我想看北京的长城很久了 → 改写后: <think>
+The user wants me to rewrite a travel-related query for vector database retrieval. The original query is: "我想去北京玩两天，我想看北京的长城很久了" (I want to travel to Beijing for two days, I've wanted to see the Great Wall in Beijing for a long time).
+
+I need to make it more formal, complete, and specific, while preserving the core intent and adding key travel elements. Length should be moderate (1-2 sentences).
+
+Let me rewrite it to be more suitable for vector database retrieval:
+- Formal and complete
+- Include destination (北京/Beijing)
+- Include duration (两天/two days)
+- Include specific attraction (长城/Great Wall)
+- Include travel type (sightseeing/visiting)
+
+A good rewrite would be: "计划前往北京进行为期两天的短途旅行，行程重点为参观长城等著名历史文化遗产景点"
+</think>
+计划前往北京进行为期两天的短途旅行，核心行程为游览长城等历史人文景观。
+2026-06-24 21:32:56.363 | INFO     | N/A | ✅ 已加载 15 个 MCP 工具
+2026-06-24 21:33:13.186 | WARNING  | N/A | 解析查询信息失败: Expecting value: line 1 column 1 (char 0)，使用默认空值
+2026-06-24 21:33:13.186 | INFO     | N/A | LLM 决定不调用工具，将使用自身知识回答
+2026-06-24 21:33:22.998 | INFO     | N/A | General QA 回答已生成，长度 1459
+2026-06-24 21:33:56.352 | INFO     | N/A | ✅ Mem0 记忆更新成功 - user_id: 1
+2026-06-24 21:33:56.352 | INFO     | 10001 | ✅ 问答处理完成
+2026-06-24 21:33:56.352 | INFO     | 10001 | 回答：<think>
+The user wants to go to Beijing for 2 days and see the Great Wall. The system has provided me with:
+- No direct search results
+- But there is Mem0 long-term memory that contains previous recommendations about:
+  - Great Wall sections: 慕田峪 (Mutianyu), 八达岭 (Badaling), 金山岭 (Jinshanling), 司马台 (Simatai)
+  - A 2-day Beijing itinerary proposal
+
+Since the user is asking the same question as before, and the Mem0 memory has relevant information, I should use that memory to provide a helpful response. Let me organize a nice, friendly answer using the memory information.
+
+I'll provide:
+1. Great Wall section recommendations with brief descriptions
+2. A suggested 2-day itinerary
+
+Let me make this response warm, professional, and well-organized.
+</think>
+# 🏯 北京两日游攻略：长城之旅
+
+很高兴为你规划这次北京之行！关于长城的几个经典段落，我为你整理了推荐：
+
+## 🧱 长城段落推荐
+
+| 段落 | 特点 | 适合人群 |
+|------|------|----------|
+| **慕田峪** | 风景秀丽，人少景美 | 🌟 首次登长城首选 |
+| **八达岭** | 最有名，交通最便利 | 经典打卡型游客 |
+| **金山岭** | 原生态风貌，保存完好 | 徒步爱好者 / 摄影发烧友 |
+| **司马台** | 陡峭险峻，野趣十足 | 探险型玩家 |
+
+> 💡 **建议**：如果你是第一次去长城，推荐 **慕田峪**，人少景美，缆车设施完善，游玩体验最好。
+
+---
+
+## 📅 建议行程安排
+
+### 🗓 Day 1：长城一日游
+- 早上出发前往长城（跟团大巴/拼车约 1.5-2 小时）
+- **建议玩法**：坐缆车上山 → 步行下山
+- 傍晚返回市区，休整
+
+### 🗓 Day 2：京城文化游
+- 上午：**天安门广场** → **故宫**（⚠️ 需提前预约购票）
+- 下午：**景山公园**（俯瞰故宫全景）或 **天坛**
+- 晚上：**王府井大街** 或 **南锣鼓巷**（感受老北京胡同风情 + 美食）
+
+---
+
+## 📌 实用小贴士
+- 🎫 **故宫**务必提前在网上预约，否则无法入园
+- 👟 长城的部分路段较陡，建议穿舒适的运动鞋
+- 📷 带好充电宝，长城拍照非常耗电
+- 🌞 春秋季前往最舒适，夏季注意防晒
+
+如果你有更多偏好（比如想徒步多走一点、或者第二天的具体景点想调整），可以告诉我，我帮你进一步定制路线 😊
+2026-06-24 21:37:25.206 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-24 21:37:25.259 | INFO     | 10001 | 进入process_with_agent
+2026-06-24 21:37:26.936 | INFO     | N/A | 路线：<think>
+the user is expressing desire to plan a trip to beijing for two days and wants to see the great wall. this is a planning intent.
+</think>
+plan
+2026-06-24 21:37:26.938 | INFO     | N/A | General QA 处理用户问题: 我想去北京玩两天，我想看北京的长城很久了
+2026-06-24 21:37:31.707 | INFO     | N/A | 原始查询: 我想去北京玩两天，我想看北京的长城很久了 → 改写后: <think>
+The user wants me to rewrite a travel query for vector database retrieval. The original query is casual and informal. I need to make it more formal, complete, and specific while preserving the core intent. I should add key travel elements like destination, time, type, etc.
+
+Original: "我想去北京玩两天，我想看北京的长城很久了"
+Translation: "I want to go to Beijing for two days, I've wanted to see the Great Wall for a long time"
+
+Key elements to preserve:
+- Destination: Beijing
+- Duration: 2 days
+- Attraction: Great Wall (长城)
+- Travel type: sightseeing/tourism
+
+Let me rewrite this in a more formal, complete way for vector retrieval:
+</think>
+请提供北京两日游的旅行攻略，重点包含长城游览线路安排、推荐游览时间、交通方式及周边景点推荐。
+2026-06-24 21:37:32.564 | INFO     | N/A | ✅ 已加载 15 个 MCP 工具
+2026-06-24 21:37:40.735 | WARNING  | N/A | 解析查询信息失败: Expecting value: line 1 column 1 (char 0)，使用默认空值
+2026-06-24 21:37:40.736 | INFO     | N/A | LLM 决定不调用工具，将使用自身知识回答
+2026-06-24 21:37:52.214 | INFO     | N/A | General QA 回答已生成，长度 1807
+2026-06-24 21:39:24.636 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-24 21:39:24.914 | INFO     | 10001 | 进入process_with_agent
+2026-06-24 21:40:04.085 | INFO     | N/A | 路线：<think>
+the user wants to go to beijing for two days and wants to see the great wall. this is about planning a trip.
+</think>
+plan
+2026-06-24 21:43:11.872 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-24 21:43:11.926 | INFO     | 10001 | 进入process_with_agent
+2026-06-24 21:43:13.843 | INFO     | N/A | 路线：plan（原始：<think>
+the user wants to go to beijing for two days and wants to see the great ）
+2026-06-24 21:43:13.845 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-24 21:43:13.845 | INFO     | N/A | 下一步 → task_analyzer
+2026-06-24 21:43:13.847 | INFO     | N/A | 实际调用的大模型=MiniMax-M3
+2026-06-24 21:43:13.874 | INFO     | N/A | Mem0 长期记忆：Assistant recommended Great Wall sections for the user's Beijing 2-day trip: 慕田峪 (scenic, fewer crowds, recommended for first-timers), 八达岭 (most famous, easy transport), 金山岭 (pristine, best for hiking/photography), 司马台 (steep, for adventurers)
+Assistant proposed a 2-day Beijing itinerary: Day 1 — Great Wall day trip (suggested cable car up, hike down, ~1.5-2hr each way by tour bus/carpool); Day 2 — Tiananmen Square → Forbidden City (requires advance booking), then Jingshan Park or Temple of Heaven, evening at Wangfujing/Nanluoguxiang
+用户想去北京玩两天，想看长城
+2026-06-24 21:43:13.875 | INFO     | N/A | 用户 Profile：暂无
+2026-06-24 21:43:16.901 | WARNING  | N/A | Task 提取失败，使用默认值: Invalid json output: <think>
+The user wants to plan a 2-day Beijing trip focused on the Great Wall. I need to output a strict JSON object based on the example format provided, incorporating the user's request and historical context.
+
+Key elements:
+- days: 2
+- budget: not mentioned, but based on context (tour bus/carpool, standard itinerary) I'll set to "中等"
+- pace: from the proposed itinerary it seems moderate, "适中"
+- user_query: user's request about Beijing 2-day trip and Great Wall
+- destination: 北京
+
+Let me construct the JSON properly.
+</think>
+{"days":2,"budget":"中等","pace":"适中","user_query":"我想去北京玩两天，想看北京的长城很久了","destination":"北京"}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+2026-06-24 21:43:16.902 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-24 21:43:16.902 | INFO     | N/A | 下一步 → researcher
+2026-06-24 21:43:17.742 | INFO     | N/A | ✅ 已加载 15 个 MCP 工具
+2026-06-24 21:44:40.768 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'research_results', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-24 21:44:40.769 | INFO     | N/A | 下一步 → planner
+2026-06-24 21:44:41.013 | ERROR    | N/A | 多智能体处理失败: Error code: 400 - {'type': 'error', 'error': {'type': 'bad_request_error', 'message': 'invalid params, chat content is empty (2013)', 'http_code': '400'}, 'request_id': '068b124a15823c512dc62df6bb86fd39'}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 32, in <module>
+    main1()
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\testContent.py", line 28, in main1
+    task, final_plan, parsed_plan =asyncio.run(process_with_agent(message, "10001"))
+
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 102, in process_with_agent
+    result =await multi_agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\planner.py", line 74, in planner_node
+    result = await agent.ainvoke({"messages": []})
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1469, in amodel_node
+    model_response = await _execute_model_async(request)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1441, in _execute_model_async
+    output = await model_.ainvoke(messages)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6017, in ainvoke
+    return await self.bound.ainvoke(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2151, in _agenerate_with_cache
+    result = await self._agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1960, in _agenerate
+    _handle_openai_bad_request(e)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1955, in _agenerate
+    raw_response = await self.async_client.with_raw_response.create(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_legacy_response.py", line 384, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2814, in create
+    return await self._post(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'bad_request_error', 'message': 'invalid params, chat content is empty (2013)', 'http_code': '400'}, 'request_id': '068b124a15823c512dc62df6bb86fd39'}
+During task with name 'model' and id '34dab85a-94ef-9ba6-ac59-ee62a32fed8a'
+During task with name 'planner' and id '9794aaed-f4ca-5900-61a7-43f87844bf0a'
+2026-06-24 21:47:24.619 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-24 21:47:24.672 | INFO     | 10001 | 进入process_with_agent
+2026-06-24 21:47:42.655 | INFO     | N/A | 路线：plan（原始：plan）
+2026-06-24 21:47:42.656 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-24 21:47:42.657 | INFO     | N/A | 下一步 → task_analyzer
+2026-06-24 21:47:42.658 | INFO     | N/A | 实际调用的大模型=qwen2.5
+2026-06-24 21:47:42.690 | INFO     | N/A | Mem0 长期记忆：Assistant recommended Great Wall sections for the user's Beijing 2-day trip: 慕田峪 (scenic, fewer crowds, recommended for first-timers), 八达岭 (most famous, easy transport), 金山岭 (pristine, best for hiking/photography), 司马台 (steep, for adventurers)
+Assistant proposed a 2-day Beijing itinerary: Day 1 — Great Wall day trip (suggested cable car up, hike down, ~1.5-2hr each way by tour bus/carpool); Day 2 — Tiananmen Square → Forbidden City (requires advance booking), then Jingshan Park or Temple of Heaven, evening at Wangfujing/Nanluoguxiang
+用户想去北京玩两天，想看长城
+2026-06-24 21:47:42.691 | INFO     | N/A | 用户 Profile：暂无
+2026-06-24 21:48:08.645 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-24 21:48:08.646 | INFO     | N/A | 下一步 → researcher
+2026-06-24 21:48:09.587 | INFO     | N/A | ✅ 已加载 15 个 MCP 工具
+2026-06-24 21:51:19.869 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'research_results', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-24 21:51:19.870 | INFO     | N/A | 下一步 → planner
+2026-06-24 21:56:22.953 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'research_results', 'draft_plan', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-24 21:56:22.953 | INFO     | N/A | 下一步 → final_optimizer（单次高质量生成）
+2026-06-24 21:59:58.254 | INFO     | N/A | 已完成完成最后的规划=### 2天北京长城与文化之旅
+
+#### 第1天：八达岭长城 + 颐和园
+- **上午**：
+  - 08:30 - 从酒店出发，建议乘坐S2线或877路公交前往八达岭长城（约45分钟车程）。
+  - 09:30 - 到达长城入口，购买门票并进入景区。推荐使用缆车上山，下山时徒步返回。
+  - 12:00 - 在长城上享用自带午餐或在附近餐馆用餐（如“长城脚下的农家菜”）。
+  
+- **下午**：
+  - 13:00 - 下山后前往颐和园，建议购买联票以节省时间。
+  - 14:00 - 游览长廊、佛香阁等景点。
+  - 17:30 - 结束游览后返回酒店休息。
+
+#### 第2天：故宫博物院 + 酒店周边休闲活动
+- **上午**：
+  - 08:30 - 前往故宫博物院（建议提前在官网预约）。
+  - 09:00 - 开始参观太和殿、珍宝馆等重要景点，注意避开人流高峰时段。
+  - 12:00 - 在附近餐馆享用午餐。
+
+- **下午**：
+  - 13:00 - 下午游览颐和园的苏州街或十七孔桥。
+  - 15:00 - 结束游览后在酒店周边闲逛，体验当地生活。推荐去王府井步行街购物、品尝小吃。
+
+### 预算提示
+- **交通费用**：往返八达岭长城约40元/人；S2线单程票价约8元。
+- **门票费用**：
+  - 八达岭长城旺季40元/人；
+  - 故宫博物院旺季60元/人；
+  - 颐和园联票旺季120元/人
+- **餐饮费用**：自带午餐或在酒店附近餐馆用餐，建议预算约50元/餐；王府井步行街有更多选择且性价比更高。
+  
+### 实用贴士
+- 建议提前在官方网站上预约故宫门票。
+- 北京天气多变，请携带雨具及防晒用品。八达岭长城和颐和园内均有售卖，但价格较高，建议自备或购买景区内的经济型防晒霜。
+- 用餐时尽量避开景区内的餐馆，以免价格偏高；王府井步行街有更多选择且性价比更高。
+
+希望这个行程能够满足您的需求。祝您旅途愉快！
+
+---
+
+**最终版完整行程**：
+
+### 第1天：八达岭长城 + 颐和园
+- **上午**：
+  - 08:30 - 从酒店出发，建议乘坐S2线或877路公交前往八达岭长城（约45分钟车程）。
+  - 09:30 - 到达长城入口，购买门票并进入景区。推荐使用缆车上山，下山时徒步返回。
+  - 12:00 - 在长城上享用自带午餐或在附近餐馆用餐（如“长城脚下的农家菜”）。
+
+- **下午**：
+  - 13:00 - 下山后前往颐和园，建议购买联票以节省时间。
+  - 14:00 - 游览长廊、佛香阁等景点。
+  - 17:30 - 结束游览后返回酒店休息。
+
+### 第2天：故宫博物院 + 酒店周边休闲活动
+- **上午**：
+  - 08:30 - 前往故宫博物院（建议提前在官网预约）。
+  - 09:00 - 开始参观太和殿、珍宝馆等重要景点，注意避开人流高峰时段。
+  - 12:00 - 在附近餐馆享用午餐。
+
+- **下午**：
+  - 13:00 - 下午游览颐和园的苏州街或十七孔桥。
+  - 15:00 - 结束游览后在酒店周边闲逛，体验当地生活。推荐去王府井步行街购物、品尝小吃。
+
+### 预算提示
+- **交通费用**：往返八达岭长城约40元/人；S2线单程票价约8元。
+- **门票费用**：
+  - 八达岭长城旺季40元/人；
+  - 故宫博物院旺季60元/人；
+  - 颐和园联票旺季120元/人
+- **餐饮费用**：自带午餐或在酒店附近餐馆用餐，建议预算约50元/餐；王府井步行街有更多选择且性价比更高。
+
+### 实用贴士
+- 建议提前在官方网站上预约故宫门票。
+- 北京天气多变，请携带雨具及防晒用品。八达岭长城和颐和园内均有售卖，但价格较高，建议自备或购买景区内的经济型防晒霜。
+- 用餐时尽量避开景区内的餐馆，以免价格偏高；王府井步行街有更多选择且性价比更高。
+
+希望这个行程能够满足您的需求。祝您旅途愉快！,分数=0
+2026-06-24 21:59:58.255 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'research_results', 'draft_plan', 'final_plan', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-24 21:59:58.257 | INFO     | N/A | ✅ 已生成最终计划，下一步解析
+2026-06-24 22:03:34.956 | INFO     | N/A | ✅ Plan 结构化解析成功 | 共 2 天
+2026-06-24 22:03:34.957 | INFO     | N/A | 最后的解析完的计划：TravelPlan(user_id=1, daily_plans=[DailyActivity(day=1, theme='抵达适应', activities=['入住酒店', '前门大街漫步'], location='前门/大栅栏', transportation='地铁', meals=None, tips=None, estimated_cost=300), DailyActivity(day=2, theme='八达岭长城与颐和园', activities=[{'time': '上午', 'details': [{'start_time': '08:30', 'activity': '从酒店出发，建议乘坐S2线或877路公交前往八达岭长城（约45分钟车程）'}, {'start_time': '09:30', 'activity': '到达长城入口，购买门票并进入景区。推荐使用缆车上山，下山时徒步返回'}, {'start_time': '12:00', 'activity': '在长城上享用自带午餐或在附近餐馆用餐（如“长城脚下的农家菜”）'}]}, {'time': '下午', 'details': [{'start_time': '13:00', 'activity': '下山后前往颐和园，建议购买联票以节省时间'}, {'start_time': '14:00', 'activity': '游览长廊、佛香阁等景点'}, {'start_time': '17:30', 'activity': '结束游览后返回酒店休息'}]}], location='八达岭长城/颐和园', transportation='公交/S2线', meals=None, tips=None, estimated_cost=480), DailyActivity(day=3, theme='故宫博物院 + 酒店周边休闲活动', activities=[{'time': '上午', 'details': [{'start_time': '08:30', 'activity': '前往故宫博物院（建议提前在官网预约）'}, {'start_time': '09:00', 'activity': '开始参观太和殿、珍宝馆等重要景点，注意避开人流高峰时段'}, {'start_time': '12:00', 'activity': '在附近餐馆享用午餐'}]}, {'time': '下午', 'details': [{'start_time': '13:00', 'activity': '下午游览颐和园的苏州街或十七孔桥'}, {'start_time': '15:00', 'activity': '结束游览后在酒店周边闲逛，体验当地生活。推荐去王府井步行街购物、品尝小吃'}]}], location='故宫博物院/酒店周边', transportation='公交/地铁', meals=None, tips=None, estimated_cost=680)], title='北京10日深度游', days=2, budget='未指定', pace='适中', task_id=None, plan_id=None, destination='北京', start_date=None, total_estimated_cost=None, notes=None, raw_markdown='### 2天北京长城与文化之旅\n\n#### 第1天：八达岭长城 + 颐和园\n- **上午**：\n  - 08:30 - 从酒店出发，建议乘坐S2线或877路公交前往八达岭长城（约45分钟车程）。\n  - 09:30 - 到达长城入口，购买门票并进入景区。推荐使用缆车上山，下山时徒步返回。\n  - 12:00 - 在长城上享用自带午餐或在附近餐馆用餐（如“长城脚下的农家菜”）。\n  \n- **下午**：\n  - 13:00 - 下山后前往颐和园，建议购买联票以节省时间。\n  - 14:00 - 游览长廊、佛香阁等景点。\n  - 17:30 - 结束游览后返回酒店休息。\n\n#### 第2天：故宫博物院 + 酒店周边休闲活动\n- **上午**：\n  - 08:30 - 前往故宫博物院（建议提前在官网预约）。\n  - 09:00 - 开始参观太和殿、珍宝馆等重要景点，注意避开人流高峰时段。\n  - 12:00 - 在附近餐馆享用午餐。\n\n- **下午**：\n  - 13:00 - 下午游览颐和园的苏州街或十七孔桥。\n  - 15:00 - 结束游览后在酒店周边闲逛，体验当地生活。推荐去王府井步行街购物、品尝小吃。\n\n### 预算提示\n- **交通费用**：往返八达岭长城约40元/人；S2线单程票价约8元。\n- **门票费用**：\n  - 八达岭长城旺季40元/人；\n  - 故宫博物院旺季60元/人；\n  - 颐和园联票旺季120元/人\n- **餐饮费用**：自带午餐或在酒店附近餐馆用餐，建议预算约50元/餐；王府井步行街有更多选择且性价比更高。\n  \n### 实用贴士\n- 建议提前在官方网站上预约故宫门票。\n- 北京天气多变，请携带雨具及防晒用品。八达岭长城和颐和园内均有售卖，但价格较高，建议自备或购买景区内的经济型防晒霜。\n- 用餐时尽量避开景区内的餐馆，以免价格偏高；王府井步行街有更多选择且性价比更高。\n\n希望这个行程能够满足您的需求。祝您旅途愉快！\n\n---\n\n**最终版完整行程**：\n\n### 第1天：八达岭长城 + 颐和园\n- **上午**：\n  - 08:30 - 从酒店出发，建议乘坐S2线或877路公交前往八达岭长城（约45分钟车程）。\n  - 09:30 - 到达长城入口，购买门票并进入景区。推荐使用缆车上山，下山时徒步返回。\n  - 12:00 - 在长城上享用自带午餐或在附近餐馆用餐（如“长城脚下的农家菜”）。\n\n- **下午**：\n  - 13:00 - 下山后前往颐和园，建议购买联票以节省时间。\n  - 14:00 - 游览长廊、佛香阁等景点。\n  - 17:30 - 结束游览后返回酒店休息。\n\n### 第2天：故宫博物院 + 酒店周边休闲活动\n- **上午**：\n  - 08:30 - 前往故宫博物院（建议提前在官网预约）。\n  - 09:00 - 开始参观太和殿、珍宝馆等重要景点，注意避开人流高峰时段。\n  - 12:00 - 在附近餐馆享用午餐。\n\n- **下午**：\n  - 13:00 - 下午游览颐和园的苏州街或十七孔桥。\n  - 15:00 - 结束游览后在酒店周边闲逛，体验当地生活。推荐去王府井步行街购物、品尝小吃。\n\n### 预算提示\n- **交通费用**：往返八达岭长城约40元/人；S2线单程票价约8元。\n- **门票费用**：\n  - 八达岭长城旺季40元/人；\n  - 故宫博物院旺季60元/人；\n  - 颐和园联票旺季120元/人\n- **餐饮费用**：自带午餐或在酒店附近餐馆用餐，建议预算约50元/餐；王府井步行街有更多选择且性价比更高。\n\n### 实用贴士\n- 建议提前在官方网站上预约故宫门票。\n- 北京天气多变，请携带雨具及防晒用品。八达岭长城和颐和园内均有售卖，但价格较高，建议自备或购买景区内的经济型防晒霜。\n- 用餐时尽量避开景区内的餐馆，以免价格偏高；王府井步行街有更多选择且性价比更高。\n\n希望这个行程能够满足您的需求。祝您旅途愉快！')
+2026-06-24 22:09:39.519 | INFO     | N/A | ✅ Mem0 记忆更新成功 - user_id: 1
+2026-06-24 22:13:05.946 | INFO     | N/A | LLM 偏好提取结果: {'dietary_restrictions': [], 'preferred_foods': [], 'accommodation_preference': '', 'travel_style': ['文化游']}
+2026-06-24 22:13:05.948 | INFO     | N/A | ✅ Profile 更新成功: {'preferred_destinations': ['北京'], 'preferred_budgets': ['未指定'], 'preferred_paces': ['适中'], 'travel_style': ['文化游'], 'last_updated': '2026-06-24T22:13:05.946852'}
+2026-06-24 22:13:05.949 | INFO     | 10001 | ✅ 8-Agent 多智能体处理完成
+2026-06-24 22:44:08.615 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-24 22:51:02.270 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-24 22:51:46.383 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-24 22:52:54.165 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-24 23:05:29.889 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-06-24 23:05:31.713 | INFO     | 10001 | 进入process_with_agent
+2026-06-24 23:05:49.154 | INFO     | N/A | 路线：plan（原始：plan）
+2026-06-24 23:05:49.162 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-24 23:05:49.162 | INFO     | N/A | 下一步 → task_analyzer
+2026-06-24 23:05:49.166 | INFO     | N/A | 实际调用的大模型=qwen2.5
+2026-06-24 23:05:49.201 | INFO     | N/A | Mem0 长期记忆：Assistant proposed a 2-day Beijing itinerary
+Assistant recommended Great Wall sections for the user's Beijing 2-day trip: 慕田峪 (scenic, fewer crowds, recommended for first-timers), 八达岭 (most famous, easy transport), 金山岭 (pristine, best for hiking/photography), 司马台 (steep, for adventurers)
+Assistant proposed a 2-day Beijing itinerary: Day 1 — Great Wall day trip (suggested cable car up, hike down, ~1.5-2hr each way by tour bus/carpool); Day 2 — Tiananmen Square → Forbidden City (requires advance booking), then Jingshan Park or Temple of Heaven, evening at Wangfujing/Nanluoguxiang
+用户想去北京玩两天，想看长城
+2026-06-24 23:05:49.203 | INFO     | N/A | 用户 Profile：{"preferred_destinations": ["北京"], "preferred_budgets": ["未指定"], "preferred_paces": ["适中"], "travel_style": ["文化游"], "last_updated": "2026-06-24T22:13:05.946852"}
+2026-06-24 23:06:19.718 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-24 23:06:19.718 | INFO     | N/A | 下一步 → researcher
+2026-06-24 23:06:20.836 | INFO     | N/A | ✅ 已加载 15 个 MCP 工具
+2026-06-24 23:10:13.797 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'research_results', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-24 23:10:13.798 | INFO     | N/A | 下一步 → planner
+2026-06-24 23:32:08.653 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'research_results', 'draft_plan', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-24 23:32:08.654 | INFO     | N/A | 下一步 → final_optimizer（单次高质量生成）
+2026-06-24 23:36:19.691 | INFO     | N/A | 已完成完成最后的规划=### 2天北京长城与文化之旅
+
+#### 第1天：八达岭长城 + 颐和园
+**上午**
+- **08:30 - 09:30**：从酒店出发，建议乘坐S2线或877路公交前往八达岭长城（约45分钟车程）。
+- **09:30 - 12:00**：到达长城入口，购买门票并进入景区。推荐使用缆车上山，下山时徒步返回。
+- **12:00 - 12:30**：在长城上享用自带午餐或在附近餐馆用餐。
+
+**下午**
+- **13:00 - 17:30**：游览颐和园，建议购买联票以节省时间。重点参观长廊、佛香阁等景点。
+- **17:30 - 18:00**：结束游览后返回酒店休息。
+
+#### 第2天：故宫博物院 + 酒店周边休闲活动
+**上午**
+- **08:30 - 12:00**：前往故宫博物院（建议提前在官网预约），参观太和殿、珍宝馆等重要景点，注意避开人流高峰时段。
+- **12:00 - 13:00**：在附近餐馆享用午餐。
+
+**下午**
+- **13:00 - 15:00**：游览颐和园的苏州街或十七孔桥。
+- **15:00 - 18:00**：结束游览后在酒店周边闲逛，体验当地生活。推荐去王府井步行街购物、品尝小吃。
+
+### 预算提示
+- **交通费用**：
+  - 往返八达岭长城约40元/人；S2线单程票价约8元。
+- **门票费用**：
+  - 八达岭长城旺季40元/人；
+  - 故宫博物院旺季60元/人；
+  - 颐和园联票旺季120元/人
+- **餐饮费用**：自带午餐或在酒店附近餐馆用餐，建议预算约50元/餐；王府井步行街有更多选择且性价比更高。
+
+### 实用贴士
+- **提前预约**：建议提前在官方网站上预约故宫门票。
+- **天气准备**：北京天气多变，请携带雨具及防晒用品。八达岭长城和颐和园内均有售卖，但价格较高，建议自备或购买景区内的经济型防晒霜。
+- **用餐选择**：尽量避开景区内的餐馆，以免价格偏高；王府井步行街有更多选择且性价比更高。
+
+### 预订酒店
+根据您的需求，我们为您推荐了两家不同价位的酒店：
+
+- **丽思卡尔顿**：¥1200/晚（高端奢华）
+- **汉庭**：¥350/晚（经济型）
+
+您可以根据自己的预算选择合适的住宿。如果您需要进一步的帮助或有其他问题，请随时告知。
+
+希望这个行程能够满足您的需求，祝您旅途愉快！
+
+---
+
+**最终版完整行程**：
+
+### 2天北京长城与文化之旅
+
+#### 第1天：八达岭长城 + 颐和园
+- **上午**
+  - 08:30 - 09:30：从酒店出发，建议乘坐S2线或877路公交前往八达岭长城（约45分钟车程）。
+  - 09:30 - 12:00：到达长城入口，购买门票并进入景区。推荐使用缆车上山，下山时徒步返回。
+  - 12:00 - 12:30：在长城上享用自带午餐或在附近餐馆用餐。
+
+- **下午**
+  - 13:00 - 17:30：游览颐和园，建议购买联票以节省时间。重点参观长廊、佛香阁等景点。
+  - 17:30 - 18:00：结束游览后返回酒店休息。
+
+#### 第2天：故宫博物院 + 酒店周边休闲活动
+- **上午**
+  - 08:30 - 12:00：前往故宫博物院（建议提前在官网预约），参观太和殿、珍宝馆等重要景点，注意避开人流高峰时段。
+  - 12:00 - 13:00：在附近餐馆享用午餐。
+
+- **下午**
+  - 13:00 - 15:00：游览颐和园的苏州街或十七孔桥。
+  - 15:00 - 18:00：结束游览后在酒店周边闲逛，体验当地生活。推荐去王府井步行街购物、品尝小吃。
+
+### 预算提示
+- **交通费用**：
+  - 往返八达岭长城约40元/人；S2线单程票价约8元。
+- **门票费用**：
+  - 八达岭长城旺季40元/人；
+  - 故宫博物院旺季60元/人；
+  - 颐和园联票旺季120元/人
+- **餐饮费用**：自带午餐或在酒店附近餐馆用餐，建议预算约50元/餐；王府井步行街有更多选择且性价比更高。
+
+### 实用贴士
+- **提前预约**：建议提前在官方网站上预约故宫门票。
+- **天气准备**：北京天气多变，请携带雨具及防晒用品。八达岭长城和颐和园内均有售卖，但价格较高，建议自备或购买景区内的经济型防晒霜。
+- **用餐选择**：尽量避开景区内的餐馆，以免价格偏高；王府井步行街有更多选择且性价比更高。
+
+### 预订酒店
+根据您的需求，我们为您推荐了两家不同价位的酒店：
+
+- **丽思卡尔顿**：¥1200/晚（高端奢华）
+- **汉庭**：¥350/晚（经济型）
+
+您可以根据自己的预算选择合适的住宿。如果您需要进一步的帮助或有其他问题，请随时告知。
+
+希望这个行程能够满足您的需求，祝您旅途愉快！,分数=0
+2026-06-24 23:36:19.713 | INFO     | N/A | 进入supervisor_node | 当前状态: ['messages', 'user_id', 'session_id', 'msg_id', 'trace_id', 'task', 'research_results', 'draft_plan', 'final_plan', 'next', 'critiques', 'scores', 'should_end', 'intent']
+2026-06-24 23:36:19.714 | INFO     | N/A | ✅ 已生成最终计划，下一步解析
