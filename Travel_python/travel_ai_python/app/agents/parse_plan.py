@@ -1,4 +1,4 @@
-from langchain_core.messages import SystemMessage
+from langchain_core.messages import HumanMessage
 from app.config.logger import logger
 from app.model.plan_model import TravelPlan, DailyActivity
 from app.agents.base import llm
@@ -33,7 +33,7 @@ def parse_plan_node(state):
     try:
 
         structured_llm = llm.with_structured_output(dict, method="json_mode")
-        parsed_dict = structured_llm.invoke([SystemMessage(content=parse_prompt)])
+        parsed_dict = structured_llm.invoke([HumanMessage(content=parse_prompt)])
 
         daily_plans = []
         for item in parsed_dict.get("daily_plans", []):

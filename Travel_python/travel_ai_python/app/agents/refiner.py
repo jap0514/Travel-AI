@@ -1,4 +1,4 @@
-from langchain_core.messages import SystemMessage
+from langchain_core.messages import HumanMessage
 from app.config.logger import logger
 from app.agents.state import AgentState
 from app.agents.base import llm
@@ -27,7 +27,7 @@ def refiner_node(state: AgentState):
 
     logger.info(f"refiner迭代次数={state.get("iteration")}")
 
-    response = llm.invoke([SystemMessage(content=prompt)])
+    response = llm.invoke([HumanMessage(content=prompt)])
 
     return {
         "draft_plan": response.content,  # 更新draft用于下一轮

@@ -1,0 +1,789 @@
+2026-06-29 20:19:24.814 | INFO     | N/A | 🚀 Profile Update Worker 启动
+2026-06-29 20:19:24.814 | INFO     | N/A | ⏳ 等待 Profile 更新任务...
+2026-06-29 20:19:29.841 | ERROR    | N/A | Worker 主循环异常: Timeout reading from socket
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 64, in _read_from_socket
+    data = sock.recv(socket_read_size)
+
+TimeoutError: timed out
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 194, in <module>
+    run_worker()
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 169, in run_worker
+    task_data = pop_profile_update_task(block=True, timeout=5)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\utils\redis_client.py", line 37, in pop_profile_update_task
+    result = redis_client.brpop(PROFILE_UPDATE_QUEUE, timeout=timeout)
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\commands\core.py", line 4751, in brpop
+    return self.execute_command("BRPOP", *keys)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 787, in execute_command
+    return self._execute_command(*args, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 809, in _execute_command
+    result = conn.retry.call_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 132, in call_with_retry
+    raise error
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 120, in call_with_retry
+    return do()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 810, in <lambda>
+    lambda: self._send_command_parse_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 753, in _send_command_parse_response
+    return self.parse_response(conn, command_name, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 853, in parse_response
+    response = connection.read_response()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\connection.py", line 1371, in read_response
+    response = self._parser.read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 40, in read_response
+    result = self._read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 65, in _read_response
+    raw = self._buffer.readline(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 117, in readline
+    self._read_from_socket(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 77, in _read_from_socket
+    raise TimeoutError("Timeout reading from socket")
+
+redis.exceptions.TimeoutError: Timeout reading from socket
+2026-06-29 20:19:30.862 | INFO     | N/A | ⏳ 等待 Profile 更新任务...
+2026-06-29 20:19:35.897 | ERROR    | N/A | Worker 主循环异常: Timeout reading from socket
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 64, in _read_from_socket
+    data = sock.recv(socket_read_size)
+
+TimeoutError: timed out
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 194, in <module>
+    run_worker()
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 169, in run_worker
+    task_data = pop_profile_update_task(block=True, timeout=5)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\utils\redis_client.py", line 37, in pop_profile_update_task
+    result = redis_client.brpop(PROFILE_UPDATE_QUEUE, timeout=timeout)
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\commands\core.py", line 4751, in brpop
+    return self.execute_command("BRPOP", *keys)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 787, in execute_command
+    return self._execute_command(*args, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 809, in _execute_command
+    result = conn.retry.call_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 132, in call_with_retry
+    raise error
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 120, in call_with_retry
+    return do()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 810, in <lambda>
+    lambda: self._send_command_parse_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 753, in _send_command_parse_response
+    return self.parse_response(conn, command_name, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 853, in parse_response
+    response = connection.read_response()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\connection.py", line 1371, in read_response
+    response = self._parser.read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 40, in read_response
+    result = self._read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 65, in _read_response
+    raw = self._buffer.readline(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 117, in readline
+    self._read_from_socket(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 77, in _read_from_socket
+    raise TimeoutError("Timeout reading from socket")
+
+redis.exceptions.TimeoutError: Timeout reading from socket
+2026-06-29 20:19:36.908 | INFO     | N/A | ⏳ 等待 Profile 更新任务...
+2026-06-29 20:19:41.946 | ERROR    | N/A | Worker 主循环异常: Timeout reading from socket
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 64, in _read_from_socket
+    data = sock.recv(socket_read_size)
+
+TimeoutError: timed out
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 194, in <module>
+    run_worker()
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 169, in run_worker
+    task_data = pop_profile_update_task(block=True, timeout=5)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\utils\redis_client.py", line 37, in pop_profile_update_task
+    result = redis_client.brpop(PROFILE_UPDATE_QUEUE, timeout=timeout)
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\commands\core.py", line 4751, in brpop
+    return self.execute_command("BRPOP", *keys)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 787, in execute_command
+    return self._execute_command(*args, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 809, in _execute_command
+    result = conn.retry.call_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 132, in call_with_retry
+    raise error
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 120, in call_with_retry
+    return do()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 810, in <lambda>
+    lambda: self._send_command_parse_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 753, in _send_command_parse_response
+    return self.parse_response(conn, command_name, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 853, in parse_response
+    response = connection.read_response()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\connection.py", line 1371, in read_response
+    response = self._parser.read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 40, in read_response
+    result = self._read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 65, in _read_response
+    raw = self._buffer.readline(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 117, in readline
+    self._read_from_socket(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 77, in _read_from_socket
+    raise TimeoutError("Timeout reading from socket")
+
+redis.exceptions.TimeoutError: Timeout reading from socket
+2026-06-29 20:19:42.950 | INFO     | N/A | ⏳ 等待 Profile 更新任务...
+2026-06-29 20:19:47.973 | ERROR    | N/A | Worker 主循环异常: Timeout reading from socket
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 64, in _read_from_socket
+    data = sock.recv(socket_read_size)
+
+TimeoutError: timed out
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 194, in <module>
+    run_worker()
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 169, in run_worker
+    task_data = pop_profile_update_task(block=True, timeout=5)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\utils\redis_client.py", line 37, in pop_profile_update_task
+    result = redis_client.brpop(PROFILE_UPDATE_QUEUE, timeout=timeout)
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\commands\core.py", line 4751, in brpop
+    return self.execute_command("BRPOP", *keys)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 787, in execute_command
+    return self._execute_command(*args, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 809, in _execute_command
+    result = conn.retry.call_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 132, in call_with_retry
+    raise error
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 120, in call_with_retry
+    return do()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 810, in <lambda>
+    lambda: self._send_command_parse_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 753, in _send_command_parse_response
+    return self.parse_response(conn, command_name, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 853, in parse_response
+    response = connection.read_response()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\connection.py", line 1371, in read_response
+    response = self._parser.read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 40, in read_response
+    result = self._read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 65, in _read_response
+    raw = self._buffer.readline(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 117, in readline
+    self._read_from_socket(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 77, in _read_from_socket
+    raise TimeoutError("Timeout reading from socket")
+
+redis.exceptions.TimeoutError: Timeout reading from socket
+2026-06-29 20:19:48.977 | INFO     | N/A | ⏳ 等待 Profile 更新任务...
+2026-06-29 20:19:53.999 | ERROR    | N/A | Worker 主循环异常: Timeout reading from socket
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 64, in _read_from_socket
+    data = sock.recv(socket_read_size)
+
+TimeoutError: timed out
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 194, in <module>
+    run_worker()
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 169, in run_worker
+    task_data = pop_profile_update_task(block=True, timeout=5)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\utils\redis_client.py", line 37, in pop_profile_update_task
+    result = redis_client.brpop(PROFILE_UPDATE_QUEUE, timeout=timeout)
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\commands\core.py", line 4751, in brpop
+    return self.execute_command("BRPOP", *keys)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 787, in execute_command
+    return self._execute_command(*args, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 809, in _execute_command
+    result = conn.retry.call_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 132, in call_with_retry
+    raise error
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 120, in call_with_retry
+    return do()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 810, in <lambda>
+    lambda: self._send_command_parse_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 753, in _send_command_parse_response
+    return self.parse_response(conn, command_name, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 853, in parse_response
+    response = connection.read_response()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\connection.py", line 1371, in read_response
+    response = self._parser.read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 40, in read_response
+    result = self._read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 65, in _read_response
+    raw = self._buffer.readline(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 117, in readline
+    self._read_from_socket(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 77, in _read_from_socket
+    raise TimeoutError("Timeout reading from socket")
+
+redis.exceptions.TimeoutError: Timeout reading from socket
+2026-06-29 20:19:55.005 | INFO     | N/A | ⏳ 等待 Profile 更新任务...
+2026-06-29 20:20:00.042 | ERROR    | N/A | Worker 主循环异常: Timeout reading from socket
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 64, in _read_from_socket
+    data = sock.recv(socket_read_size)
+
+TimeoutError: timed out
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 194, in <module>
+    run_worker()
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 169, in run_worker
+    task_data = pop_profile_update_task(block=True, timeout=5)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\utils\redis_client.py", line 37, in pop_profile_update_task
+    result = redis_client.brpop(PROFILE_UPDATE_QUEUE, timeout=timeout)
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\commands\core.py", line 4751, in brpop
+    return self.execute_command("BRPOP", *keys)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 787, in execute_command
+    return self._execute_command(*args, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 809, in _execute_command
+    result = conn.retry.call_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 132, in call_with_retry
+    raise error
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 120, in call_with_retry
+    return do()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 810, in <lambda>
+    lambda: self._send_command_parse_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 753, in _send_command_parse_response
+    return self.parse_response(conn, command_name, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 853, in parse_response
+    response = connection.read_response()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\connection.py", line 1371, in read_response
+    response = self._parser.read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 40, in read_response
+    result = self._read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 65, in _read_response
+    raw = self._buffer.readline(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 117, in readline
+    self._read_from_socket(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 77, in _read_from_socket
+    raise TimeoutError("Timeout reading from socket")
+
+redis.exceptions.TimeoutError: Timeout reading from socket
+2026-06-29 20:20:01.048 | INFO     | N/A | ⏳ 等待 Profile 更新任务...
+2026-06-29 20:20:06.076 | ERROR    | N/A | Worker 主循环异常: Timeout reading from socket
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 64, in _read_from_socket
+    data = sock.recv(socket_read_size)
+
+TimeoutError: timed out
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 194, in <module>
+    run_worker()
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 169, in run_worker
+    task_data = pop_profile_update_task(block=True, timeout=5)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\utils\redis_client.py", line 37, in pop_profile_update_task
+    result = redis_client.brpop(PROFILE_UPDATE_QUEUE, timeout=timeout)
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\commands\core.py", line 4751, in brpop
+    return self.execute_command("BRPOP", *keys)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 787, in execute_command
+    return self._execute_command(*args, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 809, in _execute_command
+    result = conn.retry.call_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 132, in call_with_retry
+    raise error
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 120, in call_with_retry
+    return do()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 810, in <lambda>
+    lambda: self._send_command_parse_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 753, in _send_command_parse_response
+    return self.parse_response(conn, command_name, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 853, in parse_response
+    response = connection.read_response()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\connection.py", line 1371, in read_response
+    response = self._parser.read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 40, in read_response
+    result = self._read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 65, in _read_response
+    raw = self._buffer.readline(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 117, in readline
+    self._read_from_socket(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 77, in _read_from_socket
+    raise TimeoutError("Timeout reading from socket")
+
+redis.exceptions.TimeoutError: Timeout reading from socket
+2026-06-29 20:20:07.081 | INFO     | N/A | ⏳ 等待 Profile 更新任务...
+2026-06-29 20:20:12.108 | ERROR    | N/A | Worker 主循环异常: Timeout reading from socket
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 64, in _read_from_socket
+    data = sock.recv(socket_read_size)
+
+TimeoutError: timed out
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 194, in <module>
+    run_worker()
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 169, in run_worker
+    task_data = pop_profile_update_task(block=True, timeout=5)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\utils\redis_client.py", line 37, in pop_profile_update_task
+    result = redis_client.brpop(PROFILE_UPDATE_QUEUE, timeout=timeout)
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\commands\core.py", line 4751, in brpop
+    return self.execute_command("BRPOP", *keys)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 787, in execute_command
+    return self._execute_command(*args, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 809, in _execute_command
+    result = conn.retry.call_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 132, in call_with_retry
+    raise error
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 120, in call_with_retry
+    return do()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 810, in <lambda>
+    lambda: self._send_command_parse_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 753, in _send_command_parse_response
+    return self.parse_response(conn, command_name, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 853, in parse_response
+    response = connection.read_response()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\connection.py", line 1371, in read_response
+    response = self._parser.read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 40, in read_response
+    result = self._read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 65, in _read_response
+    raw = self._buffer.readline(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 117, in readline
+    self._read_from_socket(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 77, in _read_from_socket
+    raise TimeoutError("Timeout reading from socket")
+
+redis.exceptions.TimeoutError: Timeout reading from socket
+2026-06-29 20:20:13.112 | INFO     | N/A | ⏳ 等待 Profile 更新任务...
+2026-06-29 20:20:18.123 | INFO     | N/A | 收到停止信号，Worker 即将关闭...
+2026-06-29 20:20:18.123 | ERROR    | N/A | Worker 主循环异常: Timeout reading from socket
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 64, in _read_from_socket
+    data = sock.recv(socket_read_size)
+
+TimeoutError: timed out
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 194, in <module>
+    run_worker()
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 169, in run_worker
+    task_data = pop_profile_update_task(block=True, timeout=5)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\utils\redis_client.py", line 37, in pop_profile_update_task
+    result = redis_client.brpop(PROFILE_UPDATE_QUEUE, timeout=timeout)
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\commands\core.py", line 4751, in brpop
+    return self.execute_command("BRPOP", *keys)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 787, in execute_command
+    return self._execute_command(*args, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 809, in _execute_command
+    result = conn.retry.call_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 132, in call_with_retry
+    raise error
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 120, in call_with_retry
+    return do()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 810, in <lambda>
+    lambda: self._send_command_parse_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 753, in _send_command_parse_response
+    return self.parse_response(conn, command_name, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 853, in parse_response
+    response = connection.read_response()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\connection.py", line 1371, in read_response
+    response = self._parser.read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 40, in read_response
+    result = self._read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 65, in _read_response
+    raw = self._buffer.readline(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 117, in readline
+    self._read_from_socket(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 77, in _read_from_socket
+    raise TimeoutError("Timeout reading from socket")
+
+redis.exceptions.TimeoutError: Timeout reading from socket
+2026-06-29 20:20:19.128 | INFO     | N/A | Worker 关闭 | 总处理: 0 个任务, 失败: 0 个
+2026-06-29 20:20:25.751 | INFO     | N/A | 🚀 Profile Update Worker 启动
+2026-06-29 20:20:25.751 | INFO     | N/A | ⏳ 等待 Profile 更新任务...
+2026-06-29 20:20:30.775 | ERROR    | N/A | Worker 主循环异常: Timeout reading from socket
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 64, in _read_from_socket
+    data = sock.recv(socket_read_size)
+
+TimeoutError: timed out
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 194, in <module>
+    run_worker()
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 169, in run_worker
+    task_data = pop_profile_update_task(block=True, timeout=5)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\utils\redis_client.py", line 37, in pop_profile_update_task
+    result = redis_client.brpop(PROFILE_UPDATE_QUEUE, timeout=timeout)
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\commands\core.py", line 4751, in brpop
+    return self.execute_command("BRPOP", *keys)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 787, in execute_command
+    return self._execute_command(*args, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 809, in _execute_command
+    result = conn.retry.call_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 132, in call_with_retry
+    raise error
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 120, in call_with_retry
+    return do()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 810, in <lambda>
+    lambda: self._send_command_parse_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 753, in _send_command_parse_response
+    return self.parse_response(conn, command_name, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 853, in parse_response
+    response = connection.read_response()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\connection.py", line 1371, in read_response
+    response = self._parser.read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 40, in read_response
+    result = self._read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 65, in _read_response
+    raw = self._buffer.readline(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 117, in readline
+    self._read_from_socket(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 77, in _read_from_socket
+    raise TimeoutError("Timeout reading from socket")
+
+redis.exceptions.TimeoutError: Timeout reading from socket
+2026-06-29 20:20:31.785 | INFO     | N/A | ⏳ 等待 Profile 更新任务...
+2026-06-29 20:20:36.825 | ERROR    | N/A | Worker 主循环异常: Timeout reading from socket
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 64, in _read_from_socket
+    data = sock.recv(socket_read_size)
+
+TimeoutError: timed out
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 194, in <module>
+    run_worker()
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 169, in run_worker
+    task_data = pop_profile_update_task(block=True, timeout=5)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\utils\redis_client.py", line 37, in pop_profile_update_task
+    result = redis_client.brpop(PROFILE_UPDATE_QUEUE, timeout=timeout)
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\commands\core.py", line 4751, in brpop
+    return self.execute_command("BRPOP", *keys)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 787, in execute_command
+    return self._execute_command(*args, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 809, in _execute_command
+    result = conn.retry.call_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 132, in call_with_retry
+    raise error
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 120, in call_with_retry
+    return do()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 810, in <lambda>
+    lambda: self._send_command_parse_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 753, in _send_command_parse_response
+    return self.parse_response(conn, command_name, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 853, in parse_response
+    response = connection.read_response()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\connection.py", line 1371, in read_response
+    response = self._parser.read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 40, in read_response
+    result = self._read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 65, in _read_response
+    raw = self._buffer.readline(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 117, in readline
+    self._read_from_socket(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 77, in _read_from_socket
+    raise TimeoutError("Timeout reading from socket")
+
+redis.exceptions.TimeoutError: Timeout reading from socket
+2026-06-29 20:20:37.830 | INFO     | N/A | ⏳ 等待 Profile 更新任务...
+2026-06-29 20:20:42.854 | ERROR    | N/A | Worker 主循环异常: Timeout reading from socket
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 64, in _read_from_socket
+    data = sock.recv(socket_read_size)
+
+TimeoutError: timed out
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 194, in <module>
+    run_worker()
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 169, in run_worker
+    task_data = pop_profile_update_task(block=True, timeout=5)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\utils\redis_client.py", line 37, in pop_profile_update_task
+    result = redis_client.brpop(PROFILE_UPDATE_QUEUE, timeout=timeout)
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\commands\core.py", line 4751, in brpop
+    return self.execute_command("BRPOP", *keys)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 787, in execute_command
+    return self._execute_command(*args, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 809, in _execute_command
+    result = conn.retry.call_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 132, in call_with_retry
+    raise error
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 120, in call_with_retry
+    return do()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 810, in <lambda>
+    lambda: self._send_command_parse_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 753, in _send_command_parse_response
+    return self.parse_response(conn, command_name, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 853, in parse_response
+    response = connection.read_response()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\connection.py", line 1371, in read_response
+    response = self._parser.read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 40, in read_response
+    result = self._read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 65, in _read_response
+    raw = self._buffer.readline(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 117, in readline
+    self._read_from_socket(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 77, in _read_from_socket
+    raise TimeoutError("Timeout reading from socket")
+
+redis.exceptions.TimeoutError: Timeout reading from socket
+2026-06-29 20:20:43.862 | INFO     | N/A | ⏳ 等待 Profile 更新任务...
+2026-06-29 20:20:48.881 | INFO     | N/A | 收到停止信号，Worker 即将关闭...
+2026-06-29 20:20:48.882 | ERROR    | N/A | Worker 主循环异常: Timeout reading from socket
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 64, in _read_from_socket
+    data = sock.recv(socket_read_size)
+
+TimeoutError: timed out
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 194, in <module>
+    run_worker()
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 169, in run_worker
+    task_data = pop_profile_update_task(block=True, timeout=5)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\utils\redis_client.py", line 37, in pop_profile_update_task
+    result = redis_client.brpop(PROFILE_UPDATE_QUEUE, timeout=timeout)
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\commands\core.py", line 4751, in brpop
+    return self.execute_command("BRPOP", *keys)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 787, in execute_command
+    return self._execute_command(*args, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 809, in _execute_command
+    result = conn.retry.call_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 132, in call_with_retry
+    raise error
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 120, in call_with_retry
+    return do()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 810, in <lambda>
+    lambda: self._send_command_parse_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 753, in _send_command_parse_response
+    return self.parse_response(conn, command_name, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 853, in parse_response
+    response = connection.read_response()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\connection.py", line 1371, in read_response
+    response = self._parser.read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 40, in read_response
+    result = self._read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 65, in _read_response
+    raw = self._buffer.readline(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 117, in readline
+    self._read_from_socket(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 77, in _read_from_socket
+    raise TimeoutError("Timeout reading from socket")
+
+redis.exceptions.TimeoutError: Timeout reading from socket
+2026-06-29 20:20:49.886 | INFO     | N/A | Worker 关闭 | 总处理: 0 个任务, 失败: 0 个
+2026-06-29 20:23:20.819 | INFO     | N/A | 🚀 Profile Update Worker 启动
+2026-06-29 20:23:20.819 | INFO     | N/A | ⏳ 等待 Profile 更新任务...
+2026-06-29 20:23:25.827 | ERROR    | N/A | Worker 主循环异常: Timeout reading from socket
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 64, in _read_from_socket
+    data = sock.recv(socket_read_size)
+
+TimeoutError: timed out
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 194, in <module>
+    run_worker()
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 169, in run_worker
+    task_data = pop_profile_update_task(block=True, timeout=5)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\utils\redis_client.py", line 37, in pop_profile_update_task
+    result = redis_client.brpop(PROFILE_UPDATE_QUEUE, timeout=timeout)
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\commands\core.py", line 4751, in brpop
+    return self.execute_command("BRPOP", *keys)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 787, in execute_command
+    return self._execute_command(*args, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 809, in _execute_command
+    result = conn.retry.call_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 132, in call_with_retry
+    raise error
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 120, in call_with_retry
+    return do()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 810, in <lambda>
+    lambda: self._send_command_parse_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 753, in _send_command_parse_response
+    return self.parse_response(conn, command_name, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 853, in parse_response
+    response = connection.read_response()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\connection.py", line 1371, in read_response
+    response = self._parser.read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 40, in read_response
+    result = self._read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 65, in _read_response
+    raw = self._buffer.readline(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 117, in readline
+    self._read_from_socket(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 77, in _read_from_socket
+    raise TimeoutError("Timeout reading from socket")
+
+redis.exceptions.TimeoutError: Timeout reading from socket
+2026-06-29 20:23:26.843 | INFO     | N/A | ⏳ 等待 Profile 更新任务...
+2026-06-29 20:23:31.876 | INFO     | N/A | 收到停止信号，Worker 即将关闭...
+2026-06-29 20:23:31.876 | ERROR    | N/A | Worker 主循环异常: Timeout reading from socket
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 64, in _read_from_socket
+    data = sock.recv(socket_read_size)
+
+TimeoutError: timed out
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 194, in <module>
+    run_worker()
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\profile_worker.py", line 169, in run_worker
+    task_data = pop_profile_update_task(block=True, timeout=5)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\utils\redis_client.py", line 37, in pop_profile_update_task
+    result = redis_client.brpop(PROFILE_UPDATE_QUEUE, timeout=timeout)
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\commands\core.py", line 4751, in brpop
+    return self.execute_command("BRPOP", *keys)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 787, in execute_command
+    return self._execute_command(*args, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 809, in _execute_command
+    result = conn.retry.call_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 132, in call_with_retry
+    raise error
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\retry.py", line 120, in call_with_retry
+    return do()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 810, in <lambda>
+    lambda: self._send_command_parse_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 753, in _send_command_parse_response
+    return self.parse_response(conn, command_name, **options)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\client.py", line 853, in parse_response
+    response = connection.read_response()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\connection.py", line 1371, in read_response
+    response = self._parser.read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 40, in read_response
+    result = self._read_response(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\resp3.py", line 65, in _read_response
+    raw = self._buffer.readline(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 117, in readline
+    self._read_from_socket(timeout=timeout)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\redis\_parsers\socket.py", line 77, in _read_from_socket
+    raise TimeoutError("Timeout reading from socket")
+
+redis.exceptions.TimeoutError: Timeout reading from socket
+2026-06-29 20:23:32.881 | INFO     | N/A | Worker 关闭 | 总处理: 0 个任务, 失败: 0 个
