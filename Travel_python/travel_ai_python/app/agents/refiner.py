@@ -10,10 +10,10 @@ def refiner_node(state: AgentState):
 
     prompt = f"""你是一位顶级旅行行程优化专家，擅长根据专家反馈大幅提升行程质量。
 
-    **原草案**：
+    原草案：
     {draft}
 
-    **专家评审意见**：
+    专家评审意见：
     {critiques}
 
     **优化要求**：
@@ -23,7 +23,7 @@ def refiner_node(state: AgentState):
     4. 优化每日节奏，避免过度疲劳或过于松散
     5. 增强整体连贯性和惊喜感
 
-    请输出**大幅改进后的完整新版本行程**（使用Markdown格式）。"""
+    请输出大幅改进后的完整新版本行程。"""
 
     logger.info(f"refiner迭代次数={state.get("iteration")}")
 

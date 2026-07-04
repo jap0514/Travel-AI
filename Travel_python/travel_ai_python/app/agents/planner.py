@@ -63,7 +63,7 @@ async def planner_node(state):
     - search_hotels(city, checkin, checkout, budget) ：查询酒店
     - search_flights(departure, destination, date) ：查询航班
 
-    请生成完整、详细、美观的旅行行程（使用Markdown格式）。"""
+    请生成完整、详细、美观的旅行行程。"""
 
     agent = create_agent(
         model=llm,
