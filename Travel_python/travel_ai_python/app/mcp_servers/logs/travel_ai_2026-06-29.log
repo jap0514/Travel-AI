@@ -1,0 +1,16 @@
+2026-06-29 20:43:41.436 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 广州 好玩的 景点 历史文化 特色 | City: 广州
+2026-06-29 20:43:41.663 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-29 20:43:41.672 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 广州 好玩 景点 历史文化 特色 | City: 广州
+2026-06-29 20:43:41.695 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-29 20:43:41.698 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 广州 好玩 景点 历史文化 特色 | City: 广州
+2026-06-29 20:43:41.748 | INFO     | N/A | 混合检索完成 → 召回 0 条
+2026-06-29 20:58:14.812 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京 好玩 景点 历史文化 特色 | City: 北京
+2026-06-29 20:58:14.900 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-29 20:58:14.909 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京 好玩 景点 历史文化 特色 | City: 北京
+2026-06-29 20:58:14.986 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-29 20:58:14.995 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京 好玩 景点 历史文化 特色 | City: 北京
+2026-06-29 20:58:15.076 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-29 20:58:15.081 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京 好玩 景点 历史文化 特色 | City: 北京
+2026-06-29 20:58:15.152 | INFO     | N/A | 混合检索完成 → 召回 3 条
+2026-06-29 20:58:15.156 | INFO     | N/A | 🔍 执行混合检索 | Collection: attractions | Query: 北京 好玩 景点 历史文化 特色 | City: 北京
+2026-06-29 20:58:15.228 | INFO     | N/A | 混合检索完成 → 召回 3 条

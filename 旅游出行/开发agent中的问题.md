@@ -118,3 +118,44 @@ Qdrant 的混合检索需要两个条件：
   1. Collection 配置了 sparse_vectors
   2. 数据同时导入了 sparse_vector（BM25 向量）
 
+
+
+
+
+6、行程规划好像没有用到qdrant_rag_server，我没看到有查询
+
+
+
+7、现在是需要输入起点，点击规划才会显示路线。但是路线不准确，同时后台显示地址解析失败。我想要在agent完成规划后地图自动显示目的地，用户输入起点，点击规划才显示路线
+
+
+
+
+
+8、返回的数据有问题，有些location为空，有些的行程规划里面出现相同的活动，也就是地方一样
+
+![image-20260703135243929](开发agent中的问题.assets/image-20260703135243929.png)
+
+
+
+
+
+9、把具体的游玩信息当成地址来解析了
+
+
+
+![image-20260703142338809](开发agent中的问题.assets/image-20260703142338809.png)
+
+
+
+
+
+10、为什么生成的地址location中间还有个斜杠
+
+activities=['抵达三亚市区', '天涯海角游览'], location='三亚市区/天涯海角', transportation='飞机', meals=None, tips=None, estimated_cost=899)
+
+
+
+
+
+11、parse_plan 节点里面的提示词不对，没有和我的model里面的plan_model对应上
