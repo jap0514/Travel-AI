@@ -1,0 +1,91 @@
+2026-07-12 14:33:00.143 | INFO     | N/A | 👋 Travel AI Web 服务已关闭
+2026-07-12 14:33:20.496 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-07-12 14:33:21.117 | INFO     | N/A | 🌐 Travel AI Web 服务启动中...
+2026-07-12 14:33:21.117 | INFO     | N/A | 📄 前端页面: http://localhost:8000
+2026-07-12 14:33:21.117 | INFO     | N/A | 🔌 API 文档: http://localhost:8000/docs
+2026-07-12 14:33:21.117 | INFO     | N/A | 💡 确保 MCP 服务已启动以获得完整功能！
+2026-07-12 14:36:35.657 | INFO     | 1_1001_1783838195657729800 | python端成功接收到Java发过来的消息: 请帮我规划一个广州1日游...
+2026-07-12 14:36:35.661 | INFO     | 1_1001_1783838195657729800 | 进入process_with_agent
+2026-07-12 14:36:37.079 | INFO     | N/A | 路线：plan（原始：plan）
+2026-07-12 14:36:37.089 | INFO     | N/A | 进入supervisor_node
+2026-07-12 14:36:37.089 | INFO     | N/A | 下一步task_analyzer
+2026-07-12 14:36:37.094 | INFO     | N/A | [TaskAnalyzer] 用户消息: 请帮我规划一个广州1日游...
+2026-07-12 14:36:39.004 | INFO     | N/A | [TaskAnalyzer] 提取结果: 广州 1天 中等 适中
+2026-07-12 14:36:39.008 | INFO     | N/A | 进入supervisor_node
+2026-07-12 14:36:39.008 | INFO     | N/A | 下一步researcher
+2026-07-12 14:36:41.401 | INFO     | N/A | ✅ 已加载 15 个 MCP 工具
+2026-07-12 14:36:41.402 | INFO     | N/A | [Researcher] 开始研究 广州
+2026-07-12 14:37:32.943 | INFO     | N/A | [Researcher] 研究完成，字数: 3732
+2026-07-12 14:37:32.960 | INFO     | N/A | 进入supervisor_node
+2026-07-12 14:37:32.960 | INFO     | N/A | 下一步planner
+2026-07-12 14:37:33.046 | INFO     | N/A | [Planner] 开始规划 广州1天行程
+2026-07-12 14:38:00.311 | INFO     | N/A | [Planner] 草案完成，字数: 3678
+2026-07-12 14:38:00.319 | INFO     | N/A | 进入supervisor_node
+2026-07-12 14:38:00.320 | INFO     | N/A | 下一步critic
+2026-07-12 14:38:00.333 | INFO     | N/A | [Critic] 第0次评审开始
+2026-07-12 14:38:09.702 | INFO     | N/A | [Critic] 第0次评审完成 | 总分: 85.0 | 下一步: final_optimizer
+2026-07-12 14:38:09.719 | INFO     | N/A | [FinalOptimizer] 开始最终润色 | 最高分: 85.0
+2026-07-12 14:38:45.738 | INFO     | N/A | [FinalOptimizer] 完成，最终字数: 4401
+2026-07-12 14:38:45.750 | INFO     | N/A | 进入supervisor_node
+2026-07-12 14:38:45.750 | INFO     | N/A | 下一步=parse_plan（should_end=True）
+2026-07-12 14:38:59.909 | INFO     | N/A | [ParsePlan] 解析成功，共 1 天
+2026-07-12 14:38:59.926 | INFO     | N/A | Profile 更新任务已入队: user_id=1
+2026-07-12 14:38:59.927 | INFO     | 1_1001_1783838195657729800 | ✅ 8-Agent 多智能体处理完成
+2026-07-12 14:38:59.938 | INFO     | 1_1001_1783838195657729800 | ✅ 已回调Java，callbackUrl=http://localhost:9999/sendMessageByPython/receiveAI
+2026-07-12 14:39:12.670 | INFO     | N/A | ✅ Mem0 记忆更新成功(后台) - user_id: 1
+2026-07-12 14:45:31.310 | INFO     | 1_1001_1783838731310764000 | python端成功接收到Java发过来的消息: 请帮我规划一个广州1日游...
+2026-07-12 14:45:31.312 | INFO     | 1_1001_1783838731310764000 | 进入process_with_agent
+2026-07-12 14:45:32.569 | INFO     | N/A | 路线：plan（原始：plan）
+2026-07-12 14:45:32.582 | INFO     | N/A | 进入supervisor_node
+2026-07-12 14:45:32.583 | INFO     | N/A | 下一步task_analyzer
+2026-07-12 14:45:32.596 | INFO     | N/A | [TaskAnalyzer] 用户消息: 请帮我规划一个广州1日游...
+2026-07-12 14:45:35.309 | INFO     | N/A | [TaskAnalyzer] 提取结果: 广州 1天 中等 适中
+2026-07-12 14:45:35.316 | INFO     | N/A | 进入supervisor_node
+2026-07-12 14:45:35.316 | INFO     | N/A | 下一步researcher
+2026-07-12 14:45:35.329 | INFO     | N/A | [Researcher] 开始研究 广州
+2026-07-12 14:46:21.460 | INFO     | N/A | [Researcher] 研究完成，字数: 4083
+2026-07-12 14:46:21.471 | INFO     | N/A | 进入supervisor_node
+2026-07-12 14:46:21.472 | INFO     | N/A | 下一步planner
+2026-07-12 14:46:21.582 | INFO     | N/A | [Planner] 开始规划 广州1天行程
+2026-07-12 14:46:49.346 | INFO     | N/A | [Planner] 草案完成，字数: 4076
+2026-07-12 14:46:49.357 | INFO     | N/A | 进入supervisor_node
+2026-07-12 14:46:49.358 | INFO     | N/A | 下一步critic
+2026-07-12 14:46:49.377 | INFO     | N/A | [Critic] 第0次评审开始
+2026-07-12 14:46:53.450 | INFO     | N/A | [Critic] 第0次评审完成 | 总分: 85.0 | 下一步: final_optimizer
+2026-07-12 14:46:53.468 | INFO     | N/A | [FinalOptimizer] 开始最终润色 | 最高分: 85.0
+2026-07-12 14:47:30.119 | INFO     | N/A | [FinalOptimizer] 完成，最终字数: 4749
+2026-07-12 14:47:30.127 | INFO     | N/A | 进入supervisor_node
+2026-07-12 14:47:30.128 | INFO     | N/A | 下一步=parse_plan（should_end=True）
+2026-07-12 14:47:43.269 | INFO     | N/A | [ParsePlan] 解析成功，共 1 天
+2026-07-12 14:47:43.288 | INFO     | N/A | Profile 更新任务已入队: user_id=1
+2026-07-12 14:47:43.288 | INFO     | 1_1001_1783838731310764000 | ✅ 8-Agent 多智能体处理完成
+2026-07-12 14:47:43.297 | INFO     | 1_1001_1783838731310764000 | ✅ 已回调Java，callbackUrl=http://localhost:9999/sendMessageByPython/receiveAI
+2026-07-12 14:47:48.141 | INFO     | N/A | ✅ Mem0 记忆更新成功(后台) - user_id: 1
+2026-07-12 14:50:28.736 | INFO     | 1_1001_1783839028736459500 | python端成功接收到Java发过来的消息: 请帮我规划一个广州1日游...
+2026-07-12 14:50:28.737 | INFO     | 1_1001_1783839028736459500 | 进入process_with_agent
+2026-07-12 14:50:31.335 | INFO     | N/A | 路线：plan（原始：plan）
+2026-07-12 14:50:31.346 | INFO     | N/A | 进入supervisor_node
+2026-07-12 14:50:31.347 | INFO     | N/A | 下一步task_analyzer
+2026-07-12 14:50:31.357 | INFO     | N/A | [TaskAnalyzer] 用户消息: 请帮我规划一个广州1日游...
+2026-07-12 14:50:33.727 | INFO     | N/A | [TaskAnalyzer] 提取结果: 广州 1天 中等 适中
+2026-07-12 14:50:33.736 | INFO     | N/A | 进入supervisor_node
+2026-07-12 14:50:33.737 | INFO     | N/A | 下一步researcher
+2026-07-12 14:50:33.751 | INFO     | N/A | [Researcher] 开始研究 广州
+2026-07-12 14:51:41.064 | INFO     | N/A | [Researcher] 研究完成，字数: 3989
+2026-07-12 14:51:41.074 | INFO     | N/A | 进入supervisor_node
+2026-07-12 14:51:41.075 | INFO     | N/A | 下一步planner
+2026-07-12 14:51:41.175 | INFO     | N/A | [Planner] 开始规划 广州1天行程
+2026-07-12 14:52:26.045 | INFO     | N/A | [Planner] 草案完成，字数: 4956
+2026-07-12 14:52:26.059 | INFO     | N/A | 进入supervisor_node
+2026-07-12 14:52:26.060 | INFO     | N/A | 下一步critic
+2026-07-12 14:52:26.079 | INFO     | N/A | [Critic] 第0次评审开始
+2026-07-12 14:52:33.392 | INFO     | N/A | [Critic] 第0次评审完成 | 总分: 85.0 | 下一步: final_optimizer
+2026-07-12 14:52:33.407 | INFO     | N/A | [FinalOptimizer] 开始最终润色 | 最高分: 85.0
+2026-07-12 14:53:26.298 | INFO     | N/A | [FinalOptimizer] 完成，最终字数: 7290
+2026-07-12 14:53:26.314 | INFO     | N/A | 进入supervisor_node
+2026-07-12 14:53:26.315 | INFO     | N/A | 下一步=parse_plan（should_end=True）
+2026-07-12 14:53:35.597 | INFO     | N/A | [ParsePlan] 解析成功，共 1 天
+2026-07-12 14:53:35.623 | INFO     | N/A | Profile 更新任务已入队: user_id=1
+2026-07-12 14:53:35.624 | INFO     | 1_1001_1783839028736459500 | ✅ 8-Agent 多智能体处理完成
+2026-07-12 14:53:35.673 | INFO     | 1_1001_1783839028736459500 | ✅ 已回调Java，callbackUrl=http://localhost:9999/sendMessageByPython/receiveAI
+2026-07-12 14:53:39.186 | INFO     | N/A | ✅ Mem0 记忆更新成功(后台) - user_id: 1

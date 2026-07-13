@@ -84,7 +84,7 @@ workflow.add_edge("general_QA",END)
 workflow.add_edge("task_analyzer", "supervisor")
 workflow.add_edge("researcher", "supervisor")
 workflow.add_edge("planner", "supervisor")
-workflow.add_edge("critic", "supervisor")
+# workflow.add_edge("critic", "supervisor")
 workflow.add_edge("refiner", "critic")           # 回到 critic ，形成循环
 workflow.add_edge("final_optimizer", "supervisor")   # 最终优化后回到 supervisor
 workflow.add_edge("parse_plan", END)

@@ -191,9 +191,11 @@ class GaodeMapTools:
 
                 if paths:
                     first_path = paths[0]
+                    # 注意：高德API v5 返回格式中，duration 在 cost 对象里，不在 path 直接字段
+                    cost = first_path.get("cost", {})
                     return {
                         "distance": int(first_path.get("distance", 0)),
-                        "duration": int(first_path.get("duration", 0)),
+                        "duration": int(cost.get("duration", 0)),  # 从 cost 中取 duration
                         "steps": self._parse_driving_steps(first_path.get("steps", []))
                     }
 

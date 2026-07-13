@@ -1,0 +1,2128 @@
+2026-07-09 17:07:14.604 | ERROR    | N/A | 多智能体处理失败: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\web_app.py", line 66, in <module>
+    uvicorn.run(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\main.py", line 620, in run
+    server.run()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\web\api.py", line 149, in run_agent
+    task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 116, in process_with_agent
+    result = await multi_agent.ainvoke(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 161, in researcher_node
+    result = await agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1469, in amodel_node
+    model_response = await _execute_model_async(request)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1441, in _execute_model_async
+    output = await model_.ainvoke(messages)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6017, in ainvoke
+    return await self.bound.ainvoke(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2151, in _agenerate_with_cache
+    result = await self._agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1960, in _agenerate
+    _handle_openai_bad_request(e)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1955, in _agenerate
+    raw_response = await self.async_client.with_raw_response.create(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_legacy_response.py", line 384, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2814, in create
+    return await self._post(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+During task with name 'model' and id '8a2f2308-d805-2ad7-674d-f21788ac466f'
+During task with name 'researcher' and id 'bb207e1e-f8cc-902b-354e-e9a54c8ed437'
+2026-07-09 17:07:14.685 | ERROR    | 3694a430-fd6e-48b0-88bd-ab037b2584db | Agent 执行失败: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\web_app.py", line 66, in <module>
+    uvicorn.run(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\main.py", line 620, in run
+    server.run()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\web\api.py", line 149, in run_agent
+    task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 116, in process_with_agent
+    result = await multi_agent.ainvoke(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 161, in researcher_node
+    result = await agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1469, in amodel_node
+    model_response = await _execute_model_async(request)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1441, in _execute_model_async
+    output = await model_.ainvoke(messages)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6017, in ainvoke
+    return await self.bound.ainvoke(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2151, in _agenerate_with_cache
+    result = await self._agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1960, in _agenerate
+    _handle_openai_bad_request(e)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1955, in _agenerate
+    raw_response = await self.async_client.with_raw_response.create(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_legacy_response.py", line 384, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2814, in create
+    return await self._post(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+During task with name 'model' and id '8a2f2308-d805-2ad7-674d-f21788ac466f'
+During task with name 'researcher' and id 'bb207e1e-f8cc-902b-354e-e9a54c8ed437'
+2026-07-09 17:07:26.947 | ERROR    | N/A | 多智能体处理失败: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\web_app.py", line 66, in <module>
+    uvicorn.run(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\main.py", line 620, in run
+    server.run()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\web\api.py", line 149, in run_agent
+    task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 116, in process_with_agent
+    result = await multi_agent.ainvoke(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 161, in researcher_node
+    result = await agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1469, in amodel_node
+    model_response = await _execute_model_async(request)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1441, in _execute_model_async
+    output = await model_.ainvoke(messages)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6017, in ainvoke
+    return await self.bound.ainvoke(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2151, in _agenerate_with_cache
+    result = await self._agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1960, in _agenerate
+    _handle_openai_bad_request(e)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1955, in _agenerate
+    raw_response = await self.async_client.with_raw_response.create(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_legacy_response.py", line 384, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2814, in create
+    return await self._post(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+During task with name 'model' and id '73345cca-b06f-c6b6-79a9-209cb879c9b8'
+During task with name 'researcher' and id '3854e136-fa05-22f8-82f2-82fadfe98b50'
+2026-07-09 17:07:26.980 | ERROR    | 30493093-a000-4637-b0aa-3d99b42cd5ff | Agent 执行失败: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\web_app.py", line 66, in <module>
+    uvicorn.run(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\main.py", line 620, in run
+    server.run()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\web\api.py", line 149, in run_agent
+    task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 116, in process_with_agent
+    result = await multi_agent.ainvoke(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 161, in researcher_node
+    result = await agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1469, in amodel_node
+    model_response = await _execute_model_async(request)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1441, in _execute_model_async
+    output = await model_.ainvoke(messages)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6017, in ainvoke
+    return await self.bound.ainvoke(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2151, in _agenerate_with_cache
+    result = await self._agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1960, in _agenerate
+    _handle_openai_bad_request(e)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1955, in _agenerate
+    raw_response = await self.async_client.with_raw_response.create(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_legacy_response.py", line 384, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2814, in create
+    return await self._post(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+During task with name 'model' and id '73345cca-b06f-c6b6-79a9-209cb879c9b8'
+During task with name 'researcher' and id '3854e136-fa05-22f8-82f2-82fadfe98b50'
+2026-07-09 17:07:41.992 | ERROR    | N/A | 多智能体处理失败: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\web_app.py", line 66, in <module>
+    uvicorn.run(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\main.py", line 620, in run
+    server.run()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\web\api.py", line 149, in run_agent
+    task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 116, in process_with_agent
+    result = await multi_agent.ainvoke(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 161, in researcher_node
+    result = await agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1469, in amodel_node
+    model_response = await _execute_model_async(request)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1441, in _execute_model_async
+    output = await model_.ainvoke(messages)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6017, in ainvoke
+    return await self.bound.ainvoke(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2151, in _agenerate_with_cache
+    result = await self._agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1960, in _agenerate
+    _handle_openai_bad_request(e)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1955, in _agenerate
+    raw_response = await self.async_client.with_raw_response.create(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_legacy_response.py", line 384, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2814, in create
+    return await self._post(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+During task with name 'model' and id '305c9cb1-e5ff-c427-ea85-9ce0af2ba10c'
+During task with name 'researcher' and id '29257ecb-3f5c-c688-c64b-518bd1aa1378'
+2026-07-09 17:07:42.023 | ERROR    | 335df897-aa7f-4b4a-b253-91463d49172f | Agent 执行失败: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\web_app.py", line 66, in <module>
+    uvicorn.run(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\main.py", line 620, in run
+    server.run()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\web\api.py", line 149, in run_agent
+    task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 116, in process_with_agent
+    result = await multi_agent.ainvoke(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 161, in researcher_node
+    result = await agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1469, in amodel_node
+    model_response = await _execute_model_async(request)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1441, in _execute_model_async
+    output = await model_.ainvoke(messages)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6017, in ainvoke
+    return await self.bound.ainvoke(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2151, in _agenerate_with_cache
+    result = await self._agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1960, in _agenerate
+    _handle_openai_bad_request(e)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1955, in _agenerate
+    raw_response = await self.async_client.with_raw_response.create(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_legacy_response.py", line 384, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2814, in create
+    return await self._post(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+During task with name 'model' and id '305c9cb1-e5ff-c427-ea85-9ce0af2ba10c'
+During task with name 'researcher' and id '29257ecb-3f5c-c688-c64b-518bd1aa1378'
+2026-07-09 17:07:54.466 | ERROR    | N/A | 多智能体处理失败: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\web_app.py", line 66, in <module>
+    uvicorn.run(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\main.py", line 620, in run
+    server.run()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\web\api.py", line 149, in run_agent
+    task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 116, in process_with_agent
+    result = await multi_agent.ainvoke(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 161, in researcher_node
+    result = await agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1469, in amodel_node
+    model_response = await _execute_model_async(request)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1441, in _execute_model_async
+    output = await model_.ainvoke(messages)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6017, in ainvoke
+    return await self.bound.ainvoke(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2151, in _agenerate_with_cache
+    result = await self._agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1960, in _agenerate
+    _handle_openai_bad_request(e)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1955, in _agenerate
+    raw_response = await self.async_client.with_raw_response.create(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_legacy_response.py", line 384, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2814, in create
+    return await self._post(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+During task with name 'model' and id 'ddc80b52-fda4-1a67-e62e-7bb30c865f86'
+During task with name 'researcher' and id '9661a7a2-8fc9-f102-86aa-b90369e8f858'
+2026-07-09 17:07:54.497 | ERROR    | 42a0de6e-09e0-46d5-8137-c0c39342fff6 | Agent 执行失败: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\web_app.py", line 66, in <module>
+    uvicorn.run(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\main.py", line 620, in run
+    server.run()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\web\api.py", line 149, in run_agent
+    task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 116, in process_with_agent
+    result = await multi_agent.ainvoke(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 161, in researcher_node
+    result = await agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1469, in amodel_node
+    model_response = await _execute_model_async(request)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1441, in _execute_model_async
+    output = await model_.ainvoke(messages)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6017, in ainvoke
+    return await self.bound.ainvoke(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2151, in _agenerate_with_cache
+    result = await self._agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1960, in _agenerate
+    _handle_openai_bad_request(e)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1955, in _agenerate
+    raw_response = await self.async_client.with_raw_response.create(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_legacy_response.py", line 384, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2814, in create
+    return await self._post(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+During task with name 'model' and id 'ddc80b52-fda4-1a67-e62e-7bb30c865f86'
+During task with name 'researcher' and id '9661a7a2-8fc9-f102-86aa-b90369e8f858'
+2026-07-09 17:08:08.797 | ERROR    | N/A | 多智能体处理失败: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\web_app.py", line 66, in <module>
+    uvicorn.run(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\main.py", line 620, in run
+    server.run()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\web\api.py", line 149, in run_agent
+    task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 116, in process_with_agent
+    result = await multi_agent.ainvoke(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 161, in researcher_node
+    result = await agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1469, in amodel_node
+    model_response = await _execute_model_async(request)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1441, in _execute_model_async
+    output = await model_.ainvoke(messages)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6017, in ainvoke
+    return await self.bound.ainvoke(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2151, in _agenerate_with_cache
+    result = await self._agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1960, in _agenerate
+    _handle_openai_bad_request(e)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1955, in _agenerate
+    raw_response = await self.async_client.with_raw_response.create(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_legacy_response.py", line 384, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2814, in create
+    return await self._post(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+During task with name 'model' and id 'c5880886-e159-5239-6b4d-a9426f8ca107'
+During task with name 'researcher' and id 'f8250d86-a667-9dd8-4414-c39a2a9a8b40'
+2026-07-09 17:08:08.827 | ERROR    | a6767f95-2359-4315-9827-d034b0b1dbb7 | Agent 执行失败: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\web_app.py", line 66, in <module>
+    uvicorn.run(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\main.py", line 620, in run
+    server.run()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\web\api.py", line 149, in run_agent
+    task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 116, in process_with_agent
+    result = await multi_agent.ainvoke(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 161, in researcher_node
+    result = await agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1469, in amodel_node
+    model_response = await _execute_model_async(request)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1441, in _execute_model_async
+    output = await model_.ainvoke(messages)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6017, in ainvoke
+    return await self.bound.ainvoke(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2151, in _agenerate_with_cache
+    result = await self._agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1960, in _agenerate
+    _handle_openai_bad_request(e)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1955, in _agenerate
+    raw_response = await self.async_client.with_raw_response.create(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_legacy_response.py", line 384, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2814, in create
+    return await self._post(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+During task with name 'model' and id 'c5880886-e159-5239-6b4d-a9426f8ca107'
+During task with name 'researcher' and id 'f8250d86-a667-9dd8-4414-c39a2a9a8b40'
+2026-07-09 17:08:24.798 | ERROR    | N/A | 多智能体处理失败: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\web_app.py", line 66, in <module>
+    uvicorn.run(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\main.py", line 620, in run
+    server.run()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\web\api.py", line 149, in run_agent
+    task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 116, in process_with_agent
+    result = await multi_agent.ainvoke(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 161, in researcher_node
+    result = await agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1469, in amodel_node
+    model_response = await _execute_model_async(request)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1441, in _execute_model_async
+    output = await model_.ainvoke(messages)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6017, in ainvoke
+    return await self.bound.ainvoke(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2151, in _agenerate_with_cache
+    result = await self._agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1960, in _agenerate
+    _handle_openai_bad_request(e)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1955, in _agenerate
+    raw_response = await self.async_client.with_raw_response.create(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_legacy_response.py", line 384, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2814, in create
+    return await self._post(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+During task with name 'model' and id '9b59db0b-dc34-681e-6aa9-9b4d653bcae4'
+During task with name 'researcher' and id 'bb212aab-6370-8a82-ca9f-ea80cac044bd'
+2026-07-09 17:08:24.834 | ERROR    | b2c7deff-ae5c-49cf-8800-fcce65f3e856 | Agent 执行失败: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\web_app.py", line 66, in <module>
+    uvicorn.run(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\main.py", line 620, in run
+    server.run()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\web\api.py", line 149, in run_agent
+    task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 116, in process_with_agent
+    result = await multi_agent.ainvoke(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 161, in researcher_node
+    result = await agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1469, in amodel_node
+    model_response = await _execute_model_async(request)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1441, in _execute_model_async
+    output = await model_.ainvoke(messages)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6017, in ainvoke
+    return await self.bound.ainvoke(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2151, in _agenerate_with_cache
+    result = await self._agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1960, in _agenerate
+    _handle_openai_bad_request(e)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1955, in _agenerate
+    raw_response = await self.async_client.with_raw_response.create(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_legacy_response.py", line 384, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2814, in create
+    return await self._post(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+During task with name 'model' and id '9b59db0b-dc34-681e-6aa9-9b4d653bcae4'
+During task with name 'researcher' and id 'bb212aab-6370-8a82-ca9f-ea80cac044bd'
+2026-07-09 17:08:43.368 | ERROR    | N/A | 多智能体处理失败: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\web_app.py", line 66, in <module>
+    uvicorn.run(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\main.py", line 620, in run
+    server.run()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\web\api.py", line 149, in run_agent
+    task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 116, in process_with_agent
+    result = await multi_agent.ainvoke(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 161, in researcher_node
+    result = await agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1469, in amodel_node
+    model_response = await _execute_model_async(request)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1441, in _execute_model_async
+    output = await model_.ainvoke(messages)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6017, in ainvoke
+    return await self.bound.ainvoke(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2151, in _agenerate_with_cache
+    result = await self._agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1960, in _agenerate
+    _handle_openai_bad_request(e)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1955, in _agenerate
+    raw_response = await self.async_client.with_raw_response.create(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_legacy_response.py", line 384, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2814, in create
+    return await self._post(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+During task with name 'model' and id '5f3db9a5-2c51-2084-d69a-d62ba460f3dc'
+During task with name 'researcher' and id '8572868c-6234-33a2-e0bf-f94b32235d75'
+2026-07-09 17:08:43.398 | ERROR    | 9853f362-6ef3-4f06-bebf-2261111f2ddf | Agent 执行失败: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\web_app.py", line 66, in <module>
+    uvicorn.run(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\main.py", line 620, in run
+    server.run()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\web\api.py", line 149, in run_agent
+    task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 116, in process_with_agent
+    result = await multi_agent.ainvoke(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 161, in researcher_node
+    result = await agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1469, in amodel_node
+    model_response = await _execute_model_async(request)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1441, in _execute_model_async
+    output = await model_.ainvoke(messages)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6017, in ainvoke
+    return await self.bound.ainvoke(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2151, in _agenerate_with_cache
+    result = await self._agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1960, in _agenerate
+    _handle_openai_bad_request(e)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1955, in _agenerate
+    raw_response = await self.async_client.with_raw_response.create(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_legacy_response.py", line 384, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2814, in create
+    return await self._post(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+During task with name 'model' and id '5f3db9a5-2c51-2084-d69a-d62ba460f3dc'
+During task with name 'researcher' and id '8572868c-6234-33a2-e0bf-f94b32235d75'
+2026-07-09 17:09:01.791 | ERROR    | N/A | 多智能体处理失败: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\web_app.py", line 66, in <module>
+    uvicorn.run(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\main.py", line 620, in run
+    server.run()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\web\api.py", line 149, in run_agent
+    task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 116, in process_with_agent
+    result = await multi_agent.ainvoke(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 161, in researcher_node
+    result = await agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1469, in amodel_node
+    model_response = await _execute_model_async(request)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1441, in _execute_model_async
+    output = await model_.ainvoke(messages)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6017, in ainvoke
+    return await self.bound.ainvoke(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2151, in _agenerate_with_cache
+    result = await self._agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1960, in _agenerate
+    _handle_openai_bad_request(e)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1955, in _agenerate
+    raw_response = await self.async_client.with_raw_response.create(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_legacy_response.py", line 384, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2814, in create
+    return await self._post(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+During task with name 'model' and id '5da50e6a-18ca-b0ad-549b-fec079e4194a'
+During task with name 'researcher' and id '2bb5ecd3-c208-223e-efe7-30053c27a0c6'
+2026-07-09 17:09:01.844 | ERROR    | ea39b90b-5496-442c-a6a1-5eaaac670803 | Agent 执行失败: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\web_app.py", line 66, in <module>
+    uvicorn.run(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\main.py", line 620, in run
+    server.run()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\web\api.py", line 149, in run_agent
+    task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 116, in process_with_agent
+    result = await multi_agent.ainvoke(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 161, in researcher_node
+    result = await agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1469, in amodel_node
+    model_response = await _execute_model_async(request)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1441, in _execute_model_async
+    output = await model_.ainvoke(messages)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6017, in ainvoke
+    return await self.bound.ainvoke(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2151, in _agenerate_with_cache
+    result = await self._agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1960, in _agenerate
+    _handle_openai_bad_request(e)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1955, in _agenerate
+    raw_response = await self.async_client.with_raw_response.create(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_legacy_response.py", line 384, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2814, in create
+    return await self._post(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+During task with name 'model' and id '5da50e6a-18ca-b0ad-549b-fec079e4194a'
+During task with name 'researcher' and id '2bb5ecd3-c208-223e-efe7-30053c27a0c6'
+2026-07-09 17:09:15.715 | ERROR    | N/A | 多智能体处理失败: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\web_app.py", line 66, in <module>
+    uvicorn.run(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\main.py", line 620, in run
+    server.run()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\web\api.py", line 149, in run_agent
+    task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 116, in process_with_agent
+    result = await multi_agent.ainvoke(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 161, in researcher_node
+    result = await agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1469, in amodel_node
+    model_response = await _execute_model_async(request)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1441, in _execute_model_async
+    output = await model_.ainvoke(messages)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6017, in ainvoke
+    return await self.bound.ainvoke(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2151, in _agenerate_with_cache
+    result = await self._agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1960, in _agenerate
+    _handle_openai_bad_request(e)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1955, in _agenerate
+    raw_response = await self.async_client.with_raw_response.create(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_legacy_response.py", line 384, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2814, in create
+    return await self._post(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+During task with name 'model' and id 'f09f3699-b68a-0f50-9fcb-66980acf01d3'
+During task with name 'researcher' and id 'a38454a7-630f-a377-33a7-08d4ca811279'
+2026-07-09 17:09:15.794 | ERROR    | f5feeaf2-fd0d-43cb-a05f-ccc9712b7e43 | Agent 执行失败: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\web_app.py", line 66, in <module>
+    uvicorn.run(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\main.py", line 620, in run
+    server.run()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\web\api.py", line 149, in run_agent
+    task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 116, in process_with_agent
+    result = await multi_agent.ainvoke(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 161, in researcher_node
+    result = await agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1469, in amodel_node
+    model_response = await _execute_model_async(request)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1441, in _execute_model_async
+    output = await model_.ainvoke(messages)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6017, in ainvoke
+    return await self.bound.ainvoke(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2151, in _agenerate_with_cache
+    result = await self._agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1960, in _agenerate
+    _handle_openai_bad_request(e)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1955, in _agenerate
+    raw_response = await self.async_client.with_raw_response.create(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_legacy_response.py", line 384, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2814, in create
+    return await self._post(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+During task with name 'model' and id 'f09f3699-b68a-0f50-9fcb-66980acf01d3'
+During task with name 'researcher' and id 'a38454a7-630f-a377-33a7-08d4ca811279'
+2026-07-09 17:09:37.612 | ERROR    | N/A | 多智能体处理失败: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\web_app.py", line 66, in <module>
+    uvicorn.run(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\main.py", line 620, in run
+    server.run()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\web\api.py", line 149, in run_agent
+    task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 116, in process_with_agent
+    result = await multi_agent.ainvoke(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 161, in researcher_node
+    result = await agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1469, in amodel_node
+    model_response = await _execute_model_async(request)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1441, in _execute_model_async
+    output = await model_.ainvoke(messages)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6017, in ainvoke
+    return await self.bound.ainvoke(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2151, in _agenerate_with_cache
+    result = await self._agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1960, in _agenerate
+    _handle_openai_bad_request(e)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1955, in _agenerate
+    raw_response = await self.async_client.with_raw_response.create(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_legacy_response.py", line 384, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2814, in create
+    return await self._post(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+During task with name 'model' and id 'dc45557a-6cac-5410-b543-369060846c4c'
+During task with name 'researcher' and id '44dc8e95-9889-b5dd-660e-87a287b61e86'
+2026-07-09 17:09:37.657 | ERROR    | 6de2d41e-9b3a-425b-8424-bf9695972737 | Agent 执行失败: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\web_app.py", line 66, in <module>
+    uvicorn.run(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\main.py", line 620, in run
+    server.run()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\web\api.py", line 149, in run_agent
+    task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 116, in process_with_agent
+    result = await multi_agent.ainvoke(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 161, in researcher_node
+    result = await agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1469, in amodel_node
+    model_response = await _execute_model_async(request)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain\agents\factory.py", line 1441, in _execute_model_async
+    output = await model_.ainvoke(messages)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6017, in ainvoke
+    return await self.bound.ainvoke(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 499, in ainvoke
+    llm_result = await self.agenerate_prompt(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1860, in agenerate_prompt
+    return await self.agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1818, in agenerate
+    raise exceptions[0]
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 2151, in _agenerate_with_cache
+    result = await self._agenerate(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1960, in _agenerate
+    _handle_openai_bad_request(e)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_openai\chat_models\base.py", line 1955, in _agenerate
+    raw_response = await self.async_client.with_raw_response.create(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_legacy_response.py", line 384, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2814, in create
+    return await self._post(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\openai\_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:1.5b does not support tools', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+During task with name 'model' and id 'dc45557a-6cac-5410-b543-369060846c4c'
+During task with name 'researcher' and id '44dc8e95-9889-b5dd-660e-87a287b61e86'
+2026-07-09 19:03:13.926 | ERROR    | N/A | 多智能体处理失败: 
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\web_app.py", line 66, in <module>
+    uvicorn.run(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\main.py", line 620, in run
+    server.run()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\web\api.py", line 149, in run_agent
+    task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 116, in process_with_agent
+    result = await multi_agent.ainvoke(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\planner.py", line 147, in planner_node
+    result = await agent.ainvoke({"messages": []})
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 557, in atick
+    _panic_or_proceed(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 687, in _panic_or_proceed
+    raise exc
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 858, in _afunc
+    outputs = await asyncio.gather(*coros)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 1193, in _arun_one
+    return await self._execute_tool_async(tool_request, input_type, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 1153, in _execute_tool_async
+    content = _handle_tool_error(e, flag=self._handle_tool_errors)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 434, in _handle_tool_error
+    content = flag(e)  # type: ignore [assignment, call-arg]
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 391, in _default_handle_tool_errors
+    raise e
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 1105, in _execute_tool_async
+    response = await tool.ainvoke(call_args, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\tools\structured.py", line 70, in ainvoke
+    return await super().ainvoke(input, config, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\tools\base.py", line 650, in ainvoke
+    return await self.arun(tool_input, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\tools\base.py", line 1132, in arun
+    raise error_to_raise
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\tools\base.py", line 1098, in arun
+    response = await coro_with_context(coro, context)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\tools\structured.py", line 124, in _arun
+    return await self.coroutine(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_mcp_adapters\tools.py", line 506, in call_tool
+    call_tool_result = await handler(request)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_mcp_adapters\tools.py", line 487, in execute_tool
+    raise captured_exception
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_mcp_adapters\tools.py", line 471, in execute_tool
+    call_tool_result = await tool_session.call_tool(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\mcp\client\session.py", line 401, in call_tool
+    result = await self.send_request(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\mcp\shared\session.py", line 281, in send_request
+    await self._write_stream.send(SessionMessage(message=JSONRPCMessage(jsonrpc_request), metadata=metadata))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\anyio\streams\memory.py", line 262, in send
+    raise BrokenResourceError from None
+
+anyio.BrokenResourceError
+During task with name 'tools' and id '6e162943-a92c-7565-4ced-f9494c93b688'
+During task with name 'planner' and id '7eb65441-3a2e-757b-5156-259408acdd8c'
+2026-07-09 19:03:14.027 | ERROR    | ab015e9a-7fea-4bf3-ab1e-7aae75420ec8 | Agent 执行失败: 
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\web_app.py", line 66, in <module>
+    uvicorn.run(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\main.py", line 620, in run
+    server.run()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\web\api.py", line 149, in run_agent
+    task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 116, in process_with_agent
+    result = await multi_agent.ainvoke(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\planner.py", line 147, in planner_node
+    result = await agent.ainvoke({"messages": []})
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 557, in atick
+    _panic_or_proceed(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 687, in _panic_or_proceed
+    raise exc
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 858, in _afunc
+    outputs = await asyncio.gather(*coros)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 1193, in _arun_one
+    return await self._execute_tool_async(tool_request, input_type, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 1153, in _execute_tool_async
+    content = _handle_tool_error(e, flag=self._handle_tool_errors)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 434, in _handle_tool_error
+    content = flag(e)  # type: ignore [assignment, call-arg]
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 391, in _default_handle_tool_errors
+    raise e
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 1105, in _execute_tool_async
+    response = await tool.ainvoke(call_args, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\tools\structured.py", line 70, in ainvoke
+    return await super().ainvoke(input, config, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\tools\base.py", line 650, in ainvoke
+    return await self.arun(tool_input, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\tools\base.py", line 1132, in arun
+    raise error_to_raise
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\tools\base.py", line 1098, in arun
+    response = await coro_with_context(coro, context)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\tools\structured.py", line 124, in _arun
+    return await self.coroutine(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_mcp_adapters\tools.py", line 506, in call_tool
+    call_tool_result = await handler(request)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_mcp_adapters\tools.py", line 487, in execute_tool
+    raise captured_exception
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_mcp_adapters\tools.py", line 471, in execute_tool
+    call_tool_result = await tool_session.call_tool(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\mcp\client\session.py", line 401, in call_tool
+    result = await self.send_request(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\mcp\shared\session.py", line 281, in send_request
+    await self._write_stream.send(SessionMessage(message=JSONRPCMessage(jsonrpc_request), metadata=metadata))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\anyio\streams\memory.py", line 262, in send
+    raise BrokenResourceError from None
+
+anyio.BrokenResourceError
+During task with name 'tools' and id '6e162943-a92c-7565-4ced-f9494c93b688'
+During task with name 'planner' and id '7eb65441-3a2e-757b-5156-259408acdd8c'
+2026-07-09 19:08:14.766 | ERROR    | N/A | 多智能体处理失败: 
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\web_app.py", line 66, in <module>
+    uvicorn.run(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\main.py", line 620, in run
+    server.run()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\web\api.py", line 149, in run_agent
+    task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 116, in process_with_agent
+    result = await multi_agent.ainvoke(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 161, in researcher_node
+    result = await agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 557, in atick
+    _panic_or_proceed(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 687, in _panic_or_proceed
+    raise exc
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 858, in _afunc
+    outputs = await asyncio.gather(*coros)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 1193, in _arun_one
+    return await self._execute_tool_async(tool_request, input_type, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 1153, in _execute_tool_async
+    content = _handle_tool_error(e, flag=self._handle_tool_errors)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 434, in _handle_tool_error
+    content = flag(e)  # type: ignore [assignment, call-arg]
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 391, in _default_handle_tool_errors
+    raise e
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 1105, in _execute_tool_async
+    response = await tool.ainvoke(call_args, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\tools\structured.py", line 70, in ainvoke
+    return await super().ainvoke(input, config, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\tools\base.py", line 650, in ainvoke
+    return await self.arun(tool_input, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\tools\base.py", line 1132, in arun
+    raise error_to_raise
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\tools\base.py", line 1098, in arun
+    response = await coro_with_context(coro, context)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\tools\structured.py", line 124, in _arun
+    return await self.coroutine(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_mcp_adapters\tools.py", line 506, in call_tool
+    call_tool_result = await handler(request)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_mcp_adapters\tools.py", line 487, in execute_tool
+    raise captured_exception
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_mcp_adapters\tools.py", line 471, in execute_tool
+    call_tool_result = await tool_session.call_tool(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\mcp\client\session.py", line 401, in call_tool
+    result = await self.send_request(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\mcp\shared\session.py", line 281, in send_request
+    await self._write_stream.send(SessionMessage(message=JSONRPCMessage(jsonrpc_request), metadata=metadata))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\anyio\streams\memory.py", line 262, in send
+    raise BrokenResourceError from None
+
+anyio.BrokenResourceError
+During task with name 'tools' and id 'd26ffafd-2e5b-8e5e-06c1-9b983efdf181'
+During task with name 'researcher' and id 'd1c44cdc-7ba6-0fd2-6c53-739954a73b64'
+2026-07-09 19:08:14.825 | ERROR    | 06f32590-8c2b-4739-acde-a5245c01f976 | Agent 执行失败: 
+Traceback (most recent call last):
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\web_app.py", line 66, in <module>
+    uvicorn.run(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\main.py", line 620, in run
+    server.run()
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "D:\Python\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+  File "D:\Python\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+  File "D:\Python\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+  File "D:\Python\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+  File "D:\Python\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+  File "D:\Python\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+
+> File "D:\毕业设计\Travel_python\travel_ai_python\app\web\api.py", line 149, in run_agent
+    task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\service\multi_agent_travel.py", line 116, in process_with_agent
+    result = await multi_agent.ainvoke(
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 396, in atick
+    await arun_with_retry(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+
+  File "D:\毕业设计\Travel_python\travel_ai_python\app\agents\researcher.py", line 161, in researcher_node
+    result = await agent.ainvoke({
+
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 4105, in ainvoke
+    async for chunk in self.astream(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\main.py", line 3455, in astream
+    async for _ in runner.atick(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 557, in atick
+    _panic_or_proceed(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 687, in _panic_or_proceed
+    raise exc
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 733, in ainvoke
+    input = await asyncio.create_task(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 501, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 858, in _afunc
+    outputs = await asyncio.gather(*coros)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 1193, in _arun_one
+    return await self._execute_tool_async(tool_request, input_type, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 1153, in _execute_tool_async
+    content = _handle_tool_error(e, flag=self._handle_tool_errors)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 434, in _handle_tool_error
+    content = flag(e)  # type: ignore [assignment, call-arg]
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 391, in _default_handle_tool_errors
+    raise e
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langgraph\prebuilt\tool_node.py", line 1105, in _execute_tool_async
+    response = await tool.ainvoke(call_args, config)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\tools\structured.py", line 70, in ainvoke
+    return await super().ainvoke(input, config, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\tools\base.py", line 650, in ainvoke
+    return await self.arun(tool_input, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\tools\base.py", line 1132, in arun
+    raise error_to_raise
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\tools\base.py", line 1098, in arun
+    response = await coro_with_context(coro, context)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_core\tools\structured.py", line 124, in _arun
+    return await self.coroutine(*args, **kwargs)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_mcp_adapters\tools.py", line 506, in call_tool
+    call_tool_result = await handler(request)
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_mcp_adapters\tools.py", line 487, in execute_tool
+    raise captured_exception
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\langchain_mcp_adapters\tools.py", line 471, in execute_tool
+    call_tool_result = await tool_session.call_tool(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\mcp\client\session.py", line 401, in call_tool
+    result = await self.send_request(
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\mcp\shared\session.py", line 281, in send_request
+    await self._write_stream.send(SessionMessage(message=JSONRPCMessage(jsonrpc_request), metadata=metadata))
+  File "D:\毕业设计\Travel_python\.venv\Lib\site-packages\anyio\streams\memory.py", line 262, in send
+    raise BrokenResourceError from None
+
+anyio.BrokenResourceError
+During task with name 'tools' and id 'd26ffafd-2e5b-8e5e-06c1-9b983efdf181'
+During task with name 'researcher' and id 'd1c44cdc-7ba6-0fd2-6c53-739954a73b64'

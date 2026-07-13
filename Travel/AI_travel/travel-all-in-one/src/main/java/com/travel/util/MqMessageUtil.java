@@ -34,23 +34,23 @@ public class MqMessageUtil {
      */
     public String buildContentMessage(ChatMessage chatMessage) {
 
-        String traceId=UUID.randomUUID()+ "_" + chatMessage.getSession_id() + "_" + System.currentTimeMillis();
+        String traceId=UUID.randomUUID()+ "_" + chatMessage.getMsgId() + "_" + System.currentTimeMillis();
         // 消息头
         Map<String, Object> header = new HashMap<>();
         header.put("traceId", traceId);
-        header.put("msgId", UUID.randomUUID()+ "_" + chatMessage.getSession_id() + "_" + System.currentTimeMillis());
+        header.put("msgId", UUID.randomUUID()+ "_" + chatMessage.getSessionId() + "_" + System.currentTimeMillis());
         header.put("businessType", "CHAT_CONTENT_SUBMIT");
         header.put("version", "1.0");
         header.put("timestamp", System.currentTimeMillis());
-        header.put("userId", chatMessage.getUser_id());
+        header.put("userId", chatMessage.getUserId());
 
         // 消息体（核心数据）
         Map<String, Object> body = new HashMap<>();
-        body.put("sessionId", chatMessage.getSession_id());
-        body.put("userId", chatMessage.getUser_id());
+        body.put("sessionId", chatMessage.getSessionId());
+        body.put("userId", chatMessage.getUserId());
         body.put("role", chatMessage.getRole());
         body.put("content", chatMessage.getContent());
-        body.put("planJson", chatMessage.getPlan_json());
+        body.put("planJson", chatMessage.getPlanJson());
 
         // 扩展字段
         Map<String, Object> extension = new HashMap<>();

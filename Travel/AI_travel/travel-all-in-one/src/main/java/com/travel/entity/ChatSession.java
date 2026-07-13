@@ -19,13 +19,13 @@ public class ChatSession implements Serializable {
      * 会话ID
      */
     @TableId(value = "session_id", type = IdType.AUTO)
-    private Long session_id;
+    private Long sessionId;
 
     /**
      * 用户ID
      */
     @TableField(value = "user_id")
-    private Long user_id;
+    private Long userId;
 
     /**
      * 
@@ -37,13 +37,13 @@ public class ChatSession implements Serializable {
      * 
      */
     @TableField(value = "create_time")
-    private LocalDateTime create_time;
+    private LocalDateTime createTime;
 
     /**
      * 
      */
     @TableField(value = "update_time")
-    private LocalDateTime update_time;
+    private LocalDateTime updateTime;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

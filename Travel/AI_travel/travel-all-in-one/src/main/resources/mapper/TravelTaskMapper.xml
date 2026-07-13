@@ -15,6 +15,7 @@
             <result property="plan_id" column="plan_id" jdbcType="BIGINT"/>
             <result property="error_msg" column="error_msg" jdbcType="VARCHAR"/>
             <result property="trace_id" column="trace_id" jdbcType="VARCHAR"/>
+            <result property="destination" column="destination" jdbcType="VARCHAR"/>
             <result property="create_time" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="update_time" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
@@ -23,6 +24,6 @@
         task_id,user_id,user_query,
         days,budget,pace,
         status,plan_id,error_msg,
-        trace_id,create_time,update_time
+        trace_id,create_time,update_time,destination
     </sql>
 </mapper>

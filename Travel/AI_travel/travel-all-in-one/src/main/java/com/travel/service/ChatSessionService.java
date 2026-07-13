@@ -3,7 +3,11 @@ package com.travel.service;
 import com.travel.dto.ChatSessionDTO;
 import com.travel.entity.ChatSession;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.travel.vo.ChatMessageVO;
 import com.travel.vo.ChatSessionVO;
+import com.travel.vo.PageVO;
+
+import java.util.List;
 
 /**
 * @author 13922
@@ -18,4 +22,21 @@ public interface ChatSessionService extends IService<ChatSession> {
      * @return 返回chatSessionVo
      */
     ChatSessionVO createSession(ChatSessionDTO chatSessionDTO, Long userId);
+
+    /**
+     * 获取当前用户ID下的所有会话记录
+     * @param userId
+     * @return
+     */
+    PageVO<ChatSessionVO> getUserSessions(Long userId,Long page,Long size);
+
+    /**
+     * 根据用户ID和会话ID来查询消息
+     * @param useId
+     * @param sessionId
+     * @param page
+     * @param size
+     * @return
+     */
+    PageVO<ChatMessageVO> getMessageBySessionId(Long useId, Long sessionId, Long page, Long size);
 }

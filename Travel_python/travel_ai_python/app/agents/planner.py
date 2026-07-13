@@ -1,80 +1,160 @@
+# -*- coding: utf-8 -*-
+"""
+Planner 节点 - 生成旅行行程草案
+
+角色：旅行行程规划专家
+输入：用户任务 + 研究报告
+输出：draft_plan（完整行程草案）
+"""
 from langchain_core.messages import SystemMessage
-from app.agents.base import llm, get_tools
+from app.agents.base import llm, get_tools, get_mcp_semaphore
 from langchain.agents import create_agent
-from app.utils.redis_client import get_user_profile, get_session_context
+from app.utils.redis_client import get_user_profile
 from app.utils.mem0_client import get_user_memories
+from app.config.logger import logger
 import json
 
 
+ROLE_DEFINITION = """
+## 角色：顶级旅行规划大师
+
+### 核心技能
+- 设计合理的每日行程
+- 平衡活动密度和休息
+- 优化交通路线
+- 控制预算分配
+
+### 能力
+- 合理安排时间
+- 选择最佳景点顺序
+- 预留休息时间
+- 处理突发情况
+"""
+
+PLANNING_PRINCIPLES = """
+### 行程规划原则
+
+#### 节奏控制
+- 每天景点不超过4个（大型景点算2个）
+- 穿插吃饭和休息时间
+- 避免连续高强度活动
+- 最后一晚留出收整行李时间
+
+#### 交通安排
+- 充分利用公共交通
+- 早晚高峰错峰出行
+- 相邻景点安排在一起
+- 预留机场/车站往返时间
+
+#### 预算分配参考
+- 经济：景点门票+餐费为主，住宿选经济型
+- 中等：可体验1-2个高端项目
+- 宽裕：可选择特色体验，全程舒适优先
+
+#### 体验优化
+- 早晚安排不同类型活动
+- 美食穿插在景点附近
+- 留白时间应对意外
+- 增加当地特色体验
+"""
+
+OUTPUT_FORMAT = """
+### 输出规范
+
+#### 必须包含
+1. 每日详细行程（时间/地点/活动）
+2. 交通方式（具体班次/线路）
+3. 门票价格和预约信息
+4. 餐饮推荐（位置+人均）
+5. 实用 Tips（防坑/预约/穿着）
+
+#### 格式
+- 按天组织，每天一个段落
+- 使用 Markdown 标题（## 第X天）
+- 重点项目加粗
+- 清晰的列表结构
+
+#### 禁止
+- 不写模糊的地址（如"市中心"、"淄博市区内的餐厅"）
+- 不写不确定的价格
+- 不安排时间冲突的活动
+- 餐饮必须写具体店名+地址，不能写"当地特色餐厅"
+
+#### 餐饮格式（必须严格遵守）
+每餐格式：「餐饮类型」- 具体店名（XX区XX路XX号，人均XX元）
+例如：「午餐」- 大漠烤肉（张店区世纪路123号，人均80元）
+例如：「晚餐」- 聚斋斋鲁菜馆（张店区美食街8号，人均120元）
+"""
+
+
 async def planner_node(state):
-    """3. Itinerary Planner"""
+    """
+    Planner 节点 - 生成行程草案
+
+    输入：
+    - task（任务信息）
+    - research_results（研究报告）
+    - memories（用户记忆）
+
+    输出：draft_plan（完整行程）
+    """
     task = state["task"]
     user_id = state.get("user_id", 0)
     session_id = state.get("session_id", 0)
     tools = await get_tools()
     research = state.get("research_results", "")
 
-    # 读取三层记忆
+    # 获取用户偏好和记忆
     profile = get_user_profile(user_id)
     profile_text = json.dumps(profile, ensure_ascii=False) if profile else "暂无"
 
     memories = get_user_memories(user_id)
     memories_text = "\n".join([m.get("memory", "") for m in memories]) if memories else "暂无"
 
-    session_msgs = get_session_context(session_id)
-    session_text = "\n".join([f"{m.get('role')}: {m.get('content')}" for m in session_msgs[-6:]]) if session_msgs else "暂无"
+    prompt = f"""{ROLE_DEFINITION}
 
-    # 注入到 prompt
-    system_prompt = f"""你是一位顶级旅行行程规划大师，曾为上千位客户设计过高满意度旅行计划。
+## 用户任务
+- 目的地：{getattr(task, 'destination', '')}
+- 天数：{getattr(task, 'days', 3)}天
+- 预算：{getattr(task, 'budget', '中等')}
+- 节奏：{getattr(task, 'pace', '适中')}
+- 核心诉求：{getattr(task, 'user_query', '')}
 
-    **用户画像**：{task.user_query}
+## 用户偏好
+{profile_text}
 
-    **行程要求**：
-    - 天数：{task.days}天
-    - 预算水平：{task.budget}
-    - 节奏：{task.pace}
-    - 核心需求：{task.user_query}
+## 用户历史记忆
+{memories_text}
 
-    **【用户结构化偏好（Profile）】**：
-    {profile_text}
+## 研究报告（来自 Researcher 节点）
+{research}
 
-    **【Mem0 长期记忆】**：
-    {memories_text}
+{PLANNING_PRINCIPLES}
 
-    **【当前会话上下文】**：
-    {session_text}
+{OUTPUT_FORMAT}
 
-    **【调研结果】**：
-    {research}
+## 输出
+请生成完整的 {getattr(task, 'days', 3)} 天旅行行程草案。"""
 
-    **规划原则**（必须严格遵守）：
-    1. 节奏合理，每天活动量适中，不赶路、不疲劳
-    2. 景点搭配均衡（文化、自然、美食、休闲结合）
-    3. 逻辑流畅，减少不必要的往返
-    4. 包含详细的时间安排、交通方式、预计费用
-    5. 加入实用Tips（用餐建议、避坑提醒等）
-
-    **可用工具**（如需查询信息可调用）：
-    - search_attractions(city, keyword, limit) ：查询景点历史、亮点、贴士
-    - search_classic_routes(destination, days, limit) ：获取经典行程模板参考
-    - search_user_plans(destination, preferences, limit) ：参考真实用户行程
-    - hybrid_search(query, collection_type, city, limit, alpha) ：混合检索
-    - search_weather(city, date) ：查询天气预报
-    - search_hotels(city, checkin, checkout, budget) ：查询酒店
-    - search_flights(departure, destination, date) ：查询航班
-
-    请生成完整、详细、美观的旅行行程。"""
+    logger.info(f"[Planner] 开始规划 {getattr(task, 'destination', '')}{getattr(task, 'days', 0)}天行程")
 
     agent = create_agent(
         model=llm,
         tools=tools,
-        system_prompt=system_prompt,
+        system_prompt=prompt
     )
 
-    result = await agent.ainvoke({"messages": []})
+    # 使用信号量限制 MCP 工具并发调用，避免多请求时 MCP SSE 连接冲突
+    mcp_semaphore = get_mcp_semaphore()
+    async with mcp_semaphore:
+        result = await agent.ainvoke({"messages": []})
+
+    draft = result["messages"][-1].content
+
+    logger.info(f"[Planner] 草案完成，字数: {len(draft)}")
 
     return {
-        "draft_plan": result["messages"][-1].content,
+        "draft_plan": draft,
         "messages": state["messages"] + result.get("messages", []),
         "user_id": user_id,
         "session_id": session_id

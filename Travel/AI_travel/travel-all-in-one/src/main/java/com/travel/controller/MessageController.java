@@ -29,7 +29,7 @@ public class MessageController {
                                              @RequestAttribute Long userId){
         //获取到message里面的消息内容部分
         System.out.println("到sendMessage了");
-        ChatMessageVO chatMessageVO = chatMessageService.getContentFromMessage(chatMessageDTO, userId);
+        ChatMessageVO chatMessageVO = chatMessageService.sendMessageToPython(chatMessageDTO, userId);
         return Result.success(chatMessageVO);
     }
 }

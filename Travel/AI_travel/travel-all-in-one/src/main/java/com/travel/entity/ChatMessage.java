@@ -19,19 +19,19 @@ public class ChatMessage implements Serializable {
      * 消息ID
      */
     @TableId(value = "msg_id", type = IdType.AUTO)
-    private Long msg_id;
+    private Long msgId;
 
     /**
      * 会话ID
      */
     @TableField(value = "session_id")
-    private Long session_id;
+    private Long sessionId;
 
     /**
      * 用户ID
      */
     @TableField(value = "user_id")
-    private Long user_id;
+    private Long userId;
 
     /**
      * 角色
@@ -49,13 +49,13 @@ public class ChatMessage implements Serializable {
      * 同步行程
      */
     @TableField(value = "plan_json")
-    private Object plan_json;
+    private Object planJson;
 
     /**
      * 
      */
     @TableField(value = "create_time")
-    private LocalDateTime create_time;
+    private LocalDateTime createTime;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

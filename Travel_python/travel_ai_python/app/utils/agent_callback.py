@@ -36,8 +36,10 @@ class AgentProgressCallback(BaseCallbackHandler):
     ) -> None:
         """当一个 chain（节点）开始执行时"""
         # 获取节点名称
-        # serialized 中有 name 字段
-        chain_name = serialized.get("name", "") if serialized else ""
+        # 注意：LangGraph 的节点名称不在 serialized 中，而是在 kwargs["name"] 中
+        # 这是 LangChain 回调机制的特点：serialized 在大多数情况下为 None，
+        # 真正的节点名称通过 kwargs 传递（如 Intent_Recognition, supervisor, task_analyzer 等）
+        chain_name = kwargs.get("name", "")
 
         # 过滤掉内部节点，只关注我们定义的 Agent 节点
         known_nodes = {
