@@ -1,0 +1,108 @@
+2026-07-06 14:46:22.437 | INFO     | N/A | 收到路线规划请求: 起点=广州, 目的地=['淄博市张店区博物馆', '周村古商城内的小吃街', '淄博市周村区周村古商城', '淄博市淄川区鲁山国家森林公园', '淄博市区内的餐厅或小吃店', '淄博市淄川区陶瓷博物馆']
+2026-07-06 14:46:22.439 | INFO     | N/A | 拆分后目的地: ['淄博市张店区博物馆', '周村古商城内的小吃街', '淄博市周村区周村古商城', '淄博市淄川区鲁山国家森林公园', '淄博市区内的餐厅或小吃店', '淄博市淄川区陶瓷博物馆']
+2026-07-06 14:46:25.168 | WARNING  | N/A | 地址解析失败: 淄博市区内的餐厅或小吃店, response: {'status': '0', 'info': 'ENGINE_RESPONSE_DATA_ERROR', 'infocode': '30001'}
+2026-07-06 14:46:25.636 | WARNING  | N/A | 地址解析失败: 淄博市区内的餐厅或小吃店, response: {'status': '0', 'info': 'ENGINE_RESPONSE_DATA_ERROR', 'infocode': '30001'}
+2026-07-06 14:55:57.396 | INFO     | N/A | 👋 Travel AI Web 服务已关闭
+2026-07-06 14:57:35.653 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-07-06 14:57:36.914 | INFO     | N/A | 🌐 Travel AI Web 服务启动中...
+2026-07-06 14:57:36.915 | INFO     | N/A | 📄 前端页面: http://localhost:8000
+2026-07-06 14:57:36.915 | INFO     | N/A | 🔌 API 文档: http://localhost:8000/docs
+2026-07-06 14:57:36.915 | INFO     | N/A | 💡 确保 MCP 服务已启动以获得完整功能！
+2026-07-06 14:57:58.250 | INFO     | a0695d82-1f95-4419-8cf9-044e1d250c54 | 🌐 [SSE] Web API 收到消息: 我想去杭州玩2天...
+2026-07-06 14:57:58.251 | INFO     | a0695d82-1f95-4419-8cf9-044e1d250c54 | 进入process_with_agent
+2026-07-06 14:58:00.316 | INFO     | N/A | 路线：plan（原始：<think>the user wants to go to hangzhou for 2 days, which involves planning a tr）
+2026-07-06 14:58:00.321 | INFO     | N/A | 进入supervisor_node
+2026-07-06 14:58:00.321 | INFO     | N/A | 下一步task_analyzer
+2026-07-06 14:58:00.325 | INFO     | N/A | [TaskAnalyzer] 用户消息: 我想去杭州玩2天...
+2026-07-06 14:58:02.790 | WARNING  | N/A | [TaskAnalyzer] 提取失败，使用默认值: Invalid json output: <think>The user wants to go to Hangzhou for 2 days. Let me extract the information from their current message: "我想去杭州玩2天"
+
+- destination: 杭州
+- days: 2
+- budget: 未指定 → default "中等"
+- pace: 未指定 → default "适中"
+- user_query: "我想去杭州玩2天"</think>
+
+{"destination": "杭州", "days": 2, "budget": "中等", "pace": "适中", "user_query": "我想去杭州玩2天"}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+2026-07-06 14:58:02.793 | INFO     | N/A | 进入supervisor_node
+2026-07-06 14:58:02.794 | INFO     | N/A | 下一步researcher
+2026-07-06 14:58:04.458 | INFO     | N/A | ✅ 已加载 15 个 MCP 工具
+2026-07-06 14:58:04.460 | INFO     | N/A | [Researcher] 开始研究 北京
+2026-07-06 15:04:12.225 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-07-06 15:04:13.448 | INFO     | N/A | 🌐 Travel AI Web 服务启动中...
+2026-07-06 15:04:13.448 | INFO     | N/A | 📄 前端页面: http://localhost:8000
+2026-07-06 15:04:13.449 | INFO     | N/A | 🔌 API 文档: http://localhost:8000/docs
+2026-07-06 15:04:13.449 | INFO     | N/A | 💡 确保 MCP 服务已启动以获得完整功能！
+2026-07-06 15:04:26.252 | INFO     | 833217c8-1304-4cd6-8db9-319de83e010e | 🌐 [SSE] Web API 收到消息: 我先去杭州玩2天...
+2026-07-06 15:04:26.260 | INFO     | 833217c8-1304-4cd6-8db9-319de83e010e | 进入process_with_agent
+2026-07-06 15:04:31.386 | INFO     | N/A | 路线：plan（原始：<think>
+the user is saying "我先去杭州玩2天" which means "i'm going to hangzhou for 2 d）
+2026-07-06 15:04:31.392 | INFO     | N/A | 进入supervisor_node
+2026-07-06 15:04:31.392 | INFO     | N/A | 下一步task_analyzer
+2026-07-06 15:04:31.396 | INFO     | N/A | [TaskAnalyzer] 用户消息: 我先去杭州玩2天...
+2026-07-06 15:04:33.107 | WARNING  | N/A | [TaskAnalyzer] 提取失败，使用默认值: Invalid json output: <think>
+The user said "我先去杭州玩2天" which means "I'll go to Hangzhou first for 2 days."
+
+Let me extract:
+- destination: 杭州
+- days: 2
+- budget: not specified, default to 中等
+- pace: not specified, default to 适中
+- user_query: "我先去杭州玩2天"
+</think>
+{"destination": "杭州", "days": 2, "budget": "中等", "pace": "适中", "user_query": "我先去杭州玩2天"}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+2026-07-06 15:04:33.111 | INFO     | N/A | 进入supervisor_node
+2026-07-06 15:04:33.112 | INFO     | N/A | 下一步researcher
+2026-07-06 15:04:34.932 | INFO     | N/A | ✅ 已加载 15 个 MCP 工具
+2026-07-06 15:04:34.934 | INFO     | N/A | [Researcher] 开始研究 北京
+2026-07-06 15:10:59.920 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-07-06 15:11:01.020 | INFO     | N/A | 🌐 Travel AI Web 服务启动中...
+2026-07-06 15:11:01.020 | INFO     | N/A | 📄 前端页面: http://localhost:8000
+2026-07-06 15:11:01.020 | INFO     | N/A | 🔌 API 文档: http://localhost:8000/docs
+2026-07-06 15:11:01.020 | INFO     | N/A | 💡 确保 MCP 服务已启动以获得完整功能！
+2026-07-06 15:12:07.928 | INFO     | N/A | 👋 Travel AI Web 服务已关闭
+2026-07-06 15:13:53.426 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-07-06 15:13:54.508 | INFO     | N/A | 🌐 Travel AI Web 服务启动中...
+2026-07-06 15:13:54.508 | INFO     | N/A | 📄 前端页面: http://localhost:8000
+2026-07-06 15:13:54.509 | INFO     | N/A | 🔌 API 文档: http://localhost:8000/docs
+2026-07-06 15:13:54.509 | INFO     | N/A | 💡 确保 MCP 服务已启动以获得完整功能！
+2026-07-06 15:14:06.292 | INFO     | 39f1ffeb-1eab-4646-a9f2-3f3db7289edf | 🌐 [SSE] Web API 收到消息: 我先去杭州玩2天...
+2026-07-06 15:14:06.293 | INFO     | 39f1ffeb-1eab-4646-a9f2-3f3db7289edf | 进入process_with_agent
+2026-07-06 15:14:07.928 | INFO     | N/A | 路线：plan（原始：plan）
+2026-07-06 15:14:07.933 | INFO     | N/A | 进入supervisor_node
+2026-07-06 15:14:07.933 | INFO     | N/A | 下一步task_analyzer
+2026-07-06 15:14:07.937 | INFO     | N/A | [TaskAnalyzer] 用户消息: 我先去杭州玩2天...
+2026-07-06 15:14:09.446 | INFO     | N/A | [TaskAnalyzer] 提取结果: 杭州 2天 中等 适中
+2026-07-06 15:14:09.449 | INFO     | N/A | 进入supervisor_node
+2026-07-06 15:14:09.450 | INFO     | N/A | 下一步researcher
+2026-07-06 15:14:11.089 | INFO     | N/A | ✅ 已加载 15 个 MCP 工具
+2026-07-06 15:14:11.091 | INFO     | N/A | [Researcher] 开始研究 杭州
+2026-07-06 15:15:01.334 | INFO     | N/A | [Researcher] 研究完成，字数: 4052
+2026-07-06 15:15:01.337 | INFO     | N/A | 进入supervisor_node
+2026-07-06 15:15:01.337 | INFO     | N/A | 下一步planner
+2026-07-06 15:15:01.378 | INFO     | N/A | [Planner] 开始规划 杭州2天行程
+2026-07-06 15:15:34.924 | INFO     | N/A | [Planner] 草案完成，字数: 3949
+2026-07-06 15:15:34.937 | INFO     | N/A | 进入supervisor_node
+2026-07-06 15:15:34.937 | INFO     | N/A | 下一步critic
+2026-07-06 15:15:34.943 | INFO     | N/A | [Critic] 第0次评审开始
+2026-07-06 15:15:45.432 | INFO     | N/A | [Critic] 第0次评审完成 | 总分: 89.6 | 下一步: final_optimizer
+2026-07-06 15:15:45.439 | INFO     | N/A | [FinalOptimizer] 开始最终润色 | 最高分: 89.6
+2026-07-06 15:15:45.440 | INFO     | N/A | 进入supervisor_node
+2026-07-06 15:15:45.441 | INFO     | N/A | 下一步=final_optimizer
+2026-07-06 15:16:26.803 | INFO     | N/A | [FinalOptimizer] 完成，最终字数: 5023
+2026-07-06 15:16:26.808 | INFO     | N/A | [FinalOptimizer] 开始最终润色 | 最高分: 89.6
+2026-07-06 15:16:26.808 | INFO     | N/A | 进入supervisor_node
+2026-07-06 15:16:26.810 | INFO     | N/A | 下一步final_plan
+2026-07-06 15:16:55.899 | INFO     | N/A | [FinalOptimizer] 完成，最终字数: 5072
+2026-07-06 15:16:55.911 | INFO     | N/A | 进入supervisor_node
+2026-07-06 15:16:55.912 | INFO     | N/A | 下一步final_plan
+2026-07-06 15:17:11.728 | INFO     | N/A | [ParsePlan] 解析成功，共 2 天
+2026-07-06 15:17:21.951 | INFO     | N/A | [ParsePlan] 解析成功，共 2 天
+2026-07-06 15:17:21.962 | INFO     | N/A | Profile 更新任务已入队: user_id=1
+2026-07-06 15:17:21.962 | INFO     | 39f1ffeb-1eab-4646-a9f2-3f3db7289edf | ✅ 8-Agent 多智能体处理完成
+2026-07-06 15:17:23.281 | WARNING  | N/A | 地址解析失败: 浙江省杭州市西湖区孤山路30号, response: {'status': '0', 'info': 'CUQPS_HAS_EXCEEDED_THE_LIMIT', 'infocode': '10021'}
+2026-07-06 15:17:28.135 | INFO     | N/A | ✅ Mem0 记忆更新成功(后台) - user_id: 1
+2026-07-06 15:23:01.950 | INFO     | N/A | 收到路线规划请求: 起点=广州, 目的地=['浙江省杭州市上城区仁和路83号', '浙江省杭州市西湖区', '浙江省杭州市西湖区南山路15号', '浙江省杭州市西湖区孤山路30号', '浙江省杭州市西湖区南山路', '浙江省杭州市上城区河坊街', '浙江省杭州市上城区延安路205号', '浙江省杭州市上城区湖滨步行街', '浙江省杭州市上城区庆春路209号', '浙江省杭州市西湖区灵隐路法云弄1号', '浙江省杭州市西湖区龙井路', '浙江省杭州市西湖区龙井村']
+2026-07-06 15:23:01.951 | INFO     | N/A | 拆分后目的地: ['浙江省杭州市上城区仁和路83号', '浙江省杭州市西湖区', '浙江省杭州市西湖区南山路15号', '浙江省杭州市西湖区孤山路30号', '浙江省杭州市西湖区南山路', '浙江省杭州市上城区河坊街', '浙江省杭州市上城区延安路205号', '浙江省杭州市上城区湖滨步行街', '浙江省杭州市上城区庆春路209号', '浙江省杭州市西湖区灵隐路法云弄1号', '浙江省杭州市西湖区龙井路', '浙江省杭州市西湖区龙井村']
+2026-07-06 23:17:07.012 | INFO     | N/A | 👋 Travel AI Web 服务已关闭

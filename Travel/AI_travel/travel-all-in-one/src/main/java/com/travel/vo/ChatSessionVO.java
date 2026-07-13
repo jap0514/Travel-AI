@@ -14,6 +14,9 @@ public class ChatSessionVO {
     @Schema(description = "会话标题",example = "新会话")
     private String title;
 
+    @Schema(description = "创建时间")
+    private LocalDateTime createTime;
+
     @Schema(description = "更新时间")
     private LocalDateTime updateTime;
 }

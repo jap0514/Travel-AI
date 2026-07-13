@@ -76,16 +76,22 @@ public class TravelTask implements Serializable {
     private String trace_id;
 
     /**
-     * 
+     * 创建时间
      */
     @TableField(value = "create_time")
     private LocalDateTime create_time;
 
     /**
-     * 
+     * 更新时间
      */
     @TableField(value = "update_time")
     private LocalDateTime update_time;
+
+    /**
+     * 旅游目的地
+     */
+    @TableField(value = "destination")
+    private String destination;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

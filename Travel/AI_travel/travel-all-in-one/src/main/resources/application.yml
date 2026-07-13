@@ -77,3 +77,4 @@ travel:
     result-tag: result-exchange
   security:
     sign-secret: ${SIGN_SECRET:defaultSecret123456}  # 签名密钥
+  python-api-url: http://localhost:8000/api  # Python FastAPI 服务地址

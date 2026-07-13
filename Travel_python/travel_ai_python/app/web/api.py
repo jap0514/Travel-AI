@@ -6,6 +6,9 @@ import json
 import traceback
 import asyncio
 from datetime import datetime
+from email.policy import default
+import requests
+
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import JSONResponse, StreamingResponse
 from typing import Optional
@@ -40,8 +43,125 @@ class HealthResponse(BaseModel):
     model: str = ""
     servers: dict = {}
 
+class ChatRequestFromJava(BaseModel):
+    sessionId: int = Field(default=3001, description="会话ID")
+    userId: int = Field(default=1, description="用户ID")
+    messageId: int = Field(default=1001, description="用户消息ID")
+    content: str = Field(..., min_length=1, description="用户内容")
+    callbackUrl: Optional[str] = Field(default=None, description="Java回调地址，Python处理完成后回调此地址")
+
+class ChatResponseToJava(BaseModel):
+    sessionId: int = Field(default=3001,description="会话ID")
+    userId: int = Field(default=1,description="用户ID")
+    relatedMsgId: int = Field(default=2001,description="关联的用户消息ID")
+    content: str = Field(..., min_length=1, description="内容")
+    planJson: dict | None = None
+    traceId: str
+
 
 # ───────────────────────────── API 端点 ─────────────────────────────
+
+async def _call_java_callback(callback_url: str, payload: dict):
+    """在后台线程中同步调用 Java 回调接口，避免阻塞事件循环"""
+    loop = asyncio.get_event_loop()
+    try:
+        await loop.run_in_executor(None, lambda: requests.post(
+            callback_url,
+            json=payload,
+            headers={"Content-Type": "application/json"},
+            timeout=30
+        ))
+    except Exception as e:
+        logger.error(f"回调Java失败: {e}, callbackUrl={callback_url}")
+
+
+@router.post("/chatByJava", response_model=ChatResponseToJava)
+async def chat_by_java(request: ChatRequestFromJava):
+    """接收Java发过来的用户请求，立即返回，后台异步处理，完成后回调Java"""
+    sessionId = request.sessionId
+    messageId = request.messageId
+    userId = request.userId
+    trace_id = f"{request.userId}_{request.sessionId}_{time.time_ns()}"
+    log = logger.bind(trace_id=trace_id)
+    log.info(f"python端成功接收到Java发过来的消息: {request.content[:80]}...")
+
+    # 立即返回，不等待处理完成
+    asyncio.create_task(_process_and_callback(request, trace_id))
+
+    return ChatResponseToJava(
+        sessionId=sessionId,
+        userId=userId,
+        relatedMsgId=messageId,
+        content="请求已接收，正在处理中...",
+        planJson=None,
+        traceId=trace_id,
+    )
+
+
+async def _process_and_callback(request: ChatRequestFromJava, trace_id: str):
+    """后台任务：执行 agent，处理完成后回调 Java"""
+    log = logger.bind(trace_id=trace_id)
+
+    # 构造 message
+    message = ChatMessage(
+        msg_id=request.messageId,
+        session_id=request.sessionId,
+        user_id=request.userId,
+        role="user",
+        content=request.content,
+        plan_json=None,
+        create_time=datetime.now(),
+    )
+
+    try:
+        # 调用核心多智能体处理
+        task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+
+        # 安全处理 planJson
+        plan_json_dict = parsed_plan.to_dict() if parsed_plan else None
+        response_content = text_result or "无返回内容"
+
+        # 构造回调 payload
+        callback_payload = {
+            "sessionId": request.sessionId,
+            "userId": request.userId,
+            "relatedMsgId": request.messageId,
+            "content": response_content,
+            "planJson": json.dumps(plan_json_dict, ensure_ascii=False) if plan_json_dict else None,
+            "traceId": trace_id,
+            "task": {
+                "taskId": task.task_id if task else None,
+                "userId": task.user_id if task else None,
+                "userQuery": task.user_query if task else None,
+                "days": task.days if task else None,
+                "budget": task.budget if task else None,
+                "pace": task.pace if task else None,
+                "destination": task.destination if task else None,
+                "planId": task.plan_id if task else None,
+                "errorMsg": task.error_msg if task else None,
+                "resultStatus": task.result_status if task else None,
+            } if task else None,
+        }
+
+        # 如果提供了回调地址，则回调 Java
+        if request.callbackUrl:
+            await _call_java_callback(request.callbackUrl, callback_payload)
+            log.info(f"✅ 已回调Java，callbackUrl={request.callbackUrl}")
+        else:
+            log.warning("未配置callbackUrl，跳过回调")
+
+    except Exception as e:
+        log.exception(f"❌ 后台处理失败: {e}")
+        if request.callbackUrl:
+            error_payload = {
+                "sessionId": request.sessionId,
+                "userId": request.userId,
+                "relatedMsgId": request.messageId,
+                "content": f"处理失败: {str(e)}",
+                "planJson": None,
+                "traceId": trace_id,
+            }
+            await _call_java_callback(request.callbackUrl, error_payload)
 
 
 @router.post("/chat", response_model=ChatResponse)

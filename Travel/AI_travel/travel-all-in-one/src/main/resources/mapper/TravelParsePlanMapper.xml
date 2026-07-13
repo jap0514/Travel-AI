@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travel.mapper.TravelParsePlanMapper">
+
+    <resultMap id="BaseResultMap" type="com.travel.entity.TravelParsePlan">
+            <id property="plan_id" column="plan_id" jdbcType="BIGINT"/>
+            <result property="task_id" column="task_id" jdbcType="BIGINT"/>
+            <result property="user_id" column="user_id" jdbcType="BIGINT"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="destination" column="destination" jdbcType="VARCHAR"/>
+            <result property="days" column="days" jdbcType="INTEGER"/>
+            <result property="budget" column="budget" jdbcType="VARCHAR"/>
+            <result property="pace" column="pace" jdbcType="VARCHAR"/>
+            <result property="start_date" column="start_date" jdbcType="DATE"/>
+            <result property="daily_plans" column="daily_plans" jdbcType="OTHER"/>
+            <result property="total_estimated_cost" column="total_estimated_cost" jdbcType="DECIMAL"/>
+            <result property="notes" column="notes" jdbcType="VARCHAR"/>
+            <result property="raw_markdown" column="raw_markdown" jdbcType="VARCHAR"/>
+            <result property="trace_id" column="trace_id" jdbcType="VARCHAR"/>
+            <result property="create_time" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="update_time" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        plan_id,task_id,user_id,
+        title,destination,days,
+        budget,pace,start_date,
+        daily_plans,total_estimated_cost,notes,
+        raw_markdown,trace_id,create_time,
+        update_time
+    </sql>
+</mapper>

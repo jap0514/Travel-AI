@@ -13,8 +13,8 @@ import com.travel.vo.ChatMessageVO;
 public interface ChatMessageService extends IService<ChatMessage> {
 
     /**
-     * 从用户的message里面获取到具体的内容content
+     * 发送用户消息给python
      * @param chatMessageDTO
      */
-    ChatMessageVO getContentFromMessage(ChatMessageDTO chatMessageDTO, Long userId);
+    ChatMessageVO sendMessageToPython(ChatMessageDTO chatMessageDTO, Long userId);
 }

@@ -36,11 +36,14 @@ from app.config.logger import logger
 
 def supervisor_node(state: AgentState):
     logger.info(f"进入supervisor_node")
+
+    # 优先检查 should_end 标志，一旦设置为 True 就直接结束
+    if state.get("should_end"):
+        logger.info(f"下一步=parse_plan（should_end=True）")
+        return {"next": "parse_plan"}
+
     if state.get("final_plan"):  # 已有最终结果
         logger.info(f"下一步final_plan")
-        return {"next": "parse_plan"}   # 添加这个，不让一直循环
-
-    if state.get("should_end"):   # 双重保险
         return {"next": "parse_plan"}
 
     # 如果 critic 或其他节点已经设置了 next，优先使用它（重要！）

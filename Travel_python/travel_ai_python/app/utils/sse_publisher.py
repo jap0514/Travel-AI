@@ -82,21 +82,18 @@ class SSEmitter:
         """在事件循环中调度协程（兼容同步上下文）"""
         try:
             loop = asyncio.get_running_loop()
-            # 在已运行的事件循环中调度任务
-            loop.call_soon(lambda: asyncio.create_task(coro))
+            asyncio.ensure_future(coro)
         except RuntimeError:
-            # 没有运行中的事件循环，在新事件循环中运行
-            try:
-                loop = asyncio.get_event_loop()
-                if loop.is_running():
-                    # 事件循环正在运行，创建任务
-                    asyncio.run_coroutine_threadsafe(coro, loop)
-                else:
-                    # 事件循环没有运行，直接运行协程
+            # 没有运行中的事件循环，在新线程中运行
+            import threading
+            def run_coro():
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+                try:
                     loop.run_until_complete(coro)
-            except Exception:
-                # 忽略调度错误
-                pass
+                finally:
+                    loop.close()
+            threading.Thread(target=run_coro, daemon=True).start()
 
 
 # 全局 SSE 发射器
