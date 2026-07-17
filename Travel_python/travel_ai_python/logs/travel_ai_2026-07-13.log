@@ -233,3 +233,32 @@
 2026-07-13 13:57:21.815 | INFO     | 1_1001_1783922047625273000 | ✅ 8-Agent 多智能体处理完成
 2026-07-13 13:57:21.883 | INFO     | 1_1001_1783922047625273000 | ✅ 已回调Java，callbackUrl=http://localhost:9999/sendMessageByPython/receiveAI
 2026-07-13 13:57:24.057 | INFO     | N/A | ✅ Mem0 记忆更新成功(后台) - user_id: 1
+2026-07-13 17:53:41.191 | INFO     | 1_1001_1783936421191941600 | python端成功接收到Java发过来的消息: 请帮我规划一个广州1日游...
+2026-07-13 17:53:41.193 | INFO     | 1_1001_1783936421191941600 | 进入process_with_agent
+2026-07-13 17:53:42.305 | INFO     | N/A | 路线：plan（原始：plan）
+2026-07-13 17:53:42.313 | INFO     | N/A | 进入supervisor_node
+2026-07-13 17:53:42.314 | INFO     | N/A | 下一步task_analyzer
+2026-07-13 17:53:42.318 | INFO     | N/A | [TaskAnalyzer] 用户消息: 请帮我规划一个广州1日游...
+2026-07-13 17:53:44.588 | INFO     | N/A | [TaskAnalyzer] 提取结果: 广州 1天 中等 适中
+2026-07-13 17:53:44.591 | INFO     | N/A | 进入supervisor_node
+2026-07-13 17:53:44.591 | INFO     | N/A | 下一步researcher
+2026-07-13 17:53:44.600 | INFO     | N/A | [Researcher] 开始研究 广州
+2026-07-13 17:54:59.229 | INFO     | N/A | [Researcher] 研究完成，字数: 3883
+2026-07-13 17:54:59.233 | INFO     | N/A | 进入supervisor_node
+2026-07-13 17:54:59.233 | INFO     | N/A | 下一步planner
+2026-07-13 17:54:59.297 | INFO     | N/A | [Planner] 开始规划 广州1天行程
+2026-07-13 17:55:55.086 | INFO     | N/A | [Planner] 草案完成，字数: 4286
+2026-07-13 17:55:55.089 | INFO     | N/A | 进入supervisor_node
+2026-07-13 17:55:55.090 | INFO     | N/A | 下一步critic
+2026-07-13 17:55:55.096 | INFO     | N/A | [Critic] 第0次评审开始
+2026-07-13 17:56:04.009 | INFO     | N/A | [Critic] 第0次评审完成 | 总分: 85.6 | 下一步: final_optimizer
+2026-07-13 17:56:04.015 | INFO     | N/A | [FinalOptimizer] 开始最终润色 | 最高分: 85.6
+2026-07-13 17:56:50.767 | INFO     | N/A | [FinalOptimizer] 完成，最终字数: 6336
+2026-07-13 17:56:50.771 | INFO     | N/A | 进入supervisor_node
+2026-07-13 17:56:50.772 | INFO     | N/A | 下一步=parse_plan（should_end=True）
+2026-07-13 17:56:57.981 | INFO     | N/A | [ParsePlan] 解析成功，共 1 天
+2026-07-13 17:56:57.993 | INFO     | N/A | Profile 更新任务已入队: user_id=1
+2026-07-13 17:56:57.994 | INFO     | 1_1001_1783936421191941600 | ✅ 8-Agent 多智能体处理完成
+2026-07-13 17:56:58.092 | INFO     | 1_1001_1783936421191941600 | ✅ 已回调Java，callbackUrl=http://localhost:9999/sendMessageByPython/receiveAI
+2026-07-13 17:57:00.626 | INFO     | N/A | ✅ Mem0 记忆更新成功(后台) - user_id: 1
+2026-07-13 22:42:12.029 | INFO     | N/A | 👋 Travel AI Web 服务已关闭
