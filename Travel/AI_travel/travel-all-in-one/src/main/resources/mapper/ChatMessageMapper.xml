@@ -5,13 +5,13 @@
 <mapper namespace="com.travel.mapper.ChatMessageMapper">
 
     <resultMap id="BaseResultMap" type="com.travel.entity.ChatMessage">
-            <id property="msg_id" column="msg_id" jdbcType="BIGINT"/>
-            <result property="session_id" column="session_id" jdbcType="BIGINT"/>
-            <result property="user_id" column="user_id" jdbcType="BIGINT"/>
+            <id property="msgId" column="msg_id" jdbcType="BIGINT"/>
+            <result property="sessionId" column="session_id" jdbcType="BIGINT"/>
+            <result property="userId" column="user_id" jdbcType="BIGINT"/>
             <result property="role" column="role" jdbcType="OTHER"/>
             <result property="content" column="content" jdbcType="VARCHAR"/>
-            <result property="plan_json" column="plan_json" jdbcType="OTHER"/>
-            <result property="create_time" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="planJson" column="plan_json" jdbcType="OTHER"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travel.mapper.HotelBookingMapper">
+
+    <resultMap id="BaseResultMap" type="com.travel.entity.HotelBooking">
+            <id property="bookingId" column="booking_id" jdbcType="BIGINT"/>
+            <result property="orderNo" column="order_no" jdbcType="VARCHAR"/>
+            <result property="userId" column="user_id" jdbcType="BIGINT"/>
+            <result property="roomId" column="room_id" jdbcType="BIGINT"/>
+            <result property="checkInDate" column="check_in_date" jdbcType="DATE"/>
+            <result property="checkOutDate" column="check_out_date" jdbcType="DATE"/>
+            <result property="totalPrice" column="total_price" jdbcType="DECIMAL"/>
+            <result property="guestName" column="guest_name" jdbcType="VARCHAR"/>
+            <result property="guestPhone" column="guest_phone" jdbcType="VARCHAR"/>
+            <result property="specialRequest" column="special_request" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="TINYINT"/>
+            <result property="paymentTime" column="payment_time" jdbcType="TIMESTAMP"/>
+            <result property="transactionId" column="transaction_id" jdbcType="VARCHAR"/>
+            <result property="cancelTime" column="cancel_time" jdbcType="TIMESTAMP"/>
+            <result property="cancelReason" column="cancel_reason" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <resultMap id="EmptyRoomResultMap" type="com.travel.vo.HotelEmptyRoomVO">
+        <result property="hotelId" column="hotel_id" jdbcType="BIGINT"/>
+        <result property="hotelName" column="hotel_name" jdbcType="VARCHAR"/>
+        <result property="roomTypeId" column="room_type_id" jdbcType="BIGINT"/>
+        <result property="roomTypeName" column="room_type_name" jdbcType="VARCHAR"/>
+        <result property="roomNo" column="room_no" jdbcType="VARCHAR"/>
+        <result property="hasEmptyRoom" column="has_empty_room" jdbcType="BOOLEAN"/>
+        <result property="availableBookTime" column="available_book_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        booking_id,order_no,user_id,
+        room_id,check_in_date,check_out_date,
+        total_price,guest_name,guest_phone,
+        special_request,status,payment_time,
+        transaction_id,cancel_time,cancel_reason,
+        create_time,update_time
+    </sql>
+
+    <select id="selectEmptyRoom" resultMap="EmptyRoomResultMap">
+        select
+            h.hotel_id,
+            h.name as hotel_name,
+            hrt.room_type_id,
+            hrt.name as room_type_name,
+            hr.room_id,
+            hr.room_no,
+            case
+                when not exists(
+                        select 1 from hotel_booking hb
+                        where hb.room_id=hr.room_id
+                          and hb.status IN (0, 1, 2)
+                          and hb.check_in_date &lt; #{endDate}
+                          and hb.check_out_date &gt; #{startDate}
+                ) then true
+                else false
+            end as has_empty_room,
+            case
+                when not exists(
+                        select 1 from hotel_booking hb
+                        where hb.room_id=hr.room_id
+                          and hb.status IN (0, 1, 2)
+                          and hb.check_in_date &lt; #{endDate}
+                          and hb.check_out_date &gt; #{startDate}
+                ) then NOW()
+                else (
+                    select min(hb2.check_out_date)
+                    from hotel_booking hb2
+                    where hr.room_id=hb2.room_id
+                      and hb2.status IN (0, 1, 2)
+                      and hb2.check_out_date &gt; #{startDate}
+                    )
+            end as available_book_time
+        from hotel h
+        join hotel_room_type hrt on h.hotel_id=hrt.hotel_id
+        join hotel_room hr on hrt.room_type_id=hr.room_type_id and h.hotel_id=hr.hotel_id
+        where h.city=#{city}
+    </select>
+
+    <select id="checkEmptyRoom" resultType="java.lang.Long">
+        select
+            count(1)
+        from hotel_booking hk
+        join hotel_room hr on hr.room_id=hk.room_id
+        where hr.hotel_id=#{hotelId}
+            and hr.room_no=#{roomNo}
+            and hk.status IN (0, 1, 2)
+            and hk.check_in_date &lt;= #{checkInDate}
+            and hk.check_out_date &gt;= #{checkInDate}
+    </select>
+</mapper>
