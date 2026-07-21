@@ -28,6 +28,12 @@ public class AuthInterceptor implements HandlerInterceptor {
                              HttpServletResponse response,
                              Object handler){
 
+        // Python 回调接口，直接放行
+        String path = request.getRequestURI();
+        if (path.startsWith("/sendMessageByPython/")) {
+            return true;
+        }
+
         System.out.println("到拦截器这里了");
 
         //1、从请求头那里获得 Token

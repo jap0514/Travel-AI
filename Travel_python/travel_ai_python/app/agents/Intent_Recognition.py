@@ -20,6 +20,18 @@ intent_llm = ChatOpenAI(
 
 
 def intent_recognition_node(state: AgentState):
+    # Guard：若处于交互等待状态，强制走 plan 流程，防止用户提问被识别为 QA
+    interaction = state.get("interaction") or {}
+    waiting_statuses = {
+        "waiting_user_hotel",
+        "waiting_user_decision",
+        "waiting_user_alternatives",
+        "waiting_user_alarm",
+    }
+    if interaction.get("status") in waiting_statuses:
+        logger.info(f"路线：plan（交互等待状态强制）interaction.status={interaction.get('status')}")
+        return {"intent": "plan"}
+
     user_msg = state["messages"][-1].content
     prompt = f"""你是一个旅行助手意图分类器。严格判断用户消息属于哪种类型。
 

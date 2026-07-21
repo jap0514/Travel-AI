@@ -28,4 +28,13 @@ public class ChatMessageDTO {
 
     @Schema(description = "同步行程JSON（可选）", example = "{\"planId\":1001}")
     private String planJson;
+
+    @Schema(description = "出发日期 yyyy-MM-dd")
+    private String startDate;
+
+    @Schema(description = "旅游天数")
+    private Integer days;
+
+    @Schema(description = "flow ID（用于中断恢复）")
+    private String flowId;
 }

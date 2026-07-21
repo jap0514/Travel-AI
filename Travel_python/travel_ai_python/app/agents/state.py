@@ -30,3 +30,9 @@ class AgentState(TypedDict):
     should_end: Annotated[bool, last_value] = False  # 用来判断是否结束
     intent: Optional[str]  # "plan" or "qa"
     qa_answer: Optional[str]  # 最终返回的普通问答内容
+    flow_id: Optional[str]  # 当前 flow 唯一标识
+    start_date: Optional[str]  # 出发日期 YYYY-MM-DD
+    days: Optional[int]  # 旅游天数
+    interaction: Optional[dict]  # 交互状态（type/status/hotels/chosen/alternatives/alarm_set/message）
+    needs_replan: Optional[bool]  # 是否需要重新规划
+    booking_status: Optional[str]  # 预定状态（confirmed/skipped/pending）

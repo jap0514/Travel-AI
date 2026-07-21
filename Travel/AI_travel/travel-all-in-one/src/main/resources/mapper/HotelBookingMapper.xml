@@ -32,6 +32,8 @@
         <result property="roomNo" column="room_no" jdbcType="VARCHAR"/>
         <result property="hasEmptyRoom" column="has_empty_room" jdbcType="BOOLEAN"/>
         <result property="availableBookTime" column="available_book_time" jdbcType="TIMESTAMP"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="price" column="price" jdbcType="DECIMAL"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -51,6 +53,8 @@
             hrt.name as room_type_name,
             hr.room_id,
             hr.room_no,
+            h.address,
+            hrt.price,
             case
                 when not exists(
                         select 1 from hotel_booking hb
@@ -93,5 +97,23 @@
             and hk.status IN (0, 1, 2)
             and hk.check_in_date &lt;= #{checkInDate}
             and hk.check_out_date &gt;= #{checkInDate}
+    </select>
+
+    <select id="verifyRoomAvailable" resultType="java.lang.Long">
+        select
+            hr.room_id
+        from hotel_room hr
+        where hr.hotel_id = #{hotelId}
+          and hr.room_type_id = #{roomTypeId}
+          and hr.room_no = #{roomNo}
+          and hr.status = 1  -- 房间本身可用（未被禁用）
+          and not exists(
+              select 1 from hotel_booking hb
+              where hb.room_id = hr.room_id
+                and hb.status in (0, 1, 2)  -- 待支付、已支付、已确认
+                and hb.check_in_date &lt; #{checkOutDate}
+                and hb.check_out_date &gt; #{checkInDate}
+          )
+        limit 1
     </select>
 </mapper>

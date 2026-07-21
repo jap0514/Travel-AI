@@ -4,17 +4,16 @@ Task Analyzer 节点 - 从用户消息中提取结构化任务参数
 
 角色：任务信息提取专家
 输入：用户消息
-输出：TravelTask 对象（destination, days, budget, pace）
+输出：TravelTask 对象（destination, days, budget, pace, start_date）
 """
 from langchain_core.messages import HumanMessage
 from app.agents.base import llm
 from app.model.task_model import TravelTask
 from app.utils.mem0_client import get_user_memories
-from app.utils.redis_client import get_user_profile,get_session_context
+from app.utils.redis_client import get_user_profile, get_session_context
 from app.config.logger import logger
-from app.config.settings import settings
 import json
-
+import uuid
 
 
 ROLE_DEFINITION = """
@@ -80,14 +79,25 @@ def task_analyzer_node(state):
     """
     Task Analyzer 节点 - 提取用户旅行任务参数
 
-    输入：用户最新消息 + Mem0记忆 + Redis Profile
+    输入：用户最新消息 + Mem0记忆 + Redis Profile + 前端传入的 start_date/days
     输出：TravelTask 对象
     """
     user_msg = state["messages"][-1].content
     user_id = state.get("user_id", 0)
-    session_id=state.get("session_id",0)
+    session_id = state.get("session_id", 0)
 
     logger.info(f"[TaskAnalyzer] 用户消息: {user_msg[:50]}...")
+
+    # 生成 flow_id（若不存在）
+    flow_id = state.get("flow_id")
+    if not flow_id:
+        flow_id = str(uuid.uuid4())[:8]
+        logger.info(f"[TaskAnalyzer] 生成新 flow_id: {flow_id}")
+
+    # 获取前端传入的 start_date 和 days（优先使用）
+    start_date = state.get("start_date")
+    days = state.get("days")
+    logger.info(f"[TaskAnalyzer] 前端传入: start_date={start_date}, days={days}")
 
     # 获取记忆和偏好
     memories = get_user_memories(user_id)
@@ -95,8 +105,8 @@ def task_analyzer_node(state):
     profile = get_user_profile(user_id)
     profile_text = json.dumps(profile, ensure_ascii=False) if profile else "暂无"
     # 获取历史对话
-    session_messages= get_session_context(session_id)
-    history_text= "\n".join([
+    session_messages = get_session_context(session_id)
+    history_text = "\n".join([
         f"{m['role']}: {m['content']}"
         for m in session_messages
     ])
@@ -125,24 +135,26 @@ def task_analyzer_node(state):
 - destination 必须来自用户消息，不是默认值
 - 只看用户当前这条消息，不做推理假设
 - 只输出 JSON 对象，不要其他内容
-- 请直接输出JSON，不要包含思考过程（如</think>标签）"""
+- 请直接输出JSON，不要包含思考过程"""
 
     try:
         structured_llm = llm.with_structured_output(dict, method="json_mode")
         result = structured_llm.invoke([HumanMessage(content=prompt)])
 
+        # 优先使用前端传入的 start_date 和 days
         task = TravelTask(
             task_id=state.get("msg_id", 0),
             trace_id=state.get("trace_id"),
             user_id=user_id,
             user_query=result.get("user_query", user_msg),
-            days=result.get("days", 3),
+            days=days if days is not None else result.get("days", 3),
             budget=result.get("budget", "中等"),
             pace=result.get("pace", "适中"),
-            destination=result.get("destination", "北京")
+            destination=result.get("destination", "北京"),
+            start_date=start_date,
         )
 
-        logger.info(f"[TaskAnalyzer] 提取结果: {task.destination} {task.days}天 {task.budget} {task.pace}")
+        logger.info(f"[TaskAnalyzer] 提取结果: {task.destination} {task.days}天 {task.budget} {task.pace} 出发:{task.start_date}")
 
     except Exception as e:
         logger.warning(f"[TaskAnalyzer] 提取失败，使用默认值: {e}")
@@ -151,15 +163,17 @@ def task_analyzer_node(state):
             trace_id=state.get("trace_id"),
             user_id=user_id,
             user_query=user_msg,
-            days=3,
+            days=days if days is not None else 3,
             budget="中等",
             pace="适中",
-            destination="北京"
+            destination="北京",
+            start_date=start_date,
         )
 
     return {
         "task": task,
-        "messages": state["messages"] + [HumanMessage(content=f"已提取任务: {task.destination}{task.days}天 {task.budget} {task.pace}")],
+        "messages": state["messages"] + [HumanMessage(content=f"已提取任务: {task.destination}{task.days}天 {task.budget} {task.pace} 出发:{task.start_date}")],
         "user_id": user_id,
-        "session_id": state.get("session_id")
+        "session_id": state.get("session_id"),
+        "flow_id": flow_id,
     }

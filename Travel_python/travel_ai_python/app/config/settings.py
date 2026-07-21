@@ -43,6 +43,10 @@ class Settings:   # 将配置封装成一个类，便于统一管理和引用。
     # Redis 配置
     REDIS_URL: str = os.getenv("REDIS_URL", "redis://192.168.71.140:6379/0")
     REDIS_SESSION_TTL: int = int(os.getenv("REDIS_SESSION_TTL", 86400))  # 24小时
+    FLOW_STATE_TTL: int = int(os.getenv("FLOW_STATE_TTL", 3600))  # flow state 过期时间：1小时
+
+    # Java 酒店服务 API 地址
+    JAVA_API_BASE_URL: str = os.getenv("JAVA_API_BASE_URL", "http://localhost:9999")
 
     # Mem0 配置 - 适配通义千问 Dashscope（已修复字段问题）
     MEM0_CONFIG: dict = {

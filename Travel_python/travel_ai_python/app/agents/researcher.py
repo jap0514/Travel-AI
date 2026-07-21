@@ -12,6 +12,7 @@ from langchain.agents import create_agent
 from app.utils.redis_client import get_user_profile
 from app.config.logger import logger
 import json
+from app.config.settings import settings
 
 
 ROLE_DEFINITION = """
@@ -57,8 +58,8 @@ TOOLS_DESCRIPTION = """
    - 查询天气预报
    - 用于行程安排参考
 
-7. search_hotels(city, checkin, checkout, budget)
-   - 查询酒店推荐
+7. selectEmptyRoom(city, startDate, days)
+   - 查询城市指定日期范围内的有空房的酒店及房间
 
 8. search_flights(departure, destination, date)
    - 查询航班信息
@@ -114,9 +115,13 @@ async def researcher_node(state):
     """
     Researcher 节点 - 收集旅行研究信息
 
-    输入：task（目的地、天数、预算、节奏）
-    输出：research_results（研究报告）
+    输入：task（目的地、天数、预算、节奏）+ 前端传入的 start_date/days
+    输出：research_results（研究报告）+ hotels（酒店列表）+ has_hotel_rooms
+          若有酒店且有房：设置 interaction.status=waiting_user_hotel，等待用户选择
     """
+    import requests
+    from app.config.settings import settings
+
     task = state["task"]
     user_id = state.get("user_id", 0)
     tools = await get_tools()
@@ -125,14 +130,32 @@ async def researcher_node(state):
     profile = get_user_profile(user_id)
     profile_text = json.dumps(profile, ensure_ascii=False) if profile else "暂无"
 
+    # 获取前端传入的日期参数
+    start_date = state.get("start_date") or getattr(task, "start_date", None) or ""
+    days = state.get("days") or getattr(task, "days", 3)
+    destination = getattr(task, "destination", "未知")
+
+    # 计算离店日期
+    from datetime import datetime, timedelta
+    checkout = ""
+    if start_date:
+        try:
+            start = datetime.strptime(start_date, "%Y-%m-%d")
+            end = start + timedelta(days=days)
+            checkout = end.strftime("%Y-%m-%d")
+        except ValueError:
+            pass
+
     prompt = f"""{ROLE_DEFINITION}
 
 ## 用户任务
-- 目的地：{getattr(task, 'destination', '未知')}
-- 天数：{getattr(task, 'days', 3)}天
+- 目的地：{destination}
+- 天数：{days}天
 - 预算：{getattr(task, 'budget', '中等')}
 - 节奏：{getattr(task, 'pace', '适中')}
 - 核心诉求：{getattr(task, 'user_query', '')}
+- 入住日期：{start_date}
+- 离店日期：{checkout}
 
 ## 用户偏好
 {profile_text}
@@ -144,18 +167,18 @@ async def researcher_node(state):
 {OUTPUT_FORMAT}
 
 ## 输出
-请基于用户任务进行全面研究，使用工具收集真实信息，输出实用研究报告。"""
+请基于用户任务进行全面研究，使用工具收集真实信息，输出实用研究报告（不包含酒店）。"""
 
-    logger.info(f"[Researcher] 开始研究 {getattr(task, 'destination', '')}")
+    logger.info(f"[Researcher] 开始研究 {destination}，日期: {start_date}~{checkout}")
 
-    # 创建 ReAct Agent
+    # 创建 ReAct Agent（研究景点、交通、美食、天气等）
     agent = create_agent(
         model=llm,
         tools=tools,
         system_prompt=prompt
     )
 
-    # 使用信号量限制 MCP 工具并发调用，避免多请求时 MCP SSE 连接冲突
+    # 使用信号量限制 MCP 工具并发调用
     mcp_semaphore = get_mcp_semaphore()
     async with mcp_semaphore:
         result = await agent.ainvoke({
@@ -163,10 +186,102 @@ async def researcher_node(state):
         })
 
     final_content = result["messages"][-1].content
+    all_messages = state["messages"] + result["messages"]
 
-    logger.info(f"[Researcher] 研究完成，字数: {len(final_content)}")
+    # ==================== 直接调用 Java 接口查询有空房的酒店 ====================
+    hotels, has_hotel_rooms = _query_empty_rooms(destination, start_date, days)
 
-    return {
+    logger.info(f"[Researcher] 研究完成 | 酒店数量: {len(hotels)} | 有空房: {has_hotel_rooms}")
+
+    return_dict = {
         "research_results": final_content,
-        "messages": state["messages"] + result["messages"]
+        "messages": all_messages,
+        "hotels": hotels,
+        "has_hotel_rooms": has_hotel_rooms,
     }
+
+    # 若有酒店且有房，设置交互状态，等待用户选择
+    if hotels and has_hotel_rooms:
+        from app.agents.user_interaction_node import handle_hotel_selection
+        interaction_update = handle_hotel_selection(
+            state=state,
+            hotels=hotels,
+            message="请从以下酒店列表中选择您心仪的酒店：",
+        )
+        return_dict["interaction"] = interaction_update["interaction"]
+        logger.info(f"[Researcher] 设置 waiting_user_hotel，酒店数量: {len(hotels)}")
+    elif not hotels:
+        # 没有空房，设置 waiting_user_decision，让用户选择是否继续
+        from app.agents.user_interaction_node import handle_no_hotel_decision
+        interaction_update = handle_no_hotel_decision(
+            state=state,
+            message="很抱歉，当前没有查询到有空房的酒店。",
+        )
+        return_dict["interaction"] = interaction_update["interaction"]
+        logger.info(f"[Researcher] 无空房酒店，设置 waiting_user_decision")
+
+    return return_dict
+
+
+def _query_empty_rooms(city: str, start_date: str, days: int) -> tuple:
+    """
+    直接调用 Java HTTP 接口查询有空房的酒店
+    GET /hotel/hotelInfo/selectEmptyRoom?city=&startDate=&days=
+    返回: (hotels: list, has_hotel_rooms: bool)
+    """
+    import requests
+    if not city or not start_date:
+        return [], False
+
+    try:
+        url = f"{settings.JAVA_API_BASE_URL}/hotel/hotelInfo/selectEmptyRoom"
+        # 传 LocalDateTime 格式，Java 端用 LocalDateTime.parse 解析
+        start_datetime = start_date + " 00:00:00"
+        params = {
+            "city": city,
+            "startDate": start_datetime,
+            "days": days,
+        }
+        response = requests.get(url, params=params, timeout=10)
+        if response.status_code != 200:
+            logger.warning(f"[Researcher] selectEmptyRoom 接口异常: status={response.status_code}")
+            return [], False
+
+        result = response.json()
+        # 适配 Result<?> 包装格式：{"code":200,"data":[...]}
+        data_list = []
+        if isinstance(result, dict):
+            if "data" in result:
+                data_list = result["data"] or []
+            elif isinstance(result, list):
+                data_list = result
+        elif isinstance(result, list):
+            data_list = result
+
+        hotels = []
+        has_hotel_rooms = False
+        for item in data_list:
+            if not isinstance(item, dict):
+                continue
+            has_empty = item.get("hasEmptyRoom") or item.get("has_empty_room", False)
+            if has_empty:
+                has_hotel_rooms = True
+                hotels.append({
+                    "hotelId": item.get("hotelId") or item.get("hotel_id", ""),
+                    "roomTypeId": item.get("roomTypeId") or item.get("room_type_id", ""),
+                    "roomNo": item.get("roomNo") or item.get("room_no", ""),
+                    "hotelName": item.get("hotelName") or item.get("hotel_name", "未知酒店"),
+                    "roomTypeName": item.get("roomTypeName") or item.get("room_type_name", ""),
+                    "address": item.get("address") or "",
+                    "price": item.get("price") or item.get("price_per_night") or "",
+                })
+
+        logger.info(f"[Researcher] 查询到 {len(hotels)} 个有空房的酒店")
+        return hotels, has_hotel_rooms
+
+    except requests.exceptions.Timeout:
+        logger.warning("[Researcher] selectEmptyRoom 接口超时")
+        return [], False
+    except Exception as e:
+        logger.warning(f"[Researcher] selectEmptyRoom 接口调用失败: {e}")
+        return [], False

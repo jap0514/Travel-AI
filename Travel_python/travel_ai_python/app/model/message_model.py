@@ -11,6 +11,8 @@ class ChatMessage:
     content: str
     plan_json: Any
     create_time: datetime = field(default_factory=datetime.now)
+    start_date: str = None  # 出发日期 YYYY-MM-DD，前端必填
+    days: int = None        # 旅游天数，前端必填
 
     def to_dict(self):
         data = asdict(self)

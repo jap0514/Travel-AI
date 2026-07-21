@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/hotel")
@@ -87,11 +89,31 @@ public class HotelController {
         return Result.success(emptyRoomVOList);
     }
 
+    /**
+     * 验证指定房间在日期范围内是否仍然可预约
+     * @param hotelId 酒店ID
+     * @param roomTypeId 房型ID
+     * @param roomNo 房间号
+     * @param checkInDate 入住日期
+     * @param checkOutDate 退房日期
+     * @return true=可预约，false=已被预订
+     */
+    @GetMapping("/api/hotel/verifyRoom")
+    public Result<Map<String, Object>> verifyRoom(@RequestParam("hotelId") Long hotelId,
+                                                  @RequestParam("roomTypeId") Long roomTypeId,
+                                                  @RequestParam("roomNo") String roomNo,
+                                                  @RequestParam("checkInDate") String checkInDate,
+                                                  @RequestParam("checkOutDate") String checkOutDate) {
+        boolean available = hotelBookingService.verifyRoomAvailable(hotelId, roomTypeId, roomNo, checkInDate, checkOutDate);
+        Map<String, Object> data = new HashMap<>();
+        data.put("available", available);
+        return Result.success(data);
+    }
+
 
     @PostMapping("/order/createOrder")
-    public Result<HotelBookingVO> createOrder(@RequestBody HotelBookingDTO dto,
-                                              @RequestAttribute Long userId){
-        HotelBookingVO hotelBookingVO=hotelBookingService.createOrder(dto,userId);
+    public Result<HotelBookingVO> createOrder(@RequestBody HotelBookingDTO dto){
+        HotelBookingVO hotelBookingVO=hotelBookingService.createOrder(dto,dto.getUserId());
         return Result.success(hotelBookingVO);
     }
 

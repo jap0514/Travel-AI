@@ -17,6 +17,10 @@ public class HotelEmptyRoomVO {
     private String roomTypeName;
     @Schema(description = "判断是否有空房间")
     private Boolean hasEmptyRoom;
+    @Schema(description = "酒店地址")
+    private String address;
+    @Schema(description = "房间价格")
+    private Double price;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @Schema(description = "如果有空房间就直接返回当前时间，如果没有空房间，就查询订单表里面的退房时间返回")
