@@ -21,6 +21,9 @@ public interface ReceiveAIService {
      * @param userId
      * @param msg_id
      * @param content
+     * @param startDate 出发日期（可选）
+     * @param days 旅游天数（可选）
+     * @param flowId flow ID（用于中断恢复）
      */
-    void sendRequestToPythonAsync(Long sessionId, Long userId, Long msg_id, String content);
+    void sendRequestToPythonAsync(Long sessionId, Long userId, Long msg_id, String content, String startDate, Integer days, String flowId);
 }

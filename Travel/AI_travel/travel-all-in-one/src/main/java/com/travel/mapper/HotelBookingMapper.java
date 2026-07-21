@@ -32,6 +32,21 @@ public interface HotelBookingMapper extends BaseMapper<HotelBooking> {
     Long checkEmptyRoom(@Param("hotelId") Long hotelId,
                         @Param("roomNo") String roomNo,
                         @Param("checkInDate") LocalDateTime checkInDate);
+
+    /**
+     * 验证指定房间在日期范围内是否仍然可预约
+     * @param hotelId 酒店ID
+     * @param roomTypeId 房型ID
+     * @param roomNo 房间号
+     * @param checkInDate 入住日期
+     * @param checkOutDate 退房日期
+     * @return 可预约的房间ID（>0表示可预约），0或null表示不可预约
+     */
+    Long verifyRoomAvailable(@Param("hotelId") Long hotelId,
+                             @Param("roomTypeId") Long roomTypeId,
+                             @Param("roomNo") String roomNo,
+                             @Param("checkInDate") LocalDateTime checkInDate,
+                             @Param("checkOutDate") LocalDateTime checkOutDate);
 }
 
 

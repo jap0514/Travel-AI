@@ -24,6 +24,12 @@ public class AiMessageCallbackDTO {
     @Schema(description = "全局 trace ID")
     private String traceId;
 
+    @Schema(description = "flow ID（用于中断恢复）")
+    private String flowId;
+
+    @Schema(description = "交互状态（等待用户选择时返回）")
+    private Object interaction;
+
     @Schema(description = "任务信息（可选）")
     private TaskInfo task;
 

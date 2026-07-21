@@ -33,4 +33,10 @@ public class ChatMessageVO {
 
     @Schema(description = "用户昵称", example = "张三")
     private String userNickname;
+
+    @Schema(description = "flow ID（用于中断恢复）")
+    private String flowId;
+
+    @Schema(description = "交互状态（等待用户选择时返回）")
+    private String interaction;
 }

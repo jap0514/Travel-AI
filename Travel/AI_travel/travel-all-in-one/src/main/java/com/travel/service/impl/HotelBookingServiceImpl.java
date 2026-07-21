@@ -441,6 +441,19 @@ public class HotelBookingServiceImpl extends ServiceImpl<HotelBookingMapper, Hot
             log.error("从延迟队列移除订单失败: {}", orderNo, e);
         }
     }
+
+    @Override
+    public boolean verifyRoomAvailable(Long hotelId, Long roomTypeId, String roomNo,
+                                     String checkInDate, String checkOutDate) {
+        if (hotelId == null || roomTypeId == null || roomNo == null
+                || checkInDate == null || checkOutDate == null) {
+            return false;
+        }
+        LocalDateTime checkIn = LocalDateTime.parse(checkInDate + "T00:00:00");
+        LocalDateTime checkOut = LocalDateTime.parse(checkOutDate + "T00:00:00");
+        Long roomId = hotelBookingMapper.verifyRoomAvailable(hotelId, roomTypeId, roomNo, checkIn, checkOut);
+        return roomId != null && roomId > 0;
+    }
 }
 
 

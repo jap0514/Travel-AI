@@ -16,3 +16,4 @@ class TravelTask:
     error_msg: Optional[str] = None
     result_status: Optional[str] = None
     destination: str = "未知城市"
+    start_date: Optional[str] = None  # 出发日期，格式：YYYY-MM-DD

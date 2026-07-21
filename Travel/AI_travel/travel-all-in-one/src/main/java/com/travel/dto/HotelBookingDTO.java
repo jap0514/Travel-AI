@@ -10,6 +10,9 @@ import java.time.LocalDateTime;
 @Schema(description = "酒店房间预订传输对象")
 public class HotelBookingDTO {
 
+    @Schema(description = "用户ID")
+    private Long userId;
+
     @Schema(description = "酒店ID")
     private Long hotelId;
 

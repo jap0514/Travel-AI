@@ -22,7 +22,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
                         "/webjars/**",        // 文档页依赖的静态资源
                         "/swagger-resources/**", // 接口文档的资源配置
                         "/v3/api-docs/**",    // OpenAPI接口文档数据
-                        "/sendMessageByPython/**" // Python回调接口，不需要认证
+                        "/sendMessageByPython/**", // Python回调接口，不需要认证
+                        "/test/**",             // 测试页面，不需要认证
+                        "/hotel/**"
                 );
     }
 

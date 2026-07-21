@@ -63,4 +63,16 @@ public interface HotelBookingService extends IService<HotelBooking> {
      * @return 操作结果
      */
     HotelBookingVO payOrder(String orderNo, Long userId, PayOrderDTO dto);
+
+    /**
+     * 验证指定房间在日期范围内是否仍然可预约
+     * @param hotelId 酒店ID
+     * @param roomTypeId 房型ID
+     * @param roomNo 房间号
+     * @param checkInDate 入住日期
+     * @param checkOutDate 退房日期
+     * @return true=可预约，false=已被预订
+     */
+    boolean verifyRoomAvailable(Long hotelId, Long roomTypeId, String roomNo,
+                                String checkInDate, String checkOutDate);
 }

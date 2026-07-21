@@ -30,6 +30,9 @@ class ChatRequest(BaseModel):
     content: str = Field(..., min_length=1, description="用户消息内容")
     user_id: int = Field(default=1, description="用户 ID")
     session_id: Optional[int] = Field(default=None, description="会话 ID（不传则自动分配）")
+    flow_id: Optional[str] = Field(default=None, description="flow 唯一标识（用于中断恢复）")
+    start_date: str = Field(..., description="出发日期 YYYY-MM-DD")
+    days: int = Field(..., description="旅游天数")
 
 
 class ChatResponse(BaseModel):
@@ -49,6 +52,9 @@ class ChatRequestFromJava(BaseModel):
     messageId: int = Field(default=1001, description="用户消息ID")
     content: str = Field(..., min_length=1, description="用户内容")
     callbackUrl: Optional[str] = Field(default=None, description="Java回调地址，Python处理完成后回调此地址")
+    flowId: Optional[str] = Field(default=None, description="flow唯一标识（用于中断恢复）")
+    startDate: str = Field(..., description="出发日期 YYYY-MM-DD")
+    days: int = Field(..., description="旅游天数")
 
 class ChatResponseToJava(BaseModel):
     sessionId: int = Field(default=3001,description="会话ID")
@@ -111,11 +117,24 @@ async def _process_and_callback(request: ChatRequestFromJava, trace_id: str):
         content=request.content,
         plan_json=None,
         create_time=datetime.now(),
+        start_date=request.startDate,
+        days=request.days,
     )
 
     try:
         # 调用核心多智能体处理
-        task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+        result = await process_with_agent(
+            message, trace_id,
+            flow_id=request.flowId,
+            callback_url=request.callbackUrl,
+        )
+
+        # 解析返回值（可能是4元组或5元组）
+        if len(result) == 5:
+            task, text_result, parsed_plan, returned_flow_id, returned_interaction = result
+        else:
+            task, text_result, parsed_plan, returned_flow_id = result
+            returned_interaction = None
 
         # 安全处理 planJson
         plan_json_dict = parsed_plan.to_dict() if parsed_plan else None
@@ -129,6 +148,8 @@ async def _process_and_callback(request: ChatRequestFromJava, trace_id: str):
             "content": response_content,
             "planJson": json.dumps(plan_json_dict, ensure_ascii=False) if plan_json_dict else None,
             "traceId": trace_id,
+            "flowId": returned_flow_id,
+            "interaction": returned_interaction,  # 包含 waiting_ 状态等信息
             "task": {
                 "taskId": task.task_id if task else None,
                 "userId": task.user_id if task else None,
@@ -184,11 +205,17 @@ async def chat(request: ChatRequest):
         content=request.content,
         plan_json=None,
         create_time=datetime.now(),
+        start_date=request.start_date,
+        days=request.days,
     )
 
     try:
         # 调用核心多智能体处理
-        task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+        result = await process_with_agent(message, trace_id, flow_id=request.flow_id)
+        if len(result) == 5:
+            task, text_result, parsed_plan, returned_flow_id, _ = result
+        else:
+            task, text_result, parsed_plan, returned_flow_id = result
 
         # 判断返回类型
         # process_with_agent 在 QA 流程返回 (None, qa_answer, None)
@@ -202,6 +229,7 @@ async def chat(request: ChatRequest):
             "session_id": session_id,
             "msg_id": msg_id,
             "trace_id": trace_id,
+            "flow_id": returned_flow_id if not is_qa else None,
         }
 
         if not is_qa and task is not None:
@@ -252,6 +280,8 @@ async def chat_stream(request: ChatRequest):
         content=request.content,
         plan_json=None,
         create_time=datetime.now(),
+        start_date=request.start_date,
+        days=request.days,
     )
 
     async def event_generator():
@@ -266,7 +296,11 @@ async def chat_stream(request: ChatRequest):
             # 3. 启动后台任务执行 Agent
             async def run_agent():
                 try:
-                    task, text_result, parsed_plan = await process_with_agent(message, trace_id)
+                    result = await process_with_agent(message, trace_id, flow_id=request.flow_id)
+                    if len(result) == 5:
+                        task, text_result, parsed_plan, returned_flow_id, _ = result
+                    else:
+                        task, text_result, parsed_plan, returned_flow_id = result
 
                     # 判断返回类型
                     is_qa = parsed_plan is None
@@ -278,6 +312,7 @@ async def chat_stream(request: ChatRequest):
                         "session_id": session_id,
                         "msg_id": msg_id,
                         "trace_id": trace_id,
+                        "flow_id": returned_flow_id if not is_qa else None,
                     }
 
                     if not is_qa and task is not None:

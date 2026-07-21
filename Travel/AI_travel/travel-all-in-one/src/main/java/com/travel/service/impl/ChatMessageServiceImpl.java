@@ -86,7 +86,8 @@ public class ChatMessageServiceImpl extends ServiceImpl<ChatMessageMapper, ChatM
         Long msg_id = chatMessage.getMsgId();
 
         //4、将消息转发给python，同时需要python做收到确认返回，还需要从数据库中获得刚刚存进去的消息ID传给python
-        receiveAIService.sendRequestToPythonAsync(sessionId,userId,msg_id,content);
+        receiveAIService.sendRequestToPythonAsync(sessionId, userId, msg_id, content,
+                chatMessageDTO.getStartDate(), chatMessageDTO.getDays(), chatMessageDTO.getFlowId());
 
         ChatMessageVO chatMessageVO=new ChatMessageVO();
         chatMessageVO.setContent(content);
@@ -94,7 +95,7 @@ public class ChatMessageServiceImpl extends ServiceImpl<ChatMessageMapper, ChatM
         chatMessageVO.setCreateTime(chatMessage.getCreateTime());
         chatMessageVO.setMsgId(chatMessage.getMsgId());
         chatMessageVO.setSessionId(chatMessage.getSessionId());
-        chatMessageVO.setPlanJson(chatMessage.getPlanJson().toString());
+        chatMessageVO.setPlanJson(chatMessage.getPlanJson() != null ? chatMessage.getPlanJson().toString() : null);
         chatMessageVO.setUserId(chatMessage.getUserId());
         chatMessageVO.setUserNickname(userMapper.selectById(userId).getNickname());
 

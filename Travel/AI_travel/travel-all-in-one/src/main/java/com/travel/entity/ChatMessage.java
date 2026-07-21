@@ -52,7 +52,19 @@ public class ChatMessage implements Serializable {
     private Object planJson;
 
     /**
-     * 
+     * flow ID（用于中断恢复）
+     */
+    @TableField(value = "flow_id")
+    private String flowId;
+
+    /**
+     * 交互状态（等待用户选择时返回）
+     */
+    @TableField(value = "interaction")
+    private String interaction;
+
+    /**
+     * 创建时间
      */
     @TableField(value = "create_time")
     private LocalDateTime createTime;
