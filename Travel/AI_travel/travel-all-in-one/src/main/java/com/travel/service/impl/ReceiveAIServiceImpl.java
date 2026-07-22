@@ -4,7 +4,10 @@ import cn.hutool.http.HttpUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.travel.common.ChatMessageRoleEnum;
+import com.travel.common.ResultCode;
 import com.travel.common.TaskStatusEnum;
+import com.travel.common.constant.SignatureConstant;
+import com.travel.exception.BusinessException;
 import com.travel.dto.AiMessageCallbackDTO;
 import com.travel.entity.ChatMessage;
 import com.travel.entity.TravelParsePlan;
@@ -16,6 +19,8 @@ import com.travel.mapper.UserMapper;
 import com.travel.pojo.TravelPlanPojo;
 import com.travel.service.ReceiveAIService;
 import com.travel.util.RedisUtil;
+import com.travel.util.SignatureUtil;
+import com.travel.util.TraceIdUtil;
 import com.travel.vo.ChatMessageVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +51,9 @@ public class ReceiveAIServiceImpl implements ReceiveAIService {
     @Value("${travel.python-api-url}")
     private String pythonApiUrl;
 
+    @Value("${travel.signature.secret-key-java:travel-secret-key-java}")
+    private String secretKeyForJava;
+
     @Autowired
     private RedisUtil redisUtil;
 
@@ -65,6 +73,9 @@ public class ReceiveAIServiceImpl implements ReceiveAIService {
      */
     @Override
     public void sendRequestToPythonAsync(Long sessionId, Long userId, Long msg_id, String content, String startDate, Integer days, String flowId) {
+        // 获取当前请求的 traceId（用于跨线程传递）
+        String traceId = TraceIdUtil.getTraceId();
+
         // 构造请求体
         Map<String, Object> requestBody = new HashMap<>();
         requestBody.put("sessionId", sessionId);
@@ -73,6 +84,8 @@ public class ReceiveAIServiceImpl implements ReceiveAIService {
         requestBody.put("content", content);
         // 设置回调地址，Python处理完成后回调此地址
         requestBody.put("callbackUrl", "http://localhost:9999/sendMessageByPython/receiveAI");
+        // 透传 traceId，让 Python 在回调时带回
+        requestBody.put("traceId", traceId);
         // 透传日期参数
         if (startDate != null && !startDate.isBlank()) {
             requestBody.put("startDate", startDate);
@@ -86,21 +99,35 @@ public class ReceiveAIServiceImpl implements ReceiveAIService {
 
         // 使用 CompletableFuture 异步发送，不阻塞主线程
         CompletableFuture.runAsync(() -> {
+            // 将 traceId 传递到新线程的 MDC
+            TraceIdUtil.setTraceId(traceId);
             try {
-                log.info("异步发送请求到Python，sessionId={}, userId={}, content={}",
-                        sessionId, userId, content.substring(0, Math.min(50, content.length())));
+                log.info("异步发送请求到Python，traceId={}, sessionId={}, userId={}, content={}",
+                        traceId, sessionId, userId, content.substring(0, Math.min(50, content.length())));
+
+                // 构造请求体
+                String requestBodyJson = objectMapper.writeValueAsString(requestBody);
+
+                // 生成签名
+                String timestamp = String.valueOf(System.currentTimeMillis());
+                String sign = SignatureUtil.generateSign(secretKeyForJava, timestamp, requestBodyJson);
 
                 String responseJson = HttpUtil.createPost(pythonApiUrl + "/chatByJava")
+                        .header(SignatureConstant.HEADER_APP_ID, SignatureConstant.APP_ID_JAVA)
+                        .header(SignatureConstant.HEADER_TIMESTAMP, timestamp)
+                        .header(SignatureConstant.HEADER_SIGN, sign)
                         .header("Content-Type", "application/json")
                         .timeout(10000)  // 10秒超时，只等待Python确认接收
-                        .body(objectMapper.writeValueAsString(requestBody))
+                        .body(requestBodyJson)
                         .execute()
                         .body();
 
                 log.info("Python API 响应: {}", responseJson);
             } catch (Exception e) {
-                log.error("调用Python API失败，sessionId={}, userId={}, error={}",
-                        sessionId, userId, e.getMessage());
+                log.error("调用Python API失败，traceId={}, sessionId={}, userId={}, error={}",
+                        traceId, sessionId, userId, e.getMessage());
+            } finally {
+                TraceIdUtil.clear();
             }
         });
     }
@@ -113,6 +140,14 @@ public class ReceiveAIServiceImpl implements ReceiveAIService {
      */
     @Override
     public ChatMessageVO receiveAIByPython(AiMessageCallbackDTO callbackDTO, Long userId) throws JsonProcessingException {
+        // 打印Python回调的完整数据，用于调试
+        log.info("【Python回调】receiveAIByPython 被调用");
+        log.info("【Python回调】callbackDTO={}", callbackDTO);
+        log.info("【Python回调】sessionId={}, userId={}", callbackDTO.getSessionId(), callbackDTO.getUserId());
+        log.info("【Python回调】flowId={}", callbackDTO.getFlowId());
+        log.info("【Python回调】interaction={}", callbackDTO.getInteraction());
+        log.info("【Python回调】content={}", callbackDTO.getContent());
+
         //1、解析DTO，获取里面的content和planjson
         String content = callbackDTO.getContent();
         String planJson = callbackDTO.getPlanJson();
@@ -148,7 +183,7 @@ public class ReceiveAIServiceImpl implements ReceiveAIService {
         int insert = chatMessageMapper.insert(chatMessage);
         if(insert==0){
             log.error("保存AI回答消息失败，sessionId={}, userId={}",sessionId,userId);
-            throw new RuntimeException("保存AI回答消息失败");
+            throw new BusinessException(ResultCode.INTERNAL_ERROR, "保存AI回答消息失败");
         }
         log.info("AI回答消息已保存, msgId={}",chatMessage.getMsgId());
 
@@ -186,7 +221,7 @@ public class ReceiveAIServiceImpl implements ReceiveAIService {
         int insert1 = travelTaskMapper.insert(travelTask);
         if(insert1==0){
             log.error("保存任务失败，userId={}",task.getUserId());
-            throw new RuntimeException("保存任务失败");
+            throw new BusinessException(ResultCode.INTERNAL_ERROR, "保存任务失败");
         }
         log.info("任务已保存, userId={}",task.getUserId());
 
@@ -216,7 +251,7 @@ public class ReceiveAIServiceImpl implements ReceiveAIService {
         int insert2 = travelParsePlanMapper.insert(travelParsePlan);
         if(insert2==0){
             log.error("保存行程规划失败，userId={},taskId={}",task.getUserId(),travelTask.getTask_id());
-            throw new RuntimeException("保存行程规划失败");
+            throw new BusinessException(ResultCode.INTERNAL_ERROR, "保存行程规划失败");
         }
         log.info("行程规划已保存, userId={},taskId={}",task.getUserId(),travelTask.getTask_id());
 

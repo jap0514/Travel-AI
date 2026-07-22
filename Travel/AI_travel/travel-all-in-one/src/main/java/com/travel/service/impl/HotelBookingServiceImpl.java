@@ -4,10 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.travel.common.Result;
-import com.travel.config.RedisConfig;
-import com.travel.config.RedissonConfig;
+import com.travel.common.ResultCode;
 import com.travel.config.OrderTimeoutProcessor;
+import com.travel.exception.BusinessException;
 import com.travel.dto.CancelOrderDTO;
 import com.travel.dto.HotelBookingDTO;
 import com.travel.dto.PayOrderDTO;
@@ -84,17 +83,14 @@ public class HotelBookingServiceImpl extends ServiceImpl<HotelBookingMapper, Hot
         try {
             boolean locked = lock.tryLock(10, 30, TimeUnit.SECONDS);
             if(!locked){
-                throw new RuntimeException("该房间正在被预订，请稍后重试！");
+                throw new BusinessException(ResultCode.ROOM_NOT_AVAILABLE, "该房间正在被预订，请稍后重试！");
             }
 
             //校验房间是否为空
             Long count = hotelBookingMapper.checkEmptyRoom(hotelId, roomNo, dto.getCheckInDate());
             if(count != null && count > 0){
                 //查询到需要预订的房间存在订单时
-                HotelBookingVO vo = new HotelBookingVO();
-                vo.setSuccess(false);
-                vo.setErrorMessage("该房间在入住当天已被预订");
-                return vo;
+                throw new BusinessException(ResultCode.ROOM_NOT_AVAILABLE, "该房间在入住当天已被预订");
             }
 
             //计算价格
@@ -127,7 +123,7 @@ public class HotelBookingServiceImpl extends ServiceImpl<HotelBookingMapper, Hot
             int insert = hotelBookingMapper.insert(booking);
             if(insert==0){
                 log.error("保存订单消息失败");
-                throw new RuntimeException("订单保存失败");
+                throw new BusinessException(ResultCode.INTERNAL_ERROR, "订单保存失败");
             }
 
             //添加延迟队列，30分钟后自动处理
@@ -159,7 +155,8 @@ public class HotelBookingServiceImpl extends ServiceImpl<HotelBookingMapper, Hot
 
             return vo;
         } catch (InterruptedException e) {
-            throw new RuntimeException("获取锁被中断",e);
+            Thread.currentThread().interrupt();
+            throw new BusinessException(ResultCode.INTERNAL_ERROR, "获取锁被中断");
         } finally {
             if(lock.isHeldByCurrentThread()){
                 lock.unlock();
@@ -297,27 +294,18 @@ public class HotelBookingServiceImpl extends ServiceImpl<HotelBookingMapper, Hot
 
         // 校验订单是否存在
         if (booking == null) {
-            HotelBookingVO vo = new HotelBookingVO();
-            vo.setSuccess(false);
-            vo.setErrorMessage("订单不存在");
-            return vo;
+            throw new BusinessException(ResultCode.ORDER_NOT_FOUND, "订单不存在");
         }
 
         // 校验是否是本人的订单
         if (!booking.getUserId().equals(userId)) {
-            HotelBookingVO vo = new HotelBookingVO();
-            vo.setSuccess(false);
-            vo.setErrorMessage("无权取消此订单");
-            return vo;
+            throw new BusinessException(ResultCode.FORBIDDEN, "无权取消此订单");
         }
 
         // 校验订单状态：只有 0待支付、1已支付 可以取消（2已确认只能走退房流程）
         Integer status = booking.getStatus();
         if (status == null || (status != 0 && status != 1)) {
-            HotelBookingVO vo = new HotelBookingVO();
-            vo.setSuccess(false);
-            vo.setErrorMessage("此订单无法取消，当前状态：" + getStatusName(status));
-            return vo;
+            throw new BusinessException(ResultCode.BAD_REQUEST, "此订单无法取消，当前状态：" + getStatusName(status));
         }
 
         //TODO: 如果是已支付状态下取消的订单，就需要做退款处理
@@ -345,26 +333,17 @@ public class HotelBookingServiceImpl extends ServiceImpl<HotelBookingMapper, Hot
 
         // 校验订单是否存在
         if (booking == null) {
-            HotelBookingVO vo = new HotelBookingVO();
-            vo.setSuccess(false);
-            vo.setErrorMessage("订单不存在");
-            return vo;
+            throw new BusinessException(ResultCode.ORDER_NOT_FOUND, "订单不存在");
         }
 
         // 校验是否是本人的订单
         if (!booking.getUserId().equals(userId)) {
-            HotelBookingVO vo = new HotelBookingVO();
-            vo.setSuccess(false);
-            vo.setErrorMessage("无权操作此订单");
-            return vo;
+            throw new BusinessException(ResultCode.FORBIDDEN, "无权操作此订单");
         }
 
         // 校验订单状态：只有 2已确认 可以完成
         if (booking.getStatus() != 2) {
-            HotelBookingVO vo = new HotelBookingVO();
-            vo.setSuccess(false);
-            vo.setErrorMessage("此订单无法完成入住，当前状态：" + getStatusName(booking.getStatus()));
-            return vo;
+            throw new BusinessException(ResultCode.BAD_REQUEST, "此订单无法完成入住，当前状态：" + getStatusName(booking.getStatus()));
         }
 
         // 执行完成：更新状态为已完成
@@ -388,26 +367,17 @@ public class HotelBookingServiceImpl extends ServiceImpl<HotelBookingMapper, Hot
 
         // 校验订单是否存在
         if (booking == null) {
-            HotelBookingVO vo = new HotelBookingVO();
-            vo.setSuccess(false);
-            vo.setErrorMessage("订单不存在");
-            return vo;
+            throw new BusinessException(ResultCode.ORDER_NOT_FOUND, "订单不存在");
         }
 
         // 校验是否是本人的订单
         if (!booking.getUserId().equals(userId)) {
-            HotelBookingVO vo = new HotelBookingVO();
-            vo.setSuccess(false);
-            vo.setErrorMessage("无权操作此订单");
-            return vo;
+            throw new BusinessException(ResultCode.FORBIDDEN, "无权操作此订单");
         }
 
         // 校验订单状态：只有 0待支付 可以支付
         if (booking.getStatus() != 0) {
-            HotelBookingVO vo = new HotelBookingVO();
-            vo.setSuccess(false);
-            vo.setErrorMessage("此订单无法支付，当前状态：" + getStatusName(booking.getStatus()));
-            return vo;
+            throw new BusinessException(ResultCode.BAD_REQUEST, "此订单无法支付，当前状态：" + getStatusName(booking.getStatus()));
         }
 
         // 生成交易流水号（简化版）

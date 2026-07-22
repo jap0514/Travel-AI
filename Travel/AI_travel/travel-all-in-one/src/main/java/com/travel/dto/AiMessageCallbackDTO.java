@@ -1,14 +1,19 @@
 package com.travel.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 @Schema(description = "接收python返回的AI回答的传输对象")
 public class AiMessageCallbackDTO {
+
+    @NotNull(message = "会话ID不能为空")
     @Schema(description = "会话ID", example = "3001")
     private Long sessionId;
 
+    @NotNull(message = "用户ID不能为空")
     @Schema(description = "用户ID", example = "123")
     private Long userId;
 

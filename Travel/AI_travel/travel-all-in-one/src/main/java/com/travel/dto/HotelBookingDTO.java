@@ -2,6 +2,9 @@ package com.travel.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -10,28 +13,37 @@ import java.time.LocalDateTime;
 @Schema(description = "酒店房间预订传输对象")
 public class HotelBookingDTO {
 
-    @Schema(description = "用户ID")
+    @NotNull(message = "用户ID不能为空")
+    @Schema(description = "用户ID", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long userId;
 
-    @Schema(description = "酒店ID")
+    @NotNull(message = "酒店ID不能为空")
+    @Schema(description = "酒店ID", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long hotelId;
 
-    @Schema(description = "房间类型ID")
+    @NotNull(message = "房间类型ID不能为空")
+    @Schema(description = "房间类型ID", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long roomTypeId;
 
-    @Schema(description = "房间号")
+    @NotBlank(message = "房间号不能为空")
+    @Schema(description = "房间号", requiredMode = Schema.RequiredMode.REQUIRED, example = "801")
     private String roomNo;
 
-    @Schema(description = "入住日期")
+    @NotNull(message = "入住日期不能为空")
+    @Schema(description = "入住日期", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime checkInDate;
 
-    @Schema(description = "退房日期")
+    @NotNull(message = "退房日期不能为空")
+    @Schema(description = "退房日期", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime checkOutDate;
 
-    @Schema(description = "入住人姓名")
+    @NotBlank(message = "入住人姓名不能为空")
+    @Schema(description = "入住人姓名", requiredMode = Schema.RequiredMode.REQUIRED, example = "张三")
     private String guestName;
 
-    @Schema(description = "入住人电话")
+    @NotBlank(message = "入住人电话不能为空")
+    @Pattern(regexp = "^1[3-9]\\d{9}$", message = "手机号格式不正确")
+    @Schema(description = "入住人电话", requiredMode = Schema.RequiredMode.REQUIRED, example = "13800138000")
     private String guestPhone;
 
     @Schema(description = "特殊要求（可选）")

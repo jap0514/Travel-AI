@@ -76232,3 +76232,8 @@ For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/erro
 2026-07-21 21:41:18.359 | INFO     | N/A | 路由: 5-research_results不存在 → researcher
 2026-07-21 21:41:18.374 | INFO     | N/A | [Researcher] 开始研究 北京，日期: 2026-08-01~2026-08-04
 2026-07-21 21:41:45.535 | INFO     | N/A | 👋 Travel AI Web 服务已关闭
+2026-07-21 21:43:14.349 | INFO     | N/A | ✅ Mem0 初始化成功 | Qdrant 持久化已启用
+2026-07-21 21:43:16.364 | INFO     | N/A | 🌐 Travel AI Web 服务启动中...
+2026-07-21 21:43:16.364 | INFO     | N/A | 📄 前端页面: http://localhost:8000
+2026-07-21 21:43:16.365 | INFO     | N/A | 🔌 API 文档: http://localhost:8000/docs
+2026-07-21 21:43:16.365 | INFO     | N/A | 💡 确保 MCP 服务已启动以获得完整功能！

@@ -138,8 +138,9 @@ public class TravelTestController {
     <script>
         const BASE = 'http://localhost:9999';
         let currentFlowId = null;          // 当前 flow ID
-        let lastShownAiMsgId = null;       // 已显示的最后一条AI消息ID，避免重复显示
+        let lastShownAiMsgId = 0;          // 已显示的最后一条AI消息ID，避免重复显示（0表示还没有显示过任何消息）
         let pollingTimer = null;
+        let isWaitingForInteraction = false; // 是否正在等待用户交互
 
         // 发送消息
         function sendMessage() {
@@ -153,6 +154,7 @@ public class TravelTestController {
 
             // 发送前清空交互面板
             hideInteractionPanel();
+            isWaitingForInteraction = false;
             document.getElementById('message').value = '';
 
             const btn = document.getElementById('sendBtn');
@@ -160,7 +162,7 @@ public class TravelTestController {
             setStatus('发送中...', 'waiting');
 
             // 用户消息立即显示（带临时ID标记）
-            const userMsgDiv = addChat('user', content);
+            addChat('user', content);
 
             const payload = {
                 sessionId: parseInt(sessionId),
@@ -177,14 +179,63 @@ public class TravelTestController {
                 headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + (document.getElementById('jwtToken').value || '') },
                 body: JSON.stringify(payload)
             })
-            .then(r => r.json())
             .then(r => {
+                if (!r.ok) {
+                    throw new Error('HTTP ' + r.status);
+                }
+                return r.json();
+            })
+            .then(async r => {
                 document.getElementById('rawResponse').textContent = JSON.stringify(r, null, 2);
-                setStatus('等待响应...', 'waiting');
                 btn.disabled = false;
-                // 从响应中提取 flowId（首次请求会返回null，后续请求带flowId）
+
+                console.log('[sendMessage响应] 完整响应:', r);
+                console.log('[sendMessage响应] r.data:', r.data);
+                console.log('[sendMessage响应] r.data.flowId:', r.data && r.data.flowId);
+                console.log('[sendMessage响应] r.data.interaction:', r.data && r.data.interaction);
+                console.log('[sendMessage响应] currentFlowId:', currentFlowId);
+
+                // 先获取当前数据库中最新的AI消息ID，作为基准线
+                // 这样轮询时只会显示这条ID之后的新消息，不会显示旧消息
+                try {
+                    const msgsRes = await fetch(`${BASE}/test/travel/messages/` + sessionId, {
+                        headers: { 'Authorization': 'Bearer ' + (document.getElementById('jwtToken').value || '') }
+                    });
+                    if (msgsRes.ok) {
+                        const msgsData = await msgsRes.json();
+                        const aiMsgs = (msgsData.data || []).filter(m => m.role && m.role.toUpperCase().includes('ASSISTANT'));
+                        if (aiMsgs.length > 0) {
+                            lastShownAiMsgId = aiMsgs[aiMsgs.length - 1].msgId;
+                            console.log('[初始化] 设置lastShownAiMsgId为:', lastShownAiMsgId);
+                        }
+                    }
+                } catch (e) {
+                    console.log('[初始化] 获取基准消息ID失败，使用默认值:', e);
+                }
+
+                // 检查响应中是否直接包含交互数据（立即显示，无需等待轮询）
+                if (r.data && r.data.interaction) {
+                    try {
+                        const interactionData = typeof r.data.interaction === 'string'
+                            ? JSON.parse(r.data.interaction)
+                            : r.data.interaction;
+                        console.log('[sendMessage响应] 解析后的interactionData:', interactionData);
+                        if (interactionData && interactionData.status && interactionData.status.startsWith('waiting_')) {
+                            currentFlowId = r.data.flowId || currentFlowId;
+                            console.log('[sendMessage响应] 显示交互面板, flowId:', currentFlowId);
+                            showInteraction(interactionData.status, interactionData);
+                            isWaitingForInteraction = true;
+                            startPolling();
+                            return;
+                        }
+                    } catch (e) {
+                        console.error('解析交互数据失败', e);
+                    }
+                }
+
+                // 从响应中提取 flowId
                 currentFlowId = r.data && r.data.flowId;
-                lastShownAiMsgId = null;  // 重置，开始监控新消息
+                setStatus('等待响应...', 'waiting');
                 startPolling();
             })
             .catch(e => {
@@ -201,7 +252,17 @@ public class TravelTestController {
                 const flowId = currentFlowId;
                 const pollHeaders = { 'Authorization': 'Bearer ' + (document.getElementById('jwtToken').value || '') };
 
-                // 1. 轮询Redis中的interaction状态（有flowId时）
+                // 1. 轮询Redis中的interaction状态
+                // 使用sessionId作为key前缀尝试获取（因为flowId可能还未更新）
+                const redisKeys = flowId
+                    ? [`interaction:${sessionId}:${flowId}`]
+                    : [];
+
+                // 如果没有flowId，尝试遍历可能的flowId（从当前messages中获取）
+                if (!flowId) {
+                    // 稍后通过数据库查询获取可能的flowId
+                }
+
                 if (flowId) {
                     fetch(`${BASE}/test/travel/interaction/` + sessionId + '/' + flowId, { headers: pollHeaders })
                         .then(r => r.json())
@@ -211,7 +272,9 @@ public class TravelTestController {
                                 if (interaction && interaction.status && interaction.status.startsWith('waiting_')) {
                                     // Python要求用户交互，显示交互面板
                                     showInteraction(interaction.status, interaction);
+                                    isWaitingForInteraction = true;
                                     clearInterval(pollingTimer);
+                                    console.log('[Redis轮询] 找到交互状态:', interaction.status);
                                 }
                             }
                         })
@@ -220,38 +283,103 @@ public class TravelTestController {
 
                 // 2. 轮询数据库中的AI消息（只显示新消息）
                 fetch(`${BASE}/test/travel/messages/` + sessionId, { headers: pollHeaders })
-                    .then(r => r.json())
+                    .then(r => {
+                        if (!r.ok) {
+                            throw new Error('HTTP ' + r.status + ': ' + r.statusText);
+                        }
+                        return r.json();
+                    })
                     .then(r => {
                         const data = r.data || [];
-                        // 找最后一条ASSISTANT消息
+                        // 找所有ASSISTANT消息
                         const allAiMsgs = data.filter(m => m.role && m.role.toUpperCase().includes('ASSISTANT'));
-                        if (allAiMsgs.length === 0) return;
+                        if (allAiMsgs.length === 0) {
+                            console.log('[数据库轮询] 没有ASSISTANT消息');
+                            return;
+                        }
 
-                        const latestAi = allAiMsgs[allAiMsgs.length - 1];
+                        // 获取所有不同的flowId（用于调试）
+                        const flowIdsInDb = [...new Set(allAiMsgs.map(m => m.flowId).filter(Boolean))];
+                        console.log('[数据库轮询] 当前flowId:', flowId, '数据库中的flowIds:', flowIdsInDb, 'lastShownAiMsgId:', lastShownAiMsgId);
 
-                        // 只显示新的AI消息（msgId大于已显示的）
-                        if (lastShownAiMsgId === null || latestAi.msgId > lastShownAiMsgId) {
-                            // 如果有交互状态，显示交互面板；否则作为普通AI回复显示
-                            const interactionData = latestAi.interaction
-                                ? (typeof latestAi.interaction === 'string' ? JSON.parse(latestAi.interaction) : latestAi.interaction)
-                                : null;
+                        // 优先找当前flowId对应的消息，如果没有则用最新的
+                        let latestAi = null;
+                        if (flowId) {
+                            // 找相同flowId的最新消息（最后一条）
+                            const matched = allAiMsgs.filter(m => m.flowId === flowId);
+                            latestAi = matched.length > 0 ? matched[matched.length - 1] : null;
+                            console.log('[数据库轮询] 有flowId，匹配到', matched.length, '条消息');
+                        }
+
+                        // 如果没找到，尝试找没有flowId的消息（可能是首次请求）
+                        if (!latestAi) {
+                            const noFlowIdMsgs = allAiMsgs.filter(m => !m.flowId);
+                            if (noFlowIdMsgs.length > 0) {
+                                latestAi = noFlowIdMsgs[noFlowIdMsgs.length - 1];
+                                console.log('[数据库轮询] 无flowId匹配，使用最新无flowId消息');
+                            }
+                        }
+
+                        // 如果还没找到（不太可能），用数据库中最新的消息
+                        if (!latestAi) {
+                            latestAi = allAiMsgs[allAiMsgs.length - 1];
+                            console.log('[数据库轮询] 强制使用数据库最新消息');
+                        }
+
+                        if (!latestAi) return;
+
+                        console.log('[数据库轮询] 最新AI消息 msgId:', latestAi.msgId, 'flowId:', latestAi.flowId, 'hasInteraction:', !!latestAi.interaction);
+
+                        // 检查是否是新消息（msgId大于已显示的）
+                        // 如果 latestAi.msgId <= lastShownAiMsgId，可能是ID异常或重复，更新 lastShownAiMsgId
+                        let isNewMessage = latestAi.msgId > lastShownAiMsgId;
+                        if (!isNewMessage && latestAi.msgId < lastShownAiMsgId) {
+                            // ID 异常：已显示的ID比数据库最新还大，重置基准线
+                            console.log('[数据库轮询] ID异常：lastShownAiMsgId', lastShownAiMsgId, '> 最新msgId', latestAi.msgId, '，重置基准线');
+                            lastShownAiMsgId = latestAi.msgId - 1;
+                            isNewMessage = true;
+                        }
+                        console.log('[数据库轮询] isNewMessage:', isNewMessage, '(', latestAi.msgId, '>', lastShownAiMsgId, ')');
+
+                        if (isNewMessage) {
+                            // 解析交互数据
+                            let interactionData = null;
+                            if (latestAi.interaction) {
+                                try {
+                                    interactionData = typeof latestAi.interaction === 'string'
+                                        ? JSON.parse(latestAi.interaction)
+                                        : latestAi.interaction;
+                                    console.log('[数据库轮询] 解析到interaction:', interactionData);
+                                } catch (e) {
+                                    console.error('解析interaction失败', e);
+                                }
+                            }
+
+                            // 更新flowId（如果消息有flowId且当前没有）
+                            if (latestAi.flowId && !currentFlowId) {
+                                currentFlowId = latestAi.flowId;
+                                console.log('[数据库轮询] 更新currentFlowId:', currentFlowId);
+                            }
 
                             if (interactionData && interactionData.status && interactionData.status.startsWith('waiting_')) {
                                 // 有交互状态，保存flowId用于后续
                                 if (latestAi.flowId) currentFlowId = latestAi.flowId;
                                 showInteraction(interactionData.status, interactionData);
+                                isWaitingForInteraction = true;
+                                console.log('[数据库轮询] 显示交互面板, status:', interactionData.status);
                                 clearInterval(pollingTimer);
-                            } else {
+                            } else if (!isWaitingForInteraction) {
                                 // 无交互状态，作为普通AI消息显示（规划完成等）
                                 addChat('ai', latestAi.content);
                                 setStatus('处理完成', 'success');
+                                console.log('[数据库轮询] 显示普通AI消息');
                                 clearInterval(pollingTimer);
                             }
                             lastShownAiMsgId = latestAi.msgId;
                         }
                         document.getElementById('rawResponse').textContent = JSON.stringify(r, null, 2);
                     })
-                    .catch(e => console.error('消息轮询失败', e));
+                    .catch(e => console.error('消息轮询失败:', e));
             }, 2000);
         }
 
@@ -288,6 +416,7 @@ public class TravelTestController {
             const title = document.getElementById('interactionTitle');
             const content = document.getElementById('interactionContent');
             panel.style.display = 'block';
+            isWaitingForInteraction = true;
 
             if (status === 'waiting_user_hotel') {
                 title.textContent = '🏨 请选择酒店：';
@@ -342,8 +471,10 @@ public class TravelTestController {
             const reply = document.getElementById('interactionReply').value.trim();
             if (!reply) { alert('请输入回复'); return; }
 
-            // 隐藏面板，消息作为新对话发送
+            // 隐藏面板，但标记为不再等待交互（避免显示旧的AI消息）
             hideInteractionPanel();
+            isWaitingForInteraction = false;
+            // 不清空message，直接发送
             document.getElementById('message').value = reply;
             sendMessage();
         }
@@ -355,7 +486,8 @@ public class TravelTestController {
             hideInteractionPanel();
             document.getElementById('statusBox').style.display = 'none';
             currentFlowId = null;
-            lastShownAiMsgId = null;
+            lastShownAiMsgId = 0;
+            isWaitingForInteraction = false;
             if (pollingTimer) clearInterval(pollingTimer);
         }
     </script>

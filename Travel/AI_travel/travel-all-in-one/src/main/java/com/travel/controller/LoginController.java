@@ -1,7 +1,9 @@
 package com.travel.controller;
 
 import com.travel.common.Result;
+import com.travel.common.ResultUtil;
 import com.travel.dto.WechatLoginDTO;
+import jakarta.validation.Valid;
 import com.travel.service.LogoutService;
 import com.travel.service.UserService;
 import com.travel.service.WechatLoginService;
@@ -33,7 +35,7 @@ public class LoginController {
      * 这里先在数据库固定openid，后续再去申请
      */
     @PostMapping("/login")
-    public Result<LoginVO> WechatLogin(@RequestBody WechatLoginDTO wechatLoginDTO){
+    public Result<LoginVO> WechatLogin(@RequestBody @Valid WechatLoginDTO wechatLoginDTO){
         LoginVO loginVO=wechatLoginService.login(wechatLoginDTO.getCode());
         return Result.success(loginVO);
     }
@@ -47,7 +49,7 @@ public class LoginController {
     public Result<Void> Logout(@RequestHeader("Authorization") String authorization){
         //1、校验请求头格式
         if(!StringUtils.hasText(authorization) || !authorization.startsWith("Bearer ")){
-            return Result.error("登录凭证无效");
+            return ResultUtil.fail("登录凭证无效");
         }
 
         //2、截取出原始的 Token
