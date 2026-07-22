@@ -1,5 +1,7 @@
 package com.travel.util;
 
+import com.travel.common.ResultCode;
+import com.travel.exception.BusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -113,8 +115,8 @@ public class RedisUtil {
      * @param delta 要增加几(大于0)
      */
     public long incr(String key, long delta) {
-        if (delta < 0) {
-            throw new RuntimeException("递增因子必须大于0");
+        if (delta <= 0) {
+            throw new BusinessException(ResultCode.BAD_REQUEST, "递增因子必须大于0");
         }
         return redisTemplate.opsForValue().increment(key, delta);
     }
@@ -123,8 +125,8 @@ public class RedisUtil {
      * 递减
      */
     public long decr(String key, long delta) {
-        if (delta < 0) {
-            throw new RuntimeException("递减因子必须大于0");
+        if (delta <= 0) {
+            throw new BusinessException(ResultCode.BAD_REQUEST, "递减因子必须大于0");
         }
         return redisTemplate.opsForValue().increment(key, -delta);
     }

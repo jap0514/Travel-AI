@@ -2,8 +2,10 @@ package com.travel.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.travel.common.ChatMessageRoleEnum;
+import com.travel.common.ResultCode;
 import com.travel.dto.ChatMessageDTO;
 import com.travel.entity.ChatMessage;
+import com.travel.exception.BusinessException;
 import com.travel.mapper.UserMapper;
 import com.travel.service.ChatMessageService;
 import com.travel.mapper.ChatMessageMapper;
@@ -77,7 +79,7 @@ public class ChatMessageServiceImpl extends ServiceImpl<ChatMessageMapper, ChatM
         int saved = chatMessageMapper.insert(chatMessage);
         if (saved==0) {
             log.error("保存用户消息失败，sessionId={}, userId={}", sessionId, userId);
-            throw new RuntimeException("消息保存失败");
+            throw new BusinessException(ResultCode.INTERNAL_ERROR, "消息保存失败");
         }
         log.info("用户消息已保存，msgId={}", chatMessage.getMsgId());
 

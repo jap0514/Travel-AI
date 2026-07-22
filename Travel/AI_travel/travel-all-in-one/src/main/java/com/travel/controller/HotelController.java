@@ -16,6 +16,7 @@ import com.travel.vo.HotelVO;
 import com.travel.vo.PageVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -112,7 +113,7 @@ public class HotelController {
 
 
     @PostMapping("/order/createOrder")
-    public Result<HotelBookingVO> createOrder(@RequestBody HotelBookingDTO dto){
+    public Result<HotelBookingVO> createOrder(@RequestBody @Valid HotelBookingDTO dto){
         HotelBookingVO hotelBookingVO=hotelBookingService.createOrder(dto,dto.getUserId());
         return Result.success(hotelBookingVO);
     }
@@ -123,7 +124,7 @@ public class HotelController {
      * @return 分页订单列表
      */
     @GetMapping("/order/list")
-    public Result<PageVO<HotelBookingVO>> getUserOrders(QueryBookingDTO dto){
+    public Result<PageVO<HotelBookingVO>> getUserOrders(@Valid QueryBookingDTO dto){
         PageVO<HotelBookingVO> result = hotelBookingService.getUserOrders(dto);
         return Result.success(result);
     }

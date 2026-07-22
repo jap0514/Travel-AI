@@ -3,7 +3,6 @@ package com.travel.util;
 import cn.hutool.crypto.digest.HMac;
 import cn.hutool.crypto.digest.HmacAlgorithm;
 import com.alibaba.fastjson2.JSON;
-import com.travel.dto.ChatMessageDTO;
 import com.travel.entity.ChatMessage;
 import com.travel.entity.TravelTask;
 
@@ -11,10 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 @Slf4j
 @Component
@@ -34,11 +31,12 @@ public class MqMessageUtil {
      */
     public String buildContentMessage(ChatMessage chatMessage) {
 
-        String traceId=UUID.randomUUID()+ "_" + chatMessage.getMsgId() + "_" + System.currentTimeMillis();
+        // 从当前请求上下文中获取 TraceId，如果不存在则生成新的
+        String traceId = TraceIdUtil.getTraceId();
         // 消息头
         Map<String, Object> header = new HashMap<>();
         header.put("traceId", traceId);
-        header.put("msgId", UUID.randomUUID()+ "_" + chatMessage.getSessionId() + "_" + System.currentTimeMillis());
+        header.put("msgId", TraceIdUtil.generateTraceId());
         header.put("businessType", "CHAT_CONTENT_SUBMIT");
         header.put("version", "1.0");
         header.put("timestamp", System.currentTimeMillis());
