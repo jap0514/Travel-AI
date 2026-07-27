@@ -1,5 +1,8 @@
 package com.travel.controller;
 
+import com.travel.annotation.DistributedLock;
+import com.travel.annotation.Idempotent;
+import com.travel.annotation.RateLimiter;
 import com.travel.common.Result;
 import com.travel.dto.CancelOrderDTO;
 import com.travel.dto.HotelBookingDTO;
@@ -14,18 +17,26 @@ import com.travel.vo.HotelRoomTypeVO;
 import com.travel.vo.HotelRoomVO;
 import com.travel.vo.HotelVO;
 import com.travel.vo.PageVO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import io.micrometer.core.annotation.Timed;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/hotel")
+@Validated
 public class HotelController {
 
     @Autowired
@@ -34,13 +45,25 @@ public class HotelController {
     @Autowired
     private HotelBookingService hotelBookingService;
 
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
+
+    /** 订单幂等 Token 有效期：5分钟 */
+    private static final long IDEMPOTENT_TOKEN_EXPIRE = 300;
+
     /**
      * 根据城市获取酒店信息
      * @param city
      * @return
      */
     @GetMapping("/hotelInfo/getHotelByCity")
-    public Result<List<HotelVO>> getHotelByCity(@RequestParam("city") String city){
+    @RateLimiter(resourceName = "HotelController:getHotelByCity", count = 200, timeout = 1000)
+    @Timed(value = "hotel.getHotelByCity", description = "按城市查询酒店耗时", percentiles = {0.5, 0.90, 0.95, 0.99})
+    public Result<List<HotelVO>> getHotelByCity(
+            @RequestParam("city")
+            @NotBlank(message = "城市不能为空")
+            @Pattern(regexp = "^[\\u4e00-\\u9fa5]{2,10}$", message = "城市名格式不正确（2-10个中文）")
+            String city){
         List<HotelVO> hotelVOList = new ArrayList<>();
         hotelVOList=hotelService.getAllHotelInfo(city);
         return Result.success(hotelVOList);
@@ -111,8 +134,36 @@ public class HotelController {
         return Result.success(data);
     }
 
+    /**
+     * 获取订单幂等 Token
+     * 前端下单前先调用此接口获取 Token，下单时携带 Token 防止重复提交
+     *
+     * @return 幂等 Token
+     */
+    @GetMapping("/order/token")
+    public Result<Map<String, String>> getIdempotentToken() {
+        String token = UUID.randomUUID().toString().replace("-", "");
+        String redisKey = "idempotent:order:token:" + token;
+        redisTemplate.opsForValue().set(redisKey, "1", IDEMPOTENT_TOKEN_EXPIRE, TimeUnit.SECONDS);
 
+        Map<String, String> result = new HashMap<>();
+        result.put("token", token);
+        result.put("expireSeconds", String.valueOf(IDEMPOTENT_TOKEN_EXPIRE));
+
+        return Result.success(result);
+    }
+
+    /**
+     * 创建酒店订单（带幂等性保护）
+     * 前端需先调用 GET /order/token 获取 Token，然后携带 Token 请求此接口
+     *
+     * @param dto 订单信息（含幂等 Token）
+     * @return 订单信息
+     */
     @PostMapping("/order/createOrder")
+    @RateLimiter(resourceName = "HotelController:createOrder", count = 50, timeout = 1000)
+    @Idempotent(key = "#dto.idempotentToken", expireTime = 300, message = "请勿重复提交订单")
+    @Timed(value = "hotel.createOrder", description = "创建订单耗时", percentiles = {0.5, 0.90, 0.95, 0.99})
     public Result<HotelBookingVO> createOrder(@RequestBody @Valid HotelBookingDTO dto){
         HotelBookingVO hotelBookingVO=hotelBookingService.createOrder(dto,dto.getUserId());
         return Result.success(hotelBookingVO);
@@ -169,13 +220,15 @@ public class HotelController {
     }
 
     /**
-     * 支付订单
+     * 支付订单（带分布式锁，防止并发支付）
      * @param orderNo 订单号
      * @param dto 支付信息
      * @param userId 用户ID
      * @return 操作结果
      */
     @PutMapping("/order/{orderNo}/pay")
+    @DistributedLock(key = "'lock:order:pay:' + #orderNo", waitTime = 5, leaseTime = 10)
+    @Timed(value = "hotel.payOrder", description = "支付订单耗时", percentiles = {0.5, 0.90, 0.95, 0.99})
     public Result<HotelBookingVO> payOrder(@PathVariable("orderNo") String orderNo,
                                           @RequestBody PayOrderDTO dto,
                                           @RequestAttribute Long userId){

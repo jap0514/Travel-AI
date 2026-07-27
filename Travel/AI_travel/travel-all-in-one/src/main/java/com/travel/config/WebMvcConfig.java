@@ -2,6 +2,7 @@ package com.travel.config;
 
 import com.travel.interceptor.AuthInterceptor;
 import com.travel.interceptor.SignatureInterceptor;
+import com.travel.interceptor.TraceIdInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -16,8 +17,15 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Autowired
     private SignatureInterceptor signatureInterceptor;
 
+    @Autowired
+    private TraceIdInterceptor traceIdInterceptor;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry){
+        // TraceId 拦截器 - 最早执行，为所有请求生成/透传 TraceId
+        registry.addInterceptor(traceIdInterceptor)
+                .addPathPatterns("/**");
+
         // 签名验证拦截器 - 只拦截Python回调接口
         registry.addInterceptor(signatureInterceptor)
                 .addPathPatterns("/sendMessageByPython/**");

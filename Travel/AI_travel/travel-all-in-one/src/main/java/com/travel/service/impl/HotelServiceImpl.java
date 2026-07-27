@@ -2,6 +2,7 @@ package com.travel.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.travel.annotation.ThreeTierCache;
 import com.travel.entity.Hotel;
 import com.travel.entity.HotelRoom;
 import com.travel.entity.HotelRoomType;
@@ -10,6 +11,7 @@ import com.travel.mapper.HotelRoomTypeMapper;
 import com.travel.service.HotelService;
 import com.travel.mapper.HotelMapper;
 import com.travel.vo.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
-* @author 13922
-* @description 针对表【hotel(酒店信息)】的数据库操作Service实现
-* @createDate 2026-07-14 16:01:42
-*/
+ * 酒店服务实现
+ * 使用 @ThreeTierCache 注解实现三级缓存 + 三大防护
+ */
+@Slf4j
 @Service
 public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel>
     implements HotelService{
@@ -41,16 +43,24 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel>
 
     /**
      * 根据城市获取该城市的酒店信息
-     * @param city
-     * @return
+     * 三级缓存 + 三大防护全部由AOP处理
      */
     @Override
+    @ThreeTierCache(
+        cacheName = "hotels",
+        key = "#city",
+        localTtlMinutes = 5,
+        redisTtlMinutes = 30,
+        redisTtlOffsetMinutes = 5,
+        useBloomFilter = true
+    )
     public List<HotelVO> getAllHotelInfo(String city) {
+        // 只需要写查DB的逻辑，缓存全部由AOP处理
         LambdaQueryWrapper<Hotel> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.eq(Hotel::getCity,city);
+        lambdaQueryWrapper.eq(Hotel::getCity, city);
 
         List<Hotel> result = hotelMapper.selectList(lambdaQueryWrapper);
-        List<HotelVO> voList=result.stream().map(s->{
+        return result.stream().map(s -> {
             HotelVO vo = new HotelVO();
             vo.setHotelId(s.getHotelId());
             vo.setAddress(s.getAddress());
@@ -67,23 +77,27 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel>
             vo.setMainImage(s.getMainImage());
             return vo;
         }).toList();
-
-        return voList;
     }
 
     /**
      * 根据酒店ID获取酒店的房间类型信息
-     * @param hotelId
-     * @return
      */
     @Override
+    @ThreeTierCache(
+        cacheName = "roomTypes",
+        key = "#hotelId",
+        localTtlMinutes = 5,
+        redisTtlMinutes = 30,
+        redisTtlOffsetMinutes = 5,
+        useBloomFilter = true
+    )
     public List<HotelRoomTypeVO> getHotelRoomType(Long hotelId) {
         LambdaQueryWrapper<HotelRoomType> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.eq(HotelRoomType::getHotelId,hotelId);
+        lambdaQueryWrapper.eq(HotelRoomType::getHotelId, hotelId);
 
         List<HotelRoomType> result = hotelRoomTypeMapper.selectList(lambdaQueryWrapper);
 
-        List<HotelRoomTypeVO> voList=result.stream().map(s->{
+        return result.stream().map(s -> {
             HotelRoomTypeVO vo = new HotelRoomTypeVO();
             vo.setRoomTypeId(s.getRoomTypeId());
             vo.setHotelId(s.getHotelId());
@@ -98,15 +112,11 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel>
             vo.setUpdateTime(s.getUpdateTime());
             return vo;
         }).toList();
-        return voList;
     }
 
     /**
      * 根据酒店ID、房间类型ID、房间号查询房间信息
-     * @param hotelId 酒店ID
-     * @param roomTypeId 房间类型ID
-     * @param roomNo 房间号
-     * @return
+     * 房间信息不适合缓存（实时性要求高），不添加缓存注解
      */
     @Override
     public List<HotelRoomVO> getHotelRoom(Long hotelId, Long roomTypeId, String roomNo) {
@@ -127,7 +137,6 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel>
             vo.setStatusName(s.getStatus() == 1 ? "可用" : "不可用");
             vo.setCreateTime(s.getCreateTime());
             vo.setUpdateTime(s.getUpdateTime());
-            // 查询关联数据
             vo.setHotelName(hotelMapper.selectById(hotelId).getName());
             vo.setRoomTypeName(hotelRoomTypeMapper.selectById(roomTypeId).getName());
             return vo;
@@ -135,23 +144,16 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel>
         return voList;
     }
 
+    /**
+     * 根据城市、日期、天数来查询当地的酒店是否有空房间
+     * 实时性要求高，不适合缓存
+     */
     @Override
     public List<HotelEmptyRoomVO> selectEmptyRoom(String city, String startDate, Long days) {
-        // 计算退房日期
         DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime newStartDate = LocalDateTime.parse(startDate, formatter);
-
         LocalDateTime endDate = newStartDate.plusDays(days);
 
-        //查询空房间
-        List<HotelEmptyRoomVO> hotelBookings = hotelBookingMapper.selectEmptyRoom(city, newStartDate, endDate);
-
-
-
-        return hotelBookings;
+        return hotelBookingMapper.selectEmptyRoom(city, newStartDate, endDate);
     }
 }
-
-
-
-

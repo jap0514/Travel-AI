@@ -24,7 +24,7 @@ public class SignatureUtil {
      */
     public static String generateSign(String secretKey, String timestamp, String body) {
         String data = secretKey + timestamp + (body == null ? "" : body);
-        return DigestUtil.sha256Hex(data, StandardCharsets.UTF_8);
+        return DigestUtil.sha256Hex(data);
     }
 
     /**

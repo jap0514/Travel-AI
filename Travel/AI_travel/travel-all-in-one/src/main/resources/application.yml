@@ -4,6 +4,8 @@ server:
 spring:
   profiles:
     active: dev
+  application:
+    name: travel-java  # 应用名称，用于链路追踪
   # 数据库
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -28,6 +30,27 @@ spring:
   web:
     resources:
       add-mappings: false  # 因为是先处理静态资源的请求，再找匹配的controller。如果不设置为false的话，就会先匹配静态资源，匹配不上就会返回404状态码了，就根本到不了下一步的匹配controller，也就无法抛异常了。
+
+# Actuator + Micrometer 配置（可观测性）
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics  # 暴露的端点
+      base-path: /actuator  # 端点基础路径
+  endpoint:
+    health:
+      show-details: always  # 健康检查显示详情
+    prometheus:
+      enabled: true  # 开启 Prometheus 端点
+  metrics:
+    tags:
+      application: ${spring.application.name}  # 给所有指标添加应用名标签
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true  # 开启请求耗时的百分位直方图
+      percentiles:
+        http.server.requests: 0.5,0.90,0.95,0.99  # p50, p90, p95, p99
 
 rocketmq:
   name-server: 192.168.71.140:9876

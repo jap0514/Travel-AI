@@ -1,5 +1,7 @@
 package com.travel.common;
 
+import com.alibaba.csp.sentinel.slots.block.BlockException;
+import com.alibaba.csp.sentinel.slots.block.flow.FlowException;
 import com.travel.exception.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolation;
@@ -58,6 +60,17 @@ public class GlobalExceptionHandler {
         log.error("远程服务异常 | service={} | path={} | msg={}",
                 e.getServiceName(), request.getRequestURI(), e.getMessage(), e);
         return ResultUtil.fail(ResultCode.PYTHON_SERVICE_ERROR);
+    }
+
+    // ========== Sentinel 限流异常 ==========
+
+    @ExceptionHandler(BlockException.class)
+    @ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
+    public Result<Void> handleBlock(BlockException e, HttpServletRequest request) {
+        String resourceName = e.getRule() != null ? e.getRule().getResource() : "unknown";
+        log.warn("【限流触发】path={} | resource={} | msg={}",
+                request.getRequestURI(), resourceName, e.getClass().getSimpleName());
+        return ResultUtil.fail(ResultCode.RATE_LIMITED);
     }
 
     // ========== 参数校验异常 ==========

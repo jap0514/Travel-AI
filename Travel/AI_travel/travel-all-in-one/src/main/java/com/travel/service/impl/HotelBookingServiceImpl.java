@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.travel.common.ResultCode;
-import com.travel.config.OrderTimeoutProcessor;
 import com.travel.exception.BusinessException;
 import com.travel.dto.CancelOrderDTO;
 import com.travel.dto.HotelBookingDTO;
@@ -19,13 +18,14 @@ import com.travel.mapper.HotelBookingMapper;
 import com.travel.mapper.HotelMapper;
 import com.travel.mapper.HotelRoomMapper;
 import com.travel.mapper.HotelRoomTypeMapper;
+import com.travel.mq.OrderTimeoutProducer;
 import com.travel.service.HotelBookingService;
+import com.travel.util.TraceIdUtil;
 import com.travel.vo.HotelBookingVO;
 import com.travel.vo.HotelEmptyRoomVO;
 import com.travel.vo.PageVO;
 import com.travel.vo.HotelRoomVO;
 import lombok.extern.slf4j.Slf4j;
-import org.redisson.api.RDelayedQueue;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +66,12 @@ public class HotelBookingServiceImpl extends ServiceImpl<HotelBookingMapper, Hot
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    private OrderTimeoutProducer orderTimeoutProducer;
+
+    @Autowired
+    private TraceIdUtil traceIdUtil;
 
     @Override
     public HotelBookingVO createOrder(HotelBookingDTO dto, Long userId) {
@@ -126,12 +132,8 @@ public class HotelBookingServiceImpl extends ServiceImpl<HotelBookingMapper, Hot
                 throw new BusinessException(ResultCode.INTERNAL_ERROR, "订单保存失败");
             }
 
-            //添加延迟队列，30分钟后自动处理
-            RDelayedQueue<String> delayedQueue = redissonClient.getDelayedQueue(
-                    redissonClient.getQueue("order:timeout:queue")
-            );
-            //30分钟后，这条消息会自动进入 queue
-            delayedQueue.offer(orderNo,30,TimeUnit.MINUTES);
+            //发送 RocketMQ 延迟消息，30分钟后自动处理超时订单
+            orderTimeoutProducer.sendTimeoutMessage(orderNo, userId, traceIdUtil.getTraceId());
 
             //构建VO返回
             HotelBookingVO vo = new HotelBookingVO();
@@ -317,9 +319,6 @@ public class HotelBookingServiceImpl extends ServiceImpl<HotelBookingMapper, Hot
         booking.setUpdateTime(LocalDateTime.now());
         hotelBookingMapper.updateById(booking);
 
-        // 从延迟队列中移除，不再自动取消
-        removeFromDelayQueue(orderNo);
-
         // 返回更新后的订单信息
         return getOrderByOrderNo(orderNo);
     }
@@ -350,9 +349,6 @@ public class HotelBookingServiceImpl extends ServiceImpl<HotelBookingMapper, Hot
         booking.setStatus(4); // 已完成
         booking.setUpdateTime(LocalDateTime.now());
         hotelBookingMapper.updateById(booking);
-
-        // 从延迟队列中移除，不再自动取消
-        removeFromDelayQueue(orderNo);
 
         // 返回更新后的订单信息
         return getOrderByOrderNo(orderNo);
@@ -393,23 +389,8 @@ public class HotelBookingServiceImpl extends ServiceImpl<HotelBookingMapper, Hot
         booking.setUpdateTime(LocalDateTime.now());
         hotelBookingMapper.updateById(booking);
 
-        // 从延迟队列中移除，不再自动取消
-        removeFromDelayQueue(orderNo);
-
         // 返回更新后的订单信息
         return getOrderByOrderNo(orderNo);
-    }
-
-    /**
-     * 从延迟队列中移除订单
-     * @param orderNo 订单号
-     */
-    private void removeFromDelayQueue(String orderNo) {
-        try {
-            redissonClient.getBlockingQueue(OrderTimeoutProcessor.QUEUE_NAME).remove(orderNo);
-        } catch (Exception e) {
-            log.error("从延迟队列移除订单失败: {}", orderNo, e);
-        }
     }
 
     @Override
