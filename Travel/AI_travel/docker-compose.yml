@@ -86,6 +86,39 @@ services:
       - QDRANT__SERVICE__GRPC_PORT=6334
     restart: always
 
+  # ========== 可观测性服务 ==========
+
+  # Prometheus 时序数据库（采集 Java 服务 metrics）
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: travel_prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./travel-all-in-one/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.enable-lifecycle'
+    restart: unless-stopped
+
+  # Grafana 可视化大盘
+  grafana:
+    image: grafana/grafana:latest
+    container_name: travel_grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana_dashboards:/etc/grafana/provisioning/dashboards
+      - grafana_datasources:/etc/grafana/provisioning/datasources
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
 volumes:
   mysql_data:
   redis_data:
@@ -93,6 +126,9 @@ volumes:
   rocketmq_broker_logs:
   rocketmq_broker_store:
   qdrant_storage:
+  prometheus_data:
+  grafana_dashboards:
+  grafana_datasources:
 
 #  # RabbitMQ 3.13（带管理面板）
 #  rabbitmq:

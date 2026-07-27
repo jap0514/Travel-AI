@@ -9,4 +9,12 @@ public class TravelRocketMQConstant {
 
     //消费者组
     public static final String TRAVEL_CONSUMER_GROUP="travel-task-consumer-group";
+
+    //========== 订单超时处理 ==========
+
+    // 订单超时延迟消息 Topic
+    public static final String ORDER_TIMEOUT_TOPIC = "order-timeout-topic";
+
+    // 订单超时 Consumer Group
+    public static final String ORDER_TIMEOUT_CONSUMER_GROUP = "order-timeout-consumer-group";
 }

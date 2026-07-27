@@ -13,6 +13,9 @@ import java.time.LocalDateTime;
 @Schema(description = "酒店房间预订传输对象")
 public class HotelBookingDTO {
 
+    @Schema(description = "幂等Token（下单前先调用 /order/token 获取）")
+    private String idempotentToken;
+
     @NotNull(message = "用户ID不能为空")
     @Schema(description = "用户ID", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long userId;

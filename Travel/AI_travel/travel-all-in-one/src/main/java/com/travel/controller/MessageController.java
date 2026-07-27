@@ -1,9 +1,11 @@
 package com.travel.controller;
 
+import com.travel.annotation.RateLimiter;
 import com.travel.common.Result;
 import com.travel.dto.ChatMessageDTO;
 import com.travel.service.ChatMessageService;
 import com.travel.vo.ChatMessageVO;
+import io.micrometer.core.annotation.Timed;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,8 @@ public class MessageController {
      * @return
      */
     @PostMapping("/sendMessage")
+    @RateLimiter(resourceName = "ChatController:sendMessage", count = 100, timeout = 1000)
+    @Timed(value = "message.sendMessage", description = "发送消息接口耗时", percentiles = {0.5, 0.90, 0.95, 0.99})
     public Result<ChatMessageVO> sendMessage(@RequestBody @Valid ChatMessageDTO chatMessageDTO,
                                              @RequestAttribute Long userId){
         //获取到message里面的消息内容部分

@@ -1,0 +1,18 @@
+# Prometheus 配置
+global:
+  scrape_interval: 15s  # 采集间隔
+  evaluation_interval: 15s
+
+scrape_configs:
+  # 采集 Java 应用的 metrics
+  - job_name: 'travel-java'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['localhost:9999']
+        labels:
+          application: 'travel-java'
+
+  # 采集 RocketMQ metrics
+  - job_name: 'rocketmq'
+    static_configs:
+      - targets: ['192.168.71.140:9876']
