@@ -1,5 +1,6 @@
 package com.travel.util;
 
+import com.google.common.hash.BloomFilter;
 import com.google.common.hash.Funnels;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -19,7 +20,7 @@ public class BloomFilterUtil {
      * 布隆过滤器实例
      * 使用 Google Guava 实现
      */
-    private com.google.common.hash.BloomFilter<String> hotelBloomFilter;
+    private BloomFilter<String> hotelBloomFilter;
 
     /**
      * 布隆过滤器配置参数
@@ -29,10 +30,10 @@ public class BloomFilterUtil {
     private static final long EXPECTED_INSERTIONS = 10000;
     private static final double FPP = 0.01;
 
-    @PostConstruct
+    @PostConstruct  //依赖注入后立即执行
     public void init() {
         // 初始化酒店查询的布隆过滤器
-        hotelBloomFilter = com.google.common.hash.BloomFilter.create(
+        hotelBloomFilter = BloomFilter.create(
                 Funnels.stringFunnel(StandardCharsets.UTF_8),
                 EXPECTED_INSERTIONS,
                 FPP
@@ -96,7 +97,7 @@ public class BloomFilterUtil {
      * 获取布隆过滤器的统计信息
      * 用于监控和调优
      */
-    public String getStats() {
+    public String getStatus() {
         if (hotelBloomFilter == null) {
             return "BloomFilter not initialized";
         }

@@ -2,6 +2,8 @@ package com.travel.util;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import com.github.benmanes.caffeine.cache.stats.CacheStats;
+import com.travel.context.SpringContextHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Component;
@@ -114,7 +116,7 @@ public class DynamicCachePromoter {
      */
     private Object getDataFromRedis(String cacheName, String fullKey) {
         try {
-            CacheManager cacheManager = com.travel.context.SpringContextHolder.getCacheManager();
+            CacheManager cacheManager = SpringContextHolder.getCacheManager();
             if (cacheManager == null) {
                 return null;
             }
@@ -148,9 +150,12 @@ public class DynamicCachePromoter {
      * 获取热点缓存统计信息
      */
     public String getStats() {
-        com.github.benmanes.caffeine.cache.CacheStats stats = hotDataCache.stats();
-        return String.format("热点缓存: 容量=%d/%d, 命中率=%.2f%%, eviction=%d",
-                hotDataCache.estimatedSize(), HOT_CACHE_MAX_SIZE,
-                stats.hitRate() * 100, stats.evictionCount());
+        CacheStats stats = hotDataCache.stats();
+        return String.format("热点缓存: 容量=%d/%d, 命中率=%.2f%%, 淘汰数=%d, 加载时间=%.2fms",
+                hotDataCache.estimatedSize(),
+                HOT_CACHE_MAX_SIZE,
+                stats.hitRate() * 100,
+                stats.evictionCount(),
+                stats.averageLoadPenalty() / 1_000_000.0);
     }
 }

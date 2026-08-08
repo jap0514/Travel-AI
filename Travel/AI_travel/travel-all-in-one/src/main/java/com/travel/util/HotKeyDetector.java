@@ -8,17 +8,18 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 热点数据识别器
  * 使用滑动窗口算法识别热点key
  *
  * 原理：
- * 1. 每次缓存访问，在Redis SortedSet中记录访问次数
- * 2. SortedSet的score为时间戳，value为cacheKey
- * 3. 定时任务统计窗口内访问次数，超过阈值则标记为热点
+ * 1. 每次缓存访问，ZADD 写入一条记录，member = cacheKey，score = 时间戳
+ * 2. 定时任务用 ZRANGEBYSCORE 获取窗口内的所有记录
+ * 3. 统计每个 cacheKey 出现次数，超过阈值则标记为热点
  */
 @Slf4j
 @Component
@@ -30,11 +31,8 @@ public class HotKeyDetector {
     @Autowired
     private DynamicCachePromoter dynamicCachePromoter;
 
-    /** Redis key前缀：热点key的SortedSet */
+    /** Redis key前缀：热点key的ZSet */
     private static final String HOT_KEY_ZSET_PREFIX = "hot:key:access:";
-
-    /** 热点key池的Redis key */
-    private static final String HOT_KEY_POOL = "hot:key:pool";
 
     /** 时间窗口大小（秒）：统计多久内的访问 */
     private static final long WINDOW_SIZE_SECONDS = 60;
@@ -48,9 +46,15 @@ public class HotKeyDetector {
     /** 本地缓存的热点key集合 */
     private final ConcurrentHashMap<String, Long> localHotKeys = new ConcurrentHashMap<>();
 
+    @PostConstruct
+    public void init() {
+        log.info("【热点key检测】初始化完成，窗口大小={}秒，热点阈值={}", WINDOW_SIZE_SECONDS, HOT_THRESHOLD);
+    }
+
     /**
      * 记录一次缓存访问
-     * 在滑动窗口中增加访问次数
+     * 使用 ZSet，member = cacheKey:timestamp:random，score = 时间戳
+     * 加入随机数保证同一秒内多次访问不会覆盖
      *
      * @param cacheName 缓存名称
      * @param cacheKey 缓存key
@@ -58,20 +62,19 @@ public class HotKeyDetector {
     public void recordAccess(String cacheName, String cacheKey) {
         try {
             String zsetKey = HOT_KEY_ZSET_PREFIX + cacheName;
-            String fullKey = cacheName + ":" + cacheKey;
+            // member 格式：cacheName:cacheKey:timestamp:random
+            // 用时间戳+随机数确保唯一性，同一秒内多次访问不会覆盖
+            long nowSeconds = System.currentTimeMillis() / 1000;
+            long random = System.nanoTime();
+            String member = cacheName + ":" + cacheKey + ":" + nowSeconds + ":" + random;
 
-            // 使用时间戳作为score，统计窗口内的访问次数
-            long now = System.currentTimeMillis() / 1000;
-            long windowStart = now - WINDOW_SIZE_SECONDS;
+            // ZADD：score = 时间戳（秒），用于按时间窗口筛选
+            redisTemplate.opsForZSet().add(zsetKey, member, nowSeconds);
 
-            // 先删除窗口外的老数据
-            redisTemplate.opsForZSet().removeRangeByScore(zsetKey, 0, windowStart);
+            // 设置过期时间，自动清理窗口外的数据
+            redisTemplate.expire(zsetKey, WINDOW_SIZE_SECONDS * 2, TimeUnit.SECONDS);
 
-            // 增加访问次数
-            redisTemplate.opsForZSet().incrementScore(zsetKey, fullKey, 1);
-
-            // 设置过期时间，防止数据一直积累
-            redisTemplate.expire(zsetKey, WINDOW_SIZE_SECONDS * 2, java.util.concurrent.TimeUnit.SECONDS);
+            log.debug("【热点key检测】记录访问: key={}", cacheName + ":" + cacheKey);
 
         } catch (Exception e) {
             log.warn("记录热点key失败: cacheName={}, cacheKey={}, error={}", cacheName, cacheKey, e.getMessage());
@@ -83,79 +86,97 @@ public class HotKeyDetector {
      */
     public boolean isLocalHotKey(String cacheName, String cacheKey) {
         String fullKey = cacheName + ":" + cacheKey;
+        // 检查是否过期
+        Long expiration = localHotKeys.get(fullKey);
+        if (expiration != null && expiration < System.currentTimeMillis()) {
+            localHotKeys.remove(fullKey);
+            return false;
+        }
         return localHotKeys.containsKey(fullKey);
     }
 
     /**
-     * 定时任务：扫描热点key并提升到本地缓存
-     * 每分钟执行一次
+     * 定时任务：每10秒执行，清理过期数据 + 识别热点
      */
-    @Scheduled(fixedRate = 60000)
+    @Scheduled(fixedRate = 10000)
     public void scanAndPromoteHotKeys() {
         try {
-            log.debug("【热点key扫描】开始扫描...");
-
-            // 获取所有缓存名称的热点key
+            // 扫描热点缓存的热点key
             scanHotKeysForCache("hotels");
             scanHotKeysForCache("roomTypes");
 
-            log.debug("【热点key扫描】扫描完成，本地热点key数量={}", localHotKeys.size());
+            // 清理过期的本地热点key
+            long nowMs = System.currentTimeMillis();
+            localHotKeys.entrySet().removeIf(entry -> entry.getValue() < nowMs);
 
         } catch (Exception e) {
-            log.error("【热点key扫描】扫描失败: {}", e.getMessage(), e);
+            log.error("【热点key扫描】扫描失败: {}", e.getMessage());
         }
     }
 
     /**
      * 扫描某个缓存的热点key
+     * 使用 ZRANGEBYSCORE 获取窗口内的所有访问记录，统计每个 key 的出现次数
      */
     private void scanHotKeysForCache(String cacheName) {
         String zsetKey = HOT_KEY_ZSET_PREFIX + cacheName;
+        long nowSeconds = System.currentTimeMillis() / 1000;
+        long windowStart = nowSeconds - WINDOW_SIZE_SECONDS;
 
-        // 获取窗口内的所有key及其访问次数
-        long now = System.currentTimeMillis() / 1000;
-        long windowStart = now - WINDOW_SIZE_SECONDS;
+        // ZRANGEBYSCORE：获取窗口内的所有记录（score 在 windowStart ~ nowSeconds 之间）
+        Set<Object> records = redisTemplate.opsForZSet().rangeByScore(zsetKey, windowStart, nowSeconds);
 
-        // 删除窗口外的数据
-        redisTemplate.opsForZSet().removeRangeByScore(zsetKey, 0, windowStart);
-
-        // 获取窗口内的所有key，按分数（访问次数）倒序
-        Set<ZSetOperations.TypedTuple<Object>> hotKeys =
-                redisTemplate.opsForZSet().reverseRangeWithScores(zsetKey, 0, -1);
-
-        if (hotKeys == null || hotKeys.isEmpty()) {
+        if (records == null || records.isEmpty()) {
             return;
         }
 
-        for (ZSetOperations.TypedTuple<Object> tuple : hotKeys) {
-            String fullKey = (String) tuple.getValue();
-            Double score = tuple.getScore();
+        log.debug("【热点key扫描】cache={}, 窗口内记录数={}", cacheName, records.size());
 
-            if (fullKey == null || score == null) {
-                continue;
-            }
-
-            // 判断是否超过热点阈值
-            if (score >= HOT_THRESHOLD) {
-                // 标记为本地热点key
-                localHotKeys.put(fullKey, System.currentTimeMillis() + HOT_KEY_LOCAL_TTL_SECONDS * 1000);
-                log.info("【热点key识别】发现热点key: key={}, 访问次数={}", fullKey, score.intValue());
-
-                // 通知动态缓存提升器将热点key提升到本地缓存
-                dynamicCachePromoter.promoteToLocalCache(cacheName, fullKey);
+        // 统计每个 key 的访问次数
+        // member 格式：cacheName:cacheKey:timestamp:random
+        Map<String, Long> keyCountMap = new HashMap<>();
+        for (Object record : records) {
+            String member = (String) record;
+            // 提取 cacheName:cacheKey（前两个部分）
+            String[] parts = member.split(":");
+            if (parts.length >= 2) {
+                String fullKey = parts[0] + ":" + parts[1];
+                keyCountMap.merge(fullKey, 1L, Long::sum);
             }
         }
 
-        // 清理过期的本地热点key
-        long nowMs = System.currentTimeMillis();
-        localHotKeys.entrySet().removeIf(entry -> entry.getValue() < nowMs);
+        // 找出超过热点的 key
+        for (Map.Entry<String, Long> entry : keyCountMap.entrySet()) {
+            String fullKey = entry.getKey();
+            long count = entry.getValue();
+
+            if (count >= HOT_THRESHOLD) {
+                // 标记为热点key（带过期时间）
+                long expiration = System.currentTimeMillis() + HOT_KEY_LOCAL_TTL_SECONDS * 1000;
+                if (!localHotKeys.containsKey(fullKey)) {
+                    localHotKeys.put(fullKey, expiration);
+                    log.info("【热点key识别】发现热点key: key={}, 窗口内访问次数={}", fullKey, count);
+
+                    // 通知动态缓存提升器将热点key提升到本地缓存
+                    if (dynamicCachePromoter != null) {
+                        dynamicCachePromoter.promoteToLocalCache(cacheName, fullKey);
+                    }
+                }
+            }
+        }
+
+        // 删除窗口外的老数据（score < windowStart）
+        redisTemplate.opsForZSet().removeRangeByScore(zsetKey, 0, windowStart);
     }
 
     /**
      * 获取当前热点key统计信息
      */
     public String getHotKeyStats() {
-        return String.format("本地热点key数量=%d, Redis热点key正在扫描中...",
-                localHotKeys.size());
+        long now = System.currentTimeMillis();
+        int activeCount = (int) localHotKeys.entrySet().stream()
+                .filter(entry -> entry.getValue() >= now)
+                .count();
+        return String.format("本地热点key数量=%d, 活跃=%d", localHotKeys.size(), activeCount);
     }
 }

@@ -41,23 +41,23 @@ public class SentinelDegradeConfig {
             List<DegradeRule> rules = new ArrayList<>();
 
             // Python 服务熔断规则
-            DegradeRule pythonRule = new DegradeRule(PYTHON_SERVICE)
-                    // 设置资源名
-                    .setResource(PYTHON_SERVICE)
-                    // 熔断策略：慢调用比例 + 异常比例
-                    .setGrade(RuleConstant.DEGRADE_GRADE_SLOW_REQUEST_RATIO)
-                    // 慢调用比例阈值 50%（慢调用 / 总调用）
-                    .setCount(0.5)
-                    // 慢调用阈值：3秒
-                    .setSlowRatioThreshold(0.5)
-                    // 最小请求数：达到此数量后才开始计算熔断
-                    .setMinRequestAmount(5)
-                    // 统计时长：10秒内
-                    .setStatIntervalMs(10000)
-                    // 熔断持续时长：60秒
-                    .setRecoverTimeoutSec(60)
-                    // 半开状态允许通过的请求数
-                    .setMaxAllowedStateepingDurationSec(60);
+            DegradeRule pythonRule = new DegradeRule(PYTHON_SERVICE);
+//                    // 设置资源名
+//                    .setResource(PYTHON_SERVICE)
+//                    // 熔断策略：慢调用比例 + 异常比例
+//                    .setGrade(RuleConstant.DEGRADE_GRADE_SLOW_REQUEST_RATIO)
+//                    // 慢调用比例阈值 50%（慢调用 / 总调用）
+//                    .setCount(0.5)
+//                    // 慢调用阈值：3秒
+//                    .setSlowRatioThreshold(0.5)
+//                    // 最小请求数：达到此数量后才开始计算熔断
+//                    .setMinRequestAmount(5)
+//                    // 统计时长：10秒内
+//                    .setStatIntervalMs(10000)
+//                    // 熔断持续时长：60秒
+//                    .setRecoverTimeoutSec(60)
+//                    // 半开状态允许通过的请求数
+//                    .setMaxAllowedStateepingDurationSec(60);
 
             rules.add(pythonRule);
 

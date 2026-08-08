@@ -333,6 +333,10 @@ async def _immediate_callback(callback_url: str, session_id: int, user_id: int,
     立即回调 Java，通知前端进入交互状态（waiting_）
     """
     import requests
+    import hashlib
+    import time
+    import json
+
     log.info(f"[_immediate_callback] interaction dict: {interaction}")
     payload = {
         "sessionId": session_id,
@@ -355,12 +359,28 @@ async def _immediate_callback(callback_url: str, session_id: int, user_id: int,
         },
     }
     log.info(f"[_immediate_callback] payload: {payload}")
+
+    # 生成签名
+    secret_key = "travel-python-secret-key-2026"
+    timestamp = str(int(time.time() * 1000))
+    body_str = json.dumps(payload, ensure_ascii=False)
+    sign_data = secret_key + timestamp + body_str
+    sign = hashlib.sha256(sign_data.encode('utf-8')).hexdigest()
+
+    headers = {
+        "Content-Type": "application/json; charset=utf-8",
+        "X-App-Id": "travel-python",
+        "X-Timestamp": timestamp,
+        "X-Sign": sign,
+    }
+
     try:
         loop = asyncio.get_event_loop()
+        print(f"发送请求: url={callback_url}, payload={body_str}")
         await loop.run_in_executor(None, lambda: requests.post(
             callback_url,
-            json=payload,
-            headers={"Content-Type": "application/json"},
+            data=body_str.encode('utf-8'),  # 必须与签名用的 body_str 完全一致，且传 bytes 保证 Content-Length 按字节算
+            headers=headers,
             timeout=10,
         ))
         logger.info(f"即时回调已发送: flow_id={flow_id}, status={interaction.get('status')}")

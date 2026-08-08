@@ -57,7 +57,7 @@ public class HotelController {
      * @return
      */
     @GetMapping("/hotelInfo/getHotelByCity")
-    @RateLimiter(resourceName = "HotelController:getHotelByCity", count = 200, timeout = 1000)
+    @RateLimiter(resourceName = "HotelController:getHotelByCity")
     @Timed(value = "hotel.getHotelByCity", description = "按城市查询酒店耗时", percentiles = {0.5, 0.90, 0.95, 0.99})
     public Result<List<HotelVO>> getHotelByCity(
             @RequestParam("city")

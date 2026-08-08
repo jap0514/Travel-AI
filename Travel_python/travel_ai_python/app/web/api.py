@@ -3,6 +3,7 @@
 import time
 import uuid
 import json
+import hashlib
 import traceback
 import asyncio
 from datetime import datetime
@@ -55,6 +56,7 @@ class ChatRequestFromJava(BaseModel):
     flowId: Optional[str] = Field(default=None, description="flow唯一标识（用于中断恢复）")
     startDate: str = Field(..., description="出发日期 YYYY-MM-DD")
     days: int = Field(..., description="旅游天数")
+    traceId: Optional[str] = Field(default=None, description="Java传来的traceId，用于链路追踪")
 
 class ChatResponseToJava(BaseModel):
     sessionId: int = Field(default=3001,description="会话ID")
@@ -69,14 +71,37 @@ class ChatResponseToJava(BaseModel):
 
 async def _call_java_callback(callback_url: str, payload: dict):
     """在后台线程中同步调用 Java 回调接口，避免阻塞事件循环"""
+    import hashlib
+    import time
+
+    # 生成签名
+    secret_key = "travel-python-secret-key-2026"
+    timestamp = str(int(time.time() * 1000))
+    body_str = json.dumps(payload, ensure_ascii=False)
+    logger.info(f"[_call_java_callback] body_str={body_str}")
+    sign_data = secret_key + timestamp + body_str
+    logger.info(f"[_call_java_callback] sign_data={sign_data}")
+    sign = hashlib.sha256(sign_data.encode('utf-8')).hexdigest()
+    logger.info(f"[_call_java_callback] sign={sign}")
+
+    headers = {
+        "Content-Type": "application/json; charset=utf-8",
+        "X-App-Id": "travel-python",
+        "X-Timestamp": timestamp,
+        "X-Sign": sign,
+    }
+
+    logger.info(f"[_call_java_callback] 发送请求: url={callback_url}, payload={payload}")
+
     loop = asyncio.get_event_loop()
     try:
         await loop.run_in_executor(None, lambda: requests.post(
             callback_url,
-            json=payload,
-            headers={"Content-Type": "application/json"},
+            data=body_str.encode('utf-8'),  # 必须传 bytes：传 str 时 requests 按字符数算 Content-Length，中文会被截断
+            headers=headers,
             timeout=30
         ))
+        logger.info(f"[_call_java_callback] 请求发送成功")
     except Exception as e:
         logger.error(f"回调Java失败: {e}, callbackUrl={callback_url}")
 
@@ -87,7 +112,7 @@ async def chat_by_java(request: ChatRequestFromJava):
     sessionId = request.sessionId
     messageId = request.messageId
     userId = request.userId
-    trace_id = f"{request.userId}_{request.sessionId}_{time.time_ns()}"
+    trace_id = request.traceId if request.traceId else f"{request.userId}_{request.sessionId}_{time.time_ns()}"
     log = logger.bind(trace_id=trace_id)
     log.info(f"python端成功接收到Java发过来的消息: {request.content[:80]}...")
 

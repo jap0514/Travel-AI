@@ -6,6 +6,7 @@ import com.alibaba.csp.sentinel.SphU;
 import com.alibaba.csp.sentinel.Tracer;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.travel.annotation.CircuitBreaker;
+import com.travel.common.ChatMessageRoleEnum;
 import com.travel.common.ResultCode;
 import com.travel.config.SentinelDegradeConfig;
 import com.travel.dto.AiMessageCallbackDTO;
@@ -105,7 +106,7 @@ public class PythonServiceCallerImpl implements PythonServiceCaller {
         // 返回降级响应
         ChatMessageVO fallback = new ChatMessageVO();
         fallback.setContent("AI服务暂时繁忙，请稍后再试");
-        fallback.setRole("assistant");
+        fallback.setRole(ChatMessageRoleEnum.ASSISTANT);
         fallback.setSessionId(callbackDTO.getSessionId());
         fallback.setUserId(userId);
 

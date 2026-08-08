@@ -35,6 +35,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         //3、分页查询
         return userMapper.selectPage(page,wrapper);
     }
+
+    @Override
+    public User findByOpenid(String openid) {
+        LambdaQueryWrapper<User> wrapper = Wrappers.lambdaQuery();
+        wrapper.eq(User::getOpen_id, openid);
+        return userMapper.selectOne(wrapper);
+    }
 }
 
 

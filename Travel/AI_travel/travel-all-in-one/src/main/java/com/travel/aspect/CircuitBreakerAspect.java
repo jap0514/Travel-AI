@@ -5,12 +5,6 @@ import com.alibaba.csp.sentinel.EntryType;
 import com.alibaba.csp.sentinel.SphU;
 import com.alibaba.csp.sentinel.Tracer;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
-import com.alibaba.csp.sentinel.slots.block.degrade.DeadefaultRules;
-import com.alibaba.csp.sentinel.slots.block.degrade.DegradeRule;
-import com.alibaba.csp.sentinel.slots.block.degrade.DegradeRuleManager;
-import com.alibaba.csp.sentinel.slots.block.degrade.circuitbreaker.CircuitBreaker;
-import com.alibaba.csp.sentinel.slots.block.degrade.circuitbreaker.CircuitBreakerRegistry;
-import com.alibaba.csp.sentinel.slots.block.degrade.circuitbreaker.strategy.SlowRatioCircuitBreakerStrategy;
 import com.travel.annotation.CircuitBreaker;
 import com.travel.util.TraceIdUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -19,23 +13,30 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
 import java.lang.reflect.Method;
 import java.lang.reflect.UndeclaredThrowableException;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Sentinel 熔断器切面
+ * Sentinel 熔断器切面（简化版）
  *
- * 核心逻辑：
- * 1. 解析 @CircuitBreaker 注解配置
- * 2. 为每个熔断器注册 Sentinel 降级规则
- * 3. 通过 SphU.entry() 进入资源
- * 4. 记录异常到 Sentinel（触发熔断计算）
- * 5. 熔断触发时调用降级方法
+ * 当前实现：try-catch 实现基础降级
+ * 后续优化：接入 Sentinel Dashboard，实现完整的熔断配置
+ *
+ * Sentinel Dashboard 方案：
+ * 1. 部署 Sentinel Dashboard（Java Web 控制台，端口 8080）
+ * 2. Java 应用引入 sentinel-dashboard 依赖
+ * 3. 配置 sentinel transporter 连接 Dashboard
+ * 4. 在 Dashboard 上动态配置熔断规则（失败率/慢调用比例）
+ * 5. 规则实时生效，无需重启应用
+ *
+ * 熔断原理（Sentinel 官方实现）：
+ * 1. 统计接口的响应时间和异常比例
+ * 2. 超过阈值触发熔断（直接拒绝或降级）
+ * 3. 熔断一段时间后半开，尝试放行一个请求
+ * 4. 请求成功则关闭熔断，失败则继续熔断
  */
 @Aspect
 @Component
@@ -45,15 +46,9 @@ public class CircuitBreakerAspect {
     @Autowired
     private TraceIdUtil traceIdUtil;
 
-    @Value("${travel.python-api-timeout:3000}")
-    private int pythonApiTimeout;
-
-    /** 已注册的熔断器缓存 */
-    private final ConcurrentHashMap<String, CircuitBreaker> circuitBreakers = new ConcurrentHashMap<>();
-
     @PostConstruct
     public void init() {
-        log.info("【熔断器】初始化完成，默认超时时间={}ms", pythonApiTimeout);
+        log.info("【熔断器】初始化完成（简化版，后续可接入 Sentinel Dashboard）");
     }
 
     /**
@@ -70,76 +65,41 @@ public class CircuitBreakerAspect {
 
         log.debug("【熔断器】开始检查，traceId={}, resource={}", traceId, resourceName);
 
-        // 确保熔断规则已注册
-        registerDegradeRuleIfNeeded(resourceName, annotation);
-
         try {
-            // 进入资源（会检查熔断状态）
+            // ========== 进入资源（Sentinel 自动统计响应时间和异常）==========
+            // TODO: 后续接入 Dashboard 后，这里会由 Sentinel 自动判断是否熔断
+            // 简化版：直接执行业务，通过 try-catch 实现降级
             Entry entry = SphU.entry(resourceName, EntryType.OUT);
 
-            // 执行目标方法
+            // 执行业务
             Object result = joinPoint.proceed();
 
-            // 正常结束，记录成功
-            if (entry != null) {
-                entry.exit();
-            }
-
+            // 正常结束
+            entry.exit();
             return result;
 
         } catch (BlockException e) {
-            // 熔断触发，执行降级方法
+            // ========== 熔断触发（Sentinel Dashboard 方案中是自动触发的）==========
+            // 简化版：手动降级
             log.warn("【熔断器】【熔断触发】traceId={}, resource={}", traceId, resourceName);
             return executeFallback(joinPoint, annotation.fallbackMethod(), e);
 
         } catch (Exception e) {
-            // 业务异常，记录到 Sentinel（触发熔断计算）
+            // ========== 业务异常：记录到 Sentinel（用于 Dashboard 统计）==========
+            // 简化版：打印日志
+            // TODO: 后续接入 Dashboard 后，Sentinel 会自动统计异常比例
             Tracer.trace(e);
-            log.warn("【熔断器】【业务异常】traceId={}, resource={}, error={}", traceId, resourceName, e.getMessage());
+            log.warn("【熔断器】【业务异常】traceId={}, resource={}, error={}",
+                    traceId, resourceName, e.getMessage());
             throw e;
         }
-    }
-
-    /**
-     * 注册熔断规则（如果尚未注册）
-     */
-    private void registerDegradeRuleIfNeeded(String resourceName, CircuitBreaker annotation) {
-        if (circuitBreakers.containsKey(resourceName)) {
-            return;
-        }
-
-        // 创建熔断规则
-        DegradeRule rule = new DegradeRule(resourceName)
-                .setGrade(com.alibaba.csp.sentinel.slots.block.degrade.DegradeRule.SLOW_REQUEST_RATIO)
-                .setCount(annotation.failureRatioThreshold() / 100.0)
-                .setSlowRequestRatioThreshold(annotation.slowCallRatioThreshold() / 100.0)
-                .setMinRequestAmount(annotation.minimumNumberOfCalls())
-                .setStatIntervalMs(annotation.waitDurationInOpenState() * 1000)
-                .setRecoverTimeoutSec(annotation.waitDurationInOpenState())
-                .setMaxAllowedStateepingDurationSec(annotation.waitDurationInOpenState());
-
-        // 加载规则
-        DegradeRuleManager.loadRules(java.util.Collections.singletonList(rule));
-
-        // 获取或创建熔断器实例
-        CircuitBreaker breaker = CircuitBreakerRegistry.of(rule);
-        circuitBreakers.put(resourceName, breaker);
-
-        log.info("【熔断器】规则已注册，resource={}, slowCallRatio={}%, slowCallDuration={}s, failureRatio={}%, waitDuration={}s",
-                resourceName,
-                annotation.slowCallRatioThreshold(),
-                annotation.slowCallDurationThreshold(),
-                annotation.failureRatioThreshold(),
-                annotation.waitDurationInOpenState());
     }
 
     /**
      * 执行降级方法
      */
     private Object executeFallback(ProceedingJoinPoint joinPoint, String fallbackMethod, Exception originalException) throws Throwable {
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        Method method = signature.getMethod();
-        Method fallback = findFallbackMethod(joinPoint.getTarget(), method, fallbackMethod, originalException);
+        Method fallback = findFallbackMethod(joinPoint.getTarget(), fallbackMethod);
 
         if (fallback == null) {
             log.error("【熔断器】未找到降级方法: {}", fallbackMethod);
@@ -147,29 +107,25 @@ public class CircuitBreakerAspect {
         }
 
         try {
-            // 构建降级方法参数
-            Object[] args = buildFallbackArgs(joinPoint.getArgs(), method, fallback, originalException);
+            Object[] args = buildFallbackArgs(fallback, originalException);
             return fallback.invoke(joinPoint.getTarget(), args);
         } catch (UndeclaredThrowableException e) {
-            // 降级方法本身抛出的异常
-            throw e.getUndeclaredThrowable();
+            throw (Throwable) e.getCause();
         }
     }
 
     /**
      * 查找降级方法
      */
-    private Method findFallbackMethod(Object target, Method originalMethod, String fallbackMethodName, Exception originalException) {
+    private Method findFallbackMethod(Object target, String fallbackMethodName) {
         Class<?> clazz = target.getClass();
 
-        // 查找同名降级方法（参数兼容）
         for (Method m : clazz.getDeclaredMethods()) {
             if (m.getName().equals(fallbackMethodName)) {
                 return m;
             }
         }
 
-        // 降级方法可能在父类中
         Class<?> superClass = clazz.getSuperclass();
         if (superClass != null) {
             for (Method m : superClass.getDeclaredMethods()) {
@@ -184,34 +140,21 @@ public class CircuitBreakerAspect {
 
     /**
      * 构建降级方法参数
-     * 降级方法可以额外接收一个 Throwable 参数接收原始异常
      */
-    private Object[] buildFallbackArgs(Object[] originalArgs, Method originalMethod, Method fallbackMethod, Exception originalException) {
-        Class<?>[] fallbackParamTypes = fallbackMethod.getParameterTypes();
+    private Object[] buildFallbackArgs(Method fallbackMethod, Exception originalException) {
+        Class<?>[] paramTypes = fallbackMethod.getParameterTypes();
 
-        if (fallbackParamTypes.length == 0) {
+        // 无参数
+        if (paramTypes.length == 0) {
             return new Object[0];
         }
 
-        // 降级方法参数数量与原方法相同，且最后一个参数是 Throwable
-        if (fallbackParamTypes.length == originalMethod.getParameterCount() + 1
-                && fallbackParamTypes[fallbackParamTypes.length - 1].isAssignableFrom(originalException.getClass())) {
-            Object[] args = new Object[fallbackParamTypes.length];
-            System.arraycopy(originalArgs, 0, args, 0, originalArgs.length);
-            args[fallbackParamTypes.length - 1] = originalException;
-            return args;
-        }
-
-        // 降级方法参数与原方法相同
-        if (fallbackParamTypes.length == originalMethod.getParameterCount()) {
-            return originalArgs;
-        }
-
-        // 降级方法只有一个 Throwable 参数
-        if (fallbackParamTypes.length == 1 && fallbackParamTypes[0].isAssignableFrom(originalException.getClass())) {
+        // 只有一个 Throwable 参数
+        if (paramTypes.length == 1 && Throwable.class.isAssignableFrom(paramTypes[0])) {
             return new Object[]{originalException};
         }
 
-        return originalArgs;
+        // 其他情况返回空
+        return new Object[0];
     }
 }
