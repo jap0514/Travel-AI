@@ -97,6 +97,11 @@ jwt:
   expiration: 3600000  # 过期时间（毫秒）
 
 
+# 微信小程序配置
+wechat:
+  appid: ${WECHAT_APPID:wx0a6881820a88f45b}
+  secret: ${WECHAT_SECRET:18c8ae69fef5f5210167063305ff3527}
+
 # 自定义配置
 travel:
   mq:

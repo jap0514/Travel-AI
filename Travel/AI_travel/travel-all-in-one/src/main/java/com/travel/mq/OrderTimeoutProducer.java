@@ -1,5 +1,6 @@
 package com.travel.mq;
 
+import com.alibaba.fastjson2.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
@@ -44,7 +45,7 @@ public class OrderTimeoutProducer {
             message.setUserId(userId);
             message.setCreateTime(System.currentTimeMillis());
 
-            String jsonMsg = com.alibaba.fastjson2.JSON.toJSONString(message);
+            String jsonMsg = JSON.toJSONString(message);
 
             Message<String> rocketMsg = MessageBuilder
                     .withPayload(jsonMsg)

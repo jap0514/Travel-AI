@@ -133,7 +133,7 @@ public class ChatSessionServiceImpl extends ServiceImpl<ChatSessionMapper, ChatS
                     vo.setUserNickname(userMapper.selectById(useId).getNickname());
                     vo.setMsgId(s.getMsgId());
                     vo.setSessionId(s.getSessionId());
-                    vo.setPlanJson(s.getPlanJson().toString());
+                    vo.setPlanJson(s.getPlanJson());
                     vo.setCreateTime(s.getCreateTime());
                     vo.setUserId(s.getUserId());
                     return vo;

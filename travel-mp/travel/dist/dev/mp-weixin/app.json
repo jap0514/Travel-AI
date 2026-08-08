@@ -1,0 +1,52 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/login",
+    "pages/chat/chat",
+    "pages/chat/plan-form",
+    "pages/hotel/list",
+    "pages/hotel/detail",
+    "pages/order/list",
+    "pages/order/detail",
+    "pages/my/my"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "AI旅行规划",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#007AFF",
+    "borderStyle": "black",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "",
+        "selectedIconPath": "",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/hotel/list",
+        "iconPath": "",
+        "selectedIconPath": "",
+        "text": "酒店"
+      },
+      {
+        "pagePath": "pages/order/list",
+        "iconPath": "",
+        "selectedIconPath": "",
+        "text": "订单"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "",
+        "selectedIconPath": "",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

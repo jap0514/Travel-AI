@@ -22,7 +22,8 @@ public class User implements Serializable {
      * 用户ID
      */
     @TableId(value = "user_id", type = IdType.AUTO)
-    private Long user_id;
+    @TableField("user_id")
+    private Long userId;
 
     /**
      * 微信openId

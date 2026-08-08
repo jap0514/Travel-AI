@@ -1,5 +1,8 @@
 package com.travel.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
@@ -53,12 +56,17 @@ public class TieredCacheConfig {
     @Bean(REDIS_CACHE_MANAGER)
     @Primary
     public CacheManager redisCacheManager(RedisConnectionFactory connectionFactory) {
+        // 创建支持 Java 8 日期时间 的 ObjectMapper
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
         RedisCacheConfiguration defaultConfig = RedisCacheConfiguration.defaultCacheConfig()
                 .entryTtl(Duration.ofMinutes(30))  // 默认30分钟
                 .serializeKeysWith(RedisSerializationContext.SerializationPair
                         .fromSerializer(new StringRedisSerializer()))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair
-                        .fromSerializer(new GenericJackson2JsonRedisSerializer()))
+                        .fromSerializer(new GenericJackson2JsonRedisSerializer(objectMapper)))
                 .disableCachingNullValues();  // 不缓存null值
 
         // 为不同缓存设置不同的TTL

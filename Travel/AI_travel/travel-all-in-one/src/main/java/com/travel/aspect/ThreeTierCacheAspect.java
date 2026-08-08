@@ -20,12 +20,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.core.annotation.Order;
 import org.springframework.expression.EvaluationContext;
+import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -120,7 +123,6 @@ public class ThreeTierCacheAspect {
             // ==================== 防护2: 空值缓存检查 ====================
             if (annotation.useNullValueCache() && cachePenetrationUtil.isNullValue(fullKey)) {
                 log.info("【三级缓存】【空值缓存命中】traceId={}, key={}", traceId, fullKey);
-                recordAccessForHotDetection(cacheName, cacheKey);  // 记录访问用于热点分析
                 return getEmptyResult(method);
             }
 
@@ -131,7 +133,7 @@ public class ThreeTierCacheAspect {
                 // 回填L1-Caffeine
                 putToLocalCache(cacheName, fullKey, redisResult, annotation.localTtlMinutes());
                 // 检查是否为热点key，如果是则提升到热点缓存
-                promoteToHotCacheIfNeeded(cacheName, cacheKey, redisResult);
+                promoteToHotCacheIfNeeded(cacheName, cacheKey);
                 recordAccessForHotDetection(cacheName, cacheKey);  // 记录访问用于热点分析
                 return redisResult;
             }
@@ -186,7 +188,6 @@ public class ThreeTierCacheAspect {
                     cachePenetrationUtil.setNullValue(fullKey);
                     log.info("【三级缓存】【缓存穿透防护】traceId={}, key={}，设置空值缓存", traceId, fullKey);
                 }
-                recordAccessForHotDetection(cacheName, cacheKey);
                 return dbResult;
             }
 
@@ -243,7 +244,7 @@ public class ThreeTierCacheAspect {
     /**
      * 如果是热点key，则提升到热点缓存
      */
-    private void promoteToHotCacheIfNeeded(String cacheName, String cacheKey, Object data) {
+    private void promoteToHotCacheIfNeeded(String cacheName, String cacheKey) {
         if (dynamicCachePromoter != null && hotKeyDetector != null) {
             try {
                 if (hotKeyDetector.isLocalHotKey(cacheName, cacheKey)) {
@@ -379,8 +380,8 @@ public class ThreeTierCacheAspect {
      */
     private Object getEmptyResult(Method method) {
         Class<?> returnType = method.getReturnType();
-        if (returnType.isAssignableFrom(java.util.List.class)) {
-            return new java.util.ArrayList<>();
+        if (returnType.isAssignableFrom(List.class)) {
+            return new ArrayList<>();
         }
         return null;
     }

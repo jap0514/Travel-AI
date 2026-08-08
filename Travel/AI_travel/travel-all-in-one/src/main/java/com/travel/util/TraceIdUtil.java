@@ -1,6 +1,7 @@
 package com.travel.util;
 
 import org.slf4j.MDC;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
@@ -8,6 +9,7 @@ import java.util.UUID;
  * TraceId 工具类
  * 统一管理 TraceId 的获取和设置
  */
+@Component
 public class TraceIdUtil {
 
     private static final String TRACE_ID = "traceId";

@@ -18,4 +18,11 @@ public interface UserService extends IService<User> {
      * @return 用户信息列表
      */
     IPage<User> getUserPage(Integer pageNum, Integer pageSize);
+
+    /**
+     * 根据 openid 查询用户
+     * @param openid 微信 openid
+     * @return 用户信息
+     */
+    User findByOpenid(String openid);
 }

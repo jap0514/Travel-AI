@@ -38,6 +38,9 @@ public class SignatureUtil {
      */
     public static boolean verifySign(String secretKey, String timestamp, String body, String signature) {
         String expectedSign = generateSign(secretKey, timestamp, body);
+        log.info("期望签名: {}", expectedSign);
+        log.info("收到签名: {}", signature);
+        log.info("比较结果: {}", expectedSign.equalsIgnoreCase(signature));
         return expectedSign.equalsIgnoreCase(signature);
     }
 

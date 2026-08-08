@@ -1,10 +1,8 @@
 package com.travel.aspect;
 
 import com.alibaba.csp.sentinel.Entry;
-import com.alibaba.csp.sentinel.EntryType;
 import com.alibaba.csp.sentinel.SphU;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
-import com.alibaba.csp.sentinel.slots.block.flow.FlowException;
 import com.travel.annotation.RateLimiter;
 import com.travel.util.TraceIdUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -55,20 +53,14 @@ public class RateLimiterAspect {
         log.debug("【限流】开始限流检查，traceId={}, resource={}, count={}, timeout={}ms",
                 traceId, resourceName, rateLimiter.count(), rateLimiter.timeout());
 
+        Entry entry = null;
         try {
             // 使用 Sentinel 门面模式进入资源
-            // entryType = EntryType.IN 表示入站流量限流
-            // trafficType = inbound
-            Entry entry = SphU.entry(resourceName, EntryType.IN,
-                    rateLimiter.count(), rateLimiter.timeout());
+            // 如果被限流，SphU.entry() 会抛出 BlockException
+            entry = SphU.entry(resourceName);
 
             // 获取令牌成功，执行业务
             Object result = joinPoint.proceed();
-
-            // 业务执行完毕，记录结束
-            if (entry != null) {
-                entry.exit();
-            }
 
             return result;
 
@@ -79,6 +71,11 @@ public class RateLimiterAspect {
 
             // 抛出特定异常，由 GlobalExceptionHandler 处理
             throw e;
+        } finally {
+            // 必须在这里退出资源，确保即使业务异常也能正确退出
+            if (entry != null) {
+                entry.exit();
+            }
         }
     }
 

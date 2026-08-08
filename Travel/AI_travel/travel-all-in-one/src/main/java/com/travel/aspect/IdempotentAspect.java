@@ -17,6 +17,7 @@ import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 幂等性切面（基于 Redis Token）
@@ -68,7 +69,7 @@ public class IdempotentAspect {
                     redisKey,
                     "1",
                     idempotent.expireTime(),
-                    java.util.concurrent.TimeUnit.SECONDS
+                    TimeUnit.SECONDS
             );
 
             if (success == null || !success) {

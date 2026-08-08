@@ -1,5 +1,8 @@
 package com.travel.service.impl;
 
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.travel.common.ChatMessageRoleEnum;
 import com.travel.common.ResultCode;
@@ -88,8 +91,15 @@ public class ChatMessageServiceImpl extends ServiceImpl<ChatMessageMapper, ChatM
         Long msg_id = chatMessage.getMsgId();
 
         //4、将消息转发给python，同时需要python做收到确认返回，还需要从数据库中获得刚刚存进去的消息ID传给python
+        // flowId 优先用前端回传的；前端没传时，服务端兜底：若上一句 AI 消息正处于 waiting_ 交互状态，
+        // 说明本条消息是对该交互的回答，需要带上它的 flowId 让 Python 恢复中断的 flow
+        String flowId = chatMessageDTO.getFlowId();
+        if (flowId == null || flowId.isBlank()) {
+            flowId = resolvePendingFlowId(sessionId);
+        }
+
         receiveAIService.sendRequestToPythonAsync(sessionId, userId, msg_id, content,
-                chatMessageDTO.getStartDate(), chatMessageDTO.getDays(), chatMessageDTO.getFlowId());
+                chatMessageDTO.getStartDate(), chatMessageDTO.getDays(), flowId);
 
         ChatMessageVO chatMessageVO=new ChatMessageVO();
         chatMessageVO.setContent(content);
@@ -102,6 +112,45 @@ public class ChatMessageServiceImpl extends ServiceImpl<ChatMessageMapper, ChatM
         chatMessageVO.setUserNickname(userMapper.selectById(userId).getNickname());
 
         return chatMessageVO;
+    }
+
+    /**
+     * 查找该会话中处于挂起状态的 flowId
+     *
+     * 规则：取会话中最新一条 AI 消息，若它带有 interaction 且 status 以 "waiting_" 开头，
+     * 说明 AI 上一句正在等待用户回答，用户当前这条消息即是对它的回复，返回其 flowId。
+     * 只看最新一条是有意的——一旦 AI 发出了新的非等待消息，之前的交互就不该再被续上。
+     *
+     * @param sessionId 会话ID
+     * @return 挂起的 flowId；没有挂起的交互时返回 null
+     */
+    private String resolvePendingFlowId(Long sessionId) {
+        try {
+            LambdaQueryWrapper<ChatMessage> wrapper = new LambdaQueryWrapper<ChatMessage>()
+                    .eq(ChatMessage::getSessionId, sessionId)
+                    .eq(ChatMessage::getRole, ChatMessageRoleEnum.ASSISTANT)
+                    .orderByDesc(ChatMessage::getMsgId)
+                    .last("LIMIT 1");
+            ChatMessage lastAiMessage = baseMapper.selectOne(wrapper);
+
+            if (lastAiMessage == null || lastAiMessage.getInteraction() == null
+                    || lastAiMessage.getFlowId() == null) {
+                return null;
+            }
+
+            JSONObject interaction = JSON.parseObject(lastAiMessage.getInteraction());
+            String status = interaction == null ? null : interaction.getString("status");
+            if (status != null && status.startsWith("waiting_")) {
+                log.info("检测到挂起的交互，续传 flowId={}, status={}, sessionId={}",
+                        lastAiMessage.getFlowId(), status, sessionId);
+                return lastAiMessage.getFlowId();
+            }
+            return null;
+        } catch (Exception e) {
+            // 兜底逻辑失败不应影响正常发消息，降级为新建 flow
+            log.error("查询挂起 flowId 失败，sessionId={}, error={}", sessionId, e.getMessage());
+            return null;
+        }
     }
 
 

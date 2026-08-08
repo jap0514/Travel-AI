@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import com.travel.common.ChatMessageRoleEnum;
 import lombok.Data;
 
 /**
@@ -37,7 +39,7 @@ public class ChatMessage implements Serializable {
      * 角色
      */
     @TableField(value = "role")
-    private Object role;
+    private ChatMessageRoleEnum role;
 
     /**
      * 内容
@@ -49,7 +51,7 @@ public class ChatMessage implements Serializable {
      * 同步行程
      */
     @TableField(value = "plan_json")
-    private Object planJson;
+    private String planJson;
 
     /**
      * flow ID（用于中断恢复）

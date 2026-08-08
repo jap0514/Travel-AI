@@ -25,8 +25,9 @@ public class SignatureFilter implements Filter {
             String path = httpRequest.getRequestURI();
             // 只对 Python 回调接口进行包装
             if (path.startsWith("/sendMessageByPython/")) {
-                ContentCachingRequestWrapper wrappedRequest = new ContentCachingRequestWrapper(httpRequest);
-                chain.doFilter(wrappedRequest, response);
+                // TraceIdFilter 已经包装过了，直接放行
+                //ContentCachingRequestWrapper wrappedRequest = new ContentCachingRequestWrapper(httpRequest);
+                chain.doFilter(request, response);
                 return;
             }
         }

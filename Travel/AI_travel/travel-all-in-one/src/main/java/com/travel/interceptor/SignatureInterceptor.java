@@ -4,13 +4,13 @@ import com.travel.common.ResultCode;
 import com.travel.common.constant.SignatureConstant;
 import com.travel.exception.BusinessException;
 import com.travel.util.SignatureUtil;
+import com.travel.filter.CachedBodyHttpServletRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.util.ContentCachingRequestWrapper;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -62,6 +62,8 @@ public class SignatureInterceptor implements HandlerInterceptor {
         }
 
         // 3. 验证时间戳（防止重放攻击）
+        log.info("当前Java时间戳: {}", System.currentTimeMillis());
+        log.info("收到时间戳: {}", timestamp);
         if (!SignatureUtil.isTimestampValid(timestamp)) {
             log.warn("签名验证失败：时间戳已过期 | path={} | timestamp={}", path, timestamp);
             throw new BusinessException(ResultCode.UNAUTHORIZED, "签名已过期，请重新请求");
@@ -69,6 +71,8 @@ public class SignatureInterceptor implements HandlerInterceptor {
 
         // 4. 获取请求体并验证签名
         String body = getRequestBody(request);
+        log.info("签名验证参数: secretKey={}, timestamp={}, body={}, signature={}",
+                secretKeyForPython, timestamp, body, signature);
         if (!SignatureUtil.verifySign(secretKeyForPython, timestamp, body, signature)) {
             log.warn("签名验证失败：签名不匹配 | path={}", path);
             throw new BusinessException(ResultCode.UNAUTHORIZED, "签名验证失败");
@@ -83,9 +87,8 @@ public class SignatureInterceptor implements HandlerInterceptor {
      */
     private String getRequestBody(HttpServletRequest request) {
         try {
-            if (request instanceof ContentCachingRequestWrapper wrapper) {
-                byte[] content = wrapper.getContentAsByteArray();
-                return new String(content, StandardCharsets.UTF_8);
+            if (request instanceof CachedBodyHttpServletRequest wrapper) {
+                return wrapper.getCachedBodyString();
             }
             // 如果不是包装过的请求，读取一次
             byte[] bytes = request.getInputStream().readAllBytes();

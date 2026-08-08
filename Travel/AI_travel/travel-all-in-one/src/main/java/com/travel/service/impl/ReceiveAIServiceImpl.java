@@ -22,8 +22,10 @@ import com.travel.util.RedisUtil;
 import com.travel.util.SignatureUtil;
 import com.travel.util.TraceIdUtil;
 import com.travel.vo.ChatMessageVO;
+import com.travel.websocket.MessageWebSocketHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 
 @Service
 @Slf4j
@@ -56,6 +59,14 @@ public class ReceiveAIServiceImpl implements ReceiveAIService {
 
     @Autowired
     private RedisUtil redisUtil;
+
+    @Autowired
+    private MessageWebSocketHandler messageWebSocketHandler;
+
+    /** HTTP调用专用线程池 */
+    @Autowired
+    @Qualifier("httpExecutor")
+    private Executor httpExecutor;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -97,10 +108,10 @@ public class ReceiveAIServiceImpl implements ReceiveAIService {
             requestBody.put("flowId", flowId);
         }
 
-        // 使用 CompletableFuture 异步发送，不阻塞主线程
+        // 使用 CompletableFuture 异步发送，不阻塞主线程（使用httpExecutor线程池）
         CompletableFuture.runAsync(() -> {
             // 将 traceId 传递到新线程的 MDC
-            TraceIdUtil.setTraceId(traceId);
+//            TraceIdUtil.setTraceId(traceId);  线程池里面已经设置了traceId
             try {
                 log.info("异步发送请求到Python，traceId={}, sessionId={}, userId={}, content={}",
                         traceId, sessionId, userId, content.substring(0, Math.min(50, content.length())));
@@ -129,7 +140,7 @@ public class ReceiveAIServiceImpl implements ReceiveAIService {
             } finally {
                 TraceIdUtil.clear();
             }
-        });
+        }, httpExecutor);
     }
 
     /**
@@ -200,6 +211,20 @@ public class ReceiveAIServiceImpl implements ReceiveAIService {
             chatMessageVO.setUserNickname(userMapper.selectById(userId).getNickname());
             chatMessageVO.setFlowId(flowId);
             chatMessageVO.setInteraction(interactionJson);
+
+            // WebSocket 推送给前端（交互状态）
+            try {
+                boolean pushed = messageWebSocketHandler.sendMessageToUser(userId, chatMessageVO);
+                if (pushed) {
+                    log.info("WebSocket 推送交互状态成功: userId={}, msgId={}", userId, chatMessageVO.getMsgId());
+                } else {
+                    // 消息已落库，前端可通过拉取会话消息补齐
+                    log.warn("WebSocket 推送交互状态未送达（用户未连接）: userId={}, msgId={}", userId, chatMessageVO.getMsgId());
+                }
+            } catch (Exception e) {
+                log.error("WebSocket 推送失败: userId={}, error={}", userId, e.getMessage());
+            }
+
             return chatMessageVO;
         }
 
@@ -268,6 +293,14 @@ public class ReceiveAIServiceImpl implements ReceiveAIService {
         chatMessageVO.setUserNickname(userMapper.selectById(userId).getNickname());
         chatMessageVO.setFlowId(flowId);
         chatMessageVO.setInteraction(interactionJson);
+
+        // WebSocket 推送给前端（正常流程）
+        try {
+            messageWebSocketHandler.sendMessageToUser(userId, chatMessageVO);
+            log.info("WebSocket 推送消息成功: userId={}, msgId={}", userId, chatMessageVO.getMsgId());
+        } catch (Exception e) {
+            log.error("WebSocket 推送失败: userId={}, error={}", userId, e.getMessage());
+        }
 
         return chatMessageVO;
     }
