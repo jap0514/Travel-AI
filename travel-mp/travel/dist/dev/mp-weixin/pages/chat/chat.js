@@ -15,6 +15,14 @@ const _sfc_main = {
       scrollIntoView: "",
       userInfo: {},
       currentSessionId: null,
+      // 入住人信息弹层（后端 interaction.type=guest_contact && status=waiting_user_contact 时打开）
+      contactModalVisible: false,
+      contactForm: {
+        guestName: "",
+        guestPhone: ""
+      },
+      contactError: "",
+      pendingContact: null,
       // 行程信息
       travelInfo: {
         destination: "",
@@ -62,14 +70,58 @@ const _sfc_main = {
         console.log("不是当前会话的消息，忽略");
         return;
       }
+      let plan = null;
+      if (data.planJson) {
+        try {
+          plan = JSON.parse(data.planJson);
+        } catch (e) {
+          plan = null;
+        }
+      }
       this.messages.push({
         role: "ASSISTANT",
-        type: data.planJson ? "plan" : "text",
+        type: plan ? "plan" : "text",
         content: data.content,
         planJson: data.planJson,
+        plan,
         interaction: data.interaction
       });
+      this.checkContactInteraction();
       this.scrollToBottom();
+    },
+    // 扫描整个 messages 列表，决定是否打开入住人信息弹层
+    // 规则：找到最后一条处于 waiting_user_contact 的 assistant 消息，
+    //      且其后没有任何 user 消息提交过（即用户还没回应），才弹窗
+    checkContactInteraction() {
+      for (let i = this.messages.length - 1; i >= 0; i--) {
+        const m = this.messages[i];
+        if (m.role === "USER") {
+          return;
+        }
+        if (m.role === "ASSISTANT") {
+          const obj = this.parseInteraction(m.interaction);
+          if (obj && obj.type === "guest_contact" && obj.status === "waiting_user_contact") {
+            this.pendingContact = obj;
+            this.contactForm = { guestName: "", guestPhone: "" };
+            this.contactError = "";
+            this.contactModalVisible = true;
+          }
+          return;
+        }
+      }
+    },
+    // 把 interaction 字段统一成对象（历史加载可能是 JSON 字符串）
+    parseInteraction(raw) {
+      if (!raw) return null;
+      if (typeof raw === "object") return raw;
+      if (typeof raw === "string") {
+        try {
+          return JSON.parse(raw);
+        } catch (e) {
+          return null;
+        }
+      }
+      return null;
     },
     // ==================== Tab 切换 ====================
     switchTab(tab) {
@@ -139,15 +191,27 @@ const _sfc_main = {
         console.log("消息: ", data.records);
         console.log("role值:", data.records.map((item) => item.role));
         if (data && data.records && data.records.length > 0) {
-          this.messages = data.records.map((item) => ({
-            msgId: item.msgId,
-            role: item.role,
-            content: item.content,
-            planJson: item.planJson,
-            type: item.planJson ? "plan" : "text",
-            flowId: item.flowId,
-            interaction: item.interaction
-          }));
+          this.messages = data.records.map((item) => {
+            let plan = null;
+            if (item.planJson) {
+              try {
+                plan = JSON.parse(item.planJson);
+              } catch (e) {
+                plan = null;
+              }
+            }
+            return {
+              msgId: item.msgId,
+              role: item.role,
+              content: item.content,
+              planJson: item.planJson,
+              plan,
+              type: plan ? "plan" : "text",
+              flowId: item.flowId,
+              interaction: item.interaction
+            };
+          });
+          this.checkContactInteraction();
         }
       } catch (error) {
         console.error("加载会话消息失败", error);
@@ -193,14 +257,23 @@ const _sfc_main = {
         common_vendor.index.showToast({ title: "请先创建会话", icon: "none" });
         return;
       }
-      const content = this.inputMessage.trim();
-      this.userInfo.id;
+      this.sendContent(this.inputMessage.trim());
+    },
+    // 实际发送消息的公共逻辑，弹层表单和输入框都走这里
+    sendContent(content) {
+      if (!content) return;
+      if (!this.currentSessionId) {
+        common_vendor.index.showToast({ title: "请先创建会话", icon: "none" });
+        return;
+      }
       this.messages.push({
         role: "USER",
         type: "text",
         content
       });
-      this.inputMessage = "";
+      if (content === this.inputMessage.trim()) {
+        this.inputMessage = "";
+      }
       this.scrollToBottom();
       this.isLoading = true;
       const params = {
@@ -224,6 +297,27 @@ const _sfc_main = {
       }).finally(() => {
         this.isLoading = false;
       });
+    },
+    // ==================== 入住人信息弹层 ====================
+    submitContact() {
+      const name = this.contactForm.guestName.trim();
+      const phone = this.contactForm.guestPhone.trim();
+      if (!name) {
+        this.contactError = "请输入入住人姓名";
+        return;
+      }
+      if (!/^[一-龥A-Za-z·]{2,20}$/.test(name)) {
+        this.contactError = "姓名格式不正确（2-20 位中文/英文）";
+        return;
+      }
+      if (!/^1[3-9]\d{9}$/.test(phone)) {
+        this.contactError = "请输入正确的 11 位手机号";
+        return;
+      }
+      this.contactError = "";
+      this.contactModalVisible = false;
+      const content = `入住人姓名：${name}，手机号：${phone}`;
+      this.sendContent(content);
     },
     scrollToBottom() {
       this.$nextTick(() => {
@@ -268,30 +362,44 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         e: msg.type === "text"
       }, msg.type === "text" ? {
         f: common_vendor.t(msg.content)
-      } : msg.type === "plan" ? {
+      } : msg.type === "plan" ? common_vendor.e({
         h: common_vendor.t(msg.plan.title),
         i: common_vendor.t(msg.plan.destination),
         j: common_vendor.t(msg.plan.days),
         k: common_vendor.t(msg.plan.budget),
-        l: common_vendor.f(msg.plan.dailyPlans, (day, dIndex, i1) => {
-          return {
+        l: common_vendor.f(msg.plan.daily_plans, (day, dIndex, i1) => {
+          return common_vendor.e({
             a: common_vendor.t(day.day),
-            b: common_vendor.f(day.spots, (spot, sIndex, i2) => {
-              return {
-                a: common_vendor.t(spot.time),
-                b: common_vendor.t(spot.name),
-                c: sIndex
-              };
+            b: common_vendor.t(day.theme),
+            c: common_vendor.f(day.activities, (act, aIndex, i2) => {
+              return common_vendor.e({
+                a: common_vendor.t(act.time),
+                b: common_vendor.t(act.name),
+                c: common_vendor.t(act.description),
+                d: act.location
+              }, act.location ? {
+                e: common_vendor.t(act.location)
+              } : {}, {
+                f: aIndex
+              });
             }),
-            c: dIndex
-          };
+            d: day.estimated_cost
+          }, day.estimated_cost ? {
+            e: common_vendor.t(day.estimated_cost)
+          } : {}, {
+            f: dIndex
+          });
         }),
-        m: common_vendor.o(($event) => $options.goBookHotel(msg.plan.destination), index)
+        m: msg.plan.total_estimated_cost
+      }, msg.plan.total_estimated_cost ? {
+        n: common_vendor.t(msg.plan.total_estimated_cost)
       } : {}, {
+        o: common_vendor.o(($event) => $options.goBookHotel(msg.plan.destination), index)
+      }) : {}, {
         g: msg.type === "plan"
       }), {
-        n: index,
-        o: "msg-" + index
+        p: index,
+        q: "msg-" + index
       });
     }),
     n: $data.isLoading
@@ -319,7 +427,23 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         d: common_vendor.o(($event) => $options.openSession(session), session.id)
       };
     })
-  }));
+  }), {
+    A: $data.contactModalVisible
+  }, $data.contactModalVisible ? common_vendor.e({
+    B: $data.pendingContact
+  }, $data.pendingContact ? {
+    C: common_vendor.t($data.pendingContact.hotel_name || $data.pendingContact.hotelName)
+  } : {}, {
+    D: $data.contactForm.guestName,
+    E: common_vendor.o(($event) => $data.contactForm.guestName = $event.detail.value),
+    F: $data.contactForm.guestPhone,
+    G: common_vendor.o(($event) => $data.contactForm.guestPhone = $event.detail.value),
+    H: $data.contactError
+  }, $data.contactError ? {
+    I: common_vendor.t($data.contactError)
+  } : {}, {
+    J: common_vendor.o((...args) => $options.submitContact && $options.submitContact(...args))
+  }) : {});
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-a041b13f"]]);
 wx.createPage(MiniProgramPage);

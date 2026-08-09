@@ -125,6 +125,50 @@ def parse_hotel_choice(user_input: str, hotels: list) -> dict | None:
     return None
 
 
+def parse_guest_contact(user_input: str) -> tuple[str, str] | None:
+    """
+    从用户文本中解析入住人姓名 + 手机号
+    支持：
+      "张三 13800138000"
+      "姓名：张三，手机号：13800138000"
+      "张三，13800138000"
+      "入住人张三 13800138000"
+    手机号正则与 Java HotelBookingDTO.@Pattern("^1[3-9]\\d{9}$") 保持一致
+    返回: (name, phone) 或 None
+    """
+    import re
+
+    text = (user_input or "").strip()
+    if not text:
+        return None
+
+    phone_match = re.search(r"(?<!\d)(1[3-9]\d{9})(?!\d)", text)
+    if not phone_match:
+        return None
+    phone = phone_match.group(1)
+
+    # 姓名优先取「姓名/入住人/联系人:」前缀；否则取手机号前的部分去掉标点
+    name_match = re.search(
+        r"(?:姓名|入住人|联系人)\s*[:：]?\s*([一-龥A-Za-z·]{2,20})",
+        text,
+    )
+    if name_match:
+        name = name_match.group(1)
+    else:
+        before = text[: phone_match.start()].strip(" ，,。.：:;；、")
+        before = re.sub(
+            r"^(?:姓名|入住人|联系人)\s*[:：]?\s*",
+            "",
+            before,
+        )
+        name = before.strip()
+
+    if not re.fullmatch(r"[一-龥A-Za-z·]{2,20}", name):
+        return None
+
+    return name, phone
+
+
 # ==================== Handler：处理各类交互状态 ====================
 
 def handle_hotel_selection(state: AgentState, hotels: list, message: str = "") -> dict:
@@ -141,6 +185,7 @@ def handle_hotel_selection(state: AgentState, hotels: list, message: str = "") -
             "status": "waiting_user_hotel",
             "hotels": hotels,
             "message": prompt,
+            "interaction_interrupted": True,
         }
     }
 
@@ -158,6 +203,7 @@ def handle_no_hotel_decision(state: AgentState, message: str = "") -> dict:
             "type": "no_hotel_decision",
             "status": "waiting_user_decision",
             "message": prompt,
+            "interaction_interrupted": True,
         }
     }
 
@@ -177,6 +223,7 @@ def handle_hotel_alternatives(state: AgentState, alternatives: list, original_ho
             "hotels": alternatives,
             "original_hotel": original_hotel,
             "message": prompt,
+            "interaction_interrupted": True,
         }
     }
 
@@ -195,7 +242,28 @@ def handle_hotel_alarm_decision(state: AgentState, hotel_name: str, message: str
             "status": "waiting_user_alarm",
             "hotel_name": hotel_name,
             "message": prompt,
+            "interaction_interrupted": True,
         }
+    }
+
+
+def handle_guest_contact(state: AgentState, hotel_name: str, message: str = "") -> dict:
+    """
+    处理 waiting_user_contact 状态
+    场景：confirm 时房间可预约，等待用户填写入住人姓名和手机号
+    """
+    interaction = state.get("interaction") or {}
+    default_msg = f"「{hotel_name}」当前有房，请填写入住人姓名和手机号后预订。"
+    return {
+        "interaction": {
+            **interaction,
+            "type": "guest_contact",
+            "status": "waiting_user_contact",
+            "hotel_name": hotel_name,
+            "message": message or default_msg,
+            "interaction_interrupted": True,
+        },
+        "booking_status": "waiting_contact",
     }
 
 
@@ -338,6 +406,33 @@ def user_interaction_node(state: AgentState) -> dict:
                 }
             }
 
+    # waiting_user_contact：用户提交入住人姓名 + 手机号
+    if status == "waiting_user_contact" and user_msg:
+        parsed = parse_guest_contact(user_msg)
+        if not parsed:
+            logger.info("[UserInteraction] 入住人信息格式无法识别")
+            prompt = (interaction.get("message")
+                      or "⚠️ 信息格式不正确，请重新填写。示例：张三 13800138000")
+            return {
+                "interaction": {
+                    **interaction,
+                    "status": "waiting_user_contact",
+                    "interaction_interrupted": True,
+                    "message": prompt,
+                }
+            }
+        name, phone = parsed
+        logger.info(f"[UserInteraction] 收到入住人信息: name={name}, phone={phone}")
+        return {
+            "interaction": {
+                **interaction,
+                "status": None,
+                "interaction_interrupted": False,
+                "contact": {"guestName": name, "guestPhone": phone},
+            },
+            "booking_status": "ready_to_book",
+        }
+
     # waiting_user_alarm：用户设置闹钟时间或拒绝
     if status == "waiting_user_alarm" and user_msg:
         if "不需要" in user_msg or "不提醒" in user_msg or "算了" in user_msg:
@@ -347,7 +442,10 @@ def user_interaction_node(state: AgentState) -> dict:
                     **interaction,
                     "status": None,
                     "interaction_interrupted": False,
-                }
+                    "chosen": None,  # 关键：清 chosen 让 supervisor 规则7 不再触发
+                    "message": "好的，本次不预订酒店，也不设置提醒。",
+                },
+                "booking_status": "declined",
             }
         # 尝试从用户消息中提取日期时间
         alarm_time = _parse_alarm_time(user_msg)
@@ -358,6 +456,7 @@ def user_interaction_node(state: AgentState) -> dict:
                     **interaction,
                     "status": None,
                     "interaction_interrupted": False,
+                    "chosen": None,  # 设完闹钟同样不应再下单
                     "alarm_set": {
                         "hotel_name": interaction.get("hotel_name", ""),
                         "hotel_id": interaction.get("hotel_id", ""),
@@ -366,7 +465,8 @@ def user_interaction_node(state: AgentState) -> dict:
                         "alarm_time": alarm_time,
                         "user_message": user_msg,
                     },
-                }
+                },
+                "booking_status": "alarm_set",
             }
         else:
             prompt = build_alarm_prompt(
