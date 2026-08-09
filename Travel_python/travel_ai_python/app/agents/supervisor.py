@@ -120,11 +120,13 @@ def supervisor_node(state: AgentState):
         logger.info(f"路由: 6-hotel_select但chosen为空 → user_interaction")
         return {"next": "user_interaction"}
 
-    # 7. 用户选了酒店且 booking_status 非 confirmed → confirm_and_book（必须在 planner 之前）
+    # 7. 用户选了酒店且 booking_status 尚未终态 → confirm_and_book（必须在 planner 之前）
+    # 终态集合：confirmed(成功)/skipped(用户不要)/declined(拒绝闹钟)/alarm_set(设完闹钟)/cancelled(取消)
     chosen = interaction.get("chosen")
     booking_status = state.get("booking_status")
-    if chosen and booking_status != "confirmed":
-        logger.info(f"路由: 7-已选酒店但未confirm → confirm_and_book (booking_status={booking_status})")
+    BOOKING_TERMINAL = {"confirmed", "skipped", "declined", "alarm_set", "cancelled"}
+    if chosen and booking_status not in BOOKING_TERMINAL:
+        logger.info(f"路由: 7-已选酒店且 booking 未终态 → confirm_and_book (booking_status={booking_status})")
         return {"next": "confirm_and_book"}
 
     # 8. draft_plan 不存在 → planner

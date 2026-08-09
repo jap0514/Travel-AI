@@ -27,6 +27,7 @@ def intent_recognition_node(state: AgentState):
         "waiting_user_decision",
         "waiting_user_alternatives",
         "waiting_user_alarm",
+        "waiting_user_contact",
     }
     if interaction.get("status") in waiting_statuses:
         logger.info(f"路线：plan（交互等待状态强制）interaction.status={interaction.get('status')}")

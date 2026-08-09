@@ -62,13 +62,21 @@
                 <view class="plan-days">{{ msg.plan.days }}天行程</view>
                 <view class="plan-budget">预算: {{ msg.plan.budget }}</view>
                 <view class="plan-details">
-                  <view v-for="(day, dIndex) in msg.plan.dailyPlans" :key="dIndex" class="day-item">
-                    <view class="day-title">Day {{ day.day }}</view>
-                    <view v-for="(spot, sIndex) in day.spots" :key="sIndex" class="spot-item">
-                      <text class="spot-time">{{ spot.time }}</text>
-                      <text class="spot-name">{{ spot.name }}</text>
+                  <view v-for="(day, dIndex) in msg.plan.daily_plans" :key="dIndex" class="day-item">
+                    <view class="plan-day-title">Day {{ day.day }} · {{ day.theme }}</view>
+                    <view v-for="(act, aIndex) in day.activities" :key="aIndex" class="activity-item">
+                      <view class="activity-time">{{ act.time }}</view>
+                      <view class="activity-body">
+                        <view class="activity-name">{{ act.name }}</view>
+                        <view class="activity-desc">{{ act.description }}</view>
+                        <view class="activity-loc" v-if="act.location">📍 {{ act.location }}</view>
+                      </view>
                     </view>
+                    <view v-if="day.estimated_cost" class="day-cost">当日预算约 ¥{{ day.estimated_cost }}</view>
                   </view>
+                </view>
+                <view class="plan-total" v-if="msg.plan.total_estimated_cost">
+                  总预算约 ¥{{ msg.plan.total_estimated_cost }}
                 </view>
                 <button class="book-hotel-btn" @click="goBookHotel(msg.plan.destination)">预订酒店</button>
               </view>
@@ -117,6 +125,39 @@
         </view>
       </view>
     </view>
+
+    <!-- 入住人信息弹层：后端 interaction.type=guest_contact && status=waiting_user_contact 时显示 -->
+    <view v-if="contactModalVisible" class="modal-mask">
+      <view class="contact-modal">
+        <view class="modal-title">填写入住人信息</view>
+        <view class="modal-hotel" v-if="pendingContact">
+          {{ pendingContact.hotel_name || pendingContact.hotelName }}
+        </view>
+        <view class="form-item">
+          <text class="form-label">姓名</text>
+          <input
+            class="form-input"
+            v-model="contactForm.guestName"
+            placeholder="请输入入住人姓名"
+            maxlength="20"
+          />
+        </view>
+        <view class="form-item">
+          <text class="form-label">手机号</text>
+          <input
+            class="form-input"
+            v-model="contactForm.guestPhone"
+            placeholder="请输入 11 位手机号"
+            type="number"
+            maxlength="11"
+          />
+        </view>
+        <text v-if="contactError" class="contact-error">{{ contactError }}</text>
+        <view class="modal-actions">
+          <button class="modal-confirm" @click="submitContact">提交并预订</button>
+        </view>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -136,6 +177,14 @@ export default {
       scrollIntoView: '',
       userInfo: {},
       currentSessionId: null,
+      // 入住人信息弹层（后端 interaction.type=guest_contact && status=waiting_user_contact 时打开）
+      contactModalVisible: false,
+      contactForm: {
+        guestName: '',
+        guestPhone: ''
+      },
+      contactError: '',
+      pendingContact: null,
       // 行程信息
       travelInfo: {
         destination: '',
@@ -198,16 +247,57 @@ export default {
         return
       }
 
-      // 添加 AI 消息到列表
+      // planJson 是 JSON 字符串，解析成对象给模板用；解析失败时降级为 text
+      let plan = null
+      if (data.planJson) {
+        try { plan = JSON.parse(data.planJson) } catch (e) { plan = null }
+      }
       this.messages.push({
         role: 'ASSISTANT',
-        type: data.planJson ? 'plan' : 'text',
+        type: plan ? 'plan' : 'text',
         content: data.content,
         planJson: data.planJson,
+        plan: plan,
         interaction: data.interaction
       })
 
+      // push 之后再检查整个消息列表，避免后端回声导致重复弹窗
+      this.checkContactInteraction()
+
       this.scrollToBottom()
+    },
+
+    // 扫描整个 messages 列表，决定是否打开入住人信息弹层
+    // 规则：找到最后一条处于 waiting_user_contact 的 assistant 消息，
+    //      且其后没有任何 user 消息提交过（即用户还没回应），才弹窗
+    checkContactInteraction() {
+      for (let i = this.messages.length - 1; i >= 0; i--) {
+        const m = this.messages[i]
+        if (m.role === 'USER') {
+          // 在最后一条 assistant waiting 之后已有用户消息 → 已响应，不弹
+          return
+        }
+        if (m.role === 'ASSISTANT') {
+          const obj = this.parseInteraction(m.interaction)
+          if (obj && obj.type === 'guest_contact' && obj.status === 'waiting_user_contact') {
+            this.pendingContact = obj
+            this.contactForm = { guestName: '', guestPhone: '' }
+            this.contactError = ''
+            this.contactModalVisible = true
+          }
+          return
+        }
+      }
+    },
+
+    // 把 interaction 字段统一成对象（历史加载可能是 JSON 字符串）
+    parseInteraction(raw) {
+      if (!raw) return null
+      if (typeof raw === 'object') return raw
+      if (typeof raw === 'string') {
+        try { return JSON.parse(raw) } catch (e) { return null }
+      }
+      return null
     },
 
     // ==================== Tab 切换 ====================
@@ -287,17 +377,26 @@ export default {
 		console.log('消息: ',data.records)
 		console.log('role值:', data.records.map(item => item.role))
 		if(data && data.records && data.records.length>0){
-			this.messages=data.records.map(item =>({
-				msgId: item.msgId,
-				role: item.role,
-				content: item.content,
-				planJson: item.planJson,
-				type: item.planJson ? 'plan' : 'text',
-				flowId: item.flowId,
-				interaction: item.interaction
-			}))
+			this.messages=data.records.map(item =>{
+				let plan = null
+				if (item.planJson) {
+					try { plan = JSON.parse(item.planJson) } catch (e) { plan = null }
+				}
+				return {
+					msgId: item.msgId,
+					role: item.role,
+					content: item.content,
+					planJson: item.planJson,
+					plan: plan,
+					type: plan ? 'plan' : 'text',
+					flowId: item.flowId,
+					interaction: item.interaction
+				}
+			})
+			// 历史恢复：扫描整个消息列表决定是否弹窗
+			this.checkContactInteraction()
 		}
-		
+
 	  }catch(error){
 		  console.error('加载会话消息失败',error)
 	  }
@@ -349,29 +448,35 @@ export default {
         uni.showToast({ title: '请先创建会话', icon: 'none' })
         return
       }
+      this.sendContent(this.inputMessage.trim())
+    },
 
-      const content = this.inputMessage.trim()
-      const userId = this.userInfo.id
+    // 实际发送消息的公共逻辑，弹层表单和输入框都走这里
+    sendContent(content) {
+      if (!content) return
+      if (!this.currentSessionId) {
+        uni.showToast({ title: '请先创建会话', icon: 'none' })
+        return
+      }
 
-      // 添加用户消息到列表
       this.messages.push({
         role: 'USER',
         type: 'text',
         content: content
       })
 
-      this.inputMessage = ''
+      // 输入框发的清空输入框；弹层发的不要动 inputMessage
+      if (content === this.inputMessage.trim()) {
+        this.inputMessage = ''
+      }
       this.scrollToBottom()
       this.isLoading = true
 
-      // 构建请求参数
       const params = {
         sessionId: this.currentSessionId,
         role: 'USER',
         content: content
       }
-
-      // 如果有行程信息，添加到参数中
       if (this.travelInfo.startDate) {
         params.startDate = this.travelInfo.startDate
       }
@@ -379,19 +484,42 @@ export default {
         params.days = this.travelInfo.days
       }
 
-	  console.log('请求参数:',params)
-      // 调用后端发送消息
+      console.log('请求参数:', params)
       sendMessage(params).then(res => {
         console.log('消息发送成功:', res)
-        // 注意：AI 的回复会通过 WebSocket 推送过来，这里不需要处理
       }).catch(err => {
         console.error('消息发送失败:', err)
         uni.showToast({ title: '发送失败', icon: 'none' })
-        // 发送失败，移除刚添加的用户消息
         this.messages.pop()
       }).finally(() => {
         this.isLoading = false
       })
+    },
+
+    // ==================== 入住人信息弹层 ====================
+    submitContact() {
+      const name = this.contactForm.guestName.trim()
+      const phone = this.contactForm.guestPhone.trim()
+
+      if (!name) {
+        this.contactError = '请输入入住人姓名'
+        return
+      }
+      // 姓名：2-20 位中文/英文/中点，与 Python 侧正则保持一致
+      if (!/^[一-龥A-Za-z·]{2,20}$/.test(name)) {
+        this.contactError = '姓名格式不正确（2-20 位中文/英文）'
+        return
+      }
+      // 手机号与 Java HotelBookingDTO 的 ^1[3-9]\d{9}$ 完全一致
+      if (!/^1[3-9]\d{9}$/.test(phone)) {
+        this.contactError = '请输入正确的 11 位手机号'
+        return
+      }
+
+      this.contactError = ''
+      this.contactModalVisible = false
+      const content = `入住人姓名：${name}，手机号：${phone}`
+      this.sendContent(content)
     },
 
     scrollToBottom() {
@@ -466,6 +594,7 @@ export default {
 
 .chat-main {
   flex: 1;
+  min-height: 0;  /* 解除 flex item 默认 min-height:auto，否则内部 scroll-view 拿不到限定高度，无法滚动 */
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -535,6 +664,7 @@ export default {
 
 .message-list {
   flex: 1;
+  min-height: 0;  /* 同上，scroll-view 在小程序里需要明确的尺寸约束才能滚动 */
   padding: 20rpx 30rpx;
 }
 
@@ -637,27 +767,75 @@ export default {
     margin-top: 16rpx;
 
     .day-item {
-      margin-bottom: 16rpx;
+      margin-bottom: 20rpx;
+      padding: 12rpx;
+      background: #f8f8fa;
+      border-radius: 8rpx;
 
-      .day-title {
+      .plan-day-title {
         font-size: 26rpx;
         font-weight: 600;
         color: #333;
-        margin-bottom: 8rpx;
+        margin-bottom: 12rpx;
       }
 
-      .spot-item {
+      .activity-item {
         display: flex;
+        align-items: flex-start;
+        padding: 8rpx 0;
+        border-bottom: 1rpx solid #eee;
         font-size: 24rpx;
-        color: #666;
-        margin-bottom: 4rpx;
 
-        .spot-time {
-          width: 100rpx;
-          color: #999;
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .activity-time {
+          width: 180rpx;
+          flex-shrink: 0;
+          color: #888;
+        }
+
+        .activity-body {
+          flex: 1;
+
+          .activity-name {
+            color: #333;
+            font-weight: 500;
+            margin-bottom: 4rpx;
+          }
+
+          .activity-desc {
+            color: #888;
+            font-size: 22rpx;
+            line-height: 1.4;
+          }
+
+          .activity-loc {
+            color: #aaa;
+            font-size: 22rpx;
+            margin-top: 4rpx;
+          }
         }
       }
+
+      .day-cost {
+        margin-top: 8rpx;
+        font-size: 22rpx;
+        color: #fa8c16;
+        text-align: right;
+      }
     }
+  }
+
+  .plan-total {
+    margin-top: 16rpx;
+    padding-top: 12rpx;
+    border-top: 2rpx solid #eee;
+    font-size: 26rpx;
+    font-weight: 600;
+    color: #fa541c;
+    text-align: right;
   }
 
   .book-hotel-btn {
@@ -688,6 +866,74 @@ export default {
     background: #f5f5f5;
     border-radius: 36rpx;
     font-size: 28rpx;
+  }
+
+  /* ==================== 入住人信息弹层 ==================== */
+  .modal-mask {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+  }
+  .contact-modal {
+    width: 640rpx;
+    background: #fff;
+    border-radius: 24rpx;
+    padding: 40rpx;
+    box-sizing: border-box;
+  }
+  .modal-title {
+    font-size: 36rpx;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 16rpx;
+  }
+  .modal-hotel {
+    font-size: 28rpx;
+    color: #666;
+    text-align: center;
+    margin-bottom: 32rpx;
+  }
+  .form-item {
+    margin-bottom: 24rpx;
+  }
+  .form-label {
+    display: block;
+    font-size: 28rpx;
+    color: #333;
+    margin-bottom: 12rpx;
+  }
+  .form-input {
+    width: 100%;
+    height: 80rpx;
+    padding: 0 20rpx;
+    background: #f5f5f5;
+    border-radius: 12rpx;
+    font-size: 28rpx;
+    box-sizing: border-box;
+  }
+  .contact-error {
+    display: block;
+    color: #ff4d4f;
+    font-size: 26rpx;
+    margin-bottom: 16rpx;
+  }
+  .modal-actions {
+    display: flex;
+    margin-top: 16rpx;
+  }
+  .modal-confirm {
+    flex: 1;
+    height: 88rpx;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    font-size: 30rpx;
+    border-radius: 44rpx;
+    line-height: 88rpx;
   }
 
   .send-btn {

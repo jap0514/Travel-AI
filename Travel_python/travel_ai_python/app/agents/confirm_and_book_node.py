@@ -11,6 +11,7 @@ import requests
 from app.agents.state import AgentState
 from app.config.logger import logger
 from app.config.settings import settings
+import uuid
 
 
 def confirm_and_book_node(state: AgentState) -> dict:
@@ -55,9 +56,16 @@ def confirm_and_book_node(state: AgentState) -> dict:
         logger.info("[ConfirmAndBook] 房间已被预订，触发重新选择")
         return _build_room_unavailable_response(state, hotel_name)
 
+    # ==================== 房间可预约，但要先收集入住人信息 ====================
+    contact = interaction.get("contact") or {}
+    if not (contact.get("guestName") and contact.get("guestPhone")):
+        logger.info("[ConfirmAndBook] 房间有房，等待入住人信息")
+        from app.agents.user_interaction_node import handle_guest_contact
+        return handle_guest_contact(state, hotel_name)
+
     # ==================== 房间可预约，正式下单 ====================
     logger.info(f"[ConfirmAndBook] 房间可预约，正式下单")
-    book_result = _create_order(hotel_id, room_type_id, room_no, checkin, checkout, user_id)
+    book_result = _create_order(hotel_id, room_type_id, room_no, checkin, checkout, user_id, contact)
 
     if not book_result:
         logger.warning("[ConfirmAndBook] 下单接口失败")
@@ -151,13 +159,18 @@ def _verify_room(hotel_id, room_type_id, room_no, checkin, checkout) -> bool:
         return False
 
 
-def _create_order(hotel_id, room_type_id, room_no, checkin, checkout, user_id) -> dict | None:
+def _create_order(hotel_id, room_type_id, room_no, checkin, checkout, user_id, contact: dict) -> dict | None:
     """
     调用 Java createOrder 接口正式下单
     POST /hotel/order/createOrder
     """
     if not all([hotel_id, room_type_id, room_no, checkin, checkout]):
         return None
+
+    # 每次下单尝试都生成新的幂等 token：业务失败时 IdempotentAspect 不会删 Redis key，复用旧 token 会撞 429
+    idempotent_token = uuid.uuid4().hex
+    guest_name = (contact.get("guestName") or "").strip()
+    guest_phone = (contact.get("guestPhone") or "").strip()
 
     try:
         url = f"{settings.JAVA_API_BASE_URL}/hotel/order/createOrder"
@@ -168,8 +181,9 @@ def _create_order(hotel_id, room_type_id, room_no, checkin, checkout, user_id) -
             "roomNo": room_no,
             "checkInDate": checkin + "T00:00:00",
             "checkOutDate": checkout + "T00:00:00",
-            "guestName": "用户",  # TODO: 前端传入真实姓名
-            "guestPhone": "00000000000",  # TODO: 前端传入真实电话
+            "guestName": guest_name,
+            "guestPhone": guest_phone,
+            "idempotentToken": idempotent_token,
         }
         response = requests.post(url, json=payload, timeout=10)
         if response.status_code == 200:
@@ -179,7 +193,16 @@ def _create_order(hotel_id, room_type_id, room_no, checkin, checkout, user_id) -
                 return result["data"]
             return result
         else:
-            logger.warning(f"[CreateOrder] 接口异常: status={response.status_code}")
+            # Java 失败走全局异常处理器时 Result.data 为 null，原代码拿不到 errorMessage
+            # 改读顶层 message 字段记到日志，至少知道失败原因
+            try:
+                err_body = response.json()
+                err_msg = err_body.get("message") or err_body.get("msg") or ""
+                logger.warning(
+                    f"[CreateOrder] 接口异常: status={response.status_code}, message={err_msg}"
+                )
+            except Exception:
+                logger.warning(f"[CreateOrder] 接口异常: status={response.status_code}")
             return None
     except requests.exceptions.Timeout:
         logger.warning("[CreateOrder] 接口超时")
