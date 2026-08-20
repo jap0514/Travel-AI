@@ -3,7 +3,7 @@
     <!-- 顶部欢迎区 -->
     <view class="header">
       <view class="user-info" @click="goLogin">
-        <image class="avatar" src="/static/images/avatar-default.png" mode="aspectFill"></image>
+        <image class="avatar" src="" mode="aspectFill"></image>
         <text class="nickname">{{ isLogin ? userInfo.nickname : '点击登录' }}</text>
       </view>
       <text class="subtitle">AI智能规划您的专属旅行</text>
@@ -34,19 +34,19 @@
     <!-- 功能入口 -->
     <view class="function-grid">
       <view class="function-item" @click="goChat">
-        <image class="function-icon" src="/static/images/ic-ai.png" mode="aspectFit"></image>
+        <image class="function-icon" src="" mode="aspectFit"></image>
         <text class="function-text">AI规划行程</text>
       </view>
       <view class="function-item" @click="goHotel">
-        <image class="function-icon" src="/static/images/ic-hotel.png" mode="aspectFit"></image>
+        <image class="function-icon" src="" mode="aspectFit"></image>
         <text class="function-text">预订酒店</text>
       </view>
       <view class="function-item" @click="goOrder">
-        <image class="function-icon" src="/static/images/ic-order.png" mode="aspectFit"></image>
+        <image class="function-icon" src="" mode="aspectFit"></image>
         <text class="function-text">我的订单</text>
       </view>
       <view class="function-item" @click="goMy">
-        <image class="function-icon" src="/static/images/ic-destination.png" mode="aspectFit"></image>
+        <image class="function-icon" src="" mode="aspectFit"></image>
         <text class="function-text">我的目的地</text>
       </view>
     </view>
@@ -71,16 +71,16 @@ export default {
       isLogin: false,
       userInfo: {},
       banners: [
-        { image: '/static/images/banner1.jpg' },
-        { image: '/static/images/banner2.jpg' },
-        { image: '/static/images/banner3.jpg' }
+        { image: '' },
+        { image: '' },
+        { image: '' }
       ],
       hotDestinations: [
-        { id: 1, name: '北京', image: '/static/images/dest-beijing.jpg', count: 1234 },
-        { id: 2, name: '上海', image: '/static/images/dest-shanghai.jpg', count: 987 },
-        { id: 3, name: '杭州', image: '/static/images/dest-hangzhou.jpg', count: 856 },
-        { id: 4, name: '成都', image: '/static/images/dest-chengdu.jpg', count: 765 },
-        { id: 5, name: '三亚', image: '/static/images/dest-sanya.jpg', count: 654 }
+        { id: 1, name: '北京', image: '', count: 1234 },
+        { id: 2, name: '上海', image: '', count: 987 },
+        { id: 3, name: '杭州', image: '', count: 856 },
+        { id: 4, name: '成都', image: '', count: 765 },
+        { id: 5, name: '三亚', image: '', count: 654 }
       ]
     }
   },
@@ -133,7 +133,7 @@ export default {
 				this.hotDestinations = data.map(item => ({
 					id: item.id || Math.random(),
 					name: item.destination || item.name,
-					image: '/static/images/dest-default.jpg',
+					image: '',
 					count: item.count || 0
 				}))
 			}

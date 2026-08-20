@@ -345,7 +345,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   }, $data.currentTab === "chat" ? common_vendor.e({
     g: $data.messages.length === 0
   }, $data.messages.length === 0 ? {
-    h: common_assets._imports_0$2,
+    h: common_assets._imports_0$1,
     i: common_vendor.o((...args) => $options.showPlanForm && $options.showPlanForm(...args)),
     j: common_vendor.o(($event) => $options.sendQuickQuestion("我想去北京玩3天，推荐一下行程")),
     k: common_vendor.o(($event) => $options.sendQuickQuestion("三亚5日游，预算5000元怎么安排")),
@@ -358,7 +358,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         b: $data.userInfo.avatar || "/static/images/avatar-default.png",
         c: common_vendor.t(msg.content)
       } : common_vendor.e({
-        d: common_assets._imports_1$2,
+        d: common_assets._imports_1$1,
         e: msg.type === "text"
       }, msg.type === "text" ? {
         f: common_vendor.t(msg.content)
@@ -404,7 +404,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     n: $data.isLoading
   }, $data.isLoading ? {
-    o: common_assets._imports_1$2
+    o: common_assets._imports_1$1
   } : {}, {
     p: $data.scrollTop,
     q: $data.scrollIntoView
@@ -417,7 +417,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   }) : common_vendor.e({
     x: $data.sessions.length === 0
   }, $data.sessions.length === 0 ? {
-    y: common_assets._imports_2$1
+    y: common_assets._imports_2
   } : {
     z: common_vendor.f($data.sessions, (session, k0, i0) => {
       return {

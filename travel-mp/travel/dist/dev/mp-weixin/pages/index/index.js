@@ -1,23 +1,22 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
 const api_request = require("../../api/request.js");
-const common_assets = require("../../common/assets.js");
 const _sfc_main = {
   data() {
     return {
       isLogin: false,
       userInfo: {},
       banners: [
-        { image: "/static/images/banner1.jpg" },
-        { image: "/static/images/banner2.jpg" },
-        { image: "/static/images/banner3.jpg" }
+        { image: "" },
+        { image: "" },
+        { image: "" }
       ],
       hotDestinations: [
-        { id: 1, name: "北京", image: "/static/images/dest-beijing.jpg", count: 1234 },
-        { id: 2, name: "上海", image: "/static/images/dest-shanghai.jpg", count: 987 },
-        { id: 3, name: "杭州", image: "/static/images/dest-hangzhou.jpg", count: 856 },
-        { id: 4, name: "成都", image: "/static/images/dest-chengdu.jpg", count: 765 },
-        { id: 5, name: "三亚", image: "/static/images/dest-sanya.jpg", count: 654 }
+        { id: 1, name: "北京", image: "", count: 1234 },
+        { id: 2, name: "上海", image: "", count: 987 },
+        { id: 3, name: "杭州", image: "", count: 856 },
+        { id: 4, name: "成都", image: "", count: 765 },
+        { id: 5, name: "三亚", image: "", count: 654 }
       ]
     };
   },
@@ -70,7 +69,7 @@ const _sfc_main = {
           this.hotDestinations = data.map((item) => ({
             id: item.id || Math.random(),
             name: item.destination || item.name,
-            image: "/static/images/dest-default.jpg",
+            image: "",
             count: item.count || 0
           }));
         }
@@ -82,17 +81,16 @@ const _sfc_main = {
 };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
-    a: common_assets._imports_0,
-    b: common_vendor.t($data.isLogin ? $data.userInfo.nickname : "点击登录"),
-    c: common_vendor.o((...args) => $options.goLogin && $options.goLogin(...args)),
-    d: common_vendor.f($data.banners, (item, index, i0) => {
+    a: common_vendor.t($data.isLogin ? $data.userInfo.nickname : "点击登录"),
+    b: common_vendor.o((...args) => $options.goLogin && $options.goLogin(...args)),
+    c: common_vendor.f($data.banners, (item, index, i0) => {
       return {
         a: item.image,
         b: index
       };
     }),
-    e: common_vendor.o((...args) => $options.goHotel && $options.goHotel(...args)),
-    f: common_vendor.f($data.hotDestinations, (item, k0, i0) => {
+    d: common_vendor.o((...args) => $options.goHotel && $options.goHotel(...args)),
+    e: common_vendor.f($data.hotDestinations, (item, k0, i0) => {
       return {
         a: item.image,
         b: common_vendor.t(item.name),
@@ -100,15 +98,11 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         d: item.id
       };
     }),
-    g: common_assets._imports_1,
-    h: common_vendor.o((...args) => $options.goChat && $options.goChat(...args)),
-    i: common_assets._imports_2,
-    j: common_vendor.o((...args) => $options.goHotel && $options.goHotel(...args)),
-    k: common_assets._imports_3,
-    l: common_vendor.o((...args) => $options.goOrder && $options.goOrder(...args)),
-    m: common_assets._imports_4,
-    n: common_vendor.o((...args) => $options.goMy && $options.goMy(...args)),
-    o: common_vendor.o((...args) => $options.goChat && $options.goChat(...args))
+    f: common_vendor.o((...args) => $options.goChat && $options.goChat(...args)),
+    g: common_vendor.o((...args) => $options.goHotel && $options.goHotel(...args)),
+    h: common_vendor.o((...args) => $options.goOrder && $options.goOrder(...args)),
+    i: common_vendor.o((...args) => $options.goMy && $options.goMy(...args)),
+    j: common_vendor.o((...args) => $options.goChat && $options.goChat(...args))
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-83a5a03c"]]);

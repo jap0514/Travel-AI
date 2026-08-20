@@ -24,7 +24,7 @@ class WebSocketManager {
     }
 
     this.userId = userId
-    const url = `ws://localhost:9999/ws/message?userId=${userId}`
+    const url = `ws://10.63.45.65:9999/ws/message?userId=${userId}`
 
     console.log('正在连接 WebSocket:', url)
 

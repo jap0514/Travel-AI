@@ -5,7 +5,7 @@
 <mapper namespace="com.travel.mapper.UserMapper">
 
     <resultMap id="BaseResultMap" type="com.travel.entity.User">
-            <id property="user_id" column="user_id" jdbcType="BIGINT"/>
+            <id property="userId" column="user_id" jdbcType="BIGINT"/>
             <result property="open_id" column="open_id" jdbcType="VARCHAR"/>
             <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
             <result property="avatar" column="avatar" jdbcType="VARCHAR"/>

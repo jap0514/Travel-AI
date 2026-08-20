@@ -1,24 +1,42 @@
-rocketmq-python-client==5.1.1
-python-dotenv==1.0.0
-loguru==0.7.2
-requests==2.31.0
-PyJWT==2.8.0
+  # ===== Web 服务 =====
+  fastapi>=0.110.0
+  uvicorn[standard]>=0.27.0
+  python-multipart>=0.0.9
 
-# 测试框架
-pytest>=7.4.0
-pytest-asyncio>=0.21.0
+  # ===== LangChain / LangGraph 多智能体 =====
+  langgraph
+  langchain
+  langchain-core
+  langchain-openai
+  langchain-mcp-adapters>=0.2.2
 
-langgraph
-langchain
-langchain-openai  # 或 langchain-qwen 等
-langchain-mcp-adapters>=0.2.2  # MCP 适配器（关键）
-mem0ai
-redis
-python-dotenv
-fastmcp
-sentence_transformers==5.5.1
+  # ===== LLM 与记忆 =====
+  openai
+  mem0ai
 
-# Web 服务
-fastapi>=0.110.0
-uvicorn[standard]>=0.27.0
-python-multipart>=0.0.9
+  # ===== 向量数据库与 Embedding =====
+  qdrant-client
+  sentence-transformers==5.5.1
+
+  # ===== MCP 协议 =====
+  fastmcp
+  mcp
+
+  # ===== 存储与消息队列 =====
+  redis
+  rocketmq-python-client==5.1.1
+
+  # ===== 工具、日志、安全 =====
+  requests==2.31.0
+  python-dotenv==1.0.0
+  loguru==0.7.2
+  pydantic>=2.0
+  PyJWT==2.8.0
+
+  # ===== LLM 追踪（可选） =====
+  langfuse
+
+  # ===== 测试 =====
+  pytest>=7.4.0
+  pytest-asyncio>=0.21.0
+  aiohttp

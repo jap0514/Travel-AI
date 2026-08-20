@@ -1,0 +1,126 @@
+# ============================================
+# 生产环境配置（Docker 部署专用）
+# ============================================
+# 激活方式：--spring.profiles.active=prod
+# 所有 IP 地址都使用 Docker 容器名（service discovery）
+# 本地开发用 application.yml（默认 dev profile）
+
+server:
+  port: 9999
+
+spring:
+  application:
+    name: travel-java
+
+  # ========== 数据库（Docker 容器名）==========
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:mysql}:${MYSQL_PORT:3306}/${MYSQL_DB:travel_ai}?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:root}
+
+  # ========== Redis（Docker 容器名）==========
+  data:
+    redis:
+      host: ${REDIS_HOST:redis}
+      port: ${REDIS_PORT:6379}
+      timeout: 3000ms
+      lettuce:
+        pool:
+          max-active: 16
+          max-idle: 8
+          min-idle: 2
+          max-wait: 3000ms
+
+  # ========== Spring MVC（保持原有配置）==========
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+
+# ========== Actuator + Micrometer（保持原有配置）==========
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: always
+    prometheus:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+      percentiles:
+        http.server.requests: 0.5,0.90,0.95,0.99
+
+# ========== RocketMQ（Docker 容器名）==========
+rocketmq:
+  name-server: ${ROCKETMQ_NAMESRV:namesrv}:${ROCKETMQ_PORT:9876}
+  producer:
+    group: travel-content-producer-group
+    send-message-timeout: 3000
+    retry-times-when-send-failed: 2
+    retry-times-when-send-async-failed: 2
+  consumer:
+    group: travel-task-consumer-group
+    message-model: CLUSTERING
+    ack-mode: MANUAL
+    consume-thread-min: 1
+    consume-thread-max: 5
+
+# ========== MyBatis Plus（保持原有配置）==========
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: auto
+  mapper-locations: classpath:mapper/*.xml
+
+# ========== Knife4j（API 文档）==========
+knife4j:
+  enable: true
+
+# ========== JWT（保持原有配置）==========
+jwt:
+  secret: bXlTZWNyZXRLZXlGb3JKV1RIUzI1NklzU2FmZUFuZExvbmdFbm91Z2g=
+  expiration: 3600000
+
+# ========== 微信小程序配置 ==========
+wechat:
+  appid: ${WECHAT_APPID:wx0a6881820a88f45b}
+  secret: ${WECHAT_SECRET:18c8ae69fef5f5210167063305ff3527}
+
+# ========== 自定义业务配置（Docker 容器名）==========
+travel:
+  mq:
+    content-topic: travel-content-exchange
+    task-topic: travel-task-exchange
+    result-topic: travel-result-exchange
+    content-tag: content-exchange
+    task-tag: task-exchange
+    result-tag: result-exchange
+  security:
+    sign-secret: ${SIGN_SECRET:defaultSecret123456}
+  python-api-url: ${PYTHON_API_URL:http://python-web:8000/api}        # Python FastAPI（Docker 内）
+  java-callback-base-url: ${JAVA_CALLBACK_BASE_URL:http://java-app:9999}  # 供 Python 回调（容器名）
+  signature:
+    secret-key-java: ${SIGN_KEY_JAVA:travel-java-secret-key-2026}
+    secret-key-python: ${SIGN_KEY_PYTHON:travel-python-secret-key-2026}
+
+# ========== 日志配置（生产用 JSON 格式，便于 ELK 收集）==========
+logging:
+  level:
+    root: INFO
+    com.travel: INFO
+    com.alibaba.csp.sentinel: WARN
+    org.springframework.cache: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%X{traceId:-}] %logger{36} - %msg%n"

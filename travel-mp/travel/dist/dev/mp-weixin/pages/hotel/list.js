@@ -112,7 +112,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     c: common_vendor.o((...args) => $options.searchHotel && $options.searchHotel(...args)),
     d: $data.keyword,
     e: common_vendor.o(($event) => $data.keyword = $event.detail.value),
-    f: common_assets._imports_0$3,
+    f: common_assets._imports_0$2,
     g: $data.filters.star ? 1 : "",
     h: common_vendor.o(($event) => $options.toggleFilter("star")),
     i: $data.filters.price ? 1 : "",
@@ -123,7 +123,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     n: common_vendor.o(($event) => $options.toggleFilter("facility")),
     o: $data.hotels.length === 0
   }, $data.hotels.length === 0 ? {
-    p: common_assets._imports_1$3
+    p: common_assets._imports_1$2
   } : {}, {
     q: common_vendor.f($data.hotels, (hotel, k0, i0) => {
       return {

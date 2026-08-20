@@ -113,7 +113,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   }, !$data.isLogin ? {
     f: common_vendor.o((...args) => $options.goLogin && $options.goLogin(...args))
   } : {
-    g: common_assets._imports_0$6,
+    g: common_assets._imports_0$5,
     h: common_vendor.o((...args) => $options.goSettings && $options.goSettings(...args))
   }, {
     i: common_vendor.t($data.stats.destinationCount),
@@ -121,13 +121,13 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     k: common_vendor.t($data.stats.orderCount),
     l: common_vendor.o((...args) => $options.goOrder && $options.goOrder(...args)),
     m: common_vendor.t($data.stats.sessionCount),
-    n: common_assets._imports_1$5,
+    n: common_assets._imports_1$4,
     o: common_vendor.o((...args) => $options.goMyDestinations && $options.goMyDestinations(...args)),
-    p: common_assets._imports_2$2,
+    p: common_assets._imports_2$1,
     q: common_vendor.o((...args) => $options.goOrder && $options.goOrder(...args)),
-    r: common_assets._imports_3$1,
+    r: common_assets._imports_3,
     s: common_vendor.o((...args) => $options.goChatHistory && $options.goChatHistory(...args)),
-    t: common_assets._imports_4$1,
+    t: common_assets._imports_4,
     v: common_vendor.o((...args) => $options.goAbout && $options.goAbout(...args)),
     w: common_assets._imports_5,
     x: common_vendor.o((...args) => $options.contactService && $options.contactService(...args)),
