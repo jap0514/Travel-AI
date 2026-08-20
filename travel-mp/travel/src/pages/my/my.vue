@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import { getUserSessions,getOrderList,getUserDestinations } from '@/api/request.js'
+import { getUserSessions,getOrderList,getUserDestinations,logout } from '@/api/request.js'
 
 export default {
   data() {
@@ -175,20 +175,23 @@ export default {
       uni.showToast({ title: '帮助与反馈', icon: 'none' })
     },
 
-    logout() {
-      uni.showModal({
+    async logout() {
+      const res = await uni.showModal({
         title: '提示',
         content: '确定要退出登录吗？',
-        success: (res) => {
-          if (res.confirm) {
-            // TODO: 调用 /logout 接口
-            uni.removeStorageSync('token')
-            uni.removeStorageSync('userInfo')
-            uni.showToast({ title: '已退出登录', icon: 'success' })
-            this.checkLogin()
-          }
-        }
       })
+      if (!res.confirm) return
+
+      // 无论后端调用成功与否，都退出登录
+      try {
+        await logout()
+      } catch (e) {
+        // 静默：401/网络/业务错误都吞掉，反正要退出
+      } finally {
+        uni.removeStorageSync('token')
+        uni.removeStorageSync('userInfo')
+        uni.reLaunch({ url: '/pages/login/login' })
+      }
     }
   }
 }
