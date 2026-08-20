@@ -90,11 +90,14 @@
 </template>
 
 <script>
+import { getOrderDetail, cancelOrder as cancelOrderRequest, payOrder as payOrderRequest } from '@/api/request.js'
+
 export default {
   data() {
     return {
       orderNo: '',
-      order: {}
+      order: {},
+      loading: false
     }
   },
   onLoad(options) {
@@ -102,22 +105,45 @@ export default {
     this.loadOrderDetail()
   },
   methods: {
-    loadOrderDetail() {
-      // TODO: 调用 /hotel/order/{orderNo} 接口
-      this.order = {
-        orderNo: this.orderNo,
-        hotelName: '北京饭店',
-        roomName: '豪华间',
-        roomImage: '/static/images/room2.jpg',
-        checkInDate: '1月15日',
-        checkOutDate: '1月17日',
-        nightCount: 2,
-        roomPrice: 888,
-        totalPrice: 1776,
-        status: 0,
-        createTime: '2024-01-10 14:30:00',
-        guestName: '张三',
-        guestPhone: '138****8888'
+    formatDateShort(dateTime) {
+      if (!dateTime) return ''
+      const d = new Date(dateTime)
+      if (isNaN(d.getTime())) return ''
+      return `${d.getMonth() + 1}月${d.getDate()}日`
+    },
+
+    formatDateTime(dateTime) {
+      if (!dateTime) return ''
+      const d = new Date(dateTime)
+      if (isNaN(d.getTime())) return ''
+      const pad = (n) => n < 10 ? '0' + n : n
+      return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`
+    },
+
+    async loadOrderDetail() {
+      if (!this.orderNo) return
+      this.loading = true
+      try {
+        const o = await getOrderDetail(this.orderNo)
+        this.order = {
+          orderNo: o.orderNo,
+          hotelName: o.hotelName,
+          roomName: o.roomTypeName,
+          roomImage: '/static/images/room-default.jpg',
+          checkInDate: this.formatDateShort(o.checkInDate),
+          checkOutDate: this.formatDateShort(o.checkOutDate),
+          nightCount: o.days,
+          roomPrice: o.days > 0 ? Number(o.totalPrice) / o.days : 0,  // 反推单价
+          totalPrice: Number(o.totalPrice),
+          status: o.status,
+          createTime: this.formatDateTime(o.createTime),
+          guestName: o.guestName,
+          guestPhone: o.guestPhone
+        }
+      } catch (e) {
+        // 静默
+      } finally {
+        this.loading = false
       }
     },
 
@@ -158,21 +184,31 @@ export default {
       uni.showModal({
         title: '提示',
         content: '确定要取消该订单吗？',
-        success: (res) => {
-          if (res.confirm) {
-            // TODO: 调用 /hotel/order/{orderNo}/cancel 接口
+        editable: true,
+        placeholderText: '请输入取消原因（可选）',
+        success: async (res) => {
+          if (!res.confirm) return
+          try {
+            await cancelOrderRequest(this.orderNo, { cancelReason: res.content || '用户主动取消' })
             uni.showToast({ title: '取消成功', icon: 'success' })
-            setTimeout(() => {
-              uni.navigateBack()
-            }, 1500)
+            // 刷新详情
+            this.loadOrderDetail()
+          } catch (e) {
+            // 静默
           }
         }
       })
     },
 
-    payOrder() {
-      // TODO: 调用 /hotel/order/{orderNo}/pay 接口
-      uni.showToast({ title: '支付功能开发中', icon: 'none' })
+    async payOrder() {
+      try {
+        await payOrderRequest(this.orderNo, {})
+        uni.showToast({ title: '支付成功', icon: 'success' })
+        // 刷新详情
+        this.loadOrderDetail()
+      } catch (e) {
+        // 静默
+      }
     },
 
     reBook() {

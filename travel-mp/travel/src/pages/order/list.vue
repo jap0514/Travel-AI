@@ -64,6 +64,8 @@
 </template>
 
 <script>
+import { getOrderList, cancelOrder as cancelOrderRequest, payOrder as payOrderRequest } from '@/api/request.js'
+
 export default {
   data() {
     return {
@@ -106,57 +108,59 @@ export default {
       this.loadOrders()
     },
 
-    loadOrders() {
+    // 把 LocalDateTime 格式化为 "1月15日" 形式
+    formatDateShort(dateTime) {
+      if (!dateTime) return ''
+      const d = new Date(dateTime)
+      if (isNaN(d.getTime())) return ''
+      return `${d.getMonth() + 1}月${d.getDate()}日`
+    },
+
+    // 字段映射：后端 HotelBookingVO → 前端展示结构
+    mapOrder(o) {
+      return {
+        orderNo: o.orderNo,
+        hotelName: o.hotelName,
+        roomName: o.roomTypeName,        // 后端是 roomTypeName
+        roomImage: '/static/images/room-default.jpg', // 后端无此字段
+        checkInDate: this.formatDateShort(o.checkInDate),
+        checkOutDate: this.formatDateShort(o.checkOutDate),
+        nightCount: o.days,               // 后端是 days
+        totalPrice: Number(o.totalPrice),
+        status: o.status
+      }
+    },
+
+    async loadOrders() {
       if (this.isLoading || this.noMore) return
+
+      const userInfo = uni.getStorageSync('userInfo') || {}
+      const userId = userInfo.id
+      if (!userId) {
+        uni.navigateTo({ url: '/pages/login/login' })
+        return
+      }
+
       this.isLoading = true
 
-      // TODO: 调用 /hotel/order/list 接口
-      setTimeout(() => {
-        const mockOrders = [
-          {
-            orderNo: 'HT202401010001',
-            hotelName: '北京饭店',
-            roomName: '豪华间',
-            roomImage: '/static/images/room2.jpg',
-            checkInDate: '1月15日',
-            checkOutDate: '1月17日',
-            nightCount: 2,
-            totalPrice: 1776,
-            status: 0
-          },
-          {
-            orderNo: 'HT202401010002',
-            hotelName: '上海外滩酒店',
-            roomName: '标准间',
-            roomImage: '/static/images/room1.jpg',
-            checkInDate: '1月20日',
-            checkOutDate: '1月22日',
-            nightCount: 2,
-            totalPrice: 1176,
-            status: 1
-          },
-          {
-            orderNo: 'HT202401010003',
-            hotelName: '杭州西湖酒店',
-            roomName: '套房',
-            roomImage: '/static/images/room3.jpg',
-            checkInDate: '12月25日',
-            checkOutDate: '12月27日',
-            nightCount: 2,
-            totalPrice: 3176,
-            status: 4
-          }
-        ]
+      try {
+        const statusParam = this.currentTab === 'all' ? undefined : parseInt(this.currentTab)
+        const pageVO = await getOrderList(userId, this.page, this.pageSize, statusParam)
 
-        if (this.currentTab === 'all') {
-          this.orders = mockOrders
-        } else {
-          this.orders = mockOrders.filter(o => o.status === parseInt(this.currentTab))
+        // 后端返回 PageVO<HotelBookingVO>，records 是订单列表
+        const records = (pageVO && (pageVO.records || pageVO.list || pageVO)) || []
+        const mapped = records.map(o => this.mapOrder(o))
+
+        if (mapped.length < this.pageSize) {
+          this.noMore = true
         }
-
-        this.noMore = true
+        this.orders = this.orders.concat(mapped)
+        this.page++
+      } catch (e) {
+        // 静默
+      } finally {
         this.isLoading = false
-      }, 1000)
+      }
     },
 
     loadMore() {
@@ -195,19 +199,37 @@ export default {
       uni.showModal({
         title: '提示',
         content: '确定要取消该订单吗？',
-        success: (res) => {
-          if (res.confirm) {
-            // TODO: 调用 /hotel/order/{orderNo}/cancel 接口
+        editable: true,
+        placeholderText: '请输入取消原因（可选）',
+        success: async (res) => {
+          if (!res.confirm) return
+          try {
+            await cancelOrderRequest(order.orderNo, { cancelReason: res.content || '用户主动取消' })
             uni.showToast({ title: '取消成功', icon: 'success' })
+            // 刷新列表
+            this.page = 1
+            this.noMore = false
+            this.orders = []
             this.loadOrders()
+          } catch (e) {
+            // 静默
           }
         }
       })
     },
 
-    payOrder(order) {
-      // TODO: 调用 /hotel/order/{orderNo}/pay 接口
-      uni.showToast({ title: '支付功能开发中', icon: 'none' })
+    async payOrder(order) {
+      try {
+        await payOrderRequest(order.orderNo, {})
+        uni.showToast({ title: '支付成功', icon: 'success' })
+        // 刷新列表
+        this.page = 1
+        this.noMore = false
+        this.orders = []
+        this.loadOrders()
+      } catch (e) {
+        // 静默
+      }
     },
 
     goHotel() {

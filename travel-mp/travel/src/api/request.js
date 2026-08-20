@@ -148,10 +148,10 @@ export const createOrder = (data) => request({
   data
 })
 
-export const getOrderList = (userId, page = 1, size = 10) => request({
+export const getOrderList = (userId, page = 1, size = 10, status) => request({
   url: '/hotel/order/list',
   method: 'GET',
-  data: { userId, page, size }
+  data: { userId, page, size, status }
 })
 
 export const getOrderDetail = (orderNo) => request({
@@ -159,9 +159,10 @@ export const getOrderDetail = (orderNo) => request({
   method: 'GET'
 })
 
-export const cancelOrder = (orderNo) => request({
+export const cancelOrder = (orderNo, data = {}) => request({
   url: `/hotel/order/${orderNo}/cancel`,
-  method: 'PUT'
+  method: 'PUT',
+  data
 })
 
 export const completeOrder = (orderNo) => request({
@@ -169,9 +170,10 @@ export const completeOrder = (orderNo) => request({
   method: 'PUT'
 })
 
-export const payOrder = (orderNo) => request({
+export const payOrder = (orderNo, data = {}) => request({
   url: `/hotel/order/${orderNo}/pay`,
-  method: 'PUT'
+  method: 'PUT',
+  data
 })
 
 // ============ 统计相关 ============
