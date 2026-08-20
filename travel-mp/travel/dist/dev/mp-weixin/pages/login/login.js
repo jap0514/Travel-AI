@@ -76,8 +76,8 @@ const _sfc_main = {
 };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
-    a: common_assets._imports_0$1,
-    b: common_assets._imports_1$1,
+    a: common_assets._imports_0,
+    b: common_assets._imports_1,
     c: common_vendor.o((...args) => $options.onWechatLogin && $options.onWechatLogin(...args)),
     d: common_vendor.o((...args) => $options.onDebugLogin && $options.onDebugLogin(...args))
   };

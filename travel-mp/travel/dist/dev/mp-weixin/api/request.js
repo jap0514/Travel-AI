@@ -1,6 +1,6 @@
 "use strict";
 const common_vendor = require("../common/vendor.js");
-const BASE_URL = "http://localhost:9999";
+const BASE_URL = "http://10.63.45.65:9999";
 function request(options) {
   return new Promise((resolve, reject) => {
     const token = common_vendor.index.getStorageSync("token");

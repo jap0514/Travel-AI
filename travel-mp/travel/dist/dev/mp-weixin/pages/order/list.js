@@ -149,7 +149,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     b: $data.orders.length === 0
   }, $data.orders.length === 0 ? {
-    c: common_assets._imports_0$5,
+    c: common_assets._imports_0$4,
     d: common_vendor.o((...args) => $options.goHotel && $options.goHotel(...args))
   } : {}, {
     e: common_vendor.f($data.orders, (order, k0, i0) => {

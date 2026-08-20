@@ -54,6 +54,9 @@ public class ReceiveAIServiceImpl implements ReceiveAIService {
     @Value("${travel.python-api-url}")
     private String pythonApiUrl;
 
+    @Value("${travel.java-callback-base-url}")
+    private String javaCallbackBaseUrl;
+
     @Value("${travel.signature.secret-key-java:travel-secret-key-java}")
     private String secretKeyForJava;
 
@@ -94,7 +97,7 @@ public class ReceiveAIServiceImpl implements ReceiveAIService {
         requestBody.put("messageId", msg_id);
         requestBody.put("content", content);
         // 设置回调地址，Python处理完成后回调此地址
-        requestBody.put("callbackUrl", "http://localhost:9999/sendMessageByPython/receiveAI");
+        requestBody.put("callbackUrl", javaCallbackBaseUrl + "/sendMessageByPython/receiveAI");
         // 透传 traceId，让 Python 在回调时带回
         requestBody.put("traceId", traceId);
         // 透传日期参数

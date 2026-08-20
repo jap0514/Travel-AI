@@ -28,7 +28,7 @@ qdrant_client = QdrantClient(host=QDRANT_HOST, port=QDRANT_PORT)
 # 重排序模型
 reranker = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2', device='cpu')
 
-mcp = FastMCP("Qdrant RAG Server", host="127.0.0.1", port=9996)
+mcp = FastMCP("Qdrant RAG Server", host="0.0.0.0", port=9996)
 
 def _search_old(collection: str, query: str, city: Optional[str] = None, limit: int = 3) -> list:
     """通用检索，支持按城市过滤"""

@@ -3,7 +3,7 @@
  * 基于后端接口文档
  */
 
-const BASE_URL = 'http://localhost:9999'
+const BASE_URL = 'http://10.63.45.65:9999'
 
 /**
  * 发起请求

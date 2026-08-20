@@ -120,6 +120,7 @@ public class ThreeTierCacheAspect {
                 return getEmptyResult(method);
             }
 
+            //TODO:那岂不是只要缓存查不到就都返回空了？
             // ==================== 防护2: 空值缓存检查 ====================
             if (annotation.useNullValueCache() && cachePenetrationUtil.isNullValue(fullKey)) {
                 log.info("【三级缓存】【空值缓存命中】traceId={}, key={}", traceId, fullKey);

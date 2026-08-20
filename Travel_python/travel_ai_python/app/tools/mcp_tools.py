@@ -91,7 +91,12 @@ def get_mock_tools():
 
                 result = f"🌤️ {city} 未来天气预报：\n"
                 for day in days[:3]:
-                    result += f"• {day['date']}: {day['text_day']}，{day['low']}~{day['high']}℃，{day['wind_direction_day']}\n"
+                    # 容错：字段可能缺失
+                    day_text = day.get('text_day', '未知')
+                    low_temp = day.get('low', '?')
+                    high_temp = day.get('high', '?')
+                    wind = day.get('wind_direction_day') or day.get('wind_direction') or ''
+                    result += f"• {day['date']}: {day_text}，{low_temp}~{high_temp}℃，{wind}\n"
                 return result
 
         except requests.exceptions.RequestException as e:

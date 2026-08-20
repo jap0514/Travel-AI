@@ -119,3 +119,5 @@ travel:
     secret-key-java: ${SIGN_KEY_JAVA:travel-java-secret-key-2026}
     # Python回调Java时使用的密钥（需与Python端一致）
     secret-key-python: ${SIGN_KEY_PYTHON:travel-python-secret-key-2026}
+  # Python 处理完后回调 Java 的地址（开发期同机；Docker 部署时改为容器名 http://java-app:9999）
+  java-callback-base-url: ${JAVA_CALLBACK_BASE_URL:http://localhost:9999}
