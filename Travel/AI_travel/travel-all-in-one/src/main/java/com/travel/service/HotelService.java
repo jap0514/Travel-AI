@@ -22,6 +22,13 @@ public interface HotelService extends IService<Hotel> {
     List<HotelVO> getAllHotelInfo(String city);
 
     /**
+     * 根据酒店ID获取酒店详细信息
+     * @param hotelId 酒店ID
+     * @return 酒店详细信息，不存在时返回 null
+     */
+    HotelVO getHotelById(Long hotelId);
+
+    /**
      * 根据酒店ID获取酒店的房间类型信息
      * @param hotelId
      * @return

@@ -97,6 +97,8 @@
 </template>
 
 <script>
+import { getHotelById, getHotelRoomType } from '@/api/request.js'
+
 export default {
   data() {
     return {
@@ -106,7 +108,8 @@ export default {
       checkInDate: '',
       checkOutDate: '',
       nightCount: 0,
-      selectedRoom: null
+      selectedRoom: null,
+      loading: false
     }
   },
   computed: {
@@ -117,8 +120,8 @@ export default {
   },
   onLoad(options) {
     this.hotelId = options.id
-    this.loadHotelDetail()
     this.initDates()
+    this.loadHotelDetail()
   },
   methods: {
     initDates() {
@@ -135,55 +138,56 @@ export default {
       return `${date.getMonth() + 1}月${date.getDate()}日`
     },
 
-    loadHotelDetail() {
-      // TODO: 调用 /hotel/hotelInfo/getHotelRoomType 接口
-      this.hotel = {
-        id: this.hotelId,
-        name: '北京饭店',
-        address: '北京市东城区东长安街33号',
-        star: 5,
-        rating: '4.8',
-        commentCount: 1234,
-        facilities: ['免费WiFi', '停车场', '健身房', '游泳池', 'SPA', '餐厅', '酒吧', '商务中心'],
-        images: [
-          '/static/images/hotel1.jpg',
-          '/static/images/hotel2.jpg',
-          '/static/images/hotel3.jpg'
-        ]
+    // 把后端 Object 类型的 facilities/amenities 统一转换为数组
+    ensureArray(field) {
+      if (Array.isArray(field)) return field
+      if (field == null) return []
+      if (typeof field === 'string') {
+        try { return JSON.parse(field) } catch (e) { return [] }
       }
+      return []
+    },
 
-      this.roomTypes = [
-        {
-          id: 1,
-          name: '标准间',
-          bedType: '大床1.8m/双床1.2m',
-          area: 35,
-          capacity: 2,
-          price: 588,
-          amenities: ['免费WiFi', '早餐', '独立卫浴'],
-          image: '/static/images/room1.jpg'
-        },
-        {
-          id: 2,
-          name: '豪华间',
-          bedType: '大床2.0m',
-          area: 45,
-          capacity: 2,
-          price: 888,
-          amenities: ['免费WiFi', '早餐', '海景', '迷你吧'],
-          image: '/static/images/room2.jpg'
-        },
-        {
-          id: 3,
-          name: '套房',
-          bedType: '大床2.2m',
-          area: 70,
-          capacity: 3,
-          price: 1588,
-          amenities: ['免费WiFi', '早餐', '客厅', '按摩浴缸'],
-          image: '/static/images/room3.jpg'
+    async loadHotelDetail() {
+      if (!this.hotelId) return
+      this.loading = true
+      try {
+        const [hotelVO, roomTypeList] = await Promise.all([
+          getHotelById(this.hotelId),
+          getHotelRoomType(this.hotelId)
+        ])
+
+        // 酒店基本信息
+        this.hotel = {
+          id: hotelVO.hotelId,
+          name: hotelVO.name,
+          address: hotelVO.address,
+          star: hotelVO.star,
+          rating: '5.0',          // 后端无此字段，给默认值
+          commentCount: 0,        // 后端无此字段
+          facilities: this.ensureArray(hotelVO.facilities),
+          images: hotelVO.mainImage ? [hotelVO.mainImage] : ['/static/images/hotel-default.jpg'],
+          description: hotelVO.description
         }
-      ]
+
+        // 房型列表：id → roomTypeId, area 类型转换
+        this.roomTypes = roomTypeList.map(rt => ({
+          id: rt.roomTypeId,
+          hotelId: rt.hotelId,
+          hotelName: rt.hotelName,
+          name: rt.name,
+          price: Number(rt.price),
+          capacity: rt.capacity,
+          bedType: rt.bedType,
+          area: parseFloat(rt.area) || 0,
+          amenities: this.ensureArray(rt.amenities),
+          image: '/static/images/room-default.jpg'  // 后端无此字段
+        }))
+      } catch (e) {
+        // 静默：request.js 已 toast 错误
+      } finally {
+        this.loading = false
+      }
     },
 
     selectRoom(room) {
