@@ -101,6 +101,8 @@
 </template>
 
 <script>
+import { getHotelByCity } from '@/api/request.js'
+
 export default {
   data() {
     return {
@@ -154,55 +156,55 @@ export default {
       this.loadHotels()
     },
 
-    loadHotels() {
+    // 把后端 Object 类型的 facilities 统一转换为数组
+    ensureArray(field) {
+      if (Array.isArray(field)) return field
+      if (field == null) return []
+      if (typeof field === 'string') {
+        try { return JSON.parse(field) } catch (e) { return [] }
+      }
+      return []
+    },
+
+    async loadHotels() {
       if (this.isLoading || this.noMore) return
+      if (!this.selectedCity) {
+        // 首次进入未选城市，提示选择
+        uni.showToast({ title: '请先选择城市', icon: 'none' })
+        return
+      }
       this.isLoading = true
 
-      // TODO: 调用 /hotel/hotelInfo/getHotelByCity 接口
-      // 模拟数据
-      setTimeout(() => {
-        const mockHotels = [
-          {
-            id: 1,
-            name: '北京饭店',
-            address: '北京市东城区东长安街33号',
-            star: 5,
-            startPrice: 888,
-            rating: '4.8',
-            facilities: ['免费WiFi', '停车场', '健身房', '游泳池'],
-            mainImage: '/static/images/hotel1.jpg'
-          },
-          {
-            id: 2,
-            name: '上海外滩酒店',
-            address: '上海市黄浦区外滩18号',
-            star: 5,
-            startPrice: 1288,
-            rating: '4.9',
-            facilities: ['海景房', 'SPA', '餐厅', '酒吧'],
-            mainImage: '/static/images/hotel2.jpg'
-          },
-          {
-            id: 3,
-            name: '杭州西湖酒店',
-            address: '杭州市西湖区西湖大道',
-            star: 4,
-            startPrice: 588,
-            rating: '4.6',
-            facilities: ['免费WiFi', '停车场', '会议室'],
-            mainImage: '/static/images/hotel3.jpg'
-          }
-        ]
+      try {
+        const list = await getHotelByCity(this.selectedCity, this.page, this.pageSize)
 
-        if (this.page >= 3) {
+        // 字段映射：hotelId → id, facilities (Object) → Array
+        const mapped = (list || []).map(h => ({
+          id: h.hotelId,
+          name: h.name,
+          address: h.address,
+          star: h.star,
+          startPrice: null,       // 后端无此字段
+          rating: null,           // 后端无此字段
+          facilities: this.ensureArray(h.facilities),
+          mainImage: h.mainImage || '/static/images/hotel-default.jpg'
+        }))
+
+        if (mapped.length === 0) {
           this.noMore = true
         } else {
-          this.hotels = this.hotels.concat(mockHotels)
+          this.hotels = this.hotels.concat(mapped)
           this.page++
+          // 后端不分页，列表大小等于 pageSize 时认为还有下一页
+          if (mapped.length < this.pageSize) {
+            this.noMore = true
+          }
         }
-
+      } catch (e) {
+        // 静默：request.js 已 toast
+      } finally {
         this.isLoading = false
-      }, 1000)
+      }
     },
 
     loadMore() {

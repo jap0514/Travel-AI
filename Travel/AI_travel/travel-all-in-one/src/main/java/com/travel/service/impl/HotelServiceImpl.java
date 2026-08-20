@@ -80,6 +80,41 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel>
     }
 
     /**
+     * 根据酒店ID获取酒店详细信息
+     * 三级缓存 + 三大防护全部由AOP处理
+     */
+    @Override
+    @ThreeTierCache(
+        cacheName = "hotel",
+        key = "#hotelId",
+        localTtlMinutes = 5,
+        redisTtlMinutes = 30,
+        redisTtlOffsetMinutes = 5,
+        useBloomFilter = true
+    )
+    public HotelVO getHotelById(Long hotelId) {
+        Hotel hotel = hotelMapper.selectById(hotelId);
+        if (hotel == null) {
+            return null;
+        }
+        HotelVO vo = new HotelVO();
+        vo.setHotelId(hotel.getHotelId());
+        vo.setAddress(hotel.getAddress());
+        vo.setCity(hotel.getCity());
+        vo.setDescription(hotel.getDescription());
+        vo.setCreateTime(hotel.getCreateTime());
+        vo.setFacilities(hotel.getFacilities());
+        vo.setLatitude(hotel.getLatitude());
+        vo.setName(hotel.getName());
+        vo.setUpdateTime(hotel.getUpdateTime());
+        vo.setStar(hotel.getStar());
+        vo.setLongitude(hotel.getLongitude());
+        vo.setContactPhone(hotel.getContactPhone());
+        vo.setMainImage(hotel.getMainImage());
+        return vo;
+    }
+
+    /**
      * 根据酒店ID获取酒店的房间类型信息
      */
     @Override

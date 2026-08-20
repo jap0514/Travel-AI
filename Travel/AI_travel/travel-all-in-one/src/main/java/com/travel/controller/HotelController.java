@@ -4,6 +4,7 @@ import com.travel.annotation.DistributedLock;
 import com.travel.annotation.Idempotent;
 import com.travel.annotation.RateLimiter;
 import com.travel.common.Result;
+import com.travel.common.ResultCode;
 import com.travel.dto.CancelOrderDTO;
 import com.travel.dto.HotelBookingDTO;
 import com.travel.dto.PayOrderDTO;
@@ -67,6 +68,20 @@ public class HotelController {
         List<HotelVO> hotelVOList = new ArrayList<>();
         hotelVOList=hotelService.getAllHotelInfo(city);
         return Result.success(hotelVOList);
+    }
+
+    /**
+     * 根据酒店ID获取酒店详细信息
+     * @param hotelId 酒店ID
+     * @return 酒店详细信息
+     */
+    @GetMapping("/hotelInfo/getHotelById")
+    public Result<HotelVO> getHotelById(@RequestParam("hotelId") Long hotelId){
+        HotelVO hotelVO = hotelService.getHotelById(hotelId);
+        if (hotelVO == null) {
+            return Result.error(ResultCode.NOT_FOUND, "酒店不存在");
+        }
+        return Result.success(hotelVO);
     }
 
     /**

@@ -105,6 +105,12 @@ export const getHotelByCity = (city, page = 1, size = 10) => request({
   data: { city, page, size }
 })
 
+export const getHotelById = (hotelId) => request({
+  url: '/hotel/hotelInfo/getHotelById',
+  method: 'GET',
+  data: { hotelId }
+})
+
 export const getHotelRoomType = (hotelId) => request({
   url: '/hotel/hotelInfo/getHotelRoomType',
   method: 'GET',
@@ -189,6 +195,7 @@ export default {
   getSessionMessages,
   sendMessage,
   getHotelByCity,
+  getHotelById,
   getHotelRoomType,
   getHotelRoom,
   selectEmptyRoom,
