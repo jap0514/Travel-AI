@@ -63,7 +63,12 @@ const _sfc_main = {
         common_vendor.index.hideLoading();
         common_vendor.index.showToast({ title: "登录成功", icon: "success" });
         setTimeout(() => {
-          common_vendor.index.navigateBack();
+          const pages = getCurrentPages();
+          if (pages.length > 1) {
+            common_vendor.index.navigateBack();
+          } else {
+            common_vendor.index.switchTab({ url: "/pages/index/index" });
+          }
         }, 1500);
       } catch (err) {
         console.error("登录失败:", err);

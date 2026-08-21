@@ -7,13 +7,13 @@
         "urlCheck": false,
         "es6": true,
         "postcss": false,
-        "minified": true,
+        "minified": false,
         "newFeature": true,
         "bigPackageSizeSupport": true
     },
     "compileType": "miniprogram",
     "libVersion": "",
-    "appid": "touristappid",
+    "appid": "wx0a6881820a88f45b",
     "projectname": "travel",
     "condition": {
         "search": {

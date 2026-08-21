@@ -1,9 +1,11 @@
 package com.travel.service;
 
+import com.travel.dto.HotelAdminDTO;
 import com.travel.entity.Hotel;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.travel.vo.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,10 +18,15 @@ public interface HotelService extends IService<Hotel> {
 
     /**
      * 根据城市获取该城市的酒店信息
-     * @param city
-     * @return
+     * @param city        城市名（必填）
+     * @param keyword     搜索关键字（可选，按酒店名称模糊匹配）
+     * @param minStar     最低星级 1-5（可选）
+     * @param minPrice    最低价格（可选）
+     * @param maxPrice    最高价格（可选）
+     * @param facilities  必须包含的设施列表（可选，AND 关系：酒店必须同时包含所有设施）
+     * @return 酒店列表
      */
-    List<HotelVO> getAllHotelInfo(String city);
+    List<HotelVO> getAllHotelInfo(String city, String keyword, Integer minStar, BigDecimal minPrice, BigDecimal maxPrice, List<String> facilities);
 
     /**
      * 根据酒店ID获取酒店详细信息
@@ -52,4 +59,25 @@ public interface HotelService extends IService<Hotel> {
      * @return
      */
     List<HotelEmptyRoomVO> selectEmptyRoom(String city, String startDate, Long days);
+
+    /**
+     * 新增酒店（写操作会自动清除缓存）
+     * @param dto 酒店参数
+     * @return 新创建的酒店
+     */
+    HotelVO createHotel(HotelAdminDTO dto);
+
+    /**
+     * 修改酒店（写操作会自动清除缓存）
+     * @param dto 酒店参数（必须含 hotelId）
+     * @return 更新后的酒店
+     */
+    HotelVO updateHotel(HotelAdminDTO dto);
+
+    /**
+     * 删除酒店（写操作会自动清除缓存）
+     * @param hotelId 酒店ID
+     * @return 是否删除成功
+     */
+    boolean deleteHotel(Long hotelId);
 }

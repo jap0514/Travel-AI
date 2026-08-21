@@ -1,5 +1,6 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const api_request = require("../../api/request.js");
 const common_assets = require("../../common/assets.js");
 const _sfc_main = {
   data() {
@@ -41,53 +42,53 @@ const _sfc_main = {
       this.orders = [];
       this.loadOrders();
     },
-    loadOrders() {
+    // 把 LocalDateTime 格式化为 "1月15日" 形式
+    formatDateShort(dateTime) {
+      if (!dateTime) return "";
+      const d = new Date(dateTime);
+      if (isNaN(d.getTime())) return "";
+      return `${d.getMonth() + 1}月${d.getDate()}日`;
+    },
+    // 字段映射：后端 HotelBookingVO → 前端展示结构
+    mapOrder(o) {
+      return {
+        orderNo: o.orderNo,
+        hotelName: o.hotelName,
+        roomName: o.roomTypeName,
+        // 后端是 roomTypeName
+        roomImage: "/static/images/room-default.jpg",
+        // 后端无此字段
+        checkInDate: this.formatDateShort(o.checkInDate),
+        checkOutDate: this.formatDateShort(o.checkOutDate),
+        nightCount: o.days,
+        // 后端是 days
+        totalPrice: Number(o.totalPrice),
+        status: o.status
+      };
+    },
+    async loadOrders() {
       if (this.isLoading || this.noMore) return;
+      const userInfo = common_vendor.index.getStorageSync("userInfo") || {};
+      const userId = userInfo.id;
+      if (!userId) {
+        common_vendor.index.navigateTo({ url: "/pages/login/login" });
+        return;
+      }
       this.isLoading = true;
-      setTimeout(() => {
-        const mockOrders = [
-          {
-            orderNo: "HT202401010001",
-            hotelName: "北京饭店",
-            roomName: "豪华间",
-            roomImage: "/static/images/room2.jpg",
-            checkInDate: "1月15日",
-            checkOutDate: "1月17日",
-            nightCount: 2,
-            totalPrice: 1776,
-            status: 0
-          },
-          {
-            orderNo: "HT202401010002",
-            hotelName: "上海外滩酒店",
-            roomName: "标准间",
-            roomImage: "/static/images/room1.jpg",
-            checkInDate: "1月20日",
-            checkOutDate: "1月22日",
-            nightCount: 2,
-            totalPrice: 1176,
-            status: 1
-          },
-          {
-            orderNo: "HT202401010003",
-            hotelName: "杭州西湖酒店",
-            roomName: "套房",
-            roomImage: "/static/images/room3.jpg",
-            checkInDate: "12月25日",
-            checkOutDate: "12月27日",
-            nightCount: 2,
-            totalPrice: 3176,
-            status: 4
-          }
-        ];
-        if (this.currentTab === "all") {
-          this.orders = mockOrders;
-        } else {
-          this.orders = mockOrders.filter((o) => o.status === parseInt(this.currentTab));
+      try {
+        const statusParam = this.currentTab === "all" ? void 0 : parseInt(this.currentTab);
+        const pageVO = await api_request.getOrderList(userId, this.page, this.pageSize, statusParam);
+        const records = pageVO && (pageVO.records || pageVO.list || pageVO) || [];
+        const mapped = records.map((o) => this.mapOrder(o));
+        if (mapped.length < this.pageSize) {
+          this.noMore = true;
         }
-        this.noMore = true;
+        this.orders = this.orders.concat(mapped);
+        this.page++;
+      } catch (e) {
+      } finally {
         this.isLoading = false;
-      }, 1e3);
+      }
     },
     loadMore() {
       this.loadOrders();
@@ -121,16 +122,32 @@ const _sfc_main = {
       common_vendor.index.showModal({
         title: "提示",
         content: "确定要取消该订单吗？",
-        success: (res) => {
-          if (res.confirm) {
+        editable: true,
+        placeholderText: "请输入取消原因（可选）",
+        success: async (res) => {
+          if (!res.confirm) return;
+          try {
+            await api_request.cancelOrder(order.orderNo, { cancelReason: res.content || "用户主动取消" });
             common_vendor.index.showToast({ title: "取消成功", icon: "success" });
+            this.page = 1;
+            this.noMore = false;
+            this.orders = [];
             this.loadOrders();
+          } catch (e) {
           }
         }
       });
     },
-    payOrder(order) {
-      common_vendor.index.showToast({ title: "支付功能开发中", icon: "none" });
+    async payOrder(order) {
+      try {
+        await api_request.payOrder(order.orderNo, {});
+        common_vendor.index.showToast({ title: "支付成功", icon: "success" });
+        this.page = 1;
+        this.noMore = false;
+        this.orders = [];
+        this.loadOrders();
+      } catch (e) {
+      }
     },
     goHotel() {
       common_vendor.index.switchTab({ url: "/pages/hotel/list" });

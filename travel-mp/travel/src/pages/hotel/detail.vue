@@ -30,9 +30,11 @@
     <view class="section facilities-section">
       <text class="section-title">设施服务</text>
       <view class="facilities-grid">
-        <view v-for="(facility, index) in hotel.facilities" :key="index" class="facility-item">
+        <view v-for="(value, key) in hotel.facilities" :key="key" class="facility-item">
           <image class="facility-icon" src="/static/images/facility-default.png" mode="aspectFit"></image>
-          <text class="facility-name">{{ facility }}</text>
+          <text class="facility-name">
+            {{ key }}<text v-if="Array.isArray(value)">：{{ value.join('、') }}</text>
+          </text>
         </view>
       </view>
     </view>
@@ -72,8 +74,8 @@
             <text>可住{{ room.capacity }}人</text>
           </view>
           <view class="room-facilities">
-            <text v-for="(item, index) in room.amenities.slice(0, 2)" :key="index" class="amenity-tag">
-              {{ item }}
+            <text v-for="(value, key) in filterFacilities(room.amenities, 2)" :key="key" class="amenity-tag">
+              {{ key }}
             </text>
           </view>
         </view>
@@ -138,14 +140,14 @@ export default {
       return `${date.getMonth() + 1}月${date.getDate()}日`
     },
 
-    // 把后端 Object 类型的 facilities/amenities 统一转换为数组
-    ensureArray(field) {
-      if (Array.isArray(field)) return field
-      if (field == null) return []
-      if (typeof field === 'string') {
-        try { return JSON.parse(field) } catch (e) { return [] }
-      }
-      return []
+    // 过滤设施：只保留值为 truthy 的项，可选限制数量
+    filterFacilities(facilities, limit) {
+      if (!facilities || typeof facilities !== 'object') return {}
+      const result = {}
+      const keys = Object.keys(facilities).filter(k => facilities[k])
+      const limited = typeof limit === 'number' ? keys.slice(0, limit) : keys
+      limited.forEach(k => { result[k] = facilities[k] })
+      return result
     },
 
     async loadHotelDetail() {
@@ -165,7 +167,7 @@ export default {
           star: hotelVO.star,
           rating: '5.0',          // 后端无此字段，给默认值
           commentCount: 0,        // 后端无此字段
-          facilities: this.ensureArray(hotelVO.facilities),
+          facilities: this.filterFacilities(hotelVO.facilities),
           images: hotelVO.mainImage ? [hotelVO.mainImage] : ['/static/images/hotel-default.jpg'],
           description: hotelVO.description
         }
@@ -180,7 +182,7 @@ export default {
           capacity: rt.capacity,
           bedType: rt.bedType,
           area: parseFloat(rt.area) || 0,
-          amenities: this.ensureArray(rt.amenities),
+          amenities: this.filterFacilities(rt.amenities),
           image: '/static/images/room-default.jpg'  // 后端无此字段
         }))
       } catch (e) {

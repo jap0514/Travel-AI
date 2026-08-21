@@ -6,6 +6,7 @@ import com.travel.annotation.RateLimiter;
 import com.travel.common.Result;
 import com.travel.common.ResultCode;
 import com.travel.dto.CancelOrderDTO;
+import com.travel.dto.HotelAdminDTO;
 import com.travel.dto.HotelBookingDTO;
 import com.travel.dto.PayOrderDTO;
 import com.travel.dto.QueryBookingDTO;
@@ -23,6 +24,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -49,13 +51,21 @@ public class HotelController {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
+    @Autowired
+    private CacheManager cacheManager;
+
     /** 订单幂等 Token 有效期：5分钟 */
     private static final long IDEMPOTENT_TOKEN_EXPIRE = 300;
 
     /**
-     * 根据城市获取酒店信息
-     * @param city
-     * @return
+     * 根据城市获取酒店信息（支持关键字搜索 + 星级/价格/设施筛选）
+     * @param city        城市名（必填，2-10个中文）
+     * @param keyword     搜索关键字（可选，按酒店名称模糊匹配）
+     * @param minStar     最低星级 1-5（可选）
+     * @param minPrice    最低价格（可选）
+     * @param maxPrice    最高价格（可选）
+     * @param facilities  必须包含的设施列表（可选，AND 关系，可重复传参：facilities=WiFi&facilities=游泳池）
+     * @return 酒店列表
      */
     @GetMapping("/hotelInfo/getHotelByCity")
     @RateLimiter(resourceName = "HotelController:getHotelByCity")
@@ -64,9 +74,14 @@ public class HotelController {
             @RequestParam("city")
             @NotBlank(message = "城市不能为空")
             @Pattern(regexp = "^[\\u4e00-\\u9fa5]{2,10}$", message = "城市名格式不正确（2-10个中文）")
-            String city){
+            String city,
+            @RequestParam(value = "keyword", required = false) String keyword,
+            @RequestParam(value = "minStar", required = false) Integer minStar,
+            @RequestParam(value = "minPrice", required = false) java.math.BigDecimal minPrice,
+            @RequestParam(value = "maxPrice", required = false) java.math.BigDecimal maxPrice,
+            @RequestParam(value = "facilities", required = false) java.util.List<String> facilities){
         List<HotelVO> hotelVOList = new ArrayList<>();
-        hotelVOList=hotelService.getAllHotelInfo(city);
+        hotelVOList = hotelService.getAllHotelInfo(city, keyword, minStar, minPrice, maxPrice, facilities);
         return Result.success(hotelVOList);
     }
 
@@ -248,6 +263,48 @@ public class HotelController {
                                           @RequestBody PayOrderDTO dto,
                                           @RequestAttribute Long userId){
         HotelBookingVO result = hotelBookingService.payOrder(orderNo, userId, dto);
+        return Result.success(result);
+    }
+
+    // ==================== 酒店管理接口（增删改） ====================
+
+    /**
+     * 新增酒店
+     * POST /hotel/admin/hotels
+     * Body: { name, city, address, star, latitude, longitude, contactPhone, facilities, mainImage, description }
+     */
+    @PostMapping("/admin/hotels")
+    public Result<HotelVO> createHotel(@RequestBody @Valid HotelAdminDTO dto) {
+        HotelVO vo = hotelService.createHotel(dto);
+        return Result.success(vo);
+    }
+
+    /**
+     * 修改酒店
+     * PUT /hotel/admin/hotels/{hotelId}
+     * Body: { hotelId, name, city, address, star, ... }
+     */
+    @PutMapping("/admin/hotels/{hotelId}")
+    public Result<HotelVO> updateHotel(@PathVariable("hotelId") Long hotelId,
+                                       @RequestBody @Valid HotelAdminDTO dto) {
+        dto.setHotelId(hotelId);
+        HotelVO vo = hotelService.updateHotel(dto);
+        return Result.success(vo);
+    }
+
+    /**
+     * 删除酒店
+     * DELETE /hotel/admin/hotels/{hotelId}
+     */
+    @DeleteMapping("/admin/hotels/{hotelId}")
+    public Result<Map<String, Object>> deleteHotel(@PathVariable("hotelId") Long hotelId) {
+        boolean ok = hotelService.deleteHotel(hotelId);
+        Map<String, Object> result = new HashMap<>();
+        result.put("hotelId", hotelId);
+        result.put("deleted", ok);
+        if (!ok) {
+            return Result.error(ResultCode.NOT_FOUND, "酒店不存在或已被删除");
+        }
         return Result.success(result);
     }
 }

@@ -12,10 +12,19 @@ function request(options) {
   return new Promise((resolve, reject) => {
     const token = uni.getStorageSync('token')
 
+    // 过滤掉 undefined/null 字段，避免后端类型转换报错
+    const filteredData = {}
+    const sourceData = options.data || {}
+    for (const key in sourceData) {
+      if (sourceData[key] !== undefined && sourceData[key] !== null && sourceData[key] !== '') {
+        filteredData[key] = sourceData[key]
+      }
+    }
+
     uni.request({
       url: BASE_URL + options.url,
       method: options.method || 'GET',
-      data: options.data || {},
+      data: filteredData,
       header: {
         'Content-Type': 'application/json',
         'Authorization': token ? `Bearer ${token}` : '',
@@ -99,10 +108,10 @@ export const sendMessage = (data) => request({
 
 // ============ 酒店相关 ============
 
-export const getHotelByCity = (city, page = 1, size = 10) => request({
+export const getHotelByCity = (city, keyword = '', minStar = null, minPrice = null, maxPrice = null, facilities = null, page = 1, size = 10) => request({
   url: '/hotel/hotelInfo/getHotelByCity',
   method: 'GET',
-  data: { city, page, size }
+  data: { city, keyword, minStar, minPrice, maxPrice, facilities, page, size }
 })
 
 export const getHotelById = (hotelId) => request({

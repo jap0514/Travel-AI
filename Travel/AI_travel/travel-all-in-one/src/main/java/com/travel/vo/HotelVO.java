@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Map;
 
 @Data
 @Schema(description = "酒店信息视图")
@@ -26,11 +27,15 @@ public class HotelVO {
 
     private String contactPhone;
 
-    private Object facilities;
+    @Schema(description = "设施键值对，例如 { \"WiFi\": true, \"餐厅\": [\"中餐\", \"西餐\"] }")
+    private Map<String, Object> facilities;
 
     private String mainImage;
 
     private String description;
+
+    @Schema(description = "该酒店所有房型中的最低价格（元/晚）")
+    private BigDecimal minPrice;
 
     private LocalDateTime createTime;
 
