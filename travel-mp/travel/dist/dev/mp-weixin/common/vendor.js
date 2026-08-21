@@ -95,6 +95,10 @@ const looseToNumber = (val) => {
   const n2 = parseFloat(val);
   return isNaN(n2) ? val : n2;
 };
+const toNumber = (val) => {
+  const n2 = isString(val) ? Number(val) : NaN;
+  return isNaN(n2) ? val : n2;
+};
 let _globalThis;
 const getGlobalThis = () => {
   return _globalThis || (_globalThis = typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : {});
@@ -6673,11 +6677,33 @@ function vFor(source, renderItem) {
   }
   return ret;
 }
+function withModelModifiers(fn, { number, trim }, isComponent = false) {
+  if (isComponent) {
+    return (...args) => {
+      if (trim) {
+        args = args.map((a) => a.trim());
+      } else if (number) {
+        args = args.map(toNumber);
+      }
+      return fn(...args);
+    };
+  }
+  return (event) => {
+    const value = event.detail.value;
+    if (trim) {
+      event.detail.value = value.trim();
+    } else if (number) {
+      event.detail.value = toNumber(value);
+    }
+    return fn(event);
+  };
+}
 const o = (value, key) => vOn(value, key);
 const f = (source, renderItem) => vFor(source, renderItem);
 const e = (target, ...sources) => extend(target, ...sources);
 const n = (value) => normalizeClass(value);
 const t = (val) => toDisplayString(val);
+const m = (fn, modifiers, isComponent = false) => withModelModifiers(fn, modifiers, isComponent);
 function createApp$1(rootComponent, rootProps = null) {
   rootComponent && (rootComponent.mpType = "app");
   return createVueApp(rootComponent, rootProps).use(plugin);
@@ -7511,6 +7537,7 @@ exports.createSSRApp = createSSRApp;
 exports.e = e;
 exports.f = f;
 exports.index = index;
+exports.m = m;
 exports.n = n;
 exports.o = o;
 exports.t = t;

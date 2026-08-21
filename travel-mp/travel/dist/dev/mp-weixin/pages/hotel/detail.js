@@ -1,5 +1,6 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const api_request = require("../../api/request.js");
 const common_assets = require("../../common/assets.js");
 const _sfc_main = {
   data() {
@@ -10,7 +11,8 @@ const _sfc_main = {
       checkInDate: "",
       checkOutDate: "",
       nightCount: 0,
-      selectedRoom: null
+      selectedRoom: null,
+      loading: false
     };
   },
   computed: {
@@ -21,8 +23,8 @@ const _sfc_main = {
   },
   onLoad(options) {
     this.hotelId = options.id;
-    this.loadHotelDetail();
     this.initDates();
+    this.loadHotelDetail();
   },
   methods: {
     initDates() {
@@ -36,53 +38,55 @@ const _sfc_main = {
     formatDate(date) {
       return `${date.getMonth() + 1}月${date.getDate()}日`;
     },
-    loadHotelDetail() {
-      this.hotel = {
-        id: this.hotelId,
-        name: "北京饭店",
-        address: "北京市东城区东长安街33号",
-        star: 5,
-        rating: "4.8",
-        commentCount: 1234,
-        facilities: ["免费WiFi", "停车场", "健身房", "游泳池", "SPA", "餐厅", "酒吧", "商务中心"],
-        images: [
-          "/static/images/hotel1.jpg",
-          "/static/images/hotel2.jpg",
-          "/static/images/hotel3.jpg"
-        ]
-      };
-      this.roomTypes = [
-        {
-          id: 1,
-          name: "标准间",
-          bedType: "大床1.8m/双床1.2m",
-          area: 35,
-          capacity: 2,
-          price: 588,
-          amenities: ["免费WiFi", "早餐", "独立卫浴"],
-          image: "/static/images/room1.jpg"
-        },
-        {
-          id: 2,
-          name: "豪华间",
-          bedType: "大床2.0m",
-          area: 45,
-          capacity: 2,
-          price: 888,
-          amenities: ["免费WiFi", "早餐", "海景", "迷你吧"],
-          image: "/static/images/room2.jpg"
-        },
-        {
-          id: 3,
-          name: "套房",
-          bedType: "大床2.2m",
-          area: 70,
-          capacity: 3,
-          price: 1588,
-          amenities: ["免费WiFi", "早餐", "客厅", "按摩浴缸"],
-          image: "/static/images/room3.jpg"
-        }
-      ];
+    // 过滤设施：只保留值为 truthy 的项，可选限制数量
+    filterFacilities(facilities, limit) {
+      if (!facilities || typeof facilities !== "object") return {};
+      const result = {};
+      const keys = Object.keys(facilities).filter((k) => facilities[k]);
+      const limited = typeof limit === "number" ? keys.slice(0, limit) : keys;
+      limited.forEach((k) => {
+        result[k] = facilities[k];
+      });
+      return result;
+    },
+    async loadHotelDetail() {
+      if (!this.hotelId) return;
+      this.loading = true;
+      try {
+        const [hotelVO, roomTypeList] = await Promise.all([
+          api_request.getHotelById(this.hotelId),
+          api_request.getHotelRoomType(this.hotelId)
+        ]);
+        this.hotel = {
+          id: hotelVO.hotelId,
+          name: hotelVO.name,
+          address: hotelVO.address,
+          star: hotelVO.star,
+          rating: "5.0",
+          // 后端无此字段，给默认值
+          commentCount: 0,
+          // 后端无此字段
+          facilities: this.filterFacilities(hotelVO.facilities),
+          images: hotelVO.mainImage ? [hotelVO.mainImage] : ["/static/images/hotel-default.jpg"],
+          description: hotelVO.description
+        };
+        this.roomTypes = roomTypeList.map((rt) => ({
+          id: rt.roomTypeId,
+          hotelId: rt.hotelId,
+          hotelName: rt.hotelName,
+          name: rt.name,
+          price: Number(rt.price),
+          capacity: rt.capacity,
+          bedType: rt.bedType,
+          area: parseFloat(rt.area) || 0,
+          amenities: this.filterFacilities(rt.amenities),
+          image: "/static/images/room-default.jpg"
+          // 后端无此字段
+        }));
+      } catch (e) {
+      } finally {
+        this.loading = false;
+      }
     },
     selectRoom(room) {
       this.selectedRoom = room;
@@ -125,11 +129,15 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     e: common_vendor.t($data.hotel.address),
     f: common_vendor.t($data.hotel.rating || "5.0"),
     g: common_vendor.t($data.hotel.commentCount || 0),
-    h: common_vendor.f($data.hotel.facilities, (facility, index, i0) => {
-      return {
-        a: common_vendor.t(facility),
-        b: index
-      };
+    h: common_vendor.f($data.hotel.facilities, (value, key, i0) => {
+      return common_vendor.e({
+        a: common_vendor.t(key),
+        b: Array.isArray(value)
+      }, Array.isArray(value) ? {
+        c: common_vendor.t(value.join("、"))
+      } : {}, {
+        d: key
+      });
     }),
     i: common_assets._imports_1$3,
     j: common_vendor.t($data.checkInDate || "选择日期"),
@@ -142,10 +150,10 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         c: common_vendor.t(room.bedType),
         d: common_vendor.t(room.area),
         e: common_vendor.t(room.capacity),
-        f: common_vendor.f(room.amenities.slice(0, 2), (item, index, i1) => {
+        f: common_vendor.f($options.filterFacilities(room.amenities, 2), (value, key, i1) => {
           return {
-            a: common_vendor.t(item),
-            b: index
+            a: common_vendor.t(key),
+            b: key
           };
         }),
         g: common_vendor.t(room.price),

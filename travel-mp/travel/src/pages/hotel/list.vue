@@ -21,16 +21,72 @@
     <!-- 筛选栏 -->
     <view class="filter-bar">
       <view class="filter-item" @click="toggleFilter('star')">
-        <text :class="{ active: filters.star }">星级</text>
+        <text :class="{ active: filters.star }">{{ filters.star ? `≥${minStar}星` : '星级' }}</text>
       </view>
-      <view class="filter-item" @click="toggleFilter('price')">
-        <text :class="{ active: filters.price }">价格</text>
+      <view class="filter-item" @click="showPricePicker = !showPricePicker; showFacilityPicker = false">
+        <text :class="{ active: filters.price }">{{ priceButtonText }} <text class="arrow-down">▼</text></text>
       </view>
-      <view class="filter-item" @click="toggleFilter('type')">
-        <text :class="{ active: filters.type }">房型</text>
+      <view class="filter-item" @click="showFacilityPicker = !showFacilityPicker; showPricePicker = false">
+        <text :class="{ active: filters.facility }">{{ facilityButtonText }} <text class="arrow-down">▼</text></text>
       </view>
-      <view class="filter-item" @click="toggleFilter('facility')">
-        <text :class="{ active: filters.facility }">设施</text>
+    </view>
+
+    <!-- 价格下拉：最低/最高范围输入 -->
+    <view v-if="showPricePicker" class="facility-dropdown" @click="showPricePicker = false">
+      <view class="facility-dropdown-content" @click.stop>
+        <view class="price-range-row">
+          <view class="price-input-wrap">
+            <text class="price-label">最低</text>
+            <input class="price-input"
+                   type="number"
+                   v-model.number="priceMinInput"
+                   placeholder="不限"
+                   @input="onPriceInput" />
+            <text class="price-unit">¥</text>
+          </view>
+          <text class="price-dash">—</text>
+          <view class="price-input-wrap">
+            <text class="price-label">最高</text>
+            <input class="price-input"
+                   type="number"
+                   v-model.number="priceMaxInput"
+                   placeholder="不限"
+                   @input="onPriceInput" />
+            <text class="price-unit">¥</text>
+          </view>
+        </view>
+        <view class="price-actions">
+          <view class="price-action-btn price-cancel" @click="resetPrice">
+            <text>清空</text>
+          </view>
+          <view class="price-action-btn price-confirm" @click="applyPriceRange">
+            <text>确认</text>
+          </view>
+        </view>
+        <view class="facility-divider"></view>
+        <view class="facility-option facility-reset-option" @click="resetFilters">
+          <text>重置全部筛选</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 设施下拉选择（多选） -->
+    <view v-if="showFacilityPicker" class="facility-dropdown" @click="showFacilityPicker = false">
+      <view class="facility-dropdown-content" @click.stop>
+        <view v-for="f in availableFacilities"
+              :key="f"
+              class="facility-option facility-multi-option"
+              :class="{ selected: isFacilitySelected(f) }"
+              @click="toggleFacility(f)">
+          <view class="checkbox">
+            <text v-if="isFacilitySelected(f)">✓</text>
+          </view>
+          <text>{{ f }}</text>
+        </view>
+        <view class="facility-divider"></view>
+        <view class="facility-option facility-reset-option" @click="resetFilters">
+          <text>重置全部筛选</text>
+        </view>
       </view>
     </view>
 
@@ -58,8 +114,8 @@
           </view>
           <text class="hotel-address">{{ hotel.address }}</text>
           <view class="hotel-facilities">
-            <text v-for="(facility, index) in hotel.facilities.slice(0, 3)" :key="index" class="facility-tag">
-              {{ facility }}
+            <text v-for="(value, key) in getTopFacilities(hotel.facilities, 3)" :key="key" class="facility-tag">
+              {{ key }}<text v-if="Array.isArray(value)">：{{ value.join('、') }}</text>
             </text>
           </view>
           <view class="hotel-bottom">
@@ -109,6 +165,8 @@ export default {
       selectedCity: '',
       keyword: '',
       showCity: false,
+      showFacilityPicker: false,
+      showPricePicker: false,
       isLoading: false,
       noMore: false,
       page: 1,
@@ -118,9 +176,41 @@ export default {
       filters: {
         star: false,
         price: false,
-        type: false,
         facility: false
+      },
+      // 筛选参数
+      minStar: 4,                  // 星级筛选的阈值
+      priceMin: null,              // 价格范围：最低
+      priceMax: null,              // 价格范围：最高
+      priceMinInput: '',           // 输入框：最低价（字符串）
+      priceMaxInput: '',           // 输入框：最高价（字符串）
+      selectedFacilities: [],      // 用户选中的设施列表（多选）
+      // 常用设施下拉选项
+      availableFacilities: ['WiFi', '游泳池', '健身房', '停车场', '餐厅', 'SPA', '空调', '24小时前台', '行李寄存', '会议室']
       }
+  },
+  computed: {
+    hasAnyFilter() {
+      return this.filters.star || this.filters.price || this.filters.facility
+    },
+    priceButtonText() {
+      if (this.priceMin != null && this.priceMax != null) {
+        return `¥${this.priceMin}-${this.priceMax}`
+      }
+      if (this.priceMin != null) {
+        return `≥¥${this.priceMin}`
+      }
+      if (this.priceMax != null) {
+        return `≤¥${this.priceMax}`
+      }
+      return '价格'
+    },
+    facilityButtonText() {
+      const n = this.selectedFacilities.length
+      if (n === 0) return '设施'
+      if (n === 1) return `含${this.selectedFacilities[0]}`
+      if (n <= 3) return `含${this.selectedFacilities.join('、')}`
+      return `含${this.selectedFacilities.slice(0, 2).join('、')}等${n}项`
     }
   },
   onLoad() {
@@ -146,7 +236,83 @@ export default {
     },
 
     toggleFilter(type) {
+      // 价格/设施都用专用下拉，不通过 toggleFilter 切换
+      if (type === 'price' || type === 'facility') return
       this.filters[type] = !this.filters[type]
+      this.searchHotel()
+    },
+
+    // 应用价格范围
+    applyPriceRange() {
+      const min = this.priceMinInput === '' || this.priceMinInput == null
+        ? null : Number(this.priceMinInput)
+      const max = this.priceMaxInput === '' || this.priceMaxInput == null
+        ? null : Number(this.priceMaxInput)
+      // 校验
+      if (min != null && min < 0) {
+        uni.showToast({ title: '最低价不能为负', icon: 'none' })
+        return
+      }
+      if (max != null && max < 0) {
+        uni.showToast({ title: '最高价不能为负', icon: 'none' })
+        return
+      }
+      if (min != null && max != null && min > max) {
+        uni.showToast({ title: '最低价不能大于最高价', icon: 'none' })
+        return
+      }
+      this.priceMin = min
+      this.priceMax = max
+      this.filters.price = (min != null || max != null)
+      this.showPricePicker = false
+      this.searchHotel()
+    },
+
+    // 清空价格筛选
+    resetPrice() {
+      this.priceMin = null
+      this.priceMax = null
+      this.priceMinInput = ''
+      this.priceMaxInput = ''
+      this.filters.price = false
+      this.showPricePicker = false
+      this.searchHotel()
+    },
+
+    // 输入时实时同步（可选，用于校验）
+    onPriceInput() {
+      // 这里不做实时搜索，等用户点"确认"再搜
+    },
+
+    // 判断某设施是否已选中
+    isFacilitySelected(facility) {
+      return this.selectedFacilities.includes(facility)
+    },
+
+    // 切换设施的选中状态
+    toggleFacility(facility) {
+      const idx = this.selectedFacilities.indexOf(facility)
+      if (idx >= 0) {
+        this.selectedFacilities.splice(idx, 1)  // 已选中 → 取消
+      } else {
+        this.selectedFacilities.push(facility)  // 未选中 → 选中
+      }
+      this.filters.facility = this.selectedFacilities.length > 0
+      this.searchHotel()
+    },
+
+    resetFilters() {
+      this.filters.star = false
+      this.filters.price = false
+      this.filters.facility = false
+      this.priceMin = null
+      this.priceMax = null
+      this.priceMinInput = ''
+      this.priceMaxInput = ''
+      this.selectedFacilities = []
+      this.showPricePicker = false
+      this.showFacilityPicker = false
+      this.searchHotel()
     },
 
     searchHotel() {
@@ -156,14 +322,15 @@ export default {
       this.loadHotels()
     },
 
-    // 把后端 Object 类型的 facilities 统一转换为数组
-    ensureArray(field) {
-      if (Array.isArray(field)) return field
-      if (field == null) return []
-      if (typeof field === 'string') {
-        try { return JSON.parse(field) } catch (e) { return [] }
-      }
-      return []
+    // 从设施对象里取前 N 个展示项，过滤掉值为 falsy 的
+    getTopFacilities(facilities, limit) {
+      if (!facilities || typeof facilities !== 'object') return {}
+      const keys = Object.keys(facilities)
+        .filter(k => facilities[k])
+        .slice(0, limit)
+      const result = {}
+      keys.forEach(k => { result[k] = facilities[k] })
+      return result
     },
 
     async loadHotels() {
@@ -176,17 +343,26 @@ export default {
       this.isLoading = true
 
       try {
-        const list = await getHotelByCity(this.selectedCity, this.page, this.pageSize)
+        const list = await getHotelByCity(
+          this.selectedCity,
+          this.keyword,
+          this.filters.star ? this.minStar : null,
+          this.filters.price ? this.priceMin : null,
+          this.filters.price ? this.priceMax : null,
+          this.selectedFacilities.length > 0 ? this.selectedFacilities : null,
+          this.page,
+          this.pageSize
+        )
 
-        // 字段映射：hotelId → id, facilities (Object) → Array
+        // 字段映射：hotelId → id, facilities 保留后端返回的键值对
         const mapped = (list || []).map(h => ({
           id: h.hotelId,
           name: h.name,
           address: h.address,
           star: h.star,
-          startPrice: null,       // 后端无此字段
+          startPrice: h.minPrice,    // 用后端查到的最低房型价格
           rating: null,           // 后端无此字段
-          facilities: this.ensureArray(h.facilities),
+          facilities: h.facilities || {},
           mainImage: h.mainImage || '/static/images/hotel-default.jpg'
         }))
 
@@ -294,6 +470,155 @@ export default {
         background: rgba(0, 122, 255, 0.1);
       }
     }
+
+    .arrow-down {
+      font-size: 18rpx;
+      margin-left: 4rpx;
+      color: #999;
+    }
+  }
+}
+
+// 设施下拉选择
+.facility-dropdown {
+  position: fixed;
+  top: 180rpx;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 998;
+}
+
+.facility-dropdown-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  padding: 20rpx 0;
+  max-height: 600rpx;
+  overflow-y: auto;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.facility-option {
+  padding: 24rpx 40rpx;
+  font-size: 28rpx;
+  color: #333;
+  border-bottom: 1rpx solid #f0f0f0;
+
+  &:active {
+    background: #f5f5f5;
+  }
+
+  &.selected {
+    color: #007AFF;
+    background: rgba(0, 122, 255, 0.08);
+  }
+
+  &.facility-reset-option {
+    color: #ff4d4f;
+    text-align: center;
+    border-bottom: none;
+    background: #fafafa;
+  }
+}
+
+// 多选设施项：左侧 checkbox
+.facility-multi-option {
+  display: flex;
+  align-items: center;
+
+  .checkbox {
+    width: 36rpx;
+    height: 36rpx;
+    border: 2rpx solid #ccc;
+    border-radius: 50%;
+    margin-right: 20rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28rpx;
+    color: #fff;
+    background: #fff;
+    transition: all 0.2s;
+  }
+
+  &.selected .checkbox {
+    background: #007AFF;
+    border-color: #007AFF;
+  }
+}
+
+.facility-divider {
+  height: 16rpx;
+  background: #f5f5f5;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+// 价格范围输入
+.price-range-row {
+  display: flex;
+  align-items: center;
+  padding: 30rpx 40rpx;
+  gap: 20rpx;
+}
+
+.price-input-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  border: 2rpx solid #e0e0e0;
+  border-radius: 12rpx;
+  padding: 12rpx 20rpx;
+
+  .price-label {
+    font-size: 24rpx;
+    color: #999;
+    margin-right: 12rpx;
+  }
+
+  .price-input {
+    flex: 1;
+    font-size: 28rpx;
+    color: #333;
+    text-align: right;
+  }
+
+  .price-unit {
+    font-size: 24rpx;
+    color: #999;
+    margin-left: 8rpx;
+  }
+}
+
+.price-dash {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.price-actions {
+  display: flex;
+  padding: 0 40rpx 20rpx;
+  gap: 20rpx;
+}
+
+.price-action-btn {
+  flex: 1;
+  text-align: center;
+  padding: 16rpx 0;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+
+  &.price-cancel {
+    background: #f5f5f5;
+    color: #666;
+  }
+
+  &.price-confirm {
+    background: #007AFF;
+    color: #fff;
   }
 }
 

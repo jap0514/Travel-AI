@@ -85,19 +85,20 @@ const _sfc_main = {
     goHelp() {
       common_vendor.index.showToast({ title: "帮助与反馈", icon: "none" });
     },
-    logout() {
-      common_vendor.index.showModal({
+    async logout() {
+      const res = await common_vendor.index.showModal({
         title: "提示",
-        content: "确定要退出登录吗？",
-        success: (res) => {
-          if (res.confirm) {
-            common_vendor.index.removeStorageSync("token");
-            common_vendor.index.removeStorageSync("userInfo");
-            common_vendor.index.showToast({ title: "已退出登录", icon: "success" });
-            this.checkLogin();
-          }
-        }
+        content: "确定要退出登录吗？"
       });
+      if (!res.confirm) return;
+      try {
+        await api_request.logout();
+      } catch (e) {
+      } finally {
+        common_vendor.index.removeStorageSync("token");
+        common_vendor.index.removeStorageSync("userInfo");
+        common_vendor.index.reLaunch({ url: "/pages/login/login" });
+      }
     }
   }
 };

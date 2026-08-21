@@ -111,9 +111,16 @@ export default {
         uni.hideLoading()
         uni.showToast({ title: '登录成功', icon: 'success' })
 
-        // 延迟返回上一页
+        // 延迟跳转：优先返回上一页，否则跳到首页
         setTimeout(() => {
-          uni.navigateBack()
+          const pages = getCurrentPages()
+          if (pages.length > 1) {
+            // 有上一页，正常返回
+            uni.navigateBack()
+          } else {
+            // 是首页（没有上一页），跳到 tabBar 首页
+            uni.switchTab({ url: '/pages/index/index' })
+          }
         }, 1500)
 
       } catch (err) {

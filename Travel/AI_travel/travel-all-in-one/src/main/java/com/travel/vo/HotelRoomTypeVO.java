@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Map;
 
 @Data
 @Schema(description = "酒店房间类型信息视图")
@@ -51,9 +52,10 @@ public class HotelRoomTypeVO {
     private String area;
 
     /**
-     * 房间设施
+     * 房间设施键值对，例如 { "WiFi": true, "空调": true }
      */
-    private Object amenities;
+    @Schema(description = "房间设施键值对")
+    private Map<String, Object> amenities;
 
     private LocalDateTime createTime;
 
