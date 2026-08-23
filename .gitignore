@@ -15,3 +15,21 @@ Thumbs.db
 *.env
 .env.*
 *.env.*
+
+# uni-app 编译产物
+dist/
+unpackage/
+
+# 日志文件
+*.log
+logs/
+
+# 备份文件
+*.bak
+*.bak1
+
+# Python 离线依赖
+wheelhouse/
+
+# Node 依赖
+node_modules/
