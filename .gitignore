@@ -33,3 +33,6 @@ wheelhouse/
 
 # Node 依赖
 node_modules/
+
+# 压测数据/脚本（本地用，不上传）
+Data/
