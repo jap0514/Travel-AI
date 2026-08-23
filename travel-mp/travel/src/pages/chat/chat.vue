@@ -51,34 +51,118 @@
           <!-- AI消息 -->
           <view v-else class="message-item ai">
             <image class="msg-avatar" src="/static/images/ai-avatar.png" mode="aspectFill"></image>
-            <view class="msg-bubble ai-bubble">
+            <view class="msg-bubble ai-bubble" :class="{ 'msg-bubble-wide': msg.type === 'plan','plan-bubble': msg.type === 'plan' }">
               <text v-if="msg.type === 'text'">{{ msg.content }}</text>
-              <!-- 行程规划卡片 -->
-              <view v-else-if="msg.type === 'plan'" class="plan-card">
-                <view class="plan-header">
-                  <text class="plan-title">{{ msg.plan.title }}</text>
-                  <text class="plan-destination">{{ msg.plan.destination }}</text>
-                </view>
-                <view class="plan-days">{{ msg.plan.days }}天行程</view>
-                <view class="plan-budget">预算: {{ msg.plan.budget }}</view>
-                <view class="plan-details">
-                  <view v-for="(day, dIndex) in msg.plan.daily_plans" :key="dIndex" class="day-item">
-                    <view class="plan-day-title">Day {{ day.day }} · {{ day.theme }}</view>
-                    <view v-for="(act, aIndex) in day.activities" :key="aIndex" class="activity-item">
-                      <view class="activity-time">{{ act.time }}</view>
-                      <view class="activity-body">
-                        <view class="activity-name">{{ act.name }}</view>
-                        <view class="activity-desc">{{ act.description }}</view>
-                        <view class="activity-loc" v-if="act.location">📍 {{ act.location }}</view>
-                      </view>
-                    </view>
-                    <view v-if="day.estimated_cost" class="day-cost">当日预算约 ¥{{ day.estimated_cost }}</view>
+              <!-- 行程规划卡片（按天翻页，可翻转） -->
+              <view v-else-if="msg.type === 'plan'" class="plan-card-deck" @click="openChatPlanModal(msg)">
+                <!-- 卡片头 -->
+                <view class="plan-card-header">
+                  <view class="plan-card-header-left">
+                    <text class="plan-title">{{ msg.plan.title }}</text>
+                    <text class="plan-meta-line">{{ msg.plan.destination }} · {{ msg.plan.days }}天 · 预算{{ msg.plan.budget }}</text>
+                  </view>
+                  <view class="plan-card-header-right" @click.stop="toggleChatCardAllFlip(msg)">
+                    <text class="flip-toggle-btn">{{ msg.chatCardAllFlipped ? '📖 合上' : '📖 展开' }}</text>
                   </view>
                 </view>
-                <view class="plan-total" v-if="msg.plan.total_estimated_cost">
-                  总预算约 ¥{{ msg.plan.total_estimated_cost }}
+
+                <!-- swiper 翻页：每天一张可翻转卡片 -->
+                <swiper
+                  class="chat-swiper"
+                  :current="msg.chatCardCurrentIndex || 0"
+                  @change="onChatSwiperChange(msg, $event)"
+                >
+                  <swiper-item
+                    v-for="(day, idx) in getMsgDailyPlans(msg)"
+                    :key="idx"
+                    class="chat-card-item"
+                  >
+                    <view
+                      class="chat-day-card"
+                      :class="{ 'is-flipped': isMsgCardFlipped(msg, idx) }"
+                      @click.stop="toggleMsgCardFlip(msg, idx)"
+                    >
+                      <!-- 正面 -->
+                      <view class="card-face card-front">
+                        <view class="day-badge-row">
+                          <view class="day-badge">Day {{ day.day }}</view>
+                        </view>
+                        <text class="day-theme-text">{{ day.theme || '行程主题' }}</text>
+                        <view class="day-stats">
+                          <view class="stat-block">
+                            <text class="stat-num">{{ (day.activities || []).length }}</text>
+                            <text class="stat-label">活动</text>
+                          </view>
+                          <view class="stat-divider"></view>
+                          <view class="stat-block">
+                            <text class="stat-num">¥{{ calcDayCost(day.activities) }}</text>
+                            <text class="stat-label">当日费用</text>
+                          </view>
+                        </view>
+                        <view class="day-preview">
+                          <view
+                            v-for="(act, i) in (day.activities || []).slice(0, 3)"
+                            :key="i"
+                            class="preview-row"
+                          >
+                            <text class="preview-time-text">{{ act.time }}</text>
+                            <text class="preview-name-text">{{ act.name }}</text>
+                          </view>
+                          <text v-if="(day.activities || []).length > 3" class="preview-more-text">
+                            还有 {{ (day.activities || []).length - 3 }} 个活动...
+                          </text>
+                        </view>
+                        <view class="card-footer-tip">
+                          <text class="flip-hint">点击卡片查看详细行程 ↻</text>
+                        </view>
+                      </view>
+                      <!-- 背面 -->
+                      <view class="card-face card-back">
+                        <view class="back-header-mini">
+                          <view class="back-badge-mini">Day {{ day.day }} · 详情</view>
+                          <text class="back-theme-mini">{{ day.theme }}</text>
+                        </view>
+                        <scroll-view class="activity-scroll" scroll-y>
+                          <view
+                            v-for="(act, aIdx) in (day.activities || [])"
+                            :key="aIdx"
+                            class="activity-row-card"
+                          >
+                            <view class="activity-time-row">
+                              <text class="act-time-text">{{ act.time }}</text>
+                              <text v-if="act.cost" class="act-cost-text">¥{{ act.cost }}</text>
+                            </view>
+                            <text class="act-name-text">{{ act.name }}</text>
+                            <text v-if="act.location" class="act-loc-text">📍 {{ act.location }}</text>
+                            <text v-if="act.transportation" class="act-transport-text">🚇 {{ act.transportation }}</text>
+                            <text v-if="act.description" class="act-desc-text">{{ act.description }}</text>
+                          </view>
+                        </scroll-view>
+                        <view class="card-footer-tip">
+                          <text class="flip-hint">点击卡片返回 ↻</text>
+                        </view>
+                      </view>
+                    </view>
+                  </swiper-item>
+                </swiper>
+
+                <!-- 左右切换按钮 -->
+                <view class="nav-buttons-mini">
+                  <view
+                    class="nav-btn-mini"
+                    :class="{ disabled: !msg.chatCardCurrentIndex }"
+                    @click.stop="prevChatCard(msg)"
+                  >‹ 昨天</view>
+                  <view
+                    class="nav-btn-mini"
+                    :class="{ disabled: msg.chatCardCurrentIndex >= getMsgDailyPlans(msg).length - 1 }"
+                    @click.stop="nextChatCard(msg)"
+                  >明天 ›</view>
                 </view>
-                <button class="book-hotel-btn" @click="goBookHotel(msg.plan.destination)">预订酒店</button>
+
+                <view class="plan-card-footer" v-if="msg.plan.total_estimated_cost">
+                  <text class="plan-total-line">总预算约 ¥{{ msg.plan.total_estimated_cost }}</text>
+                </view>
               </view>
             </view>
           </view>
@@ -158,6 +242,118 @@
         </view>
       </view>
     </view>
+
+    <!-- ============== AI 行程详情弹窗（与"我的行程"一致） ============== -->
+    <view v-if="showChatPlanModal" class="modal-mask" @click="closeChatPlanModal">
+      <view class="modal-container" @click.stop>
+        <!-- 弹窗头部 -->
+        <view class="modal-header">
+          <view class="modal-close" @click="closeChatPlanModal">×</view>
+          <view class="modal-title-wrap">
+            <text class="modal-title">{{ currentModalMsg.plan.title }}</text>
+            <text class="modal-sub">{{ currentModalMsg.plan.destination }} · 第 {{ modalCurrentIndex + 1 }} / {{ getModalDailyPlans().length }} 天</text>
+          </view>
+          <view class="modal-flip-btn" catchtap="toggleModalAllFlip">
+            <text>{{ modalAllFlipped ? '合上' : '展开' }}</text>
+          </view>
+        </view>
+
+        <!-- 卡片堆（去 swiper 改用单卡 + 左右按钮，避免 swiper 拦截） -->
+        <view v-if="getModalDailyPlans().length === 0" class="plan-empty">
+          <text>暂无详细行程数据</text>
+        </view>
+        <view v-else class="card-deck-container">
+          <!-- 单张卡片（每天一张） -->
+          <view class="modal-card-wrapper">
+            <view
+              v-if="getModalDailyPlans()[modalCurrentIndex]"
+              class="modal-day-card"
+              :class="{ 'is-flipped': isModalCardFlipped(modalCurrentIndex) }"
+              @click="toggleModalCardFlip(modalCurrentIndex)">
+              <!-- 正面 -->
+              <view class="modal-card-face modal-card-front">
+                <view class="modal-day-badge-row">
+                  <view class="modal-day-badge">Day {{ getModalDailyPlans()[modalCurrentIndex].day }}</view>
+                </view>
+                <text class="modal-day-theme">{{ getModalDailyPlans()[modalCurrentIndex].theme || '行程主题' }}</text>
+                <view class="modal-day-stats">
+                  <view class="modal-stat-block">
+                    <text class="modal-stat-num">{{ (getModalDailyPlans()[modalCurrentIndex].activities || []).length }}</text>
+                    <text class="modal-stat-label">活动</text>
+                  </view>
+                  <view class="modal-stat-divider"></view>
+                  <view class="modal-stat-block">
+                    <text class="modal-stat-num">¥{{ calcDayCost(getModalDailyPlans()[modalCurrentIndex].activities) }}</text>
+                    <text class="modal-stat-label">当日费用</text>
+                  </view>
+                </view>
+                <view class="modal-day-preview">
+                  <view
+                    v-for="(act, i) in (getModalDailyPlans()[modalCurrentIndex].activities || []).slice(0, 3)"
+                    :key="i"
+                    class="modal-preview-row">
+                    <text class="modal-preview-time">{{ act.time }}</text>
+                    <text class="modal-preview-name">{{ act.name }}</text>
+                  </view>
+                  <text v-if="(getModalDailyPlans()[modalCurrentIndex].activities || []).length > 3" class="modal-preview-more">
+                    还有 {{ (getModalDailyPlans()[modalCurrentIndex].activities || []).length - 3 }} 个活动...
+                  </text>
+                </view>
+                <view class="modal-card-footer">
+                  <text class="modal-flip-hint">点击卡片查看详细行程 ↻</text>
+                </view>
+              </view>
+              <!-- 背面 -->
+              <view class="modal-card-face modal-card-back">
+                <view class="modal-back-header">
+                  <view class="modal-back-badge">Day {{ getModalDailyPlans()[modalCurrentIndex].day }} · 详情</view>
+                  <text class="modal-back-theme">{{ getModalDailyPlans()[modalCurrentIndex].theme }}</text>
+                </view>
+                <scroll-view class="modal-activity-list" scroll-y>
+                  <view
+                    v-for="(act, actIdx) in (getModalDailyPlans()[modalCurrentIndex].activities || [])"
+                    :key="actIdx"
+                    class="modal-activity-card">
+                    <view class="modal-activity-time-row">
+                      <text class="modal-act-time">{{ act.time }}</text>
+                      <text v-if="act.cost" class="modal-act-cost">¥{{ act.cost }}</text>
+                    </view>
+                    <text class="modal-act-name">{{ act.name }}</text>
+                    <text v-if="act.location" class="modal-act-loc">📍 {{ act.location }}</text>
+                    <text v-if="act.transportation" class="modal-act-transport">🚇 {{ act.transportation }}</text>
+                    <text v-if="act.description" class="modal-act-desc">{{ act.description }}</text>
+                  </view>
+                </scroll-view>
+                <view class="modal-card-footer">
+                  <text class="modal-flip-hint">点击卡片返回 ↻</text>
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <!-- 左右切换按钮 + 指示点 -->
+          <view class="modal-nav-row">
+            <view
+              class="modal-nav-btn modal-nav-prev"
+              :class="{ disabled: modalCurrentIndex === 0 }"
+              @click="prevModalCard">‹ 昨天</view>
+            <!-- 指示点 -->
+            <view class="modal-dots">
+              <view
+                v-for="(d, i) in getModalDailyPlans()"
+                :key="i"
+                class="modal-dot"
+                :class="{ active: modalCurrentIndex === i }"
+                @click="modalCurrentIndex = i"></view>
+            </view>
+            <view
+              class="modal-nav-btn modal-nav-next"
+              :class="{ disabled: modalCurrentIndex >= getModalDailyPlans().length - 1 }"
+              @click="nextModalCard">明天 ›</view>
+          </view>
+        </view>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -190,7 +386,17 @@ export default {
         destination: '',
         startDate: '',
         days: 3
-      }
+      },
+      // 行程卡片翻页相关
+      chatCardCurrentIndex: 0,
+      chatCardFlipped: {},
+      chatCardAllFlipped: false,
+      // 行程详情弹窗
+      showChatPlanModal: false,
+      currentModalMsg: null,
+      modalCurrentIndex: 0,
+      modalCardFlipped: {},
+      modalAllFlipped: false
     }
   },
   onLoad(options) {
@@ -219,6 +425,19 @@ export default {
   onUnload() {
     // 页面卸载时断开 WebSocket
     this.disconnectWebSocket()
+  },
+
+  // 拦截物理返回键/导航栏返回按钮，直接跳到首页（不层层返回）
+  onBackPress(options) {
+    if (options.from === 'backbutton') {
+      uni.reLaunch({ url: '/pages/index/index' })
+      return true
+    }
+  },
+
+  // 自定义返回按钮：清栈回首页
+  goHome() {
+    uni.reLaunch({ url: '/pages/index/index' })
   },
   methods: {
     // ==================== WebSocket ====================
@@ -258,7 +477,8 @@ export default {
         content: data.content,
         planJson: data.planJson,
         plan: plan,
-        interaction: data.interaction
+        interaction: data.interaction,
+		chatCardCurrentIndex: 0,          // 初始化
       })
 
       // push 之后再检查整个消息列表，避免后端回声导致重复弹窗
@@ -390,7 +610,8 @@ export default {
 					plan: plan,
 					type: plan ? 'plan' : 'text',
 					flowId: item.flowId,
-					interaction: item.interaction
+					interaction: item.interaction,
+					chatCardCurrentIndex: 0,          // 初始化
 				}
 			})
 			// 历史恢复：扫描整个消息列表决定是否弹窗
@@ -403,7 +624,8 @@ export default {
     },
 
     openSession(session) {
-      uni.navigateTo({
+      // 用 redirectTo 替换当前页（避免栈深度增加），这样点返回直接到首页
+      uni.redirectTo({
         url: `/pages/chat/chat?sessionId=${session.sessionId}`
       })
     },
@@ -536,6 +758,177 @@ export default {
 
     goBookHotel(destination) {
       uni.switchTab({ url: '/pages/hotel/list' })
+    },
+
+    // ============== 行程卡片翻页（每条 AI 消息独立状态） ==============
+
+    // 解析消息里的 dailyPlans（兼容字符串/数组/驼峰/蛇形）
+    getMsgDailyPlans(msg) {
+      if (!msg || !msg.plan) return []
+      let plans = msg.plan.dailyPlans || msg.plan.daily_plans || msg.plan.dayPlans || []
+      if (typeof plans === 'string') {
+        try { plans = JSON.parse(plans) } catch (e) { plans = [] }
+      }
+      return Array.isArray(plans) ? plans : []
+    },
+
+    isMsgCardFlipped(msg, idx) {
+      const key = this.getMsgFlipKey(msg)
+      return (msg[key] && msg[key][idx]) || false
+    },
+
+    toggleMsgCardFlip(msg, idx) {
+      const key = this.getMsgFlipKey(msg)
+      if (!msg[key]) msg[key] = {}
+      msg[key][idx] = !msg[key][idx]
+      // 触发响应式更新（Vue 2）
+      this.$set(msg, key, { ...msg[key] })
+      this.updateMsgAllFlipped(msg)
+    },
+
+    toggleChatCardAllFlip(msg) {
+      const key = this.getMsgFlipKey(msg)
+      const newFlipped = !msg.chatCardAllFlipped
+      const plans = this.getMsgDailyPlans(msg)
+      const f = {}
+      plans.forEach((_, idx) => { f[idx] = newFlipped })
+      this.$set(msg, key, f)
+      msg.chatCardAllFlipped = newFlipped
+    },
+
+    updateMsgAllFlipped(msg) {
+      const key = this.getMsgFlipKey(msg)
+      const plans = this.getMsgDailyPlans(msg)
+      const flippedCount = Object.values(msg[key] || {}).filter(v => v).length
+      msg.chatCardAllFlipped = plans.length > 0 && flippedCount === plans.length
+    },
+
+    getMsgFlipKey(msg) {
+      // 用消息的唯一标识（planId + 时间戳）作为 key，让每条消息独立
+      return `chatCardFlipped_${msg.plan && (msg.plan.planId || msg.plan.plan_id || msg._id || Math.random())}`
+    },
+
+    onChatSwiperChange(msg, e) {
+      const idx = e.detail.current
+      // 直接修改 msg 上的字段（Vue 2 响应式）
+      msg.chatCardCurrentIndex = idx
+    },
+
+    prevChatCard(msg) {
+      if (msg.chatCardCurrentIndex > 0) {
+        msg.chatCardCurrentIndex--
+      }
+    },
+
+    nextChatCard(msg) {
+      const plans = this.getMsgDailyPlans(msg)
+      if (msg.chatCardCurrentIndex < plans.length - 1) {
+        msg.chatCardCurrentIndex++
+      }
+    },
+
+    // 计算当日总费用
+    calcDayCost(activities) {
+      if (!activities || activities.length === 0) return 0
+      return activities.reduce((total, a) => total + (Number(a.cost) || 0), 0)
+    },
+
+    // 打开聊天行程详情弹窗
+    openChatPlanModal(msg) {
+      console.log('openChatPlanModal 被调用, msg=', msg)
+      this.currentModalMsg = msg
+      this.modalCurrentIndex = 0
+      this.modalCardFlipped = {}
+      this.modalAllFlipped = false
+      this.showChatPlanModal = true
+      console.log('showChatPlanModal=', this.showChatPlanModal, 'currentModalMsg=', this.currentModalMsg)
+    },
+
+    // 关闭弹窗
+    closeChatPlanModal() {
+      console.log('closeChatPlanModal 被调用')
+      this.showChatPlanModal = false
+      this.currentModalMsg = null
+    },
+
+    // 获取当前 plan 的稳定 key（用 planId 区分不同 plan）
+    getCurrentPlanKey() {
+      const p = this.currentModalMsg && this.currentModalMsg.plan
+      if (!p) return null
+      return p.planId || p.plan_id || p.title || null
+    },
+
+    // 弹窗内：单卡翻转（按 plan 独立存储）
+    toggleModalCardFlip(idx) {
+      const planKey = this.getCurrentPlanKey()
+      if (!planKey) return
+      console.log('toggleModalCardFlip 被调用, planKey=', planKey, 'idx=', idx)
+
+      const planFlipped = this.modalCardFlipped[planKey] || {}
+      this.modalCardFlipped = {
+        ...this.modalCardFlipped,
+        [planKey]: {
+          ...planFlipped,
+          [idx]: !planFlipped[idx]
+        }
+      }
+      this.updateModalAllFlipped()
+    },
+
+    isModalCardFlipped(idx) {
+      const planKey = this.getCurrentPlanKey()
+      if (!planKey) return false
+      const planFlipped = this.modalCardFlipped[planKey]
+      return (planFlipped && planFlipped[idx]) || false
+    },
+
+    updateModalAllFlipped() {
+      const planKey = this.getCurrentPlanKey()
+      if (!planKey) return
+      const plans = this.getModalDailyPlans()
+      const planFlipped = this.modalCardFlipped[planKey] || {}
+      const flippedCount = Object.values(planFlipped).filter(v => v).length
+      this.modalAllFlipped = plans.length > 0 && flippedCount === plans.length
+    },
+
+    toggleModalAllFlip() {
+      console.log('toggleModalAllFlip 被调用')
+      const planKey = this.getCurrentPlanKey()
+      if (!planKey) return
+      const plans = this.getModalDailyPlans()
+      this.modalAllFlipped = !this.modalAllFlipped
+      const f = {}
+      plans.forEach((_, idx) => { f[idx] = this.modalAllFlipped })
+      this.modalCardFlipped = {
+        ...this.modalCardFlipped,
+        [planKey]: f
+      }
+    },
+
+    // 弹窗内的 swiper 切换
+    onModalSwiperChange(e) {
+      this.modalCurrentIndex = e.detail.current
+    },
+    prevModalCard() {
+      if (this.modalCurrentIndex > 0) {
+        this.modalCurrentIndex--
+      }
+    },
+    nextModalCard() {
+      const plans = this.getModalDailyPlans()
+      if (this.modalCurrentIndex < plans.length - 1) {
+        this.modalCurrentIndex++
+      }
+    },
+
+    // 弹窗内的 dailyPlans 解析
+    getModalDailyPlans() {
+      if (!this.currentModalMsg || !this.currentModalMsg.plan) return []
+      let plans = this.currentModalMsg.plan.dailyPlans || this.currentModalMsg.plan.daily_plans || []
+      if (typeof plans === 'string') {
+        try { plans = JSON.parse(plans) } catch (e) { plans = [] }
+      }
+      return Array.isArray(plans) ? plans : []
     }
   }
 }
@@ -701,6 +1094,12 @@ export default {
     line-height: 1.5;
   }
 
+  // 包含 plan 卡片的气泡放宽
+  .msg-bubble-wide {
+    width: 70% !important;               /* 取消固定宽度，由内容撑开 */
+    max-width: calc(100vw - 80rpx) !important; /* 左右各留 40rpx 边距，不贴边 */
+  }
+
   .user-bubble {
     background: #007AFF;
     color: #fff;
@@ -852,6 +1251,402 @@ export default {
   }
 }
 
+/* ============== 行程卡片翻页（嵌入式） ============== */
+.plan-card-deck {
+  margin-top: 16rpx;
+  width: 100%;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx 16rpx 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+}
+
+.plan-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 8rpx;
+  margin-bottom: 16rpx;
+
+  .plan-card-header-left {
+    flex: 1;
+    min-width: 0;
+
+    .plan-title {
+      display: block;
+      font-size: 30rpx;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 6rpx;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .plan-meta-line {
+      display: block;
+      font-size: 22rpx;
+      color: #666;
+    }
+  }
+
+  .plan-card-header-right {
+    flex-shrink: 0;
+
+    .flip-toggle-btn {
+      display: inline-block;
+      font-size: 20rpx;
+      color: #667eea;
+      background: rgba(102, 126, 234, 0.1);
+      padding: 6rpx 14rpx;
+      border-radius: 18rpx;
+    }
+  }
+}
+
+/* 简短预览（前 3 天） */
+.plan-preview-list {
+  margin-top: 8rpx;
+
+  .preview-day-row {
+    display: flex;
+    align-items: center;
+    padding: 14rpx 8rpx;
+    border-bottom: 1rpx solid #f0f0f0;
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+
+    .preview-day-tag {
+      flex-shrink: 0;
+      display: inline-block;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      font-size: 22rpx;
+      font-weight: 600;
+      padding: 4rpx 14rpx;
+      border-radius: 16rpx;
+      margin-right: 16rpx;
+    }
+
+    .preview-day-name {
+      flex: 1;
+      font-size: 26rpx;
+      color: #333;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .preview-day-activities {
+      flex-shrink: 0;
+      font-size: 22rpx;
+      color: #999;
+      margin-left: 12rpx;
+    }
+  }
+
+  .preview-more-link {
+    display: block;
+    text-align: center;
+    font-size: 22rpx;
+    color: #667eea;
+    padding: 14rpx 0 4rpx;
+  }
+}
+
+.plan-card-footer {
+  margin-top: 12rpx;
+  padding-top: 12rpx;
+  border-top: 1rpx solid #f0f0f0;
+  text-align: right;
+
+  .plan-total-line {
+    font-size: 24rpx;
+    font-weight: 600;
+    color: #fa541c;
+  }
+}
+
+.plan-empty {
+  text-align: center;
+  padding: 60rpx 0;
+  color: #999;
+  font-size: 26rpx;
+}
+
+.chat-card-deck {
+  width: 100%;
+}
+
+.chat-swiper {
+  height: 720rpx;
+}
+
+.chat-card-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6rpx;
+}
+
+.chat-day-card {
+  width: 100%;
+  height: 700rpx;
+  position: relative;
+  border-radius: 16rpx;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.is-flipped {
+    transform: rotateY(180deg);
+  }
+}
+
+.card-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 16rpx;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+  background: linear-gradient(180deg, #f8f9ff 0%, #fff 100%);
+  box-shadow: 0 6rpx 16rpx rgba(0, 0, 0, 0.08);
+}
+
+.card-front {
+  display: flex;
+  flex-direction: column;
+  padding: 24rpx 24rpx 16rpx;
+}
+
+.day-badge-row {
+  margin-bottom: 12rpx;
+
+  .day-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    font-size: 24rpx;
+    font-weight: 600;
+    padding: 4rpx 18rpx;
+    border-radius: 18rpx;
+  }
+}
+
+.day-theme-text {
+  display: block;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+  margin-bottom: 16rpx;
+}
+
+.day-stats {
+  display: flex;
+  background: rgba(102, 126, 234, 0.06);
+  border-radius: 12rpx;
+  padding: 16rpx 0;
+  margin-bottom: 16rpx;
+
+  .stat-block {
+    flex: 1;
+    text-align: center;
+  }
+
+  .stat-divider {
+    width: 1rpx;
+    background: rgba(0, 0, 0, 0.08);
+  }
+
+  .stat-num {
+    display: block;
+    font-size: 28rpx;
+    font-weight: 700;
+    color: #667eea;
+  }
+
+  .stat-label {
+    display: block;
+    font-size: 20rpx;
+    color: #999;
+    margin-top: 2rpx;
+  }
+}
+
+.day-preview {
+  flex: 1;
+  overflow: hidden;
+
+  .preview-row {
+    display: flex;
+    align-items: center;
+    gap: 12rpx;
+    padding: 6rpx 0;
+    border-bottom: 1rpx dashed #eee;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .preview-time-text {
+      font-size: 20rpx;
+      color: #667eea;
+      font-weight: 600;
+      width: 110rpx;
+      flex-shrink: 0;
+    }
+
+    .preview-name-text {
+      font-size: 22rpx;
+      color: #333;
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  .preview-more-text {
+    display: block;
+    font-size: 20rpx;
+    color: #999;
+    text-align: center;
+    padding-top: 8rpx;
+  }
+}
+
+.card-footer-tip {
+  text-align: center;
+  padding: 8rpx 0 0;
+
+  .flip-hint {
+    font-size: 20rpx;
+    color: #999;
+    animation: pulse 2s infinite;
+  }
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+}
+
+.back-header-mini {
+  padding: 14rpx 20rpx;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  flex-shrink: 0;
+
+  .back-badge-mini {
+    display: inline-block;
+    font-size: 20rpx;
+    background: rgba(255, 255, 255, 0.25);
+    padding: 2rpx 12rpx;
+    border-radius: 12rpx;
+    margin-bottom: 4rpx;
+  }
+
+  .back-theme-mini {
+    display: block;
+    font-size: 26rpx;
+    font-weight: 600;
+  }
+}
+
+.activity-scroll {
+  flex: 1;
+  padding: 10rpx 16rpx;
+}
+
+.activity-row-card {
+  background: #fafafa;
+  border-radius: 10rpx;
+  padding: 10rpx 12rpx;
+  margin-bottom: 8rpx;
+
+  .activity-time-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4rpx;
+
+    .act-time-text {
+      font-size: 20rpx;
+      color: #667eea;
+      font-weight: 600;
+    }
+
+    .act-cost-text {
+      font-size: 18rpx;
+      color: #d4880c;
+      background: #fff3cd;
+      padding: 1rpx 10rpx;
+      border-radius: 10rpx;
+    }
+  }
+
+  .act-name-text {
+    display: block;
+    font-size: 24rpx;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 4rpx;
+  }
+
+  .act-loc-text,
+  .act-transport-text {
+    display: block;
+    font-size: 20rpx;
+    color: #999;
+    line-height: 1.5;
+    margin-bottom: 2rpx;
+  }
+
+  .act-desc-text {
+    display: block;
+    font-size: 22rpx;
+    color: #666;
+    line-height: 1.5;
+    margin-top: 4rpx;
+  }
+}
+
+.nav-buttons-mini {
+  display: flex;
+  justify-content: space-around;
+  padding: 16rpx 40rpx 0;
+
+  .nav-btn-mini {
+    background: #f5f5f5;
+    color: #667eea;
+    font-size: 24rpx;
+    padding: 12rpx 36rpx;
+    border-radius: 30rpx;
+
+    &.disabled {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+  }
+}
+
+.plan-total-line {
+  margin-top: 12rpx;
+  padding: 8rpx 16rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #fa541c;
+  text-align: right;
+  border-top: 1rpx solid #f0f0f0;
+}
+
 .input-area {
   display: flex;
   align-items: center;
@@ -978,6 +1773,13 @@ export default {
   }
 }
 
+
+.plan-bubble {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* 水平居中子元素 */
+}
+
 .session-list {
   .session-item {
     display: flex;
@@ -1008,5 +1810,384 @@ export default {
       color: #ccc;
     }
   }
+}
+
+/* ============== AI 行程详情弹窗 ============== */
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 30rpx 0;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  padding: 0 30rpx 20rpx;
+  gap: 16rpx;
+
+  .modal-close {
+    width: 60rpx;
+    height: 60rpx;
+    line-height: 56rpx;
+    text-align: center;
+    font-size: 44rpx;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .modal-title-wrap {
+    flex: 1;
+    min-width: 0;
+
+    .modal-title {
+      display: block;
+      font-size: 32rpx;
+      font-weight: 600;
+      color: #fff;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .modal-sub {
+      display: block;
+      font-size: 22rpx;
+      color: rgba(255, 255, 255, 0.85);
+      margin-top: 4rpx;
+    }
+  }
+
+  .modal-flip-btn {
+    background: rgba(255, 255, 255, 0.25);
+    color: #fff;
+    font-size: 24rpx;
+    padding: 14rpx 24rpx;
+    border-radius: 30rpx;
+    flex-shrink: 0;
+  }
+}
+
+.plan-empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 28rpx;
+}
+
+.card-deck-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-card-deck {
+  flex: 1;
+}
+
+.modal-card-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 40rpx;
+  perspective: 2000rpx;
+}
+
+.modal-nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 30rpx 60rpx 0;
+  gap: 30rpx;
+
+  .modal-dots {
+    display: flex;
+    gap: 12rpx;
+
+    .modal-dot {
+      width: 14rpx;
+      height: 14rpx;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transition: all 0.2s;
+
+      &.active {
+        background: #667eea;
+        width: 28rpx;
+        border-radius: 7rpx;
+      }
+    }
+  }
+}
+
+.modal-day-card {
+  width: 100%;
+  height: 850rpx;
+  position: relative;
+  border-radius: 24rpx;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.is-flipped {
+    transform: rotateY(180deg);
+  }
+}
+
+.modal-card-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 24rpx;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 10rpx 30rpx rgba(0, 0, 0, 0.3);
+}
+
+.modal-card-front {
+  display: flex;
+  flex-direction: column;
+  padding: 24rpx 24rpx 16rpx;
+}
+
+.modal-day-badge-row {
+  margin-bottom: 12rpx;
+
+  .modal-day-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    font-size: 26rpx;
+    font-weight: 600;
+    padding: 6rpx 20rpx;
+    border-radius: 20rpx;
+  }
+}
+
+.modal-day-theme {
+  display: block;
+  font-size: 38rpx;
+  font-weight: 700;
+  color: #333;
+  text-align: center;
+  margin-bottom: 10rpx;
+}
+
+.modal-day-stats {
+  display: flex;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(118, 75, 162, 0.08));
+  border-radius: 16rpx;
+  padding: 22rpx 0;
+  margin-bottom: 24rpx;
+
+  .modal-stat-block {
+    flex: 1;
+    text-align: center;
+  }
+
+  .modal-stat-divider {
+    width: 1rpx;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .modal-stat-num {
+    display: block;
+    font-size: 32rpx;
+    font-weight: 700;
+    color: #667eea;
+  }
+
+  .modal-stat-label {
+    display: block;
+    font-size: 20rpx;
+    color: #999;
+    margin-top: 4rpx;
+  }
+}
+
+.modal-day-preview {
+  flex: 1;
+  overflow: hidden;
+
+  .modal-preview-row {
+    display: flex;
+    align-items: center;
+    gap: 12rpx;
+    padding: 8rpx 0;
+    border-bottom: 1rpx dashed #eee;
+
+    &:last-child { border-bottom: none; }
+
+    .modal-preview-time {
+      font-size: 20rpx;
+      color: #667eea;
+      font-weight: 600;
+      width: 120rpx;
+      flex-shrink: 0;
+    }
+
+    .modal-preview-name {
+      font-size: 24rpx;
+      color: #333;
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  .modal-preview-more {
+    display: block;
+    font-size: 20rpx;
+    color: #999;
+    text-align: center;
+    padding-top: 10rpx;
+  }
+}
+
+.modal-card-footer {
+  text-align: center;
+  padding: 8rpx 0 0;
+
+  .modal-flip-hint {
+    font-size: 20rpx;
+    color: #999;
+    animation: pulse 2s infinite;
+  }
+}
+
+.modal-card-back {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-back-header {
+  padding: 18rpx 24rpx;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  flex-shrink: 0;
+
+  .modal-back-badge {
+    display: inline-block;
+    font-size: 20rpx;
+    background: rgba(255, 255, 255, 0.25);
+    padding: 3rpx 14rpx;
+    border-radius: 14rpx;
+    margin-bottom: 4rpx;
+  }
+
+  .modal-back-theme {
+    display: block;
+    font-size: 28rpx;
+    font-weight: 600;
+  }
+}
+
+.modal-activity-list {
+  flex: 1;
+  padding: 12rpx 16rpx;
+}
+
+.modal-activity-card {
+  background: #fafafa;
+  border-radius: 10rpx;
+  padding: 12rpx;
+  margin-bottom: 10rpx;
+
+  .modal-activity-time-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4rpx;
+
+    .modal-act-time {
+      font-size: 20rpx;
+      color: #667eea;
+      font-weight: 600;
+    }
+
+    .modal-act-cost {
+      font-size: 18rpx;
+      color: #d4880c;
+      background: #fff3cd;
+      padding: 1rpx 10rpx;
+      border-radius: 10rpx;
+    }
+  }
+
+  .modal-act-name {
+    display: block;
+    font-size: 24rpx;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 4rpx;
+  }
+
+  .modal-act-loc,
+  .modal-act-transport {
+    display: block;
+    font-size: 20rpx;
+    color: #999;
+    line-height: 1.5;
+    margin-bottom: 2rpx;
+  }
+
+  .modal-act-desc {
+    display: block;
+    font-size: 22rpx;
+    color: #666;
+    line-height: 1.5;
+    margin-top: 4rpx;
+  }
+}
+
+.modal-nav-buttons {
+  display: flex;
+  justify-content: space-around;
+  padding: 20rpx 60rpx 0;
+
+  .modal-nav-btn {
+    background: rgba(255, 255, 255, 0.95);
+    color: #667eea;
+    font-size: 26rpx;
+    padding: 16rpx 50rpx;
+    border-radius: 50rpx;
+    box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.2);
+
+    &:active { transform: scale(0.95); }
+
+    &.disabled {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
 }
 </style>

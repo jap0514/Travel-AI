@@ -122,7 +122,7 @@ public class HotelController {
     public Result<List<HotelRoomVO>> getHotelRoom(
             @RequestParam("hotelId") Long hotelId,
             @RequestParam("roomTypeId") Long roomTypeId,
-            @RequestParam("roomNo") String roomNo){
+            @RequestParam(value = "roomNo", required = false) String roomNo){
         List<HotelRoomVO> hotelRoomVOList = hotelService.getHotelRoom(hotelId, roomTypeId, roomNo);
         return Result.success(hotelRoomVOList);
     }
@@ -230,39 +230,36 @@ public class HotelController {
      */
     @PutMapping("/order/{orderNo}/cancel")
     public Result<HotelBookingVO> cancelOrder(@PathVariable("orderNo") String orderNo,
-                                               @RequestBody CancelOrderDTO dto,
-                                               @RequestAttribute Long userId){
-        HotelBookingVO result = hotelBookingService.cancelOrder(orderNo, userId, dto);
+                                               @RequestBody CancelOrderDTO dto){
+        HotelBookingVO result = hotelBookingService.cancelOrder(orderNo, dto.getUserId(), dto);
         return Result.success(result);
     }
 
     /**
      * 完成订单（退房）
      * @param orderNo 订单号
-     * @param userId 用户ID
+     * @param dto 含 userId 的请求体
      * @return 操作结果
      */
     @PutMapping("/order/{orderNo}/complete")
     public Result<HotelBookingVO> completeOrder(@PathVariable("orderNo") String orderNo,
-                                                  @RequestAttribute Long userId){
-        HotelBookingVO result = hotelBookingService.completeOrder(orderNo, userId);
+                                                  @RequestBody CancelOrderDTO dto){
+        HotelBookingVO result = hotelBookingService.completeOrder(orderNo, dto.getUserId());
         return Result.success(result);
     }
 
     /**
      * 支付订单（带分布式锁，防止并发支付）
      * @param orderNo 订单号
-     * @param dto 支付信息
-     * @param userId 用户ID
+     * @param dto 支付信息（含 userId）
      * @return 操作结果
      */
     @PutMapping("/order/{orderNo}/pay")
     @DistributedLock(key = "'lock:order:pay:' + #orderNo", waitTime = 5, leaseTime = 10)
     @Timed(value = "hotel.payOrder", description = "支付订单耗时", percentiles = {0.5, 0.90, 0.95, 0.99})
     public Result<HotelBookingVO> payOrder(@PathVariable("orderNo") String orderNo,
-                                          @RequestBody PayOrderDTO dto,
-                                          @RequestAttribute Long userId){
-        HotelBookingVO result = hotelBookingService.payOrder(orderNo, userId, dto);
+                                          @RequestBody @Valid PayOrderDTO dto){
+        HotelBookingVO result = hotelBookingService.payOrder(orderNo, dto.getUserId(), dto);
         return Result.success(result);
     }
 

@@ -36,6 +36,11 @@
 
     <!-- 功能列表 -->
     <view class="menu-section">
+      <view class="menu-item" @click="goMyPlans">
+        <image class="menu-icon" src="/static/images/menu-plan.png" mode="aspectFit"></image>
+        <text class="menu-text">我的行程</text>
+        <text class="menu-arrow">></text>
+      </view>
       <view class="menu-item" @click="goMyDestinations">
         <image class="menu-icon" src="/static/images/menu-destination.png" mode="aspectFit"></image>
         <text class="menu-text">我的目的地</text>
@@ -114,17 +119,29 @@ export default {
     },
 
     async loadStats() {
-      // TODO: 调用统计接口
-	  const userId=this.userInfo.id
-	  console.log(userId)
-	  const sessions=await getUserSessions(userId,1,10)
-	  const destinations=await getUserDestinations(userId)
-	  const orders=await getOrderList(userId,1,10)
-	  
-      this.stats = {
-        destinationCount: destinations.length || 0,
-        orderCount: orders.length || 0,
-        sessionCount: sessions.length || 0
+      const userId = this.userInfo.id
+      if (!userId) return
+
+      try {
+        // 并行调用 3 个接口，提升加载速度
+        const [sessionsPage, destinations, ordersPage] = await Promise.all([
+          getUserSessions(userId, 1, 1),       // PageVO，只取 1 条用于计数
+          getUserDestinations(userId),          // 直接 List
+          getOrderList(userId, 1, 1)            // PageVO，只取 1 条用于计数
+        ])
+
+        // 从 PageVO 中取出 total 或 records 长度
+        const sessionCount = sessionsPage?.total ?? sessionsPage?.records?.length ?? 0
+        const orderCount = ordersPage?.total ?? ordersPage?.records?.length ?? 0
+        const destinationCount = Array.isArray(destinations) ? destinations.length : 0
+
+        this.stats = {
+          destinationCount,
+          orderCount,
+          sessionCount
+        }
+      } catch (e) {
+        console.error('加载统计失败', e)
       }
     },
 
@@ -159,6 +176,14 @@ export default {
         return
       }
       uni.navigateTo({ url: '/pages/chat/chat?tab=history' })
+    },
+
+    goMyPlans() {
+      if (!this.isLogin) {
+        uni.navigateTo({ url: '/pages/login/login' })
+        return
+      }
+      uni.navigateTo({ url: '/pages/plan/list' })
     },
 
     goAbout() {

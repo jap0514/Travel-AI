@@ -1,7 +1,10 @@
 package com.travel.config;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.jsontype.BasicPolymorphicTypeValidator;
+import com.fasterxml.jackson.databind.jsontype.PolymorphicTypeValidator;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import org.springframework.cache.CacheManager;
@@ -56,10 +59,18 @@ public class TieredCacheConfig {
     @Bean(REDIS_CACHE_MANAGER)
     @Primary
     public CacheManager redisCacheManager(RedisConnectionFactory connectionFactory) {
-        // 创建支持 Java 8 日期时间 的 ObjectMapper
+        // 创建支持 Java 8 日期时间 + 启用类型信息的 ObjectMapper
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        // 启用类型信息（带 @class 字段），反序列化时能恢复类型
+        // 修复：之前没启用类型信息，反序列化时只能得到 LinkedHashMap，强转 HotelVO 会 ClassCastException
+        PolymorphicTypeValidator ptv = BasicPolymorphicTypeValidator.builder()
+                .allowIfSubType("com.travel.")
+                .allowIfSubType("java.util.")
+                .allowIfSubType("java.lang.")
+                .build();
+        objectMapper.activateDefaultTyping(ptv, ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
 
         RedisCacheConfiguration defaultConfig = RedisCacheConfiguration.defaultCacheConfig()
                 .entryTtl(Duration.ofMinutes(30))  // 默认30分钟

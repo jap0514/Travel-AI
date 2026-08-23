@@ -7,6 +7,18 @@
 			}
 		},
 		{
+			"path": "pages/ranking/list",
+			"style": {
+				"navigationBarTitleText": "热门排行榜"
+			}
+		},
+		{
+			"path": "pages/plan/list",
+			"style": {
+				"navigationBarTitleText": "我的行程"
+			}
+		},
+		{
 			"path": "pages/login/login",
 			"style": {
 				"navigationBarTitleText": "登录"
@@ -40,6 +52,12 @@
 			"path": "pages/order/list",
 			"style": {
 				"navigationBarTitleText": "我的订单"
+			}
+		},
+		{
+			"path": "pages/order/confirm",
+			"style": {
+				"navigationBarTitleText": "确认订单"
 			}
 		},
 		{

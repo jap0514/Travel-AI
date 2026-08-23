@@ -20,7 +20,7 @@
     <view class="section">
       <view class="section-header">
         <text class="section-title">热门目的地</text>
-        <text class="section-more" @click="goHotel">更多></text>
+        <text class="section-more" @click="goRanking">更多></text>
       </view>
       <scroll-view class="destination-scroll" scroll-x>
         <view class="destination-item" v-for="item in hotDestinations" :key="item.id">
@@ -115,6 +115,10 @@ export default {
     goHotel() {
       uni.switchTab({ url: '/pages/hotel/list' })
     },
+
+    goRanking() {
+      uni.navigateTo({ url: '/pages/ranking/list' })
+    },
     goOrder() {
       if (!this.isLogin) {
         uni.navigateTo({ url: '/pages/login/login' })
@@ -127,7 +131,8 @@ export default {
     },
 	async gethotDestinations(){
 		try{
-			const data = await getPopularDestinations(30)
+			// 首页热门目的地：统计所有时间的目的地（不限近几天）
+			const data = await getPopularDestinations(9999)
 			console.log('热门地点: ', data)
 			if (data && data.length > 0) {
 				this.hotDestinations = data.map(item => ({

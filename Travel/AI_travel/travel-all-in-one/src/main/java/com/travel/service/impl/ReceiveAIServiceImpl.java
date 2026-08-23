@@ -259,22 +259,22 @@ public class ReceiveAIServiceImpl implements ReceiveAIService {
 
         //从解析到的pojo中获取对应的数据，将plan存进数据库
         TravelParsePlan travelParsePlan = new TravelParsePlan();
-        travelParsePlan.setTask_id(travelTask.getTask_id());
-        travelParsePlan.setUser_id(travelPlanPojo.getUserId());
+        travelParsePlan.setTaskId(travelTask.getTask_id());
+        travelParsePlan.setUserId(travelPlanPojo.getUserId());
         travelParsePlan.setTitle(travelPlanPojo.getTitle());
         travelParsePlan.setDestination(travelPlanPojo.getDestination());
         travelParsePlan.setDays(travelPlanPojo.getDays());
         travelParsePlan.setBudget(travelPlanPojo.getBudget());
         travelParsePlan.setPace(travelPlanPojo.getPace());
-        travelParsePlan.setStart_date(travelPlanPojo.getStartDate());
-        travelParsePlan.setDaily_plans(objectMapper.writeValueAsString(travelPlanPojo.getDailyPlans()));
-        travelParsePlan.setTotal_estimated_cost(travelPlanPojo.getTotalEstimatedCost());
+        travelParsePlan.setStartDate(travelPlanPojo.getStartDate());
+        travelParsePlan.setDailyPlans(objectMapper.writeValueAsString(travelPlanPojo.getDailyPlans()));
+        travelParsePlan.setTotalEstimatedCost(travelPlanPojo.getTotalEstimatedCost());
         travelParsePlan.setNotes(travelPlanPojo.getNotes());
-        travelParsePlan.setRaw_markdown(travelPlanPojo.getRawMarkdown());
+        travelParsePlan.setRawMarkdown(travelPlanPojo.getRawMarkdown());
         //TODO:这里的trace_id我觉得应该在Java这边生成，而不是在python那边生成。并且不应该用userId+sessionId+时间戳，如果同一时间同一个用户在同一个会话中发送多条消息的话就会冲突了。
-        travelParsePlan.setTrace_id(callbackDTO.getTraceId());
-        travelParsePlan.setCreate_time(LocalDateTime.now());
-        travelParsePlan.setUpdate_time(LocalDateTime.now());
+        travelParsePlan.setTraceId(callbackDTO.getTraceId());
+        travelParsePlan.setCreateTime(LocalDateTime.now());
+        travelParsePlan.setUpdateTime(LocalDateTime.now());
 
         int insert2 = travelParsePlanMapper.insert(travelParsePlan);
         if(insert2==0){

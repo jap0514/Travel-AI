@@ -274,7 +274,10 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel>
         LambdaQueryWrapper<HotelRoom> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.eq(HotelRoom::getHotelId, hotelId);
         lambdaQueryWrapper.eq(HotelRoom::getRoomTypeId, roomTypeId);
-        lambdaQueryWrapper.eq(HotelRoom::getRoomNo, roomNo);
+        // roomNo 可选：传了就精确匹配，不传就查该房型所有房间
+        if (roomNo != null && !roomNo.isBlank()) {
+            lambdaQueryWrapper.eq(HotelRoom::getRoomNo, roomNo.trim());
+        }
 
         List<HotelRoom> result = hotelRoomMapper.selectList(lambdaQueryWrapper);
 

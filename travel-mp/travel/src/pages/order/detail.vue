@@ -189,7 +189,11 @@ export default {
         success: async (res) => {
           if (!res.confirm) return
           try {
-            await cancelOrderRequest(this.orderNo, { cancelReason: res.content || '用户主动取消' })
+            const userInfo = uni.getStorageSync('userInfo')
+            await cancelOrderRequest(this.orderNo, {
+              userId: userInfo.id,
+              cancelReason: res.content || '用户主动取消'
+            })
             uni.showToast({ title: '取消成功', icon: 'success' })
             // 刷新详情
             this.loadOrderDetail()
@@ -202,7 +206,8 @@ export default {
 
     async payOrder() {
       try {
-        await payOrderRequest(this.orderNo, {})
+        const userInfo = uni.getStorageSync('userInfo')
+        await payOrderRequest(this.orderNo, { userId: userInfo.id })
         uni.showToast({ title: '支付成功', icon: 'success' })
         // 刷新详情
         this.loadOrderDetail()

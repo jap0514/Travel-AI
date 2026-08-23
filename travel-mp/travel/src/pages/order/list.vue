@@ -88,9 +88,18 @@ export default {
     this.checkLoginAndLoad()
   },
   onShow() {
-    this.loadOrders()
+    // 每次显示页面都重新加载第一页（强制刷新）
+    this.refreshOrders()
   },
   methods: {
+    // 强制刷新：重置分页，重新加载
+    refreshOrders() {
+      this.page = 1
+      this.noMore = false
+      this.orders = []
+      this.loadOrders()
+    },
+
     checkLoginAndLoad() {
       const token = uni.getStorageSync('token')
       if (!token) {
@@ -204,13 +213,13 @@ export default {
         success: async (res) => {
           if (!res.confirm) return
           try {
-            await cancelOrderRequest(order.orderNo, { cancelReason: res.content || '用户主动取消' })
+            const userInfo = uni.getStorageSync('userInfo')
+            await cancelOrderRequest(order.orderNo, {
+              userId: userInfo.id,
+              cancelReason: res.content || '用户主动取消'
+            })
             uni.showToast({ title: '取消成功', icon: 'success' })
-            // 刷新列表
-            this.page = 1
-            this.noMore = false
-            this.orders = []
-            this.loadOrders()
+            this.refreshOrders()
           } catch (e) {
             // 静默
           }
@@ -220,13 +229,10 @@ export default {
 
     async payOrder(order) {
       try {
-        await payOrderRequest(order.orderNo, {})
+        const userInfo = uni.getStorageSync('userInfo')
+        await payOrderRequest(order.orderNo, { userId: userInfo.id })
         uni.showToast({ title: '支付成功', icon: 'success' })
-        // 刷新列表
-        this.page = 1
-        this.noMore = false
-        this.orders = []
-        this.loadOrders()
+        this.refreshOrders()
       } catch (e) {
         // 静默
       }

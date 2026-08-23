@@ -92,6 +92,13 @@ export const getUserSessions = (userId, page = 1, size = 10) => request({
   data: { page, size }
 })
 
+// ============ 行程规划 ============
+
+export const getUserPlans = (userId) => request({
+  url: `/travel-plan/user/${userId}`,
+  method: 'GET'
+})
+
 export const getSessionMessages = (userId, sessionId, page = 1, size = 20) => request({
   url: `/session/${userId}/${sessionId}/message`,
   method: 'GET',
@@ -126,10 +133,10 @@ export const getHotelRoomType = (hotelId) => request({
   data: { hotelId }
 })
 
-export const getHotelRoom = (roomTypeId) => request({
+export const getHotelRoom = (hotelId, roomTypeId) => request({
   url: '/hotel/hotelInfo/getHotelRoom',
   method: 'GET',
-  data: { roomTypeId }
+  data: { hotelId, roomTypeId }
 })
 
 export const selectEmptyRoom = (city, checkIn, checkOut) => request({
