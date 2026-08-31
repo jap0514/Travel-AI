@@ -115,11 +115,27 @@ export const sendMessage = (data) => request({
 
 // ============ 酒店相关 ============
 
-export const getHotelByCity = (city, keyword = '', minStar = null, minPrice = null, maxPrice = null, facilities = null, page = 1, size = 10) => request({
-  url: '/hotel/hotelInfo/getHotelByCity',
-  method: 'GET',
-  data: { city, keyword, minStar, minPrice, maxPrice, facilities, page, size }
-})
+export const getHotelByCity = (city, keyword = '', minStar = null, minPrice = null, maxPrice = null, facilities = null, page = 1, size = 10) => {
+  // 手写 query string（不能用 URLSearchParams，mp-weixin 不支持这个 Web API）
+  // Spring @RequestParam List<String> 期望重复参数：facilities=WiFi&facilities=Pool
+  const parts = []
+  parts.push(`city=${encodeURIComponent(city)}`)
+  if (keyword) parts.push(`keyword=${encodeURIComponent(keyword)}`)
+  if (minStar !== null && minStar !== undefined) parts.push(`minStar=${minStar}`)
+  if (minPrice !== null && minPrice !== undefined) parts.push(`minPrice=${minPrice}`)
+  if (maxPrice !== null && maxPrice !== undefined) parts.push(`maxPrice=${maxPrice}`)
+  if (facilities && facilities.length > 0) {
+    facilities.forEach(f => parts.push(`facilities=${encodeURIComponent(f)}`))
+  }
+  parts.push(`page=${page}`)
+  parts.push(`size=${size}`)
+
+  return request({
+    url: `/hotel/hotelInfo/getHotelByCity?${parts.join('&')}`,
+    method: 'GET',
+    data: {}  // 空 data，避免 request 函数重复拼参数
+  })
+}
 
 export const getHotelById = (hotelId) => request({
   url: '/hotel/hotelInfo/getHotelById',

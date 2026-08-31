@@ -88,6 +88,65 @@ services:
 
   # ========== 可观测性服务 ==========
 
+  # ========== Elasticsearch 搜索引擎 ==========
+  # 单节点模式（演示够用），开启后供 Java 端 ElasticsearchClient 连接
+  # 关闭鉴权 xpack.security.enabled=false，对应 application.yml 中无用户名密码
+  # 国内环境：使用阿里云镜像 registry.cn-hangzhou.aliyuncs.com/elastic/...
+  # 海外环境：改回 docker.elastic.co/elasticsearch/elasticsearch:8.13.4
+  elasticsearch:
+    image: registry.cn-hangzhou.aliyuncs.com/elastic/elasticsearch:8.13.4
+    container_name: travel_elasticsearch
+    environment:
+      # 单节点发现模式（无需选举 master）
+      - discovery.type=single-node
+      # 关闭安全模块（演示阶段；生产环境务必开启 xpack + TLS）
+      - xpack.security.enabled=false
+      - xpack.security.http.ssl.enabled=false
+      # JVM 堆大小：最小=最大避免动态扩缩，512MB 演示够用
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      # 锁定堆内存（需配合 ulimits.memlock）
+      - bootstrap.memory_lock=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - "9200:9200"      # HTTP API（Java 端连接的端口）
+      - "9300:9300"      # 节点间通信（单节点用不到，保留备用）
+    volumes:
+      # ES 数据持久化
+      - es_data:/usr/share/elasticsearch/data
+      # IK + Pinyin 插件目录（需先放入 es-scripts/plugins/ 下）
+      - ./es-scripts/plugins:/usr/share/elasticsearch/plugins
+      # 自定义 ES 配置文件
+      - ./es-scripts/es-config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+    healthcheck:
+      # 集群健康状态为 green 或 yellow 视为健康
+      test: ["CMD-SHELL", "curl -s http://localhost:9200/_cluster/health | grep -E 'green|yellow' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+
+  # Kibana 可视化界面（依赖 ES 启动完成）
+  # 国内环境：使用阿里云镜像 registry.cn-hangzhou.aliyuncs.com/elastic/...
+  # 海外环境：改回 docker.elastic.co/kibana/kibana:8.13.4
+  kibana:
+    image: registry.cn-hangzhou.aliyuncs.com/elastic/kibana:8.13.4
+    container_name: travel_kibana
+    depends_on:
+      elasticsearch:
+        # 等 ES healthcheck 通过后再启动 Kibana
+        condition: service_healthy
+    environment:
+      # 告诉 Kibana 去哪找 ES
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      # Kibana 中文界面
+      - i18n.locale=zh-CN
+    ports:
+      - "5601:5601"      # Kibana Web UI
+    restart: unless-stopped
+
   # Prometheus 时序数据库（采集 Java 服务 metrics）
   prometheus:
     image: prom/prometheus:latest
@@ -129,6 +188,8 @@ volumes:
   prometheus_data:
   grafana_dashboards:
   grafana_datasources:
+  # Elasticsearch 数据持久化卷（重启容器数据不丢）
+  es_data:
 
 #  # RabbitMQ 3.13（带管理面板）
 #  rabbitmq:

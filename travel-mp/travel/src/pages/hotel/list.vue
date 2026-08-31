@@ -20,14 +20,31 @@
 
     <!-- 筛选栏 -->
     <view class="filter-bar">
-      <view class="filter-item" @click="toggleFilter('star')">
-        <text :class="{ active: filters.star }">{{ filters.star ? `≥${minStar}星` : '星级' }}</text>
+      <view class="filter-item" @click="toggleStarPicker">
+        <text :class="{ active: selectedStar != null }">{{ starButtonText }} <text class="arrow-down">▼</text></text>
       </view>
       <view class="filter-item" @click="showPricePicker = !showPricePicker; showFacilityPicker = false">
         <text :class="{ active: filters.price }">{{ priceButtonText }} <text class="arrow-down">▼</text></text>
       </view>
       <view class="filter-item" @click="showFacilityPicker = !showFacilityPicker; showPricePicker = false">
         <text :class="{ active: filters.facility }">{{ facilityButtonText }} <text class="arrow-down">▼</text></text>
+      </view>
+    </view>
+
+    <!-- 星级下拉选择（单选最低阈值） -->
+    <view v-if="showStarPicker" class="facility-dropdown" @click="showStarPicker = false">
+      <view class="facility-dropdown-content" @click.stop>
+        <view v-for="opt in starOptions"
+              :key="opt.value === null ? 'all' : opt.value"
+              class="facility-option"
+              :class="{ selected: selectedStar === opt.value }"
+              @click="selectStar(opt.value)">
+          <text>{{ opt.label }}</text>
+        </view>
+        <view class="facility-divider"></view>
+        <view class="facility-option facility-reset-option" @click="resetFilters">
+          <text>重置全部筛选</text>
+        </view>
       </view>
     </view>
 
@@ -114,8 +131,8 @@
           </view>
           <text class="hotel-address">{{ hotel.address }}</text>
           <view class="hotel-facilities">
-            <text v-for="(value, key) in getTopFacilities(hotel.facilities, 3)" :key="key" class="facility-tag">
-              {{ key }}<text v-if="Array.isArray(value)">：{{ value.join('、') }}</text>
+            <text v-for="(f, idx) in getTopFacilities(hotel.facilities, 3)" :key="idx" class="facility-tag">
+              {{ f }}
             </text>
           </view>
           <view class="hotel-bottom">
@@ -174,12 +191,20 @@ export default {
       cities: ['北京', '上海', '杭州', '成都', '三亚', '广州', '深圳', '重庆', '西安', '厦门'],
       hotels: [],
       filters: {
-        star: false,
         price: false,
         facility: false
       },
       // 筛选参数
-      minStar: 4,                  // 星级筛选的阈值
+      selectedStar: null,          // null=不限, 1~5=最低星级阈值
+      showStarPicker: false,       // 星级弹层显隐
+      starOptions: [               // 星级选项(单选最低阈值)
+        { value: null, label: '不限' },
+        { value: 1, label: '≥1星' },
+        { value: 2, label: '≥2星' },
+        { value: 3, label: '≥3星' },
+        { value: 4, label: '≥4星' },
+        { value: 5, label: '≥5星' }
+      ],
       priceMin: null,              // 价格范围：最低
       priceMax: null,              // 价格范围：最高
       priceMinInput: '',           // 输入框：最低价（字符串）
@@ -191,7 +216,10 @@ export default {
   },
   computed: {
     hasAnyFilter() {
-      return this.filters.star || this.filters.price || this.filters.facility
+      return this.selectedStar != null || this.filters.price || this.filters.facility
+    },
+    starButtonText() {
+      return this.selectedStar == null ? '星级' : `≥${this.selectedStar}星`
     },
     priceButtonText() {
       if (this.priceMin != null && this.priceMax != null) {
@@ -235,10 +263,15 @@ export default {
       this.searchHotel()
     },
 
-    toggleFilter(type) {
-      // 价格/设施都用专用下拉，不通过 toggleFilter 切换
-      if (type === 'price' || type === 'facility') return
-      this.filters[type] = !this.filters[type]
+    toggleStarPicker() {
+      this.showStarPicker = !this.showStarPicker
+      this.showPricePicker = false
+      this.showFacilityPicker = false
+    },
+
+    selectStar(value) {
+      this.selectedStar = value
+      this.showStarPicker = false
       this.searchHotel()
     },
 
@@ -302,7 +335,7 @@ export default {
     },
 
     resetFilters() {
-      this.filters.star = false
+      this.selectedStar = null
       this.filters.price = false
       this.filters.facility = false
       this.priceMin = null
@@ -310,6 +343,7 @@ export default {
       this.priceMinInput = ''
       this.priceMaxInput = ''
       this.selectedFacilities = []
+      this.showStarPicker = false
       this.showPricePicker = false
       this.showFacilityPicker = false
       this.searchHotel()
@@ -322,15 +356,10 @@ export default {
       this.loadHotels()
     },
 
-    // 从设施对象里取前 N 个展示项，过滤掉值为 falsy 的
+    // 从设施数组里取前 N 个展示项
     getTopFacilities(facilities, limit) {
-      if (!facilities || typeof facilities !== 'object') return {}
-      const keys = Object.keys(facilities)
-        .filter(k => facilities[k])
-        .slice(0, limit)
-      const result = {}
-      keys.forEach(k => { result[k] = facilities[k] })
-      return result
+      if (!Array.isArray(facilities)) return []
+      return facilities.slice(0, limit)
     },
 
     async loadHotels() {
@@ -343,10 +372,11 @@ export default {
       this.isLoading = true
 
       try {
-        const list = await getHotelByCity(
+        // 后端 ES 接口返回结构：{ hotels: [...], total, cityAgg, starAgg, facilityAgg, page, size }
+        const result = await getHotelByCity(
           this.selectedCity,
           this.keyword,
-          this.filters.star ? this.minStar : null,
+          this.selectedStar,
           this.filters.price ? this.priceMin : null,
           this.filters.price ? this.priceMax : null,
           this.selectedFacilities.length > 0 ? this.selectedFacilities : null,
@@ -354,15 +384,30 @@ export default {
           this.pageSize
         )
 
-        // 字段映射：hotelId → id, facilities 保留后端返回的键值对
-        const mapped = (list || []).map(h => ({
+        // 取真正的酒店列表（ES 返回结构变了：data.hotels 而不是 data 直接是数组）
+        const list = (result && result.hotels) || []
+
+        // 同步设置总数（用于分页）
+        if (result && result.total) {
+          this.total = result.total
+        }
+
+        // 同步设施聚合（下拉框数据）
+        if (result && result.facilityAgg) {
+          this.facilityOptions = Object.keys(result.facilityAgg)
+            .filter(name => name && name.trim())
+            .map(name => ({ label: name, value: name, count: result.facilityAgg[name] }))
+        }
+
+        // 字段映射：hotelId → id, facilities 保留后端返回的数组
+        const mapped = list.map(h => ({
           id: h.hotelId,
           name: h.name,
           address: h.address,
           star: h.star,
-          startPrice: h.minPrice,    // 用后端查到的最低房型价格
+          startPrice: h.minPrice,    // ES 返回的是 number，原 HotelVO 是 BigDecimal
           rating: null,           // 后端无此字段
-          facilities: h.facilities || {},
+          facilities: Array.isArray(h.facilities) ? h.facilities : [],
           mainImage: h.mainImage || '/static/images/hotel-default.jpg'
         }))
 

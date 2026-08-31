@@ -59,10 +59,10 @@ public class HotelRoomType implements Serializable {
     private String area;
 
     /**
-     * 房间设施
+     * 房间设施列表（JSON 字符串格式，如 ["WiFi","空调"]）
      */
     @TableField(value = "amenities")
-    private Object amenities;
+    private String amenities;
 
     /**
      * 

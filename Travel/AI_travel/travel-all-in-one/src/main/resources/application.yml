@@ -31,6 +31,19 @@ spring:
     resources:
       add-mappings: false  # 因为是先处理静态资源的请求，再找匹配的controller。如果不设置为false的话，就会先匹配静态资源，匹配不上就会返回404状态码了，就根本到不了下一步的匹配controller，也就无法抛异常了。
 
+# ========== Elasticsearch 搜索引擎配置 ==========
+# 本地 Windows 上直接跑 ES（不用 Docker / VM），避免 VMware NAT 网络问题
+# 详细字段说明见 ElasticsearchProperties.java
+elasticsearch:
+  # ES 服务地址：单节点用单 URL，集群用逗号分隔多个 URL
+  uris: http://localhost:9200
+  # TCP 连接建立超时（建立三次握手的等待时间）
+  connection-timeout: 5s
+  # Socket 读写超时（请求发出后等待响应的最长时间，bulk 批量操作建议调大到 60s+）
+  socket-timeout: 60s
+  # 失败自动重试次数（仅对幂等操作有效：search/get；非幂等操作不重试：index/delete）
+  max-retries: 3
+
 # Actuator + Micrometer 配置（可观测性）
 management:
   endpoints:

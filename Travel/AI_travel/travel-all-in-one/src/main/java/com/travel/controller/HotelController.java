@@ -58,19 +58,19 @@ public class HotelController {
     private static final long IDEMPOTENT_TOKEN_EXPIRE = 300;
 
     /**
-     * 根据城市获取酒店信息（支持关键字搜索 + 星级/价格/设施筛选）
+     * 根据城市获取酒店信息（ES 版，带聚合）
      * @param city        城市名（必填，2-10个中文）
-     * @param keyword     搜索关键字（可选，按酒店名称模糊匹配）
+     * @param keyword     搜索关键字（可选）
      * @param minStar     最低星级 1-5（可选）
      * @param minPrice    最低价格（可选）
      * @param maxPrice    最高价格（可选）
      * @param facilities  必须包含的设施列表（可选，AND 关系，可重复传参：facilities=WiFi&facilities=游泳池）
-     * @return 酒店列表
+     * @return ES 搜索结果（酒店列表 + total + 城市/星级/设施聚合）
      */
     @GetMapping("/hotelInfo/getHotelByCity")
     @RateLimiter(resourceName = "HotelController:getHotelByCity")
     @Timed(value = "hotel.getHotelByCity", description = "按城市查询酒店耗时", percentiles = {0.5, 0.90, 0.95, 0.99})
-    public Result<List<HotelVO>> getHotelByCity(
+    public Result<com.travel.vo.HotelSearchResultVO> getHotelByCity(
             @RequestParam("city")
             @NotBlank(message = "城市不能为空")
             @Pattern(regexp = "^[\\u4e00-\\u9fa5]{2,10}$", message = "城市名格式不正确（2-10个中文）")
@@ -80,9 +80,9 @@ public class HotelController {
             @RequestParam(value = "minPrice", required = false) java.math.BigDecimal minPrice,
             @RequestParam(value = "maxPrice", required = false) java.math.BigDecimal maxPrice,
             @RequestParam(value = "facilities", required = false) java.util.List<String> facilities){
-        List<HotelVO> hotelVOList = new ArrayList<>();
-        hotelVOList = hotelService.getAllHotelInfo(city, keyword, minStar, minPrice, maxPrice, facilities);
-        return Result.success(hotelVOList);
+        com.travel.vo.HotelSearchResultVO result = hotelService.getAllHotelInfo(
+            city, keyword, minStar, minPrice, maxPrice, facilities);
+        return Result.success(result);
     }
 
     /**

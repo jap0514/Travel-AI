@@ -17,16 +17,16 @@ import java.util.List;
 public interface HotelService extends IService<Hotel> {
 
     /**
-     * 根据城市获取该城市的酒店信息
+     * 根据城市获取该城市的酒店信息（ES 版）
      * @param city        城市名（必填）
      * @param keyword     搜索关键字（可选，按酒店名称模糊匹配）
      * @param minStar     最低星级 1-5（可选）
      * @param minPrice    最低价格（可选）
      * @param maxPrice    最高价格（可选）
      * @param facilities  必须包含的设施列表（可选，AND 关系：酒店必须同时包含所有设施）
-     * @return 酒店列表
+     * @return ES 搜索结果（包含酒店列表 + total + 城市/星级/设施聚合）
      */
-    List<HotelVO> getAllHotelInfo(String city, String keyword, Integer minStar, BigDecimal minPrice, BigDecimal maxPrice, List<String> facilities);
+    com.travel.vo.HotelSearchResultVO getAllHotelInfo(String city, String keyword, Integer minStar, BigDecimal minPrice, BigDecimal maxPrice, List<String> facilities);
 
     /**
      * 根据酒店ID获取酒店详细信息

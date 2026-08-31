@@ -42,7 +42,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
                         "/v3/api-docs/**",    // OpenAPI接口文档数据
                         "/sendMessageByPython/**", // Python回调接口，不需要认证（但需要签名）
                         "/test/travel/**",             // 测试页面，不需要认证
-                        "/hotel/**"
+                        "/hotel/**",
+                        // ========== ES 同步管理接口（演示阶段无需登录）==========
+                        "/es/**",              // ES 健康检查（/es/health、/es/ping）
+                        "/admin/hotel/**"      // 酒店同步管理（/admin/hotel/reindex、/syncStatus 等）
                 );
     }
 

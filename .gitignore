@@ -36,3 +36,6 @@ node_modules/
 
 # 压测数据/脚本（本地用，不上传）
 Data/
+
+# Maven 临时文件
+cp.txt

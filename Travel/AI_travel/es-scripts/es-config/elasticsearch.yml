@@ -1,0 +1,39 @@
+# ====================================================================
+#  Elasticsearch 单节点配置文件
+#  路径：es-scripts/es-config/elasticsearch.yml
+#  通过 docker-compose 卷挂载到容器内的
+#    /usr/share/elasticsearch/config/elasticsearch.yml
+# ====================================================================
+
+# ---------- 集群标识 ----------
+# 集群名称（同一集群内节点必须一致）
+cluster.name: travel-es-cluster
+
+# 当前节点名称（单节点随意）
+node.name: travel-es-node-1
+
+# ---------- 网络 ----------
+# 监听所有网卡，容器内 9200/9300 对应宿主机映射端口
+network.host: 0.0.0.0
+http.port: 9200
+
+# ---------- 单节点模式 ----------
+# 跳过 master 选举（单节点无需选举）
+discovery.type: single-node
+
+# ---------- 关闭地理信息库下载 ----------
+# 默认会联网下载 GeoIP 数据库，国内容易超时，主动关闭
+ingest.geoip.downloader.enabled: false
+
+# ---------- 跨域（CORS）----------
+# 允许浏览器/curl 跨域访问 ES HTTP API（方便 Kibana 之外的工具调试）
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+http.cors.allow-methods: "OPTIONS,HEAD,GET,POST,PUT,DELETE"
+http.cors.allow-headers: "X-Requested-With, Content-Type, Content-Length, Authorization"
+
+# ---------- 安全（演示阶段关闭）----------
+# 与 docker-compose 环境变量 xpack.security.enabled=false 保持一致
+xpack.security.enabled: false
+xpack.security.http.ssl.enabled: false
+xpack.security.transport.ssl.enabled: false

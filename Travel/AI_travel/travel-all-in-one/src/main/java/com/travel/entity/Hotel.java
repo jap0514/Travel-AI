@@ -65,10 +65,12 @@ public class Hotel implements Serializable {
     private String contactPhone;
 
     /**
-     * 设施
+     * 设施列表（JSON 字符串格式，如 ["WiFi","游泳池"]）
+     * 存为 String 是为了让 MyBatis 默认 TypeHandler 处理；
+     * DTO/VO 暴露为 List<String>，由 Service 层 parseFacilities 转换
      */
     @TableField(value = "facilities")
-    private Object facilities;
+    private String facilities;
 
     /**
      * 主图

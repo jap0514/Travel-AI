@@ -1,7 +1,7 @@
 package com.travel.service.impl;
 
 import com.alibaba.fastjson2.JSON;
-import com.alibaba.fastjson2.JSONObject;
+import com.alibaba.fastjson2.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.travel.annotation.ThreeTierCache;
@@ -21,6 +21,7 @@ import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.stream.Collectors;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -53,6 +54,9 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel>
     @Autowired
     private CacheManager cacheManager;
 
+    @Autowired
+    private HotelEsSearchService hotelEsSearchService;
+
     /**
      * 根据城市获取该城市的酒店信息（支持按名称关键字搜索 + 星级/价格/设施筛选）
      * 三级缓存 + 三大防护全部由AOP处理
@@ -69,88 +73,43 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel>
      * @param facilities  必须包含的设施列表（可选，AND 关系：酒店必须同时包含所有设施）
      */
     @Override
-    @ThreeTierCache(
-        cacheName = "hotels",
-        key = "#city",
-        localTtlMinutes = 5,
-        redisTtlMinutes = 30,
-        redisTtlOffsetMinutes = 5,
-        useBloomFilter = true
-    )
-    public List<HotelVO> getAllHotelInfo(String city, String keyword, Integer minStar, BigDecimal minPrice, BigDecimal maxPrice, List<String> facilities) {
-        // 缓存的是该城市所有酒店，keyword 与筛选在内存中过滤
-        LambdaQueryWrapper<Hotel> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.eq(Hotel::getCity, city);
+    public com.travel.vo.HotelSearchResultVO getAllHotelInfo(String city, String keyword, Integer minStar, BigDecimal minPrice, BigDecimal maxPrice, List<String> facilities) {
+        // ========== v2 改造：原方案 MySQL + 内存过滤 → 改为 ES bool query ==========
+        // ES 1 万酒店响应 P95 < 30ms，且支持拼音/相关性排序/聚合
+        // 去掉 @ThreeTierCache 注解（ES 本身已够快）
 
-        List<Hotel> hotelList = hotelMapper.selectList(lambdaQueryWrapper);
+        // 1. 组装 ES 查询参数
+        com.travel.dto.HotelQuery query = new com.travel.dto.HotelQuery();
+        query.setCity(city);
+        query.setKeyword(keyword);
+        query.setMinStar(minStar);
+        query.setMinPrice(minPrice);
+        query.setMaxPrice(maxPrice);
+        query.setFacilities(facilities);
+        query.setPage(1);
+        query.setSize(100);
 
-        // 批量查所有酒店的最低房型价格（避免 N+1 查询）
-        Map<Long, BigDecimal> minPriceMap = batchQueryMinPrices(
-            hotelList.stream().map(Hotel::getHotelId).toList()
-        );
+        // 2. 调 ES 搜索
+        com.travel.vo.HotelSearchResultVO esResult = hotelEsSearchService.search(query);
 
-        List<HotelVO> allHotels = hotelList.stream().map(s -> {
-            HotelVO vo = new HotelVO();
-            vo.setHotelId(s.getHotelId());
-            vo.setAddress(s.getAddress());
-            vo.setCity(s.getCity());
-            vo.setDescription(s.getDescription());
-            vo.setCreateTime(s.getCreateTime());
-            vo.setFacilities(parseFacilities(s.getFacilities()));
-            vo.setLatitude(s.getLatitude());
-            vo.setName(s.getName());
-            vo.setUpdateTime(s.getUpdateTime());
-            vo.setStar(s.getStar());
-            vo.setLongitude(s.getLongitude());
-            vo.setContactPhone(s.getContactPhone());
-            vo.setMainImage(s.getMainImage());
-            vo.setMinPrice(minPriceMap.get(s.getHotelId()));  // 可能为 null（无房型）
-            return vo;
-        }).toList();
-
-        // keyword 过滤
-        if (keyword != null && !keyword.isBlank()) {
-            String kw = keyword.trim();
-            allHotels = allHotels.stream()
-                .filter(h -> h.getName() != null && h.getName().contains(kw))
-                .toList();
-        }
-
-        // 星级过滤
-        if (minStar != null && minStar >= 1 && minStar <= 5) {
-            allHotels = allHotels.stream()
-                .filter(h -> h.getStar() != null && h.getStar() >= minStar)
-                .toList();
-        }
-
-        // 价格过滤（最低价）
-        if (minPrice != null && minPrice.compareTo(BigDecimal.ZERO) > 0) {
-            allHotels = allHotels.stream()
-                .filter(h -> h.getMinPrice() != null && h.getMinPrice().compareTo(minPrice) >= 0)
-                .toList();
-        }
-
-        // 价格过滤（最高价）
-        if (maxPrice != null && maxPrice.compareTo(BigDecimal.ZERO) > 0) {
-            allHotels = allHotels.stream()
-                .filter(h -> h.getMinPrice() != null && h.getMinPrice().compareTo(maxPrice) <= 0)
-                .toList();
-        }
-
-        // 设施过滤（多选 AND：所有设施都要包含）
-        if (facilities != null && !facilities.isEmpty()) {
-            List<String> finalFacilities = facilities.stream()
-                .filter(f -> f != null && !f.isBlank())
-                .map(String::trim)
-                .toList();
-            if (!finalFacilities.isEmpty()) {
-                allHotels = allHotels.stream()
-                    .filter(h -> h.getFacilities() != null && containsAllFacilities(h.getFacilities(), finalFacilities))
-                    .toList();
+        // 3. 补充 lat/lng/contactPhone/createTime（这些 ES 文档里没有，从 MySQL 二次查）
+        if (esResult.getHotels() != null && !esResult.getHotels().isEmpty()) {
+            List<Long> hotelIds = esResult.getHotels().stream()
+                    .map(com.travel.vo.HotelSearchResultVO.HotelDocVO::getHotelId).toList();
+            Map<Long, Hotel> hotelMap = hotelMapper.selectBatchIds(hotelIds).stream()
+                    .collect(Collectors.toMap(Hotel::getHotelId, h -> h, (a, b) -> a));
+            for (com.travel.vo.HotelSearchResultVO.HotelDocVO dv : esResult.getHotels()) {
+                Hotel h = hotelMap.get(dv.getHotelId());
+                if (h != null) {
+                    dv.setLatitude(h.getLatitude());
+                    dv.setLongitude(h.getLongitude());
+                    dv.setContactPhone(h.getContactPhone());
+                    dv.setCreateTime(h.getCreateTime());
+                    dv.setUpdateTime(h.getUpdateTime());
+                }
             }
         }
-
-        return allHotels;
+        return esResult;
     }
 
     /**
@@ -179,18 +138,12 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel>
     }
 
     /**
-     * 判断设施对象中是否同时包含所有指定设施（AND 关系）
+     * 判断酒店设施列表中是否同时包含所有指定设施（AND 关系）
      */
-    private boolean containsAllFacilities(Map<String, Object> facilities, List<String> required) {
+    private boolean containsAllFacilities(List<String> facilities, List<String> required) {
+        if (facilities == null || facilities.isEmpty()) return false;
         for (String facility : required) {
-            Object value = facilities.get(facility);
-            if (value == null) return false;
-            if (value instanceof Boolean) {
-                if (!(Boolean) value) return false;
-            } else if (value instanceof List) {
-                if (((List<?>) value).isEmpty()) return false;
-            }
-            // 其他类型视为存在
+            if (!facilities.contains(facility)) return false;
         }
         return true;
     }
@@ -312,40 +265,38 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel>
     }
 
     /**
-     * 把数据库读出来的 facilities 统一转换为 Map<String, Object>
-     * 数据库字段是 MySQL JSON 类型，MyBatis 可能以 String/Map/byte[] 形式返回
+     * 把数据库读出来的 facilities 统一转换为 List<String>
+     * 数据库字段是 MySQL JSON 数组，MyBatis 可能以 String/List 形式返回
      * 这里做防御性转换，确保对外接口契约稳定
      */
-    private Map<String, Object> parseFacilities(Object raw) {
+    private List<String> parseFacilities(Object raw) {
         if (raw == null) {
-            return Collections.emptyMap();
+            return Collections.emptyList();
         }
-        // 已经是 Map（MyBatis 把它反序列化为 LinkedHashMap）
-        if (raw instanceof Map) {
-            return (Map<String, Object>) raw;
+        // 已经是 List（MyBatis 直接反序列化为 List）
+        if (raw instanceof List) {
+            return (List<String>) raw;
         }
         // 是字符串，尝试 JSON 解析
         if (raw instanceof String) {
             String str = (String) raw;
             if (str.isEmpty()) {
-                return Collections.emptyMap();
+                return Collections.emptyList();
             }
             try {
                 Object parsed = JSON.parse(str);
-                if (parsed instanceof JSONObject) {
-                    return (Map<String, Object>) parsed;
+                if (parsed instanceof JSONArray) {
+                    return ((JSONArray) parsed).toJavaList(String.class);
                 }
-                // 解析后是数组或其他类型，转空 Map
-                log.warn("【HotelServiceImpl】facilities JSON 解析结果不是对象: {}", parsed);
-                return Collections.emptyMap();
+                log.warn("【HotelServiceImpl】facilities JSON 解析结果不是数组: {}", parsed);
+                return Collections.emptyList();
             } catch (Exception e) {
                 log.warn("【HotelServiceImpl】facilities JSON 解析失败: {}", str, e);
-                return Collections.emptyMap();
+                return Collections.emptyList();
             }
         }
-        // 其他类型（byte[] 等），记录警告
         log.warn("【HotelServiceImpl】facilities 类型异常: {}", raw.getClass());
-        return Collections.emptyMap();
+        return Collections.emptyList();
     }
 
     /**
@@ -363,8 +314,9 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel>
         hotel.setLatitude(dto.getLatitude());
         hotel.setLongitude(dto.getLongitude());
         hotel.setContactPhone(dto.getContactPhone());
-        // facilities 存为 JSON 字符串，方便 MySQL JSON 列存储
-        hotel.setFacilities(dto.getFacilities() == null ? new HashMap<>() : dto.getFacilities());
+        // facilities 存为 JSON 字符串（Entity 是 String），方便 MySQL JSON 列存储
+        hotel.setFacilities(JSON.toJSONString(
+                dto.getFacilities() == null ? java.util.Collections.emptyList() : dto.getFacilities()));
         hotel.setMainImage(dto.getMainImage());
         hotel.setDescription(dto.getDescription());
         return hotel;

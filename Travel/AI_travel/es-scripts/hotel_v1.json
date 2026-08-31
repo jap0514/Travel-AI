@@ -1,0 +1,57 @@
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 1,
+      "number_of_replicas": 0
+    },
+    "analysis": {
+      "analyzer": {
+        "ik_pinyin_analyzer": {
+          "type": "custom",
+          "tokenizer": "ik_max_word",
+          "filter": ["pinyin_filter"]
+        },
+        "ik_smart_analyzer": {
+          "type": "custom",
+          "tokenizer": "ik_smart"
+        }
+      },
+      "filter": {
+        "pinyin_filter": {
+          "type": "pinyin",
+          "keep_full_pinyin": true,
+          "keep_joined_full_pinyin": true,
+          "keep_original": true,
+          "limit_first_letter_length": 16,
+          "keep_none_chinese_in_first_letter": true
+        }
+      }
+    }
+  },
+  "mappings": {
+    "dynamic": "strict",
+    "properties": {
+      "hotelId":      { "type": "long" },
+      "name": {
+        "type": "text",
+        "analyzer": "ik_pinyin_analyzer",
+        "fields": {
+          "keyword": { "type": "keyword" },
+          "pinyin":  { "type": "text", "analyzer": "pinyin" },
+          "suggest": { "type": "completion", "analyzer": "ik_smart_analyzer" }
+        }
+      },
+      "city":         { "type": "keyword" },
+      "address":      { "type": "text", "analyzer": "ik_max_word" },
+      "star":         { "type": "integer" },
+      "location":     { "type": "geo_point" },
+      "minPrice":     { "type": "double" },
+      "contactPhone": { "type": "keyword" },
+      "facilities":   { "type": "keyword" },
+      "mainImage":    { "type": "keyword", "index": false },
+      "description":  { "type": "text", "analyzer": "ik_max_word" },
+      "createTime":   { "type": "date" },
+      "updateTime":   { "type": "date" }
+    }
+  }
+}
